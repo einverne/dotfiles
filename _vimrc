@@ -15,6 +15,9 @@ Plugin 'gmarik/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-perl/vim-perl'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'scrooloose/nerdtree'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
