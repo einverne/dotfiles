@@ -36,6 +36,18 @@ behave mswin
 " using monokai background color
 let g:molokai_original = 1
 
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases 
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch 
+
 "vim内部编码
 set encoding=utf-8
 "按照utf-8 without bom，utf-8，顺序识别打开文件
@@ -91,7 +103,13 @@ set statusline+=%3*%c,		"column
 set statusline+=%l/%L	"line no/all line"
 set statusline+=\ %P
 
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
 
 set diffexpr=MyDiff()
 function MyDiff()
