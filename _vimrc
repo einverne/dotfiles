@@ -1,38 +1,9 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" 引用vundle_vimrc
+source $VIM/vundle_vimrc
 
-" set the runtime path to include Vundle and initialize
-if has("win32")
-	set rtp+=$VIM/vimfiles/bundle/Vundle.vim
-	call vundle#begin('$VIM/vimfiles/bundle')
-else
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
-endif
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" 引用python_vimrc配置文件
+source $VIM/python_vimrc
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-perl/vim-perl'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/nerdtree'
-
-" plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'L9'
-Plugin 'perl-support.vim'
-
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
 
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
@@ -42,6 +13,9 @@ behave mswin
 " there should be molokai.vim file under ~/vimfile/colors/
 " https://github.com/tomasr/molokai
 colorscheme molokai
+
+
+let g:jedi#completions_command = "<C-N>"
 
 " Ignore case when searching
 set ignorecase
