@@ -51,7 +51,7 @@ set incsearch
 "vim内部编码
 set encoding=utf-8
 "按照utf-8 without bom，utf-8，顺序识别打开文件
-set fileencodings=ucs-bom,utf-8,shift-jis,latin1,big5,gb18030,gbk,gb2312,cp936
+set fileencodings=ucs-bom,utf-8,gbk,gb2312,cp936,big5,gb18030,shift-jis,latin1
 
 set fileencoding=utf-8
 
