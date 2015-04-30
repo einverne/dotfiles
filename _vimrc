@@ -38,8 +38,10 @@ source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
-" using monokai background color
-let g:molokai_original = 1
+" using monokai color
+" there should be molokai.vim file under ~/vimfile/colors/
+" https://github.com/tomasr/molokai
+colorscheme molokai
 
 " Ignore case when searching
 set ignorecase
