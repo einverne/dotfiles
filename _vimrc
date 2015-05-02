@@ -14,8 +14,9 @@ behave mswin
 " https://github.com/tomasr/molokai
 colorscheme molokai
 
-
+" jedi-vim plugin config
 let g:jedi#completions_command = "<C-N>"
+let g:jedi#popup_on_dot = 0
 
 " Ignore case when searching
 set ignorecase
@@ -37,7 +38,7 @@ set fileencodings=ucs-bom,utf-8,gbk,gb2312,cp936,big5,gb18030,shift-jis,latin1
 set fileencoding=utf-8
 
 "防止菜单乱码
-if(has("win32") || has("win64"))
+if(has("win32") || has("win64") || has("win95") || has("win16"))
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
     language messages zh_CN.utf-8
@@ -91,6 +92,8 @@ set statusline+=\ %P
 set nobackup
 set nowb
 set noswapfile
+
+map <F2> :NERDTree<cr>
 
 set diffexpr=MyDiff()
 function MyDiff()

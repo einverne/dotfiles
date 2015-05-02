@@ -25,6 +25,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/nerdtree'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
+Plugin 'Raimondi/delimitMate'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
