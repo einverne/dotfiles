@@ -26,6 +26,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'Raimondi/delimitMate'
+"show tabs
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
