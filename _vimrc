@@ -12,10 +12,21 @@ source $VIMRUNTIME/mswin.vim
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
-set history=700
+set history=1000
 
 " set to auto read when a file is changed outside
 set autoread
+
+" with a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" fast saving
+nmap <leader>w :w!<cr>
+
+"编辑vimrc之后，重新加载
+autocmd! bufwritepost _vimrc source $VIM/_vimrc
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -25,6 +36,9 @@ set scrolloff=8
 
 " 如下命令使鼠标用起来象微软 Windows
 behave mswin
+
+" 高亮整行
+set cursorline
 
 " always show current position
 set ruler
@@ -51,6 +65,17 @@ set incsearch
 set magic
 
 set showcmd
+
+if has('multi_byte_ime')
+	"未开启IME时光标背景色
+	hi Cursor guifg=bg guibg=Orange gui=NONE
+	"开启IME时光标背景色
+	hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
+	" 关闭Vim的自动切换IME输入法(插入模式和检索模式)
+	set iminsert=0 imsearch=0
+	" 插入模式输入法状态未被记录时，默认关闭IME
+	"inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -176,7 +201,7 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 set diffexpr=MyDiff()
-function MyDiff()
+function! MyDiff()
   let opt = '-a --binary '
   if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
   if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
