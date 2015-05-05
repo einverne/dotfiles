@@ -128,10 +128,15 @@ set noswapfile
 set nocompatible
 "设置自动缩进
 set autoindent
+
 "C语言自动缩进
 set cindent
 "设置Tab缩进4格
 set tabstop=4
+
+" 设置">"操作符 缩进，增加的缩进量是使用'shiftwidth'指定，默认是8
+set shiftwidth=4
+
 "显示行号
 set nu
 
