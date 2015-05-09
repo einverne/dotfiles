@@ -109,6 +109,7 @@ endif
 set nobomb "不自动设置字节序标记
 
 set guifont=Courier\ New\:h12
+" set guifont=Droid\ Sans\ Mono\ for\ Powerline\:h12
 set guifontwide=NSimsun\:h12
 
 
@@ -166,7 +167,7 @@ hi User3 ctermbg=blue  ctermfg=green guibg=blue  guifg=green
 " always show the status line
 set laststatus=2
 set statusline=
-"full filename	modified flag	read only flag 	help file flag	Preview
+" full filename	modified flag	read only flag 	help file flag	Preview
 set statusline=%1*%F%m%r%h%w\ 
 set statusline+=%2*[%{strlen(&fenc)?&fenc:'none'}, "file encoding
 set statusline+=%{&ff}] "file format
@@ -175,7 +176,6 @@ set statusline+=%=		"divider left/right separator"
 set statusline+=%3*%c,		"column
 set statusline+=%l/%L	"line no/all line"
 set statusline+=\ %P
-
 
 
 
@@ -195,6 +195,16 @@ let g:indent_guides_enable_on_vim_startup = 1
 " jedi-vim plugin config
 let g:jedi#completions_command = "<C-N>"
 let g:jedi#popup_on_dot = 0
+
+" powerline
+" hide the default mode text (e.g. -- INSERT -- below the statusline)
+" set t_Co=256
+" let g:Powerline_symbols='fancy'
+
+
+" general mapping
+" no <up> ddkP
+" no <down> ddp
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
