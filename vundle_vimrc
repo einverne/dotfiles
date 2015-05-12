@@ -28,6 +28,7 @@ Plugin 'ervandew/supertab'
 Plugin 'Raimondi/delimitMate'
 "show tabs
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'vim-scripts/taglist.vim'
 " Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Plugin 'Lokaltog/vim-powerline'
 " Plugin 'bling/vim-airline'
