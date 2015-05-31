@@ -18,3 +18,6 @@ git checkout -t origin/master
 
 进入vim，运行 `:PluginInstall` 安装剩余插件
 
+将 https://github.com/tomasr/molokai 工程中的配色下载到 ~/vimfile/colors/ 目录下
+
+将 ctags58.zip 压缩包中的 ctags.exe 解压到 vim74/ 目录下
