@@ -1,3 +1,21 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Judge current OS is Windows or Linux
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if(has("win32") || has("win64") || has("win95") || has("win16"))
+	let g:iswindows = 1
+else
+	let g:iswindows = 0
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Judge current process is vim or gvim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("gui_running")
+	let g:isGUI = 1
+else
+	let g:isGUI = 0
+endif
+
 " 引用vundle_vimrc
 source $VIM/vundle_vimrc
 
@@ -26,13 +44,23 @@ let g:mapleader = ","
 nmap <leader>w :w!<cr>
 
 "编辑vimrc之后，重新加载
-autocmd! bufwritepost _vimrc source $VIM/_vimrc
+if g:iswindows
+	autocmd! bufwritepost _vimrc source $VIM/_vimrc
+else
+	autocmd! bufwritepost *.vimrc source $HOME/.vimrc
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set 7 lines to the cursor - when moving vertically using j/k
+" set 8 lines to the cursor - when moving vertically using j/k
+" j/k移动时光标距离文件上下n行 缩写 set so = 8
 set scrolloff=8
+
+" gVim automatically maximize when it open
+" 启动时最大化gVim
+" http://superuser.com/questions/140419/how-to-start-gvim-maximized
+au GUIEnter * simalt ~x
 
 " 如下命令使鼠标用起来象微软 Windows
 behave mswin
@@ -42,8 +70,10 @@ set cursorline
 
 " always show current position
 set ruler
+
 " height of the command bar
 set cmdheight=2
+
 " in many terminal emulators the mouse works just fine, thus enable it
 if has('mouse')
 	set mouse=a
@@ -90,13 +120,13 @@ colorscheme molokai
 
 "vim内部编码
 set encoding=utf-8
+" set current file encoding
+set fileencoding=utf-8
 "按照utf-8 without bom，utf-8，顺序识别打开文件
 set fileencodings=ucs-bom,utf-8,gbk,gb2312,cp936,big5,gb18030,shift-jis,latin1
 
-set fileencoding=utf-8
-
 "防止菜单乱码
-if(has("win32") || has("win64") || has("win95") || has("win16"))
+if(g:iswindows && g:isGUI)
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
     language messages zh_CN.utf-8
@@ -117,6 +147,7 @@ set guifontwide=NSimsun\:h12
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
+" no backup file, no write backup file, no swap file
 set nobackup
 set nowb
 set noswapfile
@@ -206,6 +237,9 @@ let g:jedi#popup_on_dot = 0
 " no <up> ddkP
 " no <down> ddp
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>Others
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -214,6 +248,12 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+" smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
 set diffexpr=MyDiff()
 function! MyDiff()
