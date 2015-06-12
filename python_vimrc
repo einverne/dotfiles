@@ -66,6 +66,9 @@ au BufRead,BufNewFile *.c,*.h set formatoptions-=c formatoptions-=o formatoption
 " C: yes
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 
+" auto add #! /usr/bin/env python
+autocmd BufNewfile *.py call append(0,'#!/usr/bin/env python')
+autocmd BufNewfile *.py call append(1,'# -*- coding: UTF-8 -*-')
 
 " ----------------------------------------------------------------------------
 " The following section contains suggested settings.  While in no way required
