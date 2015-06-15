@@ -221,8 +221,8 @@ set statusline+=\ %P
 
 
 " Plugin settings
-" NERDTree
-map <F2> :NERDTreeToggle<cr>
+" Normal mode F2 to call NERDTree
+nmap <F2> :NERDTreeToggle<cr>
 
 " plasticboy/vim-markdown
 " disable folding
