@@ -177,6 +177,16 @@ set si
 " wrap lines
 set wrap
 
+" YAML
+autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2
+
+" Web
+autocmd Filetype json setlocal tabstop=2 shiftwidth=2
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2
+autocmd Filetype html setlocal tabstop=2 shiftwidth=2
+autocmd Filetype css setlocal tabstop=2 shiftwidth=2
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
