@@ -290,3 +290,9 @@ function! MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
+function! Xml()
+	set filetype=xml
+	:%s/></>\r</g 	"把><替换成>回车<
+	:normal gg=G<cr>
+endfunction
+map <leader>xml :call Xml()
