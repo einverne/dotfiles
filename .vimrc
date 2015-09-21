@@ -156,6 +156,9 @@ set nobackup
 set nowb
 set noswapfile
 
+" Turn off undo file, keep annoying "un~" file away
+set noundofile
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
