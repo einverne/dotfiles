@@ -29,6 +29,7 @@ Plugin 'Raimondi/delimitMate'
 "show tabs
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'WolfgangMehner/vim-plugins'
 " Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Plugin 'Lokaltog/vim-powerline'
 " Plugin 'bling/vim-airline'
