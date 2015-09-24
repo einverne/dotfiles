@@ -1,5 +1,6 @@
 vim74/*
 vimfiles/*
+.vim/bundle/*
 
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
