@@ -64,7 +64,9 @@ set scrolloff=8
 " gVim automatically maximize when it open
 " 启动时最大化gVim
 " http://superuser.com/questions/140419/how-to-start-gvim-maximized
-au GUIEnter * simalt ~x
+if g:iswindows
+	au GUIEnter * simalt ~x
+endif
 
 " 如下命令使鼠标用起来象微软 Windows
 behave mswin
@@ -142,10 +144,13 @@ endif
 
 set nobomb "不自动设置字节序标记
 
-set guifont=Courier\ New\:h12
-" set guifont=Droid\ Sans\ Mono\ for\ Powerline\:h12
-set guifontwide=NSimsun\:h12
-
+if g:iswindows
+	set guifont=Courier\ New\:h12
+	" set guifont=Droid\ Sans\ Mono\ for\ Powerline\:h12
+	set guifontwide=NSimsun\:h12
+else
+	set guifont=Monaco:h12
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -155,6 +160,9 @@ set guifontwide=NSimsun\:h12
 set nobackup
 set nowb
 set noswapfile
+
+" Turn off undo file, keep annoying "un~" file away
+set noundofile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
