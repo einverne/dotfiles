@@ -26,6 +26,10 @@ git checkout -t origin/master
 
 ## Instruction under Linux
 
+Just run `./install.sh`, everything is done. Then Enter the vim run `:PluginInstall` to install all plugins.
+
+Or, you can do it manually follow the step:
+
 Install Vundle to `~/.vim/` directory.
 
 	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -44,6 +48,3 @@ with yum:
 
 	sudo yum install ctags-etags
 
-Alternative way, using git submodule:
-
-	git submodule init && git submodule update

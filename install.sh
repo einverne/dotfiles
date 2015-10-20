@@ -19,3 +19,6 @@ if [ "$use_vim_configs" == "Y" ] || [ "$use_vim_configs" == "y" ]; then
 fi
 
 git submodule init && git submodule update
+
+# install ctags to solve "Exuberant ctags not found in PATH" error
+sudo apt-get install exuberant-ctags
