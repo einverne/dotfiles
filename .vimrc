@@ -25,6 +25,8 @@ if g:iswindows
 else
 	source ~/.vim/startup/vundle_vimrc
 	source ~/.vim/startup/python_vimrc
+	source ~/.vim/startup/map_vimrc
+	source ~/.vim/startup/plugin_vimrc
 endif
 
 source $VIMRUNTIME/vimrc_example.vim
@@ -43,9 +45,6 @@ set autoread
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
-
-" fast saving
-nmap <leader>w :w!<cr>
 
 "编辑vimrc之后，重新加载
 if g:iswindows
@@ -202,9 +201,6 @@ autocmd Filetype css setlocal tabstop=2 shiftwidth=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
 
 
 
@@ -232,22 +228,6 @@ set statusline+=\ %P
 
 
 
-" Plugin settings
-" Normal mode F2 to call NERDTree
-nmap <F2> :NERDTreeToggle<cr>
-
-" plasticboy/vim-markdown
-" disable folding
-let g:vim_markdown_folding_disabled=1
-" Highlight YAML frontmatter as used by Jekyll
-let g:vim_markdown_frontmatter=1
-
-" intend guides
-let g:indent_guides_enable_on_vim_startup = 1
-
-" jedi-vim plugin config
-let g:jedi#completions_command = "<C-N>"
-let g:jedi#popup_on_dot = 0
 
 " powerline
 " hide the default mode text (e.g. -- INSERT -- below the statusline)
@@ -271,11 +251,6 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
-" smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 set diffexpr=MyDiff()
 function! MyDiff()
@@ -301,10 +276,3 @@ function! MyDiff()
   endif
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
-
-function! Xml()
-	set filetype=xml
-	:%s/></>\r</g 	"把><替换成>回车<
-	:normal gg=G<cr>
-endfunction
-map <leader>xml :call Xml()

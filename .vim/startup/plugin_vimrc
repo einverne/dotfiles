@@ -1,0 +1,23 @@
+" Plugin settings
+
+" plasticboy/vim-markdown
+" disable folding
+let g:vim_markdown_folding_disabled=1
+" Highlight YAML frontmatter as used by Jekyll
+let g:vim_markdown_frontmatter=1
+
+" intend guides
+let g:indent_guides_enable_on_vim_startup = 1
+
+" jedi-vim plugin config
+let g:jedi#completions_command = "<C-N>"
+let g:jedi#popup_on_dot = 0
+
+" syntastic setting
+set statusline+=%#warningmsg#
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+

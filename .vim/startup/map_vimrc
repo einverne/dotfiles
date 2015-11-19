@@ -1,0 +1,36 @@
+" vim map setting
+
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+" fast saving
+nmap <leader>w :w!<cr>
+
+" smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Useful mappings for managin tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+
+" visual mode copy and paste to system clipboard
+vmap <C-c> "+y
+vmap <C-x> "+c
+vmap <C-v> "+p
+
+function! Xml()
+	set filetype=xml
+	:%s/></>\r</g 	"把><替换成>回车<
+	:normal gg=G<cr>
+endfunction
+map <leader>xml :call Xml()
+
+" plugin map setting
+
+" Normal mode F2 to call NERDTree
+nmap <F2> :NERDTreeToggle<cr>
