@@ -1,11 +1,4 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Judge current OS is Windows or Linux
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if(has("win32") || has("win64") || has("win95") || has("win16"))
-	let g:iswindows = 1
-else
-	let g:iswindows = 0
-endif
+let g:iswindows = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Judge current process is vim or gvim
@@ -23,10 +16,10 @@ if g:iswindows
 	source $VIM/vundle_vimrc
 	source $VIM/python_vimrc
 else
-	source ~/.vim/startup/vundle_vimrc
-	source ~/.vim/startup/python_vimrc
-	source ~/.vim/startup/map_vimrc
-	source ~/.vim/startup/plugin_vimrc
+	source $HOME/.vim/startup/vundle_vimrc
+	source $HOME/.vim/startup/python_vimrc
+	source $HOME/.vim/startup/map_vimrc
+	source $HOME/.vim/startup/plugin_vimrc
 endif
 
 source $VIMRUNTIME/vimrc_example.vim
@@ -147,8 +140,8 @@ if g:iswindows
 	set guifont=Courier\ New\:h12
 	" set guifont=Droid\ Sans\ Mono\ for\ Powerline\:h12
 	set guifontwide=NSimsun\:h12
-else
-	set guifont=Monaco:h12
+elseif has("gui_gtk2")
+	set guifont=Consolas\ 12
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
