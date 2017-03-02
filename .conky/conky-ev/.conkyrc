@@ -1,0 +1,172 @@
+background no
+use_spacer right
+no_buffers true
+short_units true              # 显示缩写单位，比如 kiB -> k, GB -> G
+pad_percents 2
+temperature_unit celsius      # 温度,默认为摄氏度
+
+# Use Xft?
+use_xft yes         # 开启自定义字体
+xftfont Droid Sans Light:size=10     # 自定义字体
+xftalpha 1
+text_buffer_size 2048
+uppercase false       # TEXT大小写
+override_utf8_locale yes
+
+# Update interval in seconds 更新时间间隔
+update_interval 1
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes            # 创建窗口绘制
+own_window_title NET
+own_window_class Conky
+own_window_colour 9f9a9a
+own_window_transparent no
+own_window_type desktop      # override 等选项
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager # 设置没有边框
+own_window_argb_visual yes  # 只有启用argb才能透明
+own_window_argb_value 180   # 设置透明度 0为不透明，255 100% 透明
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes   # 双缓存，解决闪烁问题
+
+minimum_size 282
+
+# Draw shades?
+draw_shades no
+default_shade_color 292421
+# Draw outlines 绘制文本或图案轮廓
+draw_outline no
+default_outline_color black
+
+# Draw borders around text
+draw_borders no
+
+# Stippled borders?
+stippled_borders 0
+
+# border margins
+border_inner_margin 5
+#border_outer_margin 0
+draw_graph_borders no
+# border width
+border_width 5
+
+# Text alignment, other possible values are commented 默认在桌面位置
+#alignment top_left
+alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 20
+gap_y 20
+
+imlib_cache_size 0
+
+# predefine the color for use inside TEXT segments
+default_color 323232
+color1 323232
+color2 323232
+color3 01C400       # green
+color4 6b6b6b
+color5 20bff9       # color of bar and graph
+color6 212121       # high temperature color
+color7 7b7b7b       # low temperature color
+
+TEXT
+${execi 300 curl -s "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%20%222151330%22%20and%20u%20%3D%20%22c%22&format=xml&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys" -o ~/.cache/weather.xml} ${font Droid Sans Light:size=15}${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "city=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}, ${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "region=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}, ${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "country=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}${font}
+${font Droid Sans Light:size=70}${alignr}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font}
+${voffset -10}
+${execi 300 cp -f -T ~/.conky/conky-ev/weather-icons/$(grep -o -P "<yweather:condition .*?>" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather.png}${image ~/.cache/weather.png -p 5,40 -s 78x78}
+${goto 20}${font Droid Sans Light:size=12}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o -m 1 "text=\"[^\"]*\"" | grep -o -m 1 "\"[^\"]*\"" | grep -o -m 1 "[^\"]*" | tr '[a-z]' '[A-Z]' | tr '[:upper:]' '[:lower:]' | sed -e "s/\b\(.\)/\u\1/g"}${font}
+${image ~/.conky/conky-ev/weather-icons/wind.png -p 0,150 -s 15x15}${goto 35}${execi 300 grep -o -P "<yweather:wind .*?>" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"} ${execi 300 grep -o -P "<yweather:units .*?>" ~/.cache/weather.xml | grep -o "speed=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${image ~/.conky/conky-ev/weather-icons/humidity.png -p 0,165 -s 15x15}${goto 35}${execi 300 grep "yweather:atmosphere" ~/.cache/weather.xml | grep -o "humidity=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}%
+${image ~/.conky/conky-ev/weather-icons/wind.png -p 18,135 -s 1x1	}${goto 35}
+${goto 18}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1' | tr '[a-z]' '[A-Z]'}${goto 88}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}${goto 158}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3' | tr '[a-z]' '[A-Z]'}${goto 228}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4' | tr '[a-z]' '[A-Z]'}${goto 298}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5' | tr '[a-z]' '[A-Z]'}
+${execi 300 cp -f -T ~/.conky/conky-ev/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 8,220 -s 30x30}${execi 300 cp -f -T ~/.conky/conky-ev/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-2.png}
+${image ~/.cache/weather-2.png -p 75,220 -s 30x30}${execi 300 cp -f -T ~/.conky/conky-ev/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 145,220 -s 30x30}${execi 300 cp -f -T ~/.conky/conky-ev/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5').png ~/.cache/weather-4.png}${image ~/.cache/weather-4.png -p 215,220 -s 30x30}${execi 300 cp -f -T ~/.conky/conky-ev/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==6').png ~/.cache/weather-5.png}${image ~/.cache/weather-5.png -p 285,220 -s 30x30}${voffset 28}${goto 20}${color6}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°${goto 90}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°${goto 160}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°${goto 230}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4'}°${goto 300}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5'}°
+${voffset 4}${goto 20}${color7}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°${goto 90}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°${goto 160}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°${goto 230}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4'}°${goto 300}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==5'}°
+
+${font Droid Sans:bold:size=12}${color Tan2}System ${color slate grey}${hr 2}${font}
+#${color1}Computer name      $alignr${color}${nodename}
+${color1}Kernel version     $alignr${color}${kernel}-${machine}
+${color1}CPU frequency      $alignr${color}${freq_g}GHz
+${color1}Load (average)     $alignr${color}${loadavg 1}
+${color1}CPU temperature    $alignr${color}${acpitemp} degrees
+Uptime  $alignr ${uptime_short}
+
+#${font Droid Sans:bold:size=12}${color Tan2}Laptop battery charge ${color slate grey}${hr 2}${font}
+#${color1}Battery charge     $alignr${color}${battery_short BAT1}
+${font Droid Sans:bold:size=12}${color Tan2}Processors ${color slate grey}${hr 2}${font}
+${color1}CPU     ${color}${cpu cpu0}%  ${voffset 2}${color5}${cpubar cpu0}
+# Processors/Memory
+#${color}${font :bold:size=10}CPU $alignc frequency $alignr CPU %${color}${font}
+#CPU 1 ${color1}$alignc${freq_g 1} ${color1}Ghz ${color1}$alignr${cpu cpu1}${color1} %
+#CPU 2 ${color1}$alignc${freq_g 2} ${color1}Ghz ${color1}$alignr${cpu cpu2}${color1} %
+#CPU 3 ${color1}$alignc${freq_g 3} ${color1}Ghz ${color1}$alignr${cpu cpu3}${color1} %
+#CPU 4 ${color1}$alignc${freq_g 4} ${color1}Ghz ${color1}$alignr${cpu cpu4}${color1} %
+# 列出排名前五的CPU消耗进程
+#${color}${font :bold:size=10}Top Process $alignc PID$alignr CPU %${font}
+#${top name 1} $alignc ${top pid 1} $alignr ${top cpu 1} %
+#${top name 2} $alignc ${top pid 2} $alignr ${top cpu 2} %
+#${top name 3} $alignc ${top pid 3} $alignr ${top cpu 3} %
+#${top name 4} $alignc ${top pid 4} $alignr ${top cpu 4} %
+#${top name 5} $alignc ${top pid 5} $alignr ${top cpu 5} %
+
+# 列出排名前五的内存消耗进程
+${color}${font :bold:size=10}Top Memory $alignc MEM$alignr Mem %${font}
+${top_mem name 1} $alignc ${top_mem mem_res 1} $alignr${top_mem mem 1} %
+${top_mem name 2} $alignc ${top_mem mem_res 2} $alignr${top_mem mem 2} %
+${top_mem name 3} $alignc ${top_mem mem_res 3} $alignr${top_mem mem 3} %
+${top_mem name 4} $alignc ${top_mem mem_res 4} $alignr${top_mem mem 4} %
+${top_mem name 5} $alignc ${top_mem mem_res 5} $alignr${top_mem mem 5} %
+$alignc ${loadgraph 50,310 20bff9 20bff9 -l}
+# 内存
+${font Droid Sans:bold:size=12}${color Tan2}Memory (RAM) ${color slate grey}${hr 2}${font}
+${color1}Memory free / total $alignr${color}${memeasyfree} / ${memmax}
+${color1}Now in use  ${color}${mem} ${color}${memperc}%   ${color5}${membar}
+${color1}Virtual memory (swap)  $alignc${color}${swap} / ${swapmax} ${color}$alignr${swapperc} %
+# ${memgraph 50,300 20bff9 20bff9 }
+
+${font Droid Sans:bold:size=12}${color Tan2}File system ${color slate grey}${hr 2}${font}
+${color1}Root or /       $alignc${color}${fs_used /} / ${fs_size /} ${color}$alignr${fs_free_perc /} %
+${color5}${fs_bar 5,300 /}
+${color1}Home or /home   $alignc${color}${fs_used /home} / ${fs_size /home} ${color}$alignr${fs_free_perc /home} %
+${color5}${fs_bar 5,300 /home}
+
+${font Droid Sans:bold:size=12}${color Tan2}Wireless network ${color slate grey}${hr 2}${font}
+${if_existing /proc/net/route eth0}${color1}Wireless access point $alignr${color}${wireless_essid wlan0}${endif}
+${color}Signal strength     $alignr${color}${wireless_link_qual_perc wlan0}   ${wireless_link_bar 5,100 wlan0}
+# ${color1}Data traffic down / up   $alignr${color}${totaldown wlan0} ${color1}/  ${color}${totalup wlan0}
+${color}WIFI SSID $alignr ${wireless_essid}
+IP $alignr ${addr wlan0}
+# 网络
+${if_existing /proc/net/route wlan0}
+${color1}Up:${color1} ${color3}${upspeed wlan0}${color1}$alignr${goto 190}${color1}Down:${color1} ${color3}${downspeed wlan0}
+${color1}${upspeedgraph wlan0 75,140 20bff9 20bff9}$alignr${goto 190}${downspeedgraph wlan0 75,140 20bff9 20bff9}
+${color1}Sent:${color1} ${color2}${totalup wlan0}${color1}$alignr${goto 190}${color1}Received:${color1} ${color2}${totaldown wlan0}${color1}
+${else}
+${if_existing /proc/net/route eth0}
+${color1}Up:${color1} ${color3}${upspeed eth0}${color1}$alignr${goto 190}${color1}Down:${color1} ${color3}${downspeed eth0}
+${color1}${upspeedgraph eth0 75,140 20bff9 20bff9}$alignr${goto 190}${downspeedgraph eth0 75,140 20bff9 20bff9}
+${color1}Sent:${color1} ${color2}${totalup eth0}${color1}$alignr${goto 190}${color1}Received:${color} ${color2}${totaldown eth0}${color1}
+${else}
+${if_existing /proc/net/route eth1}
+${color1}Up:${color1} ${color3}${upspeed eth1}${color}$alignr${goto 190}${color1}Down:${color1} ${color3}${downspeed eth1}${color1}
+${upspeedgraph eth1 75,140 20bff9 20bff9}$alignr${goto 190}${downspeedgraph eth1 75,140 20bff9 20bff9}
+${color1}Sent:${color1} ${color2}${totalup eth1}${color1}$alignr${goto 190}${color1}Received:${color1} ${color2}${totaldown eth1}${color1}
+${else}
+${if_existing /proc/net/route ppp0}
+${color5}Up:${color1} ${color3}${upspeed ppp0} ${color}$alignr${goto 190}${color1}Down:${color1} ${color3}${downspeed ppp0}${color}
+${upspeedgraph ppp0 75,140 20bff9 20bff9}$alignr ${goto 190}${downspeedgraph ppp0 75,140 20bff9 20bff9}
+${color1}Sent:${color1} ${color2}${totalup ppp0}${color1}$alignr${goto 190}${color5}Received:${color1} ${color2}${totaldown ppp0}${color1}
+${else}
+Network disconnected
+${color3}Connect to a network to see statistics${color1}
+${endif}${endif}${endif}${endif}

@@ -1,0 +1,35 @@
+
+Make sure conky is installed, and install this PPA:
+
+    sudo apt-add-repository -y ppa:teejee2008/ppa
+    sudo apt-get update
+    sudo apt-get install conky-manager
+
+Make sure to install "curl" in order to display the weather! (sudo apt-get install curl)
+
+Install this conkyrc:
+
+1. Install the "DroidSans" fonts.
+2. Run `/.install_conky.sh` to copy files to .conky dir
+3. Replace your own yahoo weather.
+    - go to https://developer.yahoo.com/weather/
+    - select XML, copy and paste (with your woeid): select * from weather.forecast where woeid = "2151330" and u = "c" , you need to change the text content to your own city.
+    - then copy the url to edit in .conkyrc file
+
+4. The first day in the conky displays the forecast for today.(in blue color)
+5. Run conky
+
+-------------------------------------------------------------------------------------------------------
+NOTE*
+
+Be careful when changing fonts as well as font sizes!The images in conky have a set position, so if you change the font or size of the text, the text will move up/down while the images will stay in position, making it look out of place.
+
+If you wish to change the font you can fix the problem in 3 ways:
+
+1. Either change the size of the font until your images are in position
+
+2. Change the position off the corresponding images.Search for "-p" and manipulate the neccesary values.
+
+3. You can also move the text up/down by adding empty lines in the conkyrc.(enter/backspace)
+
+-------------------------------------------------------------------------------------------------------
