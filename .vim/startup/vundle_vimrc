@@ -26,6 +26,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'Raimondi/delimitMate'
+Plugin 'tomasr/molokai'
 "show tabs
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'vim-scripts/taglist.vim'
