@@ -22,8 +22,8 @@ else
 	source $HOME/.vim/startup/plugin_vimrc
 endif
 
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
+" source $VIMRUNTIME/vimrc_example.vim
+" source $VIMRUNTIME/mswin.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -61,7 +61,7 @@ if g:iswindows
 endif
 
 " 如下命令使鼠标用起来象微软 Windows
-behave mswin
+" behave mswin
 
 " 高亮整行
 set cursorline

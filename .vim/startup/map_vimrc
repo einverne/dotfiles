@@ -19,9 +19,15 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 
 " visual mode copy and paste to system clipboard
-vmap <C-c> "+y
-vmap <C-x> "+c
-vmap <C-v> "+p
+"vmap <C-c> "+y
+"vmap <C-x> "+c
+"vmap <C-v> "+p
+
+" 将VIM中将内容复制到系统粘贴板，或者从系统粘贴板粘贴到VIM
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+nnoremap <C-p> "+gP
+vnoremap <C-p> "+gP
 
 function! Xml()
 	set filetype=xml
