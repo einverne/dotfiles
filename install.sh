@@ -16,9 +16,17 @@ if [ "$use_vim_configs" == "Y" ] || [ "$use_vim_configs" == "y" ]; then
 	fi
 	ln -s $PWD/.vim $VIMDIR/.vim 2> /dev/null
 	ln -s $PWD/.vimrc $VIMDIR/.vimrc 2> /dev/null
+	if [ -f "$VIMDIR/.tmux.conf" ]; then
+		mv $VIMDIR/.tmux.conf $VIMDIR/.tmux.conf.old
+		echo "origin .tmux.conf has been moved to .tmux.conf.old"
+	fi
+	ln -s $PWD/tmux/.tmux.conf $VIMDIR/.tmux.conf 2> /dev/null
+	ln -s $PWD/tmux/.tmux.conf.local $VIMDIR/.tmux.conf.local 2> /dev/null
 fi
 
 git submodule init && git submodule update
 
 # install ctags to solve "Exuberant ctags not found in PATH" error
 sudo apt-get install exuberant-ctags
+sudo apt-get install vim
+sudo apt-get install tmux
