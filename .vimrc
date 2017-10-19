@@ -9,22 +9,6 @@ else
 	let g:isGUI = 0
 endif
 
-
-" 引用vundle_vimrc
-" 引用python_vimrc配置文件
-if g:iswindows
-	source $VIM/vundle_vimrc
-	source $VIM/python_vimrc
-else
-	source $HOME/.vim/startup/vundle_vimrc
-	source $HOME/.vim/startup/python_vimrc
-	source $HOME/.vim/startup/map_vimrc
-	source $HOME/.vim/startup/plugin_vimrc
-endif
-
-" source $VIMRUNTIME/vimrc_example.vim
-" source $VIMRUNTIME/mswin.vim
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -63,8 +47,8 @@ endif
 " 如下命令使鼠标用起来象微软 Windows
 " behave mswin
 
-" 高亮整行
-set cursorline
+" 高亮整行 只在普通模式下开启
+set cursorline 
 
 " always show current position
 set ruler
@@ -219,6 +203,35 @@ set statusline+=%3*%c,		"column
 set statusline+=%l/%L	"line no/all line"
 set statusline+=\ %P
 
+" 在普通模式下用块状光标，在插入模式下用条状光标（形状类似英文 "I"
+" 的样子），然后在替换模式中使用下划线形状的光标。
+if empty($TMUX)
+	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+	if v:version >= 800
+	  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+	endif
+else
+	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+	if v:version >= 800
+	  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+	endif
+endif
+
+if &term =~ "xterm\\|rxvt"
+  " use an orange cursor in insert mode
+  let &t_SI = "\<Esc>]12;orange\x7"
+  " use a red cursor otherwise
+  let &t_EI = "\<Esc>]12;gray\x7"
+  silent !echo -ne "\033]12;gray\007"
+  " reset cursor when vim exits
+  autocmd VimLeave * silent !echo -ne "\033]112\007"
+  " use \003]12;gray\007 for gnome-terminal and rxvt up to version 9.21
+endif
+
+autocmd InsertLeave,WinEnter * set cursorline
+autocmd InsertEnter,WinLeave * set nocursorline
 
 
 
@@ -269,3 +282,21 @@ function! MyDiff()
   endif
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
+
+" 依据 https://stackoverflow.com/a/8218188/1820217 将 Plugin map
+" 移到最后，使得 leader 生效
+" 引用vundle_vimrc
+" 引用python_vimrc配置文件
+if g:iswindows
+	source $VIM/vundle_vimrc
+	source $VIM/python_vimrc
+else
+	source $HOME/.vim/startup/vundle_vimrc
+	source $HOME/.vim/startup/python_vimrc
+	source $HOME/.vim/startup/map_vimrc
+	source $HOME/.vim/startup/plugin_vimrc
+endif
+
+" source $VIMRUNTIME/vimrc_example.vim
+" source $VIMRUNTIME/mswin.vim
+

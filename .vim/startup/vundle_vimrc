@@ -39,6 +39,7 @@ Plugin 'WolfgangMehner/vim-plugins'
 Plugin 'L9'
 Plugin 'perl-support.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-surround'
 
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
