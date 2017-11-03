@@ -105,7 +105,7 @@ set encoding=utf-8
 " set current file encoding
 set fileencoding=utf-8
 "按照utf-8 without bom，utf-8，顺序识别打开文件
-set fileencodings=ucs-bom,utf-8,gbk,gb2312,cp936,big5,gb18030,shift-jis,latin1
+set fileencodings=ucs-bom,utf-8,gbk,gb2312,cp936,gb18030,big5,shift-jis,euc-jp,enc-kr,latin1
 
 "防止菜单乱码
 if(g:iswindows && g:isGUI)
@@ -157,6 +157,9 @@ set tabstop=4
 " 设置">"操作符 缩进，增加的缩进量是使用'shiftwidth'指定，默认是8
 set shiftwidth=4
 
+" 将tab自动转为空格
+set expandtab
+
 "显示行号
 set nu
 
@@ -179,7 +182,8 @@ autocmd Filetype css setlocal tabstop=2 shiftwidth=2
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
+" 左下角显示当前vim模式
+set showmode
 
 """"""""""""""""""""""""""""""
 " => Status line
@@ -205,39 +209,35 @@ set statusline+=\ %P
 
 " 在普通模式下用块状光标，在插入模式下用条状光标（形状类似英文 "I"
 " 的样子），然后在替换模式中使用下划线形状的光标。
-if empty($TMUX)
-	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-	if v:version >= 800
-	  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-	endif
-else
-	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-	if v:version >= 800
-	  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-	endif
-endif
-
-if &term =~ "xterm\\|rxvt"
-  " use an orange cursor in insert mode
-  let &t_SI = "\<Esc>]12;orange\x7"
-  " use a red cursor otherwise
-  let &t_EI = "\<Esc>]12;gray\x7"
-  silent !echo -ne "\033]12;gray\007"
-  " reset cursor when vim exits
-  autocmd VimLeave * silent !echo -ne "\033]112\007"
-  " use \003]12;gray\007 for gnome-terminal and rxvt up to version 9.21
-endif
-
-autocmd InsertLeave,WinEnter * set cursorline
-autocmd InsertEnter,WinLeave * set nocursorline
-
+" if has("autocmd")
+"   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
+"   au InsertEnter,InsertChange *
+"     \ if v:insertmode == 'i' | 
+"     \   silent execute '!echo -ne "\e[6 q"' | redraw! |
+"     \ elseif v:insertmode == 'r' |
+"     \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+"     \ endif
+"   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+" endif
+" 
+" if &term =~ "xterm\\|rxvt"
+"   " use an orange cursor in insert mode
+"   let &t_SI = "\<Esc>]12;orange\x7"
+"   " use a red cursor otherwise
+"   let &t_EI = "\<Esc>]12;gray\x7"
+"   silent !echo -ne "\033]12;gray\007"
+"   " reset cursor when vim exits
+"   autocmd VimLeave * silent !echo -ne "\033]112\007"
+"   " use \003]12;gray\007 for gnome-terminal and rxvt up to version 9.21
+" endif
+" 
+" autocmd InsertLeave,WinEnter * set cursorline
+" autocmd InsertEnter,WinLeave * set nocursorline
 
 
 " powerline
 " hide the default mode text (e.g. -- INSERT -- below the statusline)
-" set t_Co=256
+set t_Co=256
 " let g:Powerline_symbols='fancy'
 
 
@@ -257,6 +257,10 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
+autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+	\    exe "normal! g`\"" |
+    \ endif
 
 set diffexpr=MyDiff()
 function! MyDiff()

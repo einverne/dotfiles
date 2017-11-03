@@ -7,6 +7,10 @@ map k gk
 " fast saving
 nmap <leader>w :w!<cr>
 
+" use tab as %
+nmap <tab> %
+vmap <tab> %
+
 " smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -26,8 +30,19 @@ map <leader>tc :tabclose<cr>
 " 将VIM中将内容复制到系统粘贴板，或者从系统粘贴板粘贴到VIM
 nnoremap <C-y> "+y
 vnoremap <C-y> "+y
-nnoremap <C-p> "+gP
 vnoremap <C-p> "+gP
+nnoremap <C-p> "+gP
+
+" 快速移动当前行
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" 空格关闭高亮，清空所有已经显示
+nnoremap <Space> :set hlsearch! hlsearch?<CR>
 
 function! Xml()
 	set filetype=xml
