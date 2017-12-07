@@ -1,3 +1,5 @@
+set term=screen-256color " Tmux setup
+
 let g:iswindows = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
