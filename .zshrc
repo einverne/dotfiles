@@ -11,7 +11,7 @@ export PATH="$NODE_HOME/bin/:$PATH"
 
 export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
 
-export PATH="~/.pyenv/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
