@@ -242,6 +242,9 @@ set statusline+=\ %P
 set t_Co=256
 " let g:Powerline_symbols='fancy'
 
+" autosave when lost focus
+:au FocusLost * silent! wa
+
 
 " general mapping
 " no <up> ddkP
