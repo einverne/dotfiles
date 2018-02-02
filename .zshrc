@@ -14,9 +14,16 @@ export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
 
 export TERM="screen-256color"
 
+# pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# rbenv
+export GPG_TTY=$(tty)
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
