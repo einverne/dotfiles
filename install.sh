@@ -1,6 +1,15 @@
 #!/bin/bash
 VIMDIR=${1:-$HOME}
 
+# install ctags to solve "Exuberant ctags not found in PATH" error
+sudo apt-get install -y zsh
+chsh -s $(which zsh)
+sudo apt-get install -y exuberant-ctags
+sudo apt-get install -y vim vim-gtk tmux
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+
 echo "start install, all of your old .vimrc and .vim will be overwritten."
 echo "all your old vim settings will be mv to .vimrc.old & .vim.old"
 echo -en "Do you want to continue?[y/n]"
@@ -26,11 +35,4 @@ fi
 
 sudo apt-get install -y git
 git submodule init && git submodule update
-
-# install ctags to solve "Exuberant ctags not found in PATH" error
-sudo apt-get install -y exuberant-ctags
-sudo apt-get install -y vim
-sudo apt-get install -y tmux
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 

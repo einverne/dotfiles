@@ -2,6 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export EDITOR=vim
+export TERM="screen-256color"
 bindkey -e
 
 export JAVA_HOME=/usr/local/jdk1.8.0_131/
@@ -11,8 +12,6 @@ export NODE_HOME=/usr/local/node-v6.11.4-linux-64/
 export PATH="$NODE_HOME/bin/:$PATH"
 
 export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
-
-export TERM="screen-256color"
 
 # pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
@@ -116,4 +115,3 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# bindkey '^m' autosuggest-accept
