@@ -6,6 +6,7 @@ sudo apt-get install -y zsh zsh-antigen
 chsh -s $(which zsh)
 sudo apt-get install -y exuberant-ctags
 sudo apt-get install -y vim vim-gtk tmux
+sudo apt-get install htop tree zip wget
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
@@ -25,12 +26,16 @@ if [ "$use_vim_configs" == "Y" ] || [ "$use_vim_configs" == "y" ]; then
 	fi
 	ln -rsf $PWD/.vim $VIMDIR/.vim 2> /dev/null
 	ln -rsf $PWD/.vimrc $VIMDIR/.vimrc 2> /dev/null
+    
 	if [ -f "$VIMDIR/.tmux.conf" ]; then
 		mv $VIMDIR/.tmux.conf $VIMDIR/.tmux.conf.old
 		echo "origin .tmux.conf has been moved to .tmux.conf.old"
 	fi
 	ln -rsf $PWD/tmux/.tmux.conf $VIMDIR/.tmux.conf 2> /dev/null
 	ln -rsf $PWD/tmux/.tmux.conf.local $VIMDIR/.tmux.conf.local 2> /dev/null
+
+    # link zshrc
+    ln -rsf $PWD/.zshrc $VIMDIR/.zshrc 2> /dev/null
 fi
 
 sudo apt-get install -y git
