@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export EDITOR=vim
-export TERM="screen-256color"
+#export TERM="screen-256color"
 bindkey -e
 
 export JAVA_HOME=/usr/local/jdk1.8.0_131/
