@@ -76,15 +76,43 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    fabric
-    mvn
     pip
     tmux
-    web-search
-    zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
+
+source $HOME/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+#antigen bundle lein
+antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions 
+antigen bundle Tarrasch/zsh-autoenv 
+#antigen bundle supercrabtree/k 
+#antigen bundle zsh-users/zsh-history-substring-search 
+#antigen bundle tylerreckart/hyperzsh 
+#antigen bundle extract 
+#antigen bundle z 
+#antigen bundle mafredri/zsh-async 
+#antigen bundle sindresorhus/pure 
+
+# Load the theme.
+antigen theme agnoster
+
+# Tell Antigen that you're done.
+antigen apply
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 
 # User configuration
 
