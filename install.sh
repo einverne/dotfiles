@@ -2,14 +2,18 @@
 VIMDIR=${1:-$HOME}
 
 # install ctags to solve "Exuberant ctags not found in PATH" error
-sudo apt-get install -y zsh zsh-antigen
+sudo apt-get install -y git zsh zsh-antigen vim vim-gtk tmux
 chsh -s $(which zsh)
 sudo apt-get install -y exuberant-ctags
-sudo apt-get install -y vim vim-gtk tmux
-sudo apt-get install htop tree zip wget
+sudo apt-get install -y sudo apt-get install htop tree zip unzip wget nethogs
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
+VIM_SERVER="https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc"
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+read -n 1 is_server
+if [ "$is_server" == "Y" ] || [ "$is_server" == "y" ]; then
+    curl $VIM_SERVER > $HOME/.vimrc
+    exit
+fi
 
 echo "start install, all of your old .vimrc and .vim will be overwritten."
 echo "all your old vim settings will be mv to .vimrc.old & .vim.old"
@@ -36,8 +40,8 @@ if [ "$use_vim_configs" == "Y" ] || [ "$use_vim_configs" == "y" ]; then
 
     # link zshrc
     ln -rsf $PWD/.zshrc $VIMDIR/.zshrc 2> /dev/null
+    curl -L git.io/antigen > $VIMDIR/antigen.zsh
 fi
 
-sudo apt-get install -y git
 git submodule init && git submodule update
 

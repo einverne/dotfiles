@@ -91,18 +91,18 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle heroku
 antigen bundle pip
-#antigen bundle lein
+antigen bundle lein
 antigen bundle command-not-found
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions 
 antigen bundle Tarrasch/zsh-autoenv 
-#antigen bundle supercrabtree/k 
-#antigen bundle zsh-users/zsh-history-substring-search 
+antigen bundle supercrabtree/k 
+antigen bundle zsh-users/zsh-history-substring-search 
 #antigen bundle tylerreckart/hyperzsh 
 #antigen bundle extract 
-#antigen bundle z 
+antigen bundle z 
 #antigen bundle mafredri/zsh-async 
 #antigen bundle sindresorhus/pure 
 
