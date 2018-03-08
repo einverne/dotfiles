@@ -5,7 +5,7 @@ VIMDIR=${1:-$HOME}
 sudo apt-get install -y git zsh zsh-antigen vim vim-gtk tmux
 chsh -s $(which zsh)
 sudo apt-get install -y exuberant-ctags
-sudo apt-get install -y sudo apt-get install htop tree zip unzip wget nethogs
+sudo apt-get install -y htop tree zip unzip wget nethogs
 
 VIM_SERVER="https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc"
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
