@@ -267,6 +267,8 @@ autocmd BufReadPost *
 	\    exe "normal! g`\"" |
     \ endif
 
+autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
+
 set diffexpr=MyDiff()
 function! MyDiff()
   let opt = '-a --binary '

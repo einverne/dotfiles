@@ -45,6 +45,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " syntax highlight for Dockerfile
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'hotoo/pangu.vim'
 
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
