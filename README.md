@@ -1,8 +1,8 @@
-This is my vim conf file.
+vim, zsh, tmux 相关的配置
 
-vundle相关配置在vundle_vimrc中，用vundle管理插件，插件列表`:PluginList`查看
+vundle 相关配置在 vundle_vimrc 中，用 vundle 管理插件，插件列表`:PluginList`查看
 
-python相关配置在python_vimrc中
+python 相关配置在 python_vimrc 中
 
 ## Instruction under Linux
 
