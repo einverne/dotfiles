@@ -13,16 +13,20 @@ export PATH="$NODE_HOME/bin/:$PATH"
 
 export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
 
-# pyenv
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [[ -d ~/.pyenv ]]; then
+    # pyenv
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
-# rbenv
-export GPG_TTY=$(tty)
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+if [[ -d ~/.rbenv/ ]]; then
+    # rbenv
+    export GPG_TTY=$(tty)
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+    export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+fi
 
 # Path to your oh-my-zsh installation.
 # export ZSH=$HOME/.oh-my-zsh
