@@ -5,13 +5,15 @@ export EDITOR=vim
 #export TERM="screen-256color"
 bindkey -e
 
-export JAVA_HOME=/usr/local/jdk1.8.0_131/
+export JAVA_HOME=/usr/local/jdk1.8.0_131
 export PATH="$PATH:$JAVA_HOME/bin/"
 
 export NODE_HOME=/usr/local/node-v6.11.4-linux-64/
 export PATH="$NODE_HOME/bin/:$PATH"
 
 export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$PATH:$ANDROID_HOME/bin/"
 
 if [[ -d ~/.pyenv ]]; then
     # pyenv
@@ -26,6 +28,11 @@ if [[ -d ~/.rbenv/ ]]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
     export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+fi
+
+if [[ -d /usr/local/go ]]; then
+    export PATH="$PATH:/usr/local/go/bin"
+    export GOROOT="/usr/local/go"
 fi
 
 # Path to your oh-my-zsh installation.
