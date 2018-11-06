@@ -30,6 +30,12 @@ if [[ -d ~/.rbenv/ ]]; then
     export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 fi
 
+if [[ -d ~/.nvm ]]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
 if [[ -d /usr/local/go ]]; then
     export PATH="$PATH:/usr/local/go/bin"
     export GOROOT="/usr/local/go"
