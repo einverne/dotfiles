@@ -3,6 +3,8 @@
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
+nnoremap j gj
+nnoremap k gk
 
 " fast saving
 nmap <leader>w :w!<cr>
@@ -21,6 +23,12 @@ map <C-l> <C-W>l
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
+
+" Disable arrowkeys
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 " visual mode copy and paste to system clipboard
 "vmap <C-c> "+y
