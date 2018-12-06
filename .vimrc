@@ -244,7 +244,9 @@ set t_Co=256
 
 " autosave when lost focus
 :au FocusLost * silent! wa
+:au FocusLost * :wa
 
+autocmd CursorHold, CursorHoldI * update
 
 " general mapping
 " no <up> ddkP
