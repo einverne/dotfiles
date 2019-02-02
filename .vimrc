@@ -243,10 +243,28 @@ set t_Co=256
 " let g:Powerline_symbols='fancy'
 
 " autosave when lost focus
-:au FocusLost * silent! wa
-:au FocusLost * :wa
+au FocusLost * silent! wa
+au FocusLost * :wa
+
+autocmd TextChanged,TextChangedI <buffer> silent write
 
 autocmd CursorHold, CursorHoldI * update
+
+" save on buffer switch
+set autowrite
+set autowriteall
+
+let g:autosave_time_period = 10
+au BUfRead,BufNewFile * let b:start_time=localtime()
+" only write if needed and update the start time after save
+function! UpdateFile()
+    if ((localtime() - b:start_time) >= g:autosave_time_period)
+        update
+        echo "Time: " . (localtime() - b:start_time) . " seconds have elapsed. File saved."
+        let b:start_time=localtime()
+    endif
+endfunction
+au CursorHold * call UpdateFile()
 
 " general mapping
 " no <up> ddkP
