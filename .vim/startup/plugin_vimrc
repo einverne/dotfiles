@@ -43,6 +43,12 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
+" Highlight Cursor line
+let g:NERDTreeHighlightCursorline = 1
+" Show hidden files
+let NERDTreeShowHidden=1
+" NERDTree will recursively open dirs with only one child
+let NERDTreeCascadeOpenSingleChildDir=1
 
 
 "" airline settings.
@@ -65,3 +71,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_c = '%<%F%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 " show tab number in tab line
 let g:airline#extensions#tabline#tab_nr_type = 1
+
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
+
+" Disable tmux navigator when zooming the Vim pane
+let g:tmux_navigator_disable_when_zoomed = 1
+
