@@ -239,6 +239,7 @@ set statusline+=\ %P
 
 " powerline
 " hide the default mode text (e.g. -- INSERT -- below the statusline)
+set background=dark
 set t_Co=256
 " let g:Powerline_symbols='fancy'
 

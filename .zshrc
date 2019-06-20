@@ -22,9 +22,10 @@ if [[ -d ~/.pyenv ]]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
+export GPG_TTY=$(tty)
+
 if [[ -d ~/.rbenv/ ]]; then
     # rbenv
-    export GPG_TTY=$(tty)
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
     export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
@@ -47,7 +48,7 @@ fi
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -95,6 +96,7 @@ plugins=(
     git
     pip
     tmux
+    tmuxinator
 )
 
 #source $ZSH/oh-my-zsh.sh
@@ -106,15 +108,21 @@ antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
+antigen bundle git-extras
+antigen bundle tig
 antigen bundle heroku
 antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
+antigen bundle tmux
+antigen bundle tmuxinator
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions 
+antigen bundle zsh-users/zsh-completions
 antigen bundle Tarrasch/zsh-autoenv 
+antigen bundle rupa/z
 antigen bundle supercrabtree/k 
 antigen bundle zsh-users/zsh-history-substring-search 
 #antigen bundle tylerreckart/hyperzsh 
@@ -122,9 +130,36 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle z 
 #antigen bundle mafredri/zsh-async 
 #antigen bundle sindresorhus/pure 
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+
+antigen bundle djui/alias-tips
+
+# Python Plugins
+antigen bundle pip
+antigen bundle python
+antigen bundle virtualenv
+
+# OS specific plugins
+if [[ $CURRENT_OS == 'OS X' ]]; then
+    antigen bundle brew
+    antigen bundle brew-cask
+    antigen bundle gem
+    antigen bundle osx
+elif [[ $CURRENT_OS == 'Linux' ]]; then
+    # None so far...
+
+    if [[ $DISTRO == 'CentOS' ]]; then
+        antigen bundle centos
+    fi
+elif [[ $CURRENT_OS == 'Cygwin' ]]; then
+    antigen bundle cygwin
+fi
 
 # Load the theme.
-antigen theme agnoster
+# antigen theme agnoster
+# workaround for https://github.com/zsh-users/antigen/issues/675
+THEME=denysdovhan/spaceship-prompt 
+antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
 
 # Tell Antigen that you're done.
 antigen apply
@@ -160,7 +195,13 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias tmux="tmux -2"
+alias tmux="TERM=screen-256color tmux -2"
+alias vi="vim"
+alias mux="TERM=screen-256color tmuxinator"
+alias cp="cp -i"
+alias df="df -sh"
+alias free="free -m"
+alias grep="grep --color=auto"
 
 transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
 tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; } 
@@ -169,3 +210,10 @@ if [[ -f ~/.zshrc.local ]]; then
     source $HOME/.zshrc.local
 fi
 
+# space
+SPACESHIP_DIR_SHOW="${SPACESHIP_DIR_SHOW=true}"
+SPACESHIP_DIR_PREFIX="${SPACESHIP_DIR_PREFIX="in "}"
+SPACESHIP_DIR_SUFFIX="${SPACESHIP_DIR_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"}"
+SPACESHIP_DIR_TRUNC="0"
+SPACESHIP_DIR_TRUNC_REPO="${SPACESHIP_DIR_TRUNC_REPO=true}"
+SPACESHIP_DIR_COLOR="${SPACESHIP_DIR_COLOR="cyan"}"
