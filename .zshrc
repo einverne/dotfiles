@@ -217,3 +217,9 @@ SPACESHIP_DIR_SUFFIX="${SPACESHIP_DIR_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"}
 SPACESHIP_DIR_TRUNC="0"
 SPACESHIP_DIR_TRUNC_REPO="${SPACESHIP_DIR_TRUNC_REPO=true}"
 SPACESHIP_DIR_COLOR="${SPACESHIP_DIR_COLOR="cyan"}"
+
+# alias
+# adb related
+# usage adb-screencap > screen.png
+alias adbcap="adb shell screencap -p"
+
