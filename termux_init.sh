@@ -2,6 +2,7 @@
 
 # https://github.com/4679/oh-my-termux
 pkg install -y libcurl wget curl openssh vim git zsh unrar unzip less
+pkg install -y tsu neofetch
 clear
 
 if [ -d "$HOME/.termux" ]; then

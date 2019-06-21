@@ -1,11 +1,24 @@
-vim, zsh, tmux 相关的配置
+dotfiles config contain vim, zsh, tmux configurations.
 
 ## Overview
-使用 [antigen](https://gtk.pw/antigen) 来管理 zsh 插件
 
-vundle 相关配置在 vundle_vimrc 中，用 vundle 管理插件，插件列表`:PluginList`查看
+- zsh
+- vim
+- tmux
 
-python 相关配置在 python_vimrc 中
+With
+
+- [Vundle](https://github.com/VundleVim/Vundle.vim) to manage vim plugins, vundle relate configuration is under `vundle_vimrc`
+- [antigen](https://gtk.pw/antigen) to manage zsh plugins
+- [tpm](https://github.com/tmux-plugins/tpm) to manage tmux plugins
+
+
+### Vim config
+vundle related configuration is under `vundle_vimrc`, to show all plugins list, use `:PluginList` in vim.
+
+python related configurations is under `python_vimrc`.
+
+
 
 ## Instruction under Linux
 
@@ -30,25 +43,6 @@ with yum:
 
 	sudo yum install ctags-etags
 
-## Plugin
-
-	Plugin 'VundleVim/Vundle.vim'
-	Plugin 'tpope/vim-fugitive'
-	Plugin 'godlygeek/tabular'
-	Plugin 'plasticboy/vim-markdown'
-	Plugin 'scrooloose/nerdtree'
-	Plugin 'davidhalter/jedi-vim'
-	Plugin 'ervandew/supertab'
-	Plugin 'Raimondi/delimitMate'
-	Plugin 'tomasr/molokai'
-	Plugin 'nathanaelkane/vim-indent-guides'
-	Plugin 'vim-scripts/taglist.vim'
-	Plugin 'WolfgangMehner/vim-plugins'
-	Plugin 'L9'
-	Plugin 'perl-support.vim'
-	Plugin 'christoomey/vim-tmux-navigator'
-	Plugin 'tpope/vim-surround'
-	Plugin 'git://git.wincent.com/command-t.git'
 
 ## Tmux
 Tmux 配置參考了 [gpakosz](https://github.com/gpakosz/.tmux) 的大部分配置。Tmux 的基础部分可以参考[这篇](http://einverne.github.io/post/2017/07/tmux-introduction.html) 文章。

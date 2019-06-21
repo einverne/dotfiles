@@ -198,6 +198,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 alias tmux="TERM=screen-256color tmux -2"
 alias vi="vim"
 alias mux="TERM=screen-256color tmuxinator"
+alias ls="ls -alh"
 alias cp="cp -i"
 alias df="df -sh"
 alias free="free -m"
