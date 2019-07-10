@@ -8,17 +8,17 @@ dotfiles config contain vim, zsh, tmux configurations.
 
 With
 
-- [Vundle](https://github.com/VundleVim/Vundle.vim) to manage vim plugins, vundle relate configuration is under `vundle_vimrc`
-- [antigen](https://gtk.pw/antigen) to manage zsh plugins
-- [tpm](https://github.com/tmux-plugins/tpm) to manage tmux plugins
+- [antigen](https://gtk.pw/antigen) to manage zsh plugins, `source ~/.zshrc` to install all zsh plugins
+- [Vundle](https://github.com/VundleVim/Vundle.vim) to manage vim plugins, vundle relate configuration is under `vundle_vimrc`. In Vim, `:PluginInstall` to install all vim plugins.
+- [tpm](https://github.com/tmux-plugins/tpm) to manage tmux plugins, in tmux, press `Ctrl +B` + `I` to install all tmux plugins.
 
+### zsh config
+to see `.zshrc` file
 
 ### Vim config
 vundle related configuration is under `vundle_vimrc`, to show all plugins list, use `:PluginList` in vim.
 
 python related configurations is under `python_vimrc`.
-
-
 
 ## Instruction under Linux
 
@@ -57,6 +57,7 @@ Tmux 配置參考了 [gpakosz](https://github.com/gpakosz/.tmux) 的大部分配
 - 在保留`C-b` 的前提下，`C-a` 作为第二选择
 - `prefix + |` 开启垂直分割的新 panel， `prefix + -` 水平分割
 - `C-hjkl` 直接在多 panel 中跳转
+- Tmux 调整 Pane 窗口大小 `prefix + Shift + HJKL`
 
 使用 Tmux Plugin Manager 管理，默认有如下插件
 
