@@ -7,13 +7,6 @@ chsh -s $(which zsh)
 sudo apt-get install -y exuberant-ctags
 sudo apt-get install -y htop tree zip unzip wget nethogs
 
-VIM_SERVER="https://raw.githubusercontent.com/wklken/vim-for-server/master/vimrc"
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-read -n 1 is_server
-if [ "$is_server" == "Y" ] || [ "$is_server" == "y" ]; then
-    curl $VIM_SERVER > $HOME/.vimrc
-    exit
-fi
 
 echo "start install, all of your old .vimrc and .vim will be overwritten."
 echo "all your old vim settings will be mv to .vimrc.old & .vim.old"
@@ -40,7 +33,8 @@ if [ "$use_vim_configs" == "Y" ] || [ "$use_vim_configs" == "y" ]; then
 
     # link zshrc
     ln -rsf $PWD/.zshrc $VIMDIR/.zshrc 2> /dev/null
-    curl -L git.io/antigen > $VIMDIR/antigen.zsh
+#curl -L git.io/antigen > $VIMDIR/antigen.zsh
+    git clone git@github.com:zsh-users/antigen.git $HOME/antigen
 fi
 
 git submodule init && git submodule update

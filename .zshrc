@@ -92,16 +92,11 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-    pip
-    tmux
-    tmuxinator
-)
 
 #source $ZSH/oh-my-zsh.sh
 
-source $HOME/antigen.zsh
+# you need to git clone git@github.com:zsh-users/antigen.git to $HOME
+source $HOME/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -109,6 +104,7 @@ antigen use oh-my-zsh
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
 antigen bundle git-extras
+antigen bundle mvn
 antigen bundle tig
 antigen bundle heroku
 antigen bundle pip
@@ -116,6 +112,8 @@ antigen bundle lein
 antigen bundle command-not-found
 antigen bundle tmux
 antigen bundle tmuxinator
+antigen bundle docker
+antigen bundle docker-compose
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
