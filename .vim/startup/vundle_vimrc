@@ -48,7 +48,7 @@ Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'hotoo/pangu.vim'
 Plugin 'chr4/nginx.vim'
 Plugin 'mileszs/ack.vim'
-
+Plugin 'jlanzarotta/bufexplorer'
 
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
@@ -56,3 +56,103 @@ Plugin 'git://git.wincent.com/command-t.git'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+
+" Plugin settings
+
+" plasticboy/vim-markdown
+" disable folding
+let g:vim_markdown_folding_disabled=1
+" Highlight YAML frontmatter as used by Jekyll
+let g:vim_markdown_frontmatter=1
+
+" intend guides
+let g:indent_guides_enable_on_vim_startup = 1
+
+" jedi-vim plugin config
+let g:jedi#completions_command = "<C-N>"
+let g:jedi#popup_on_dot = 0
+
+" syntastic setting
+set statusline+=%#warningmsg#
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" nerd comment
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Highlight Cursor line
+let g:NERDTreeHighlightCursorline = 1
+" Show hidden files
+let NERDTreeShowHidden=1
+" NERDTree will recursively open dirs with only one child
+let NERDTreeCascadeOpenSingleChildDir=1
+
+
+"" airline settings.
+let g:airline_theme = 'luna'
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+let g:airline#extensions#tabline#enabled = 1
+" show absolute file path in status line
+let g:airline_section_c = '%<%F%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
+" show tab number in tab line
+let g:airline#extensions#tabline#tab_nr_type = 1
+
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
+
+" Disable tmux navigator when zooming the Vim pane
+let g:tmux_navigator_disable_when_zoomed = 1
+
+" ack.vim
+" 使用 leader + a search
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --nogroup --column'
+endif
+
+" 高亮搜索关键词
+let g:ackhighlight = 1
+" 修改预览窗口高度为15
+let g:ack_qhandler = "botright copen 15"
+" 在QuickFix窗口使用快捷键以后，自动关闭QuickFix窗口
+let g:ack_autoclose = 1
+" 使用ack的空白搜索，即不添加任何参数时对光标下的单词进行搜索，默认值为1，表示开启，置0以后使用空白搜索将返回错误信息
+let g:ack_use_cword_for_empty_search = 1
+" 部分功能受限，但对于大项目搜索速度较慢时可以尝试开启
+let g:ack_use_dispatch = 1

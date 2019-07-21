@@ -326,7 +326,6 @@ else
 	source $HOME/.vim/startup/vundle_vimrc
 	source $HOME/.vim/startup/python_vimrc
 	source $HOME/.vim/startup/map_vimrc
-	source $HOME/.vim/startup/plugin_vimrc
 endif
 
 " source $VIMRUNTIME/vimrc_example.vim

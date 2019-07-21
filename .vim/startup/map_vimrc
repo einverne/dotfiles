@@ -52,6 +52,11 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 " 空格关闭高亮，清空所有已经显示
 nnoremap <Space> :set hlsearch! hlsearch?<CR>
 
+set hidden  " 避免必须保存修改才可以跳转 buffer
+" buffer 
+"nmap <leader>n :bnext<CR>
+"nmap <leader>p :bprev<CR>
+
 function! Xml()
 	set filetype=xml
 	:%s/></>\r</g 	"把><替换成>回车<
