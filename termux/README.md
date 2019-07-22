@@ -5,6 +5,12 @@ This is termux configuration.
 - use zsh as default shell, setup zsh environment
 - custom termux.properties
 
+## install
+
+    bash -c "$(curl -fsSL https://gtk.pw/termux)"
+    # or
+    bash -c "$(wget https://gtk.pw/termux -O-)"
+
 ## reference
 
 - <https://github.com/adi1090x/termux-omz>

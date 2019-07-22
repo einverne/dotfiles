@@ -150,6 +150,7 @@ set noundofile
 set nocompatible
 "设置自动缩进
 set autoindent
+set smartindent
 
 "C语言自动缩进
 set cindent
@@ -161,6 +162,10 @@ set shiftwidth=4
 
 " 将tab自动转为空格
 set expandtab
+
+" spltting a window below
+set splitbelow
+set splitright
 
 "显示行号
 set nu

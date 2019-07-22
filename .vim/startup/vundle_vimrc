@@ -50,6 +50,8 @@ Plugin 'chr4/nginx.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'jlanzarotta/bufexplorer'
 
+Plugin 'mikelue/vim-maven-plugin'
+
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 
