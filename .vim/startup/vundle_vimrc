@@ -1,62 +1,75 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 if has("win32")
-	set rtp+=$VIM/vimfiles/bundle/Vundle.vim
-	call vundle#begin('$VIM/vimfiles/bundle')
+    call plug#begin('~/vimfiles/bundle')
 else
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
+    call plug#begin('~/.vim/bundle')
 endif
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+" If you need Vim help for vim-plug itself (e.g. :help plug-options), register
+" vim-plug as a plugin.
+Plug 'junegunn/vim-plug'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 " Plugin 'vim-perl/vim-perl'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'ervandew/supertab'
-Plugin 'Raimondi/delimitMate'
-Plugin 'tomasr/molokai'
+" markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'davidhalter/jedi-vim'
+Plug 'ervandew/supertab'
+Plug 'Raimondi/delimitMate'
+Plug 'tomasr/molokai'
+Plug 'terryma/vim-multiple-cursors'
+
 "show tabs
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'WolfgangMehner/vim-plugins'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'vim-scripts/taglist.vim'
+Plug 'WolfgangMehner/vim-plugins'
 " Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Plugin 'Lokaltog/vim-powerline'
 " Plugin 'bling/vim-airline'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'L9'
-Plugin 'perl-support.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/perl-support.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " syntax highlight for Dockerfile
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'hotoo/pangu.vim'
-Plugin 'chr4/nginx.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'jlanzarotta/bufexplorer'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'hotoo/pangu.vim'
+Plug 'chr4/nginx.vim'
+Plug 'mileszs/ack.vim'
+Plug 'jlanzarotta/bufexplorer'
 
-Plugin 'mikelue/vim-maven-plugin'
+Plug 'mikelue/vim-maven-plugin'
+" Plug 'w0rp/ale'
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript'] }
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+
 
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+Plug 'git://git.wincent.com/command-t.git'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 
 " Plugin settings
@@ -150,11 +163,13 @@ endif
 
 " 高亮搜索关键词
 let g:ackhighlight = 1
-" 修改预览窗口高度为15
-let g:ack_qhandler = "botright copen 15"
+" 修改预览窗口高度
+let g:ack_qhandler = "botright copen 10"
 " 在QuickFix窗口使用快捷键以后，自动关闭QuickFix窗口
 let g:ack_autoclose = 1
 " 使用ack的空白搜索，即不添加任何参数时对光标下的单词进行搜索，默认值为1，表示开启，置0以后使用空白搜索将返回错误信息
 let g:ack_use_cword_for_empty_search = 1
-" 部分功能受限，但对于大项目搜索速度较慢时可以尝试开启
+" 部分功能受限，对大项目搜索速度较慢时可以尝试开启
 let g:ack_use_dispatch = 1
+" autofold results
+let g:ack_autofold_results = 1

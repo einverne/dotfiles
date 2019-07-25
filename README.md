@@ -9,29 +9,25 @@ dotfiles config contain vim, zsh, tmux configurations.
 With
 
 - [antigen](https://gtk.pw/antigen) to manage zsh plugins, `source ~/.zshrc` to install all zsh plugins
-- [Vundle](https://github.com/VundleVim/Vundle.vim) to manage vim plugins, vundle relate configuration is under `vundle_vimrc`. In Vim, `:PluginInstall` to install all vim plugins.
+- [vim-plug](https://github.com/junegunn/vim-plug) to manage vim plugins, vim-plug relate configuration is under `vim-plug_vimrc`. In Vim, `:PlugInstall` to install all vim plugins.
 - [tpm](https://github.com/tmux-plugins/tpm) to manage tmux plugins, in tmux, press `Ctrl +B` + `I` to install all tmux plugins.
 
 ### zsh config
 to see `.zshrc` file
 
 ### Vim config
-vundle related configuration is under `vundle_vimrc`, to show all plugins list, use `:PluginList` in vim.
+vim-plug related configuration is under `vim-plug_vimrc`, to show all plugins list, use `:PluginList` in vim.
 
 python related configurations is under `python_vimrc`.
 
 ## Instruction under Linux
 
-Just run `./install.sh`, everything is done. Then Enter the vim run `:PluginInstall` to install all plugins.
+Just run `./install.sh`, everything is done. Then Enter the vim run `:PlugInstall` to install all plugins.
 
 ### install manually
 Or, you can do it manually follow the step:
 
-1. Install Vundle to `~/.vim/` directory.
-
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-2. Enter vim, run `:PluginInstall`, after install all plugin, you will meet an error,
+Enter vim, run `:PlugInstall`, after install all plugin, you will meet an error,
 
 > Taglist: Exuberant ctags (http://ctags.sf.net) not found in PATH. Plugin is not loaded.
 
