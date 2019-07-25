@@ -96,7 +96,12 @@ fi
 #source $ZSH/oh-my-zsh.sh
 
 # you need to git clone git@github.com:zsh-users/antigen.git to $HOME
-source $HOME/antigen/antigen.zsh
+
+if [[ -f $HOME/antigen.zsh ]]; then
+    source $HOME/antigen.zsh
+else
+    source $HOME/antigen/antigen.zsh
+fi
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh

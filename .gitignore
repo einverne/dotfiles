@@ -1,6 +1,7 @@
 vim74/*
 vimfiles/*
 .vim/bundle/*
+.vim/autoload/plug.vim
 
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
