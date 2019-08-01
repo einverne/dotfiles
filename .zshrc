@@ -215,6 +215,9 @@ if [[ -f ~/.zshrc.local ]]; then
     source $HOME/.zshrc.local
 fi
 
+fpath=(~/.zsh/completions $fpath) 
+autoload -U compinit && compinit
+
 # space
 SPACESHIP_DIR_SHOW="${SPACESHIP_DIR_SHOW=true}"
 SPACESHIP_DIR_PREFIX="${SPACESHIP_DIR_PREFIX="in "}"
