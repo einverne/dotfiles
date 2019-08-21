@@ -5,8 +5,6 @@ export EDITOR=vim
 #export TERM="screen-256color"
 bindkey -e
 
-export JAVA_HOME=/usr/local/jdk1.8.0_131
-export PATH="$PATH:$JAVA_HOME/bin/"
 
 export NODE_HOME=/usr/local/node-v6.11.4-linux-64/
 export PATH="$NODE_HOME/bin/:$PATH"
@@ -20,6 +18,68 @@ if [[ -d ~/.pyenv ]]; then
     export PATH="$HOME/.pyenv/bin:$PATH"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
+fi
+
+# if [[ -d ~/.jenv ]]; then
+#     # jenv
+#     export PATH="$HOME/.jenv/bin:$PATH"
+#     eval "$(jenv init -)"
+# fi
+
+# JDK 
+if [[ -d "/usr/local/jdk1.8.0_131" ]]; then
+    export JAVA_HOME=/usr/local/jdk1.8.0_131
+    export PATH=$PATH:$JAVA_HOME/bin/
+fi
+# export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"
+
+# Maven
+if [[ -d "/opt/maven" ]]; then
+    export M2_HOME=/opt/maven
+    export M2=$M2_HOME/bin
+    export PATH=$M2:$PATH
+fi
+
+# Tomcat
+if [[ -d "/opt/tomcat" ]]; then
+    export CATALINA_HOME=/opt/tomcat/
+    export PATH=$CATALINE_HOME:$PATH
+fi
+
+#
+# Hive
+if [[ -d "$HOME/apache-hive-2.3.4-bin" ]]; then
+    export HIVE_HOME=$HOME/apache-hive-2.3.4-bin
+    export PATH=$PATH:$HIVE_HOME/bin
+    export CLASSPATH=$CLASSPATH:$HIVE_HOME/lib/*:.
+fi
+
+# Hadoop
+if [[ -d "$HOME/hadoop/hadoop-2.9.1" ]]; then
+    export HADOOP_HOME=$HOME/hadoop/hadoop-2.9.1
+    export HADDOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+    export HADOOP_SSH_OPTS="-p 222"
+
+    export HADOOP_MAPRED_HOME=$HADOOP_HOME 
+    export HADOOP_COMMON_HOME=$HADOOP_HOME 
+
+    export HADOOP_HDFS_HOME=$HADOOP_HOME 
+    export YARN_HOME=$HADOOP_HOME 
+    export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native 
+    export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+
+    export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin 
+    export HADOOP_INSTALL=$HADOOP_HOME 
+
+    export CLASSPATH=$CLASSPATH:$HADOOP_HOME/lib/*:.
+fi
+
+# Derby
+if [[ -d "$HOME/db-derby-10.14.2.0-bin" ]]; then
+    export DERBY_HOME=$HOME/db-derby-10.14.2.0-bin
+    export PATH=$PATH:$DERBY_HOME/bin
+
+    export CLASSPATH=$CLASSPATH:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar
 fi
 
 export GPG_TTY=$(tty)
@@ -96,11 +156,12 @@ fi
 #source $ZSH/oh-my-zsh.sh
 
 # you need to git clone git@github.com:zsh-users/antigen.git to $HOME
-
-if [[ -f $HOME/antigen.zsh ]]; then
-    source $HOME/antigen.zsh
-else
+if [[ -d $HOME/antigen ]]; then
     source $HOME/antigen/antigen.zsh
+fi
+
+if [[ -f "$HOME/antigen.zsh" ]]; then
+    source $HOME/antigen.zsh
 fi
 
 # Load the oh-my-zsh's library.
@@ -161,7 +222,7 @@ fi
 # Load the theme.
 # antigen theme agnoster
 # workaround for https://github.com/zsh-users/antigen/issues/675
-THEME=denysdovhan/spaceship-prompt 
+THEME=denysdovhan/spaceship-prompt
 antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
 
 # Tell Antigen that you're done.
@@ -208,8 +269,9 @@ alias df="df -h"
 alias free="free -m"
 alias grep="grep --color=auto"
 
-transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
-tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; } 
+#transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
+#tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; } 
+
 
 if [[ -f ~/.zshrc.local ]]; then
     source $HOME/.zshrc.local
