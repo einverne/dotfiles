@@ -260,17 +260,17 @@ autocmd CursorHold, CursorHoldI * update
 set autowrite
 set autowriteall
 
-let g:autosave_time_period = 10
-au BUfRead,BufNewFile * let b:start_time=localtime()
-" only write if needed and update the start time after save
-function! UpdateFile()
-    if ((localtime() - b:start_time) >= g:autosave_time_period)
-        update
-        echo "Time: " . (localtime() - b:start_time) . " seconds have elapsed. File saved."
-        let b:start_time=localtime()
-    endif
-endfunction
-au CursorHold * call UpdateFile()
+" let g:autosave_time_period = 10
+" au BUfRead,BufNewFile * let b:start_time=localtime()
+" " only write if needed and update the start time after save
+" function! UpdateFile()
+"     if ((localtime() - b:start_time) >= g:autosave_time_period)
+"         update
+"         echo "Time: " . (localtime() - b:start_time) . " seconds have elapsed. File saved."
+"         let b:start_time=localtime()
+"     endif
+" endfunction
+" au CursorHold * call UpdateFile()
 
 " general mapping
 " no <up> ddkP

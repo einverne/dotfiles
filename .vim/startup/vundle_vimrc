@@ -64,7 +64,8 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript'] }
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
-
+Plug 'ntpeters/vim-better-whitespace'
+Plug '907th/vim-auto-save'
 
 " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
@@ -173,3 +174,6 @@ let g:ack_use_cword_for_empty_search = 1
 let g:ack_use_dispatch = 1
 " autofold results
 let g:ack_autofold_results = 1
+
+let g:auto_save = 1  " enable AutoSave on Vim startup
+
