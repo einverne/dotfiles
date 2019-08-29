@@ -263,7 +263,7 @@ export LC_ALL=en_US.UTF-8
 alias tmux="TERM=screen-256color tmux -2"
 alias vi="vim"
 alias mux="TERM=screen-256color tmuxinator"
-alias ls="ls -alh"
+#alias ls="ls -alh"
 alias cp="cp -i"
 alias df="df -h"
 alias free="free -m"
@@ -293,3 +293,7 @@ SPACESHIP_DIR_COLOR="${SPACESHIP_DIR_COLOR="cyan"}"
 # usage adb-screencap > screen.png
 alias adbcap="adb shell screencap -p"
 
+# fzf config
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_OPTS="--reverse --inline-info"

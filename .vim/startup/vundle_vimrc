@@ -22,7 +22,7 @@ endif
 " If you need Vim help for vim-plug itself (e.g. :help plug-options), register
 " vim-plug as a plugin.
 Plug 'junegunn/vim-plug'
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Plugin 'vim-perl/vim-perl'
@@ -66,6 +66,7 @@ Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'ntpeters/vim-better-whitespace'
 Plug '907th/vim-auto-save'
+Plug 'junegunn/fzf.vim'
 
 " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
