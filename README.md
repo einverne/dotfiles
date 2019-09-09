@@ -61,3 +61,13 @@ Tmux 配置參考了 [gpakosz](https://github.com/gpakosz/.tmux) 的大部分配
     set -g @plugin 'tmux-plugins/tmux-sensible'
     set -g @plugin 'tmux-plugins/tmux-yank'
 
+
+## fzf config
+There are following alias in `.zshrc` :
+
+- fe : open file using $EDITOR
+- fo : open file Ctrl-o using open, Ctrl-e use $EDITOR
+- fd : cd path
+- fkill : kill process
+- tm : tm new tmux session
+- fs : tmux attach tmux session
