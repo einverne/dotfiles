@@ -72,3 +72,6 @@ map <leader>xml :call Xml()
 
 " Normal mode F2 to call NERDTree
 nmap <F2> :NERDTreeToggle<cr>
+
+nnoremap <leader><leader>i :PlugInstall<CR>
+nnoremap <leader><leader>u :PlugUpdate<CR>

@@ -31,6 +31,8 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
+" 目录树美化
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
@@ -68,6 +70,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug '907th/vim-auto-save'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': '.install -all'}
 Plug 'junegunn/fzf.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
