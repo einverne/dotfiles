@@ -35,9 +35,9 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set 8 lines to the cursor - when moving vertically using j/k
+" set n lines to the cursor - when moving vertically using j/k
 " j/k移动时光标距离文件上下n行 缩写 set so = 8
-set scrolloff=8
+set scrolloff=0
 
 " gVim automatically maximize when it open
 " 启动时最大化gVim
@@ -337,4 +337,5 @@ endif
 
 " source $VIMRUNTIME/vimrc_example.vim
 " source $VIMRUNTIME/mswin.vim
+
 
