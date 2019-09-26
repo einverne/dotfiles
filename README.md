@@ -20,6 +20,11 @@ vim-plug related configuration is under `vim-plug_vimrc`, to show all plugins li
 
 python related configurations is under `python_vimrc`.
 
+## Components
+
+- bin/: executable shell scripts, Anything in bin/ will get added to your $PATH and be made available everywhere.
+- conf/: configuration file of zsh etc
+
 ## Instruction under Linux
 
 Just run `./install.sh`, everything is done. Then Enter the vim run `:PlugInstall` to install all plugins.

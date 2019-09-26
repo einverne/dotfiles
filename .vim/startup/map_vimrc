@@ -52,9 +52,22 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 " 空格关闭高亮，清空所有已经显示
 nnoremap <Space> :set hlsearch! hlsearch?<CR>
 
+" Save a file as root (,W)
+noremap <leader>W :w !sudo tee % > /dev/null<CR>
+
 " sudo write
 " https://catonmat.net/sudo-vim
 cnoremap sudow w !sudo tee % >/dev/null
+
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+	let save_cursor = getpos(".")
+	let old_query = getreg('/')
+	:%s/\s\+$//e
+	call setpos('.', save_cursor)
+	call setreg('/', old_query)
+endfunction
+noremap <leader>ss :call StripWhitespace()<CR>
 
 set hidden  " 避免必须保存修改才可以跳转 buffer
 " buffer 

@@ -1,160 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export EDITOR=vim
-#export TERM="screen-256color"
-bindkey -e
-
-
-export NODE_HOME=/usr/local/node-v6.11.4-linux-64/
-export PATH="$NODE_HOME/bin/:$PATH"
-
-export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
-export ANDROID_HOME="$HOME/Android/Sdk"
-export PATH="$PATH:$ANDROID_HOME/bin/"
-
-if [[ -d ~/.pyenv ]]; then
-    # pyenv
-    export PATH="$HOME/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
-# if [[ -d ~/.jenv ]]; then
-#     # jenv
-#     export PATH="$HOME/.jenv/bin:$PATH"
-#     eval "$(jenv init -)"
-# fi
-
-# JDK 
-if [[ -d "/usr/local/jdk1.8.0_131" ]]; then
-    export JAVA_HOME=/usr/local/jdk1.8.0_131
-    export PATH=$PATH:$JAVA_HOME/bin/
-fi
-# export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"
-
-# Maven
-if [[ -d "/opt/maven" ]]; then
-    export M2_HOME=/opt/maven
-    export M2=$M2_HOME/bin
-    export PATH=$M2:$PATH
-fi
-
-# Tomcat
-if [[ -d "/opt/tomcat" ]]; then
-    export CATALINA_HOME=/opt/tomcat/
-    export PATH=$CATALINE_HOME:$PATH
-fi
-
-#
-# Hive
-if [[ -d "$HOME/apache-hive-2.3.4-bin" ]]; then
-    export HIVE_HOME=$HOME/apache-hive-2.3.4-bin
-    export PATH=$PATH:$HIVE_HOME/bin
-    export CLASSPATH=$CLASSPATH:$HIVE_HOME/lib/*:.
-fi
-
-# Hadoop
-if [[ -d "$HOME/hadoop/hadoop-2.9.1" ]]; then
-    export HADOOP_HOME=$HOME/hadoop/hadoop-2.9.1
-    export HADDOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
-    export HADOOP_SSH_OPTS="-p 222"
-
-    export HADOOP_MAPRED_HOME=$HADOOP_HOME 
-    export HADOOP_COMMON_HOME=$HADOOP_HOME 
-
-    export HADOOP_HDFS_HOME=$HADOOP_HOME 
-    export YARN_HOME=$HADOOP_HOME 
-    export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native 
-    export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
-
-    export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin 
-    export HADOOP_INSTALL=$HADOOP_HOME 
-
-    export CLASSPATH=$CLASSPATH:$HADOOP_HOME/lib/*:.
-fi
-
-# Derby
-if [[ -d "$HOME/db-derby-10.14.2.0-bin" ]]; then
-    export DERBY_HOME=$HOME/db-derby-10.14.2.0-bin
-    export PATH=$PATH:$DERBY_HOME/bin
-
-    export CLASSPATH=$CLASSPATH:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar
-fi
-
-export GPG_TTY=$(tty)
-
-if [[ -d ~/.rbenv/ ]]; then
-    # rbenv
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
-    export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-fi
-
-if [[ -d ~/.nvm ]]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
-if [[ -d /usr/local/go ]]; then
-    export PATH="$PATH:/usr/local/go/bin"
-    export GOROOT="/usr/local/go"
-fi
-
-# Path to your oh-my-zsh installation.
-# export ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="agnoster"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-
-#source $ZSH/oh-my-zsh.sh
-
 # you need to git clone git@github.com:zsh-users/antigen.git to $HOME
 if [[ -d $HOME/antigen ]]; then
     source $HOME/antigen/antigen.zsh
@@ -170,6 +16,7 @@ antigen use oh-my-zsh
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
 antigen bundle git-extras
+antigen bundle git-flow
 antigen bundle mvn
 antigen bundle tig
 antigen bundle heroku
@@ -183,17 +30,17 @@ antigen bundle docker-compose
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions 
+antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
-antigen bundle Tarrasch/zsh-autoenv 
+antigen bundle Tarrasch/zsh-autoenv
 antigen bundle rupa/z
-antigen bundle supercrabtree/k 
-antigen bundle zsh-users/zsh-history-substring-search 
-#antigen bundle tylerreckart/hyperzsh 
-#antigen bundle extract 
-antigen bundle z 
-#antigen bundle mafredri/zsh-async 
-#antigen bundle sindresorhus/pure 
+antigen bundle supercrabtree/k
+antigen bundle zsh-users/zsh-history-substring-search
+#antigen bundle tylerreckart/hyperzsh
+#antigen bundle extract
+antigen bundle z
+#antigen bundle mafredri/zsh-async
+#antigen bundle sindresorhus/pure
 antigen bundle unixorn/autoupdate-antigen.zshplugin
 
 antigen bundle djui/alias-tips
@@ -234,9 +81,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8  
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -260,20 +104,14 @@ export LC_ALL=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias tmux="TERM=screen-256color tmux -2"
-alias vi="vim"
-alias mux="TERM=screen-256color tmuxinator"
-#alias ls="ls -alh"
-alias cp="cp -i"
-alias df="df -h"
-alias free="free -m"
-alias grep="grep --color=auto"
-alias open="xdg-open"
-alias ag="ag -i"
 
 #transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
 #tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; } 
 
+source $HOME/dotfiles/conf/zsh/common.zsh
+source $HOME/dotfiles/conf/zsh/keybindings.zsh
+source $HOME/dotfiles/conf/zsh/alias.zsh
+source $HOME/dotfiles/conf/zsh/env.zsh
 
 if [[ -f ~/.zshrc.local ]]; then
     source $HOME/.zshrc.local

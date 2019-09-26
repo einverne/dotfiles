@@ -162,7 +162,7 @@ set shiftwidth=4
 
 " 将tab自动转为空格
 " set expandtab
-set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set listchars=extends:>,precedes:<,tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
 
 " spltting a window below
