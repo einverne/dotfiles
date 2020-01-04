@@ -102,3 +102,7 @@ if [[ -d /usr/local/go ]]; then
     export GOROOT="/usr/local/go"
 fi
 
+if [[ -d $HOME/dotnet ]]; then
+	export DOTNET_ROOT=$HOME/dotnet
+	export PATH=$PATH:$DOTNET_ROOT
+fi
