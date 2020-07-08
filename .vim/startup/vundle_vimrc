@@ -22,6 +22,7 @@ endif
 " If you need Vim help for vim-plug itself (e.g. :help plug-options), register
 " vim-plug as a plugin.
 Plug 'junegunn/vim-plug'
+Plug 'easymotion/vim-easymotion'
 "Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'

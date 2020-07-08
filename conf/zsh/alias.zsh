@@ -11,3 +11,8 @@ alias ag="ag -i"
 alias mkdir="mkdir -p"
 alias e=$EDITOR
 
+alias mci="mvn -e -U clean install"
+
+# https://stackoverflow.com/a/15503178/1820217
+alias gitlog="git ls-files -z | xargs -0n1 git blame -w --show-email | perl -n -e '/^.*?\((.*?)\s+[\d]{4}/; print $1,"\n"' | sort -f | uniq -c | sort -n"
+

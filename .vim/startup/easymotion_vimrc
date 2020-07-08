@@ -1,0 +1,18 @@
+
+"Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+"Use upper target labels and type as a lower case
+let g:EasyMotion_use_upper = 1
+
+" move to character
+nmap f <Plug>(easymotion-s2)
+xmap f <Plug>(easymotion-s2)
+omap f <Plug>(easymotion-s2)
+" move to word
+nmap F <Plug>(easymotion-bd-w)
+xmap F <Plug>(easymotion-bd-w)
+omap F <Plug>(easymotion-bd-w)
+" move to line
+nmap gl <Plug>(easymotion-bd-jk)
+xmap gl <Plug>(easymotion-bd-jk)
+omap gl <Plug>(easymotion-bd-jk)
