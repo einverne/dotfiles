@@ -1,0 +1,145 @@
+set easymotion
+set surround
+
+let mapleader = ","
+let g:mapleader = ","
+
+" set clipboard=unnamed,autoselect
+set hlsearch
+set scrolloff=3
+set ignorecase
+set smartcase
+set showmode
+set incsearch
+set history=1000
+
+" source ~/.vimrc
+
+" general
+nnoremap ,a :<C-u>action GotoAction<CR>
+vnoremap ,a :<C-u>action GotoAction<CR>
+nnoremap ,e :<C-u>action SearchEverywhere<CR>
+nnoremap ,s :<C-u>action FileStructurePopup<CR>
+nnoremap ,g :<C-u>action FindInPath<CR>
+nnoremap ,r :<C-u>action RecentFiles<CR>
+
+" jump on code
+nnoremap gd :<C-u>action GotoDeclaration<CR>
+nnoremap gs :<C-u>action GotoSuperMethod<CR>
+nnoremap gi :<C-u>action GotoImplementation<CR>
+nnoremap gf :<C-u>action GotoFile<CR>
+nnoremap gb :<C-u>action JumpToLastChange<CR>
+nnoremap gu :<C-u>action ShowUsages<CR>
+nnoremap gt :<C-u>action GotoTest<CR>
+nnoremap gh :<C-u>action Back<CR>
+nnoremap gl :<C-u>action Forward<CR>
+
+" code editing
+" nnoremap r :<C-u>action RenameElement<CR>
+nnoremap q :<C-u>action ShowIntentionActions<CR>
+nnoremap == :<C-u>action ReformatCode<CR>
+vnoremap == :<C-u>action ReformatCode<CR>
+nnoremap cc :<C-u>action CommentByLineComment<CR>
+vnoremap cc :<C-u>action CommentByLineComment<CR>
+
+" show information
+nnoremap <C-I> :<C-u>action QuickJavaDoc<CR>
+
+
+" easy window navigation
+" nnoremap <c-l> <c-w>l
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-k> <c-w>k
+" 在 Tab 间切换 Alt + h/l
+nnoremap <a-h> gT
+nnoremap <a-l> gt
+" Ctrl+Shift+Tab Ctrl+Tab
+nnoremap <c-s-tab> gT
+nnoremap <c-tab> gt
+
+" clear the search buffer when hitting return
+" nnoremap <space><cr> :nohlsearch<cr>
+
+" options
+nnoremap cow :action EditorToggleUseSoftWraps<cr>
+nnoremap col :action EditorToggleShowWhitespaces<cr>
+
+" actions
+nnoremap <space>q :action CloseContent<cr>
+nnoremap <space>Q :action ReopenClosedTab<cr>
+nnoremap <space>\ :action VimFilePrevious<cr>
+nnoremap <space>e :action SearchEverywhere<cr>
+nnoremap <space>E :action Switcher<cr>
+nnoremap <space>t :action FileStructurePopup<cr>
+nnoremap <space>T :action GotoSymbol<cr>
+nnoremap <space>a :action GotoAction<cr>
+nnoremap <space>b :action ToggleLineBreakpoint<cr>
+
+" code navigation
+nnoremap <space>] :action GotoImplementation<cr>
+nnoremap <space>[ :action GotoSuperMethod<cr>
+nnoremap <space>u :action FindUsages<cr>
+nnoremap <space>gt :action GotoTest<cr>
+nnoremap <space>k :action HighlightUsagesInFile<cr>
+nnoremap \r :action RunClass<cr>
+nnoremap \R :action Run<cr>
+nnoremap \d :action DebugClass<cr>
+nnoremap \D :action Debug<cr>
+nnoremap \c :action CheckStyleCurrentFileAction<cr>
+
+" code refactoring
+nnoremap <space>rr :action RenameElement<cr>
+
+" unimpaired mappings
+nnoremap [<space> O<esc>j
+nnoremap ]<space> o<esc>k
+nnoremap [q :action PreviousOccurence<cr>
+nnoremap ]q :action NextOccurence<cr>
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
+nnoremap [c :action VcsShowPrevChangeMarker<cr>
+nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
+
+" built-in navigation to navigated items works better
+nnoremap <c-o> :action Back<cr>
+nnoremap <c-i> :action Forward<cr>
+" but preserve ideavim defaults
+nnoremap g<c-o> <c-o>
+nnoremap g<c-i> <c-i>
+
+" built in search looks better
+" nnoremap / :action Find<cr>
+" but preserve ideavim search
+nnoremap g/ /
+
+" easy motion"
+map , <Plug>(easymotion-prefix)
+
+"Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+"Use upper target labels and type as a lower case
+let g:EasyMotion_use_upper = 0
+
+" move to character
+nmap f <Plug>(easymotion-s2)
+xmap f <Plug>(easymotion-s2)
+omap f <Plug>(easymotion-s2)
+" move to word
+nmap F <Plug>(easymotion-bd-w)
+xmap F <Plug>(easymotion-bd-w)
+omap F <Plug>(easymotion-bd-w)
+" move to line
+" nmap gl <Plug>(easymotion-bd-jk)
+" xmap gl <Plug>(easymotion-bd-jk)
+" omap gl <Plug>(easymotion-bd-jk)
+
+" acejump"
+" Press `f` to activate AceJump
+nnoremap f :<C-u>action AceAction<CR>
+" Press `F` to activate Target Mode
+" 在 Target 模式下会跳转到目标，并选中目标整个Word"
+nnoremap F :<C-u>action AceTargetAction<CR>
+" Press `g` to activate Line Mode
+" map g :action AceLineAction<CR>
