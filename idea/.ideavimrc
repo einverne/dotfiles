@@ -89,7 +89,7 @@ nnoremap \D :action Debug<cr>
 nnoremap \c :action CheckStyleCurrentFileAction<cr>
 
 " code refactoring
-nnoremap <space>rr :action RenameElement<cr>
+" nnoremap <space>rr :action RenameElement<cr>
 
 " unimpaired mappings
 nnoremap [<space> O<esc>j
