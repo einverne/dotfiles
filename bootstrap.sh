@@ -22,7 +22,7 @@ mkdir -p ~/projects
 
 echo "Setup Git"
 ln -s ./git/work.gitconfig ~/projects/.gitconfig
-if [ -f ~/gitconfig ]; then
+if [ -f ~/.gitconfig ]; then
 	cat ~/.gitconfig
 	mv ~/.gitconfig ~/.gitconfig.bak
 fi
