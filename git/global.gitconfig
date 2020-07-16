@@ -1,0 +1,121 @@
+[user]
+	name = Ein Verne
+	email = einverne@gmail.com
+[core]
+	editor = vim
+	autocrlf = input
+
+[alias]
+	a = add
+	b = branch
+	c = commit
+	d = diff
+	f = fetch
+	g = grep
+	l = log
+	m = merge
+	o = checkout
+	p = pull
+	r = remote
+	s = status
+	st = status
+	w = whatchanged
+
+	### commit ###
+	ca = commit --amend
+
+	### checkout ###
+	co = checkout
+
+	### cherry-pick ###
+
+	### diff ###
+	# diff - show changes not yet staged
+	dc = diff --cache
+
+	# diff - changes about to be commited
+	ds = diff --staged
+
+	### log ###
+	# log key - our favorite way to show our key performance indicators, i.e. our most useful summary.
+	lk = log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'
+
+	### merge ###
+
+	### pull ###
+	# pull if a merge can be resolved as a fast-forward, otherwise fail.
+	pf = pull --ff-only
+
+	# pull with rebase - to provide a cleaner, linear, bisectable history.
+	#
+	# To integrate changes between branches, you can merge or rebase.
+	#
+	# When we use "git pull", git does a fetch then a merge.
+	# If we've made changes locally and someone else has pushed changes
+	# to our git host then git will automatically merge these together
+	# and create a merge commit that looks like this in the history:
+	#
+	#    12345678 - Merge branch 'foo' of bar into master
+	#
+	# When we use "git pull --rebase", git does a fetch then a rebase.
+	# A rebase resets the HEAD of your local branch to be the same as
+	# the remote HEAD, then replays your local commits back into repo.
+	# This means you don't get any noisy merge messages in your history.
+	# This gives us a linear history, and also helps with git bisect.
+	#
+	# To automatically do "pull --rebase" for any branch based on master:
+	#
+	#    git config branch.master.rebase true
+	#
+	# To automatically do "pull --rebase" for all branches:
+	#
+	#     git config --global branch.autosetuprebase always
+	#
+	pr = pull --rebase
+
+	### rebase ###
+
+	# rebase - forward-port local commits to the updated upstream head.
+	rb = rebase
+
+	# rebase - continue the rebasing process after resolving a conflict manually and updating the index with the resolution.
+	rbc = rebase --continue
+
+	# rebase - restart the rebasing process by skipping the current patch.
+	rbs = rebase --skip
+
+	### remote ###
+
+
+	### tags ###
+	lasttag = describe --tags --abbrev=0
+	tags = tag -n1 --list
+
+# Stash aliases
+	save = stash save
+	pop = stash pop
+
+[branch]
+	autosetuprebase = always
+[pull]
+	rebase = true
+[push]
+	default = matching
+[gc]
+	autoDetach = false
+[gpg]
+	program = gpg2
+[commit]
+	gpgSign = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+
+[includeIf "gitdir:~/projects/"]
+    path = ~/projects/.gitconfig

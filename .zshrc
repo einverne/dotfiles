@@ -20,13 +20,15 @@ antigen bundle git-flow
 antigen bundle mvn
 antigen bundle tig
 antigen bundle heroku
-antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
 antigen bundle tmux
 antigen bundle tmuxinator
 antigen bundle docker
 antigen bundle docker-compose
+# macos
+antigen bundle brew
+antigen bundle osx
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -116,6 +118,8 @@ source $HOME/dotfiles/conf/zsh/env.zsh
 if [[ -f ~/.zshrc.local ]]; then
     source $HOME/.zshrc.local
 fi
+
+ZSH_DISABLE_COMPFIX=true
 
 fpath=(~/.zsh/completions $fpath) 
 autoload -U compinit && compinit
