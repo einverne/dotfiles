@@ -8,7 +8,7 @@ tap "homebrew/cask-versions"
 tap "adoptopenjdk/openjdk"
 
 # primitives
-brew coreutils
+brew "coreutils"
 brew "git"
 brew "neovim"
 brew "zsh"
