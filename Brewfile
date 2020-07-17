@@ -8,6 +8,7 @@ tap "homebrew/cask-versions"
 tap "adoptopenjdk/openjdk"
 
 # primitives
+brew coreutils
 brew "git"
 brew "neovim"
 brew "zsh"
@@ -15,9 +16,13 @@ brew "zsh-completions"
 brew "tmux"
 brew "gnupg"
 brew "gnupg2"
+brew "fzf"
+brew "hub"
+brew "tmux"
+brew "tree"
+brew "wget"
 
 # tools
-brew "wget"
 brew "mas"
 brew "p7zip"
 brew "dos2unix"
@@ -25,6 +30,18 @@ brew "proxychains-ng"
 brew "htop"
 brew "neofetch"
 brew "syncthing"
+brew "openssl@1.1"
+brew "readline"
+brew "asdf"
+brew "boost@1.60", link: true
+brew "cmake"
+brew "jenv"
+brew "node"
+brew "pyenv"
+brew "rbenv"
+brew "sqlite"
+brew "xz"
+brew "zlib"
 
 # productivity
 brew "exa"
@@ -50,6 +67,7 @@ brew "yarn"
 # brew "wrk"
 
 if ENV.key? 'CI_MODE'
+cask "iterm2"
 cask "eudic"
 cask "java"
 cask "licecap"
@@ -60,7 +78,6 @@ cask "google-chrome"
 # cask "firefox-developer-edition"
 # cask "sublime-text"
 cask "visual-studio-code"
-cask "iterm2"
 cask "font-source-code-pro"
 cask "font-fira-code"
 cask "dash"
@@ -77,6 +94,7 @@ cask "oversight"
 cask "nitroshare"
 cask "qmk-toolbox"
 cask "via"
+cask "vlc"
 
 mas "WeChat", id: 836500024
 mas "Unsplash Wallpapers", id: 1284863847
@@ -91,21 +109,3 @@ end
 
 
 
-brew "openssl@1.1"
-brew "readline"
-brew "asdf"
-brew "boost@1.60", link: true
-brew "cmake"
-brew "fzf"
-brew "git"
-brew "hub"
-brew "jenv"
-brew "node"
-brew "privoxy"
-brew "pyenv"
-brew "sqlite"
-brew "tmux"
-brew "tree"
-brew "wget"
-brew "xz"
-brew "zlib"

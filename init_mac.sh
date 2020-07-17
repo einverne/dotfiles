@@ -26,3 +26,6 @@ defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
+# Show all hidden files
+defaults write com.apple.finder AppleShowAllFiles ture
+

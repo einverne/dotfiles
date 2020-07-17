@@ -36,6 +36,10 @@ ln -s ./git/global.gitconfig ~/.gitconfig
 echo "Setup Zsh"
 sudo sh -c 'echo /usr/local/bin/zsh >> /etc/shells'
 sudo chsh -s $(which zsh)
+if [ -f ~/.zshrc ]; then
+	cat ~/.zshrc
+	mv ~/.zshrc ~/zshrc.bak
+fi
 ln -s .zshrc ~/.zshrc
 source ~/.zshrc
 
