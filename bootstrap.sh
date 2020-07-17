@@ -40,7 +40,7 @@ if [ -f ~/.zshrc ]; then
 	cat ~/.zshrc
 	mv ~/.zshrc ~/zshrc.bak
 fi
-ln -s ./.zshrc ~/.zshrc
+ln -s $PWD/.zshrc $HOME/.zshrc
 
 echo "Setup applications"
 echo "- fzf"
