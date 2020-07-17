@@ -2,7 +2,7 @@ name: build
 on: [push, pull_request]
 jobs:
   ci:
-    name: run
+    name: bootstrap
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
@@ -10,6 +10,4 @@ jobs:
       env:
         CI_MODE: true
       run: bash ./bootstrap.sh
-    - name: CI
-      run: bash ./test
 
