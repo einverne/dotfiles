@@ -1,5 +1,11 @@
 dotfiles config contain vim, zsh, tmux configurations.
 
+## MacOS setup
+
+    git clone git@github.com:einverne/dotfiles.git
+	cd dotfiles
+	bash bootstrap.sh
+
 ## Overview
 
 - zsh
