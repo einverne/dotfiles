@@ -62,4 +62,4 @@ sudo ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/cod
 # ./Shadowsocks/init
 
 echo "Setup macOS defaults"
-./init_mac.sh
+bash init_mac.sh
