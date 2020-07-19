@@ -45,6 +45,7 @@ brew "xz"
 brew "zlib"
 
 # productivity
+brew "axel"
 brew "exa"
 brew "fzf"
 brew "ripgrep"
