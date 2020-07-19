@@ -1,0 +1,13 @@
+name: build
+on: [push, pull_request]
+jobs:
+  ci:
+    name: bootstrap
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: build
+      env:
+        CI_MODE: true
+      run: bash ./bootstrap.sh
+
