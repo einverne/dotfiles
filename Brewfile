@@ -8,6 +8,7 @@ tap "homebrew/cask-versions"
 tap "adoptopenjdk/openjdk"
 
 # primitives
+# https://en.wikipedia.org/wiki/List_of_GNU_Core_Utilities_commands
 brew "coreutils"
 brew "git"
 brew "neovim"
@@ -90,6 +91,10 @@ cask "neteasemusic"
 cask "google-trends"
 cask "appcleaner"
 cask "oversight"
+# open broadcaster software
+cask "obs"
+# note-taking app
+cask "obsidian"
 # cask "dropbox"
 cask "nitroshare"
 cask "qmk-toolbox"

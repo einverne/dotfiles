@@ -12,6 +12,9 @@ fi
 echo "Setup hostname"
 sudo scutil --set HostName mac
 
+echo "Install from brew.sh"
+bash brew.sh
+
 echo "Install with Brew Bundle"
 set +e
 brew bundle
@@ -22,11 +25,11 @@ mkdir -p ~/projects
 
 echo "Setup Git"
 ln -s ./git/work.gitconfig ~/projects/.gitconfig
-if [ -f ~/.gitconfig ]; then
-	cat ~/.gitconfig
-	mv ~/.gitconfig ~/.gitconfig.bak
+if [ -f $HOME/.gitconfig ]; then
+	cat $HOME/.gitconfig
+	mv $HOME/.gitconfig $HOME/.gitconfig.bak
 fi
-ln -s ./git/global.gitconfig ~/.gitconfig
+ln -s $PWD/git/global.gitconfig $HOME/.gitconfig
 
 # echo "Setup Bash"
 # sudo cp ./motd /etc/motd
@@ -41,6 +44,15 @@ if [ -f ~/.zshrc ]; then
 	mv ~/.zshrc ~/zshrc.bak
 fi
 ln -s $PWD/.zshrc $HOME/.zshrc
+
+echo "Setup Vim"
+ln -s $PWD/.vimrc $HOME/.vimrc
+
+echo "Setup Tmux"
+ln -s $PWD/tmux/.tmux.conf $HOME/.tmux.conf
+ln -s $PWD/tmux/.tmux.conf.local $HOME/.tmux.conf.local
+
+ls -al $HOME
 
 echo "Setup applications"
 echo "- fzf"

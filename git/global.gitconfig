@@ -1,11 +1,13 @@
 [user]
-	name = Ein Verne
 	email = einverne@gmail.com
-[core]
-	editor = vim
-	autocrlf = input
-
+	name = Ein Verne
+	signingkey = 926634D64ACAD792
+[push]
+	default = matching
+[http]
+	postBuffer = 524288000
 [alias]
+	unstage = reset HEAD --
 	a = add
 	b = branch
 	c = commit
@@ -71,16 +73,21 @@
 	#
 	#     git config --global branch.autosetuprebase always
 	#
-	pr = pull --rebase
-
+	# pr = pull --rebase
+    pr="!f() { \
+        BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD); \
+        git push -u origin $BRANCH_NAME; \
+        hub pull-request; \
+    };f "
+	
 	### rebase ###
-
+	
 	# rebase - forward-port local commits to the updated upstream head.
 	rb = rebase
-
+	
 	# rebase - continue the rebasing process after resolving a conflict manually and updating the index with the resolution.
 	rbc = rebase --continue
-
+	
 	# rebase - restart the rebasing process by skipping the current patch.
 	rbs = rebase --skip
 
@@ -97,25 +104,20 @@
 
 [branch]
 	autosetuprebase = always
+[core]
+    editor = vim
+	autocrlf = input
+	quotepath = false
 [pull]
 	rebase = true
-[push]
-	default = matching
-[gc]
-	autoDetach = false
+
+[merge]
+    tool = meld
+    conflictstyle = diff3
+[mergetool "meld"]
+    cmd = meld $LOCAL $BASE $REMOTE --output=$MERGED --auto-merge
 [gpg]
-	program = gpg2
-[commit]
-	gpgSign = false
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[diff]
-	tool = meld
-[difftool]
-	prompt = false
+	program = gpg
 
 [includeIf "gitdir:~/projects/"]
     path = ~/projects/.gitconfig
