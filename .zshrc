@@ -10,6 +10,12 @@ if [[ -f "$HOME/antigen.zsh" ]]; then
     source $HOME/antigen.zsh
 fi
 
+if [[ -f "$HOME/dotfiles/wp-completion.bash" ]]; then
+	autoload bashcompinit
+	bashcompinit
+	source $HOME/dotfiles/wp-completion.bash
+fi
+
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
@@ -26,9 +32,6 @@ antigen bundle tmux
 antigen bundle tmuxinator
 antigen bundle docker
 antigen bundle docker-compose
-# macos
-antigen bundle brew
-antigen bundle osx
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -52,7 +55,19 @@ antigen bundle pip
 antigen bundle python
 antigen bundle virtualenv
 
+
 # OS specific plugins
+case `uname` in
+Darwin)
+	antigen bundle brew
+    antigen bundle brew-cask
+    antigen bundle gem
+    antigen bundle osx
+	;;
+FreeBSD)
+	;;
+esac
+
 if [[ $CURRENT_OS == 'OS X' ]]; then
     antigen bundle brew
     antigen bundle brew-cask
