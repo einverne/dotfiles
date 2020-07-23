@@ -1,6 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+autoload -Uz compinit && compinit
 # you need to git clone git@github.com:zsh-users/antigen.git to $HOME
 if [[ -d $HOME/antigen ]]; then
     source $HOME/antigen/antigen.zsh
@@ -125,10 +126,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 #transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
 #tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; } 
 
-source $HOME/dotfiles/conf/zsh/common.zsh
-source $HOME/dotfiles/conf/zsh/keybindings.zsh
-source $HOME/dotfiles/conf/zsh/alias.zsh
-source $HOME/dotfiles/conf/zsh/env.zsh
+source $HOME/dotfiles/zsh/common.zsh
+source $HOME/dotfiles/zsh/keybindings.zsh
+source $HOME/dotfiles/zsh/alias.zsh
+source $HOME/dotfiles/zsh/env.zsh
 
 if [[ -f ~/.zshrc.local ]]; then
     source $HOME/.zshrc.local
@@ -136,7 +137,6 @@ fi
 
 ZSH_DISABLE_COMPFIX=true
 
-autoload -Uz compinit && compinit
 fpath=(~/.zsh/completions $fpath) 
 
 # space
@@ -151,9 +151,6 @@ SPACESHIP_DIR_COLOR="${SPACESHIP_DIR_COLOR="cyan"}"
 # adb related
 # usage adb-screencap > screen.png
 alias adbcap="adb shell screencap -p"
-
-alias proxy='export all_proxy=socks5://127.0.0.1:1080'
-alias unproxy='unset all_proxy'
 
 # fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
