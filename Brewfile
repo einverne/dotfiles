@@ -101,6 +101,7 @@ cask "nitroshare"
 cask "qmk-toolbox"
 cask "via"
 cask "vlc"
+cask "upic"
 
 mas "WeChat", id: 836500024
 mas "Unsplash Wallpapers", id: 1284863847

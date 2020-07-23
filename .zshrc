@@ -152,6 +152,9 @@ SPACESHIP_DIR_COLOR="${SPACESHIP_DIR_COLOR="cyan"}"
 # usage adb-screencap > screen.png
 alias adbcap="adb shell screencap -p"
 
+alias proxy='export all_proxy=socks5://127.0.0.1:1080'
+alias unproxy='unset all_proxy'
+
 # fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore .idea -l -g ""'
