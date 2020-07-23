@@ -136,8 +136,8 @@ fi
 
 ZSH_DISABLE_COMPFIX=true
 
+autoload -Uz compinit && compinit
 fpath=(~/.zsh/completions $fpath) 
-autoload -U compinit && compinit
 
 # space
 SPACESHIP_DIR_SHOW="${SPACESHIP_DIR_SHOW=true}"
