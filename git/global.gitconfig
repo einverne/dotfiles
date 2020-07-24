@@ -118,6 +118,8 @@
     cmd = meld $LOCAL $BASE $REMOTE --output=$MERGED --auto-merge
 [gpg]
 	program = gpg
+[hub]
+    protocol = https
 
 [includeIf "gitdir:~/projects/"]
     path = ~/projects/.gitconfig
