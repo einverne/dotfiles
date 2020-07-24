@@ -289,3 +289,6 @@ gfs() {
     --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
   cut -c4- | sed 's/.* -> //'
 }
+
+. $(brew --prefix asdf)/asdf.sh
+
