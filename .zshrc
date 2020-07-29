@@ -154,7 +154,8 @@ alias adbcap="adb shell screencap -p"
 
 # fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore .idea -l -g ""'
+# export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore .idea -l -g ""'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git --exclude .idea ""'
 #export FZF_DEFAULT_OPTS="--reverse --inline-info"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
 

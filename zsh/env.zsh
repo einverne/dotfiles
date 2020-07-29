@@ -33,6 +33,10 @@ if [[ -d "/usr/local/jdk1.8.0_131" ]]; then
 fi
 # export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"
 
+if [[ -d "~/.asdf/plugins/java/" ]]; then
+	. ~/.asdf/plugins/java/set-java-home.zsh
+fi
+
 # Maven
 if [[ -d "/opt/maven" ]]; then
     export M2_HOME=/opt/maven
