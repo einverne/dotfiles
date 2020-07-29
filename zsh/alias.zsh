@@ -12,9 +12,18 @@ alias mkdir="mkdir -p"
 alias e=$EDITOR
 
 alias mci="mvn -e -U clean install"
+alias mcp="mvn -U clean package"
+alias mvn-purge="mvn dependency:purge-local-repository"
 
 # https://stackoverflow.com/a/15503178/1820217
 alias gitlog="git ls-files -z | xargs -0n1 git blame -w --show-email | perl -n -e '/^.*?\((.*?)\s+[\d]{4}/; print $1,"\n"' | sort -f | uniq -c | sort -n"
 
 alias proxy='export all_proxy=socks5://127.0.0.1:1080'
 alias unproxy='unset all_proxy'
+
+# assh
+# https://github.com/moul/assh
+if [[ -f ~/.ssh/assh.yml ]]; then
+	echo "assh wrapper"
+	alias ssh="assh wrapper ssh --"
+fi
