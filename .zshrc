@@ -131,6 +131,14 @@ source $HOME/dotfiles/zsh/keybindings.zsh
 source $HOME/dotfiles/zsh/alias.zsh
 source $HOME/dotfiles/zsh/env.zsh
 
+case `uname` in
+Darwin)
+	source $HOME/dotfiles/zsh/osx.zsh
+	;;
+FreeBSD)
+	;;
+esac
+
 if [[ -f ~/.zshrc.local ]]; then
     source $HOME/.zshrc.local
 fi
@@ -291,5 +299,4 @@ gfs() {
   cut -c4- | sed 's/.* -> //'
 }
 
-. $(brew --prefix asdf)/asdf.sh
 
