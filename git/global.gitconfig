@@ -119,7 +119,7 @@
 [gpg]
 	program = gpg
 [hub]
-    protocol = https
+    protocol = ssh
 
 [includeIf "gitdir:~/projects/"]
     path = ~/projects/.gitconfig
