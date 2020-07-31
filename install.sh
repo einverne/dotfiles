@@ -37,5 +37,8 @@ if [ "$use_vim_configs" == "Y" ] || [ "$use_vim_configs" == "y" ]; then
     git clone git@github.com:zsh-users/antigen.git $HOME/antigen
 fi
 
+# install asdf
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+
 git submodule init && git submodule update
 

@@ -21,6 +21,7 @@ fi
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle asdf
 antigen bundle git
 antigen bundle git-extras
 antigen bundle git-flow
