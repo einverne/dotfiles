@@ -20,6 +20,7 @@ alias gitlog="git ls-files -z | xargs -0n1 git blame -w --show-email | perl -n -
 
 alias proxy='export all_proxy=socks5://127.0.0.1:1080'
 alias unproxy='unset all_proxy'
+alias proxy_http='export all_proxy=http://127.0.0.1:1081'
 
 # assh
 # https://github.com/moul/assh
