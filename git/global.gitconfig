@@ -4,8 +4,8 @@
 	signingkey = 926634D64ACAD792
 [push]
 	default = matching
-[http]
-	postBuffer = 524288000
+#[http]
+#postBuffer = 524288000
 [alias]
 	unstage = reset HEAD --
 	a = add
