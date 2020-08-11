@@ -9,7 +9,9 @@ export EDITOR=vim
 export NODE_HOME=/usr/local/node-v6.11.4-linux-64/
 export PATH="$NODE_HOME/bin/:$PATH"
 
-export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
+if [[ -d $HOME/phabricator/ ]]; then
+	export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
+fi
 export ANDROID_HOME="$HOME/Android/Sdk"
 export PATH="$PATH:$ANDROID_HOME/bin/"
 
@@ -26,7 +28,7 @@ fi
 #     eval "$(jenv init -)"
 # fi
 
-# JDK 
+# JDK
 if [[ -d "/usr/local/jdk1.8.0_131" ]]; then
     export JAVA_HOME=/usr/local/jdk1.8.0_131
     export PATH=$PATH:$JAVA_HOME/bin/

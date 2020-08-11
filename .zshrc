@@ -1,6 +1,15 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+if type brew &>/dev/null; then
+	echo "brew completion"
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+	fpath=($HOME/.asdf/completions $fpath)
+
+	autoload -Uz compinit
+	compinit
+fi
+
 autoload -Uz compinit && compinit
 # you need to git clone git@github.com:zsh-users/antigen.git to $HOME
 if [[ -d $HOME/antigen ]]; then
