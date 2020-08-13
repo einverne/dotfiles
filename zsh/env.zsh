@@ -33,6 +33,10 @@ if [[ -d "/usr/local/jdk1.8.0_131" ]]; then
     export JAVA_HOME=/usr/local/jdk1.8.0_131
     export PATH=$PATH:$JAVA_HOME/bin/
 fi
+if [[ -d "$HOME/.asdf/installs/java/adoptopenjdk-8.0.262+10.openj9-0.21.0" ]]; then
+	export JAVA_HOME=$HOME/.asdf/installs/java/adoptopenjdk-8.0.262+10.openj9-0.21.0
+	export PATH=$PATH:$JAVA_HOME/bin/
+fi
 # export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"
 
 if [[ -d "~/.asdf/plugins/java/" ]]; then
