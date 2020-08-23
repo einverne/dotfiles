@@ -101,6 +101,8 @@
 # Stash aliases
 	save = stash save
 	pop = stash pop
+[commit]
+	gpgSign = true
 
 [branch]
 	autosetuprebase = always
@@ -123,3 +125,6 @@
 
 [includeIf "gitdir:~/projects/"]
     path = ~/projects/.gitconfig
+
+[includeIf "gitdir:/Users/einverne/mifi-credit/"]
+	path = .gitconfig-work
