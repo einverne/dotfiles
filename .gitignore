@@ -11,3 +11,5 @@ Session.vim
 *~
 
 *.ba
+
+karabiner/automatic_backups/*
