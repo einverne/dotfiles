@@ -6,7 +6,7 @@ alias cp="cp -i"
 alias df="df -h"
 alias free="free -m"
 alias grep="grep --color=auto"
-alias open="xdg-open"
+# alias open="xdg-open"
 alias ag="ag -i"
 alias mkdir="mkdir -p"
 alias e=$EDITOR
