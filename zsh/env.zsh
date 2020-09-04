@@ -53,6 +53,11 @@ if [[ -d "/opt/maven" ]]; then
     export M2=$M2_HOME/bin
     export PATH=$M2:$PATH
 fi
+if [[ -d "$HOME/.asdf/installs/maven/3.6.3" ]]; then
+	export M2_HOME=$HOME/.asdf/installs/maven/3.6.3
+	export M2=$H2_HOME/bin
+    export PATH=$M2:$PATH
+fi
 
 # Tomcat
 if [[ -d "/opt/tomcat" ]]; then
