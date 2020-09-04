@@ -1,6 +1,7 @@
 log = hs.logger.new('autoscript', 'debug')
 local cmdArr = {
     "cd /Users/einverne/Sync/wiki/ && /bin/bash auto-push.sh",
+    "/usr/bin/rsync --remove-source-files -azvh ~/Downloads/*.torrent omv_proxy:/sharedfolders/pt/watch/ >> /tmp/rsync-bittorrent.log",
 }
 
 function shell(cmd)
@@ -16,6 +17,7 @@ end
 
 function runAutoScripts()
     for key, cmd in ipairs(cmdArr) do
+		log.i("execute" .. key .. " " .. cmd)
         shell(cmd)
     end
 end
