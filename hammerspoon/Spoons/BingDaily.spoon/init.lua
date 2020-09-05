@@ -38,7 +38,6 @@ local function bingRequest()
 				local pic_content_name = decode_data.images[1].copyright
 				local pic_name = decode_data.images[1].fullstartdate .. "_" .. pic_content_name .. ".jpg"
 				local pic_name = pic_name:gsub("/", "-")
-				log.i(pic_name)
 				local localpath = obj.bing_path .. pic_name
                 if obj.localpath ~= localpath then
                     obj.full_url = "https://www.bing.com" .. pic_url
