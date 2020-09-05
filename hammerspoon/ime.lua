@@ -11,9 +11,9 @@ local app2Ime = {
     {'/System/Library/CoreServices/Finder.app', 'English'},
     {'/Applications/Alfred 4.app', 'English'},
     {'/Applications/Bitwarden.app', 'English'},
-    -- {'/Applications/iTerm.app', 'English'},
+    {'/Applications/iTerm.app', 'Chinese'},
     {'/Applications/Xcode.app', 'English'},
-    {'/Applications/GoldenDict.app', 'English'},
+    {'/Applications/GoldenDict.app', 'Chinese'},
     {'/Applications/Google Chrome.app', 'Chinese'},
     {'/Applications/DingTalk.app', 'Chinese'},
     {'/Applications/Kindle.app', 'English'},
@@ -27,7 +27,7 @@ local app2Ime = {
     {'/Applications/Obsidian.app', 'Chinese'},
     {'/Applications/wechatwebdevtools.app', 'English'},
     {'/Applications/Sketch.app', 'English'},
-    {'/Users/einverne/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/201.8538.31/IntelliJ IDEA.app', 'Chinese'},
+    {'/Users/einverne/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/201.8538.31/IntelliJ IDEA.app', 'English'},
 }
 
 function updateFocusAppInputMethod()
