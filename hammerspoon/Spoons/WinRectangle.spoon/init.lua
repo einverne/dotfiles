@@ -22,6 +22,8 @@ obj.logger = hs.logger.new('WinRectangle')
 log = hs.logger.new('WinRectangle', 'debug')
 
 
+obj.grid = 50
+
 --- WinRectangle.defaultHotkeys
 --- Variable
 --- Table containing a sample set of hotkeys that can be
@@ -53,6 +55,8 @@ obj.defaultHotkeys = {
    screen_right_up = { {"ctrl", "alt", "cmd", "shift"}, "O" },
    screen_left_bottom = { {"ctrl", "alt", "cmd", "shift"}, "U" },
    screen_right_bottom = { {"ctrl", "alt", "cmd", "shift"}, "I" },
+   shrink = {{ "ctrl", "alt", "cmd", "shift"}, "-" },
+   expand = {{ "ctrl", "alt", "cmd", "shift"}, "=" },
 }
 
 --- WinRectangle.animationDuration
@@ -157,6 +161,30 @@ function obj.moveWindow(direction)
 	win:setFrame(f, 0.0)
 end
 
+function obj.resize(action)
+	local cwin = hs.window.focusedWindow()
+	if cwin then
+		local cscreen = cwin:screen()
+		local winFrame = cwin:frame()
+		local stepW = winFrame.w/obj.grid
+		local stepH = winFrame.h/obj.grid
+		if action == "shrink" then
+			winFrame.x = winFrame.x + stepW
+			winFrame.y = winFrame.y + stepH
+			winFrame.w = winFrame.w - (stepW * 2)
+			winFrame.h = winFrame.h - (stepH * 2)
+		elseif action == "expand" then
+			winFrame.x = winFrame.x - stepW
+			winFrame.y = winFrame.y - stepH
+			winFrame.w = winFrame.w + (stepW * 2)
+			winFrame.h = winFrame.h + (stepH * 2)
+		end
+		cwin:setFrame(winFrame)
+	else
+		hs.alart.show("No focused window")
+	end
+end
+
 -- --------------------------------------------------------------------
 -- Shortcut functions for those above, for the hotkeys
 -- --------------------------------------------------------------------
@@ -170,6 +198,8 @@ obj.oneScreenLeftUp  = hs.fnutils.partial(obj.moveWindow, "leftUp")
 obj.oneScreenRightUp  = hs.fnutils.partial(obj.moveWindow, "rightUp")
 obj.oneScreenLeftBottom  = hs.fnutils.partial(obj.moveWindow, "leftBottom")
 obj.oneScreenRightBottom  = hs.fnutils.partial(obj.moveWindow, "rightBottom")
+obj.windowShrink = hs.fnutils.partial(obj.resize, "shrink")
+obj.windowExpand = hs.fnutils.partial(obj.resize, "expand")
 
 --- WinRectangle:bindHotkeys(mapping)
 --- Method
@@ -189,6 +219,8 @@ function obj:bindHotkeys(mapping)
 	  screen_right_up = self.oneScreenRightUp,
 	  screen_left_bottom = self.oneScreenLeftBottom,
 	  screen_right_bottom = self.oneScreenRightBottom,
+	  shrink = self.windowShrink,
+	  expand = self.windowExpand,
    }
    hs.spoons.bindHotkeysToSpec(hotkeyDefinitions, mapping)
    return self
