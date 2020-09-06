@@ -100,29 +100,33 @@ lastSSID = hs.wifi.currentNetwork()
 
 workSSID = "MIOffice-5G"
 
+function selectKarabinerProfile(profile)
+	hs.execute("'/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --select-profile '" .. profile .. "'")
+end
+
 function ssidChangedCallback()
     newSSID = hs.wifi.currentNetwork()
 
     if newSSID == homeSSID and lastSSID ~= homeSSID then
         -- We just joined our home WiFi network
-        hs.audiodevice.defaultOutputDevice():setVolume(25)
 		hs.alert.show("Welcome home!")
+        hs.audiodevice.defaultOutputDevice():setVolume(25)
 		-- result = hs.network.configuration:setLocation("Home")
 		-- hs.alert.show(result)
     elseif newSSID ~= homeSSID and lastSSID == homeSSID then
         -- We just departed our home WiFi network
-        hs.audiodevice.defaultOutputDevice():setVolume(0)
 		hs.alert.show("left home!")
+        hs.audiodevice.defaultOutputDevice():setVolume(0)
 		-- result = hs.network.configuration:setLocation("Automatic")
 		-- hs.alert.show(result)
     end
 
 	if newSSID == workSSID then
 		hs.alert.show("work karabiner setup")
-		hs.execute("'/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --select-profile Work")
+		selectKarabinerProfile("Work")
 	else
 		hs.alert.show("built-in karabiner setup")
-		hs.execute("'/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --select-profile Built-in")
+		selectKarabinerProfile("Built-in")
 	end
 
     lastSSID = newSSID
@@ -134,13 +138,33 @@ wifiWatcher:start()
 networkConf = hs.network.configuration.open()
 location = networkConf:location()
 
+function switchNetworkLocation(location)
+	hs.execute('/usr/sbin/networksetup -switchtolocation ' .. location)
+end
+
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "H", function()
-	hs.execute('/usr/sbin/networksetup -switchtolocation Home')
+	switchNetworkLocation("Home")
 end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
-	hs.execute('/usr/sbin/networksetup -switchtolocation Automatic')
+	switchNetworkLocation("Automatic")
 end)
 
+homeDNS="192.168.2.21"
+automaticLocationUUID="/Sets/5783E8CE-BA08-4BE2-9799-5F00E15E5837"
+homeLocationUUID="/Sets/C55127DB-F0CD-4573-890A-6F8EB59D9AFF"
+
+hs.network.reachability.forAddress(homeDNS):setCallback(function(self, flags)
+	-- note that because having an internet connection at all will show the remote network
+	-- as "reachable", we instead look at whether or not our specific address is "local" instead
+	local networkConf = hs.network.configuration.open()
+	if (flags & hs.network.reachability.flags.reachable) > 0 and currentLocation ~= homeLocationUUID then
+		hs.alert.show("switch to Home network location")
+		networkConf:setLocation("Home")
+	elseif (flags & hs.network.reachability.flags.reachable) == 0 and currentLocation == homeLocationUUID then
+		hs.alert.show("switch back to Automatic network location")
+		networkConf:setLocation("Automatic")
+	end
+end):start()
 
 
 hs.hotkey.alertDuration = 0
