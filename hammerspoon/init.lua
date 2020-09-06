@@ -25,53 +25,6 @@ f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
 
 
 hyper = {"ctrl", "alt", "cmd", "shift"}
-function moveWindow(direction)
-    return function()
-        local win      = hs.window.focusedWindow()
-        local app      = win:application()
-        local app_name = app:name()
-        local f        = win:frame()
-        local screen   = win:screen()
-        local max      = screen:frame()
-        if direction == "left" then
-            f.x = max.x
-			f.y = max.y
-            f.w = (max.w / 2)
-			f.h = max.h
-        elseif direction == "right" then
-            f.x = (max.x + (max.w / 2))
-			f.y = max.y
-            f.w = (max.w / 2)
-			f.h = max.h
-        elseif direction == "full" then
-            f.x = max.x
-			f.y = max.y
-            f.w = max.w
-			f.h = max.h
-		elseif direction == "up" then
-			f.x = max.x
-			f.y = max.y
-			f.w = max.w
-			f.h = (max.h / 2)
-		elseif direction == "down" then
-			f.x = max.x
-			f.y = max.y + (max.h / 2)
-			f.w = max.w
-			f.h = max.h / 2
-        elseif direction == "normal" then
-            f.x = (max.x + (max.w / 8)) + 6
-			f.y = max.y
-            f.w = (max.w * 3 / 4) - 12
-			f.h = max.h
-        end
-        win:setFrame(f, 0.0)
-    end
-end
-hs.hotkey.bind(hyper, "H", moveWindow("left"))
-hs.hotkey.bind(hyper, "L", moveWindow("right"))
-hs.hotkey.bind(hyper, "K", moveWindow("up"))
-hs.hotkey.bind(hyper, "J", moveWindow("down"))
-hs.hotkey.bind(hyper, "F", moveWindow("full"))
 
 -- hs.hotkey.bind(hyper, "C", function() hs.application.launchOrFocus("Google Chrome") end)
 function moveWindowToDisplay(d)
@@ -234,11 +187,14 @@ if not hspoon_list then
         "BingDaily",
         "CircleClock",
         "ClipShow",
-        "CountDown",
+        --"CountDown",
         "HCalendar",
         --"HSaria2",
         "SpeedMenu",
         "WinWin",
+		"WifiNotifier",
+		"WinRectangle",
+		"Caffeine",
     }
 end
 
@@ -270,6 +226,7 @@ if not hsapp_list then
     hsapp_list = {
         {key = 'f', name = 'Finder'},
         {key = 'c', name = 'Google Chrome'},
+        {key = 'o', name = 'Obsidian'},
         {key = 's', name = 'Safari'},
         {key = 't', name = 'Terminal'},
         {key = 'v', id = 'com.apple.ActivityMonitor'},
@@ -535,6 +492,20 @@ if spoon.AClock then
     if string.len(hsaclock_keys[2]) > 0 then
         spoon.ModalMgr.supervisor:bind(hsaclock_keys[1], hsaclock_keys[2], "Toggle Floating Clock", function() spoon.AClock:toggleShow() end)
     end
+end
+
+-- Register WinRectangle
+if spoon.WinRectangle then
+	spoon.WinRectangle:bindHotkeys(spoon.WinRectangle.defaultHotkeys)
+end
+
+-- Register Caffeine
+if spoon.Caffeine then
+	spoon.Caffeine:start()
+end
+
+if spoon.wifiNotifier then
+	spoon.wifiNotifier:start()
 end
 
 ----------------------------------------------------------------------------------------------------
