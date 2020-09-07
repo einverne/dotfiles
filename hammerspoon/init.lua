@@ -157,10 +157,10 @@ hs.network.reachability.forAddress(homeDNS):setCallback(function(self, flags)
 	-- note that because having an internet connection at all will show the remote network
 	-- as "reachable", we instead look at whether or not our specific address is "local" instead
 	local networkConf = hs.network.configuration.open()
-	if (flags & hs.network.reachability.flags.reachable) > 0 and currentLocation ~= homeLocationUUID then
+	if (flags & hs.network.reachability.flags.reachable) > 0 and currentLocation == homeLocationUUID then
 		hs.alert.show("switch to Home network location")
 		networkConf:setLocation("Home")
-	elseif (flags & hs.network.reachability.flags.reachable) == 0 and currentLocation == homeLocationUUID then
+	elseif (flags & hs.network.reachability.flags.reachable) == 0 and currentLocation ~= homeLocationUUID then
 		hs.alert.show("switch back to Automatic network location")
 		networkConf:setLocation("Automatic")
 	end
