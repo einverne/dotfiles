@@ -19,11 +19,22 @@ obj.bing_path = os.getenv("HOME") .. "/Pictures/Bing/"
 local function curl_callback(exitCode, stdOut, stdErr)
     if exitCode == 0 then
         obj.task = nil
-		log.i("callback " .. obj.localpath)
-        hs.screen.mainScreen():desktopImageURL("file://" .. obj.localpath)
+		local allScreens = hs.screen.allScreens()
+		for i = 1, #allScreens do
+			local newScreen = allScreens[i]:desktopImageURL("file://" .. obj.localpath)
+			log.i(newScreen:desktopImageURL())
+		end
+        --hs.screen.mainScreen():desktopImageURL("file://" .. obj.localpath)
     else
         print(stdOut, stdErr)
     end
+end
+
+local function writeDescToFile(filename, content)
+	f = io.open(obj.bing_path .. "/" .. filename .. ".txt", "w")
+	io.output(f)
+	io.write(content)
+	io.close(f)
 end
 
 local function bingRequest()
@@ -36,8 +47,11 @@ local function bingRequest()
                 local pic_url = decode_data.images[1].url
                 -- local pic_name = hs.http.urlParts(pic_url).lastPathComponent
 				local pic_content_name = decode_data.images[1].copyright
-				local pic_name = decode_data.images[1].fullstartdate .. "_" .. pic_content_name .. ".jpg"
-				local pic_name = pic_name:gsub("/", "-")
+				local fullstartdate = decode_data.images[1].fullstartdate
+				local pic_name = fullstartdate .. ".jpg"
+				writeDescToFile(fullstartdate, pic_content_name)
+				local pic_name = pic_name:gsub("/", "_")
+				local pic_name = pic_name:gsub(" ", "_")
 				local localpath = obj.bing_path .. pic_name
                 if obj.localpath ~= localpath then
                     obj.full_url = "https://www.bing.com" .. pic_url
