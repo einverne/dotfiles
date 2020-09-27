@@ -379,14 +379,14 @@ end
 
 ----------------------------------------------------------------------------------------------------
 -- Register Hammerspoon API manual: Open Hammerspoon manual in default browser
-hsman_keys = hsman_keys or {"alt", "H"}
-if string.len(hsman_keys[2]) > 0 then
-    spoon.ModalMgr.supervisor:bind(hsman_keys[1], hsman_keys[2], "Read Hammerspoon Manual", function()
-        hs.doc.hsdocs.forceExternalBrowser(true)
-        hs.doc.hsdocs.moduleEntitiesInSidebar(true)
-        hs.doc.hsdocs.help()
-    end)
-end
+-- hsman_keys = hsman_keys or {"alt", "H"}
+-- if string.len(hsman_keys[2]) > 0 then
+--     spoon.ModalMgr.supervisor:bind(hsman_keys[1], hsman_keys[2], "Read Hammerspoon Manual", function()
+--         hs.doc.hsdocs.forceExternalBrowser(true)
+--         hs.doc.hsdocs.moduleEntitiesInSidebar(true)
+--         hs.doc.hsdocs.help()
+--     end)
+-- end
 
 ----------------------------------------------------------------------------------------------------
 -- countdownM modal environment
