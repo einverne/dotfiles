@@ -37,10 +37,8 @@ brew "dos2unix"
 brew "proxychains-ng"
 brew "htop"
 brew "neofetch"
-brew "openssl@1.1"
 brew "readline"
 brew "asdf"
-brew "boost@1.60", link: true
 brew "cmake"
 brew "node"
 brew "sqlite"
@@ -62,7 +60,6 @@ brew "hledger"
 brew "ruby"
 brew "go"
 brew "cmake"
-# brew "mysql@5.7"
 brew "sqlite"
 # brew "postgresql"
 brew "youtube-dl"
@@ -117,9 +114,7 @@ cask "vlc"
 
 mas "WeChat", id: 836500024
 mas "Unsplash Wallpapers", id: 1284863847
-mas "Microsoft ToDo", id: 1274495053
 mas "Microsoft OneNote", id: 784801555
-# mas "Bear", id: 1091189122
 # mas "Lungo", id: 1263070803
 mas "Pages", id: 409201541
 mas "Numbers", id: 409203825
