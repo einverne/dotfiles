@@ -70,7 +70,7 @@ endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 
 set hidden  " 避免必须保存修改才可以跳转 buffer
-" buffer 
+" buffer
 "nmap <leader>n :bnext<CR>
 "nmap <leader>p :bprev<CR>
 
@@ -88,3 +88,12 @@ nmap <F2> :NERDTreeToggle<cr>
 
 nnoremap <leader><leader>i :PlugInstall<CR>
 nnoremap <leader><leader>u :PlugUpdate<CR>
+
+" fzf
+nnoremap <leader><leader> :GFiles<cr>
+nnoremap <leader>f        :Files<cr>
+nnoremap <leader>C        :Colors<CR>
+nnoremap <leader><CR>     :Buffers<CR>
+nnoremap <leader>fl       :Lines<CR>
+nnoremap <leader>ag       :Ag! <C-R><C-W><CR>
+nnoremap <leader>m        :History<CR>
