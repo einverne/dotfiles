@@ -1,3 +1,4 @@
+" enable plugin
 set easymotion
 set surround
 
@@ -19,26 +20,35 @@ set history=1000
 nnoremap ,a :<C-u>action GotoAction<CR>
 vnoremap ,a :<C-u>action GotoAction<CR>
 nnoremap ,e :<C-u>action SearchEverywhere<CR>
+vnoremap ,e :<C-u>action SearchEverywhere<CR>
 nnoremap ,s :<C-u>action FileStructurePopup<CR>
 nnoremap ,g :<C-u>action FindInPath<CR>
-nnoremap ,r :<C-u>action RecentFiles<CR>
+vnoremap ,g :<C-u>action FindInPath<CR>
+nnoremap ,r :<C-u>action RenameElement<CR>
+" vnoremap ,r :<C-u>action RecentFiles<CR>
 
 " jump on code
+nnoremap gc :<C-u>action GotoClass<CR>
 nnoremap gd :<C-u>action GotoDeclaration<CR>
 nnoremap gs :<C-u>action GotoSuperMethod<CR>
 nnoremap gi :<C-u>action GotoImplementation<CR>
 nnoremap gf :<C-u>action GotoFile<CR>
-nnoremap gb :<C-u>action JumpToLastChange<CR>
+nnoremap gl :<C-u>action JumpToLastChange<CR>
 nnoremap gu :<C-u>action ShowUsages<CR>
 nnoremap gt :<C-u>action GotoTest<CR>
-nnoremap gh :<C-u>action Back<CR>
-nnoremap gl :<C-u>action Forward<CR>
+nnoremap gp :<C-u>action FindInPath<CR>
+" cmd + [ and cmd + ]
+" nnoremap gh :<C-u>action Back<CR>
+" nnoremap gl :<C-u>action Forward<CR>
 
 " code editing
-" nnoremap r :<C-u>action RenameElement<CR>
-nnoremap q :<C-u>action ShowIntentionActions<CR>
+nnoremap \f :<C-u>action ReformatCode<CR>
 nnoremap == :<C-u>action ReformatCode<CR>
 vnoremap == :<C-u>action ReformatCode<CR>
+nnoremap \i :<C-u>action OptimizeImports<CR>
+vnoremap \i :<C-u>action OptimizeImports<CR>
+" nnoremap \r :<C-u>action RenameElement<CR>
+nnoremap q :<C-u>action ShowIntentionActions<CR>
 nnoremap cc :<C-u>action CommentByLineComment<CR>
 vnoremap cc :<C-u>action CommentByLineComment<CR>
 
@@ -64,6 +74,9 @@ nnoremap <c-tab> gt
 " options
 nnoremap cow :action EditorToggleUseSoftWraps<cr>
 nnoremap col :action EditorToggleShowWhitespaces<cr>
+nnoremap ta :action Annotate<cr>
+nnoremap tb :action ToggleLineBreakpoint<cr>
+nnoremap tp :action ActivateProjectToolWindow<CR>
 
 " actions
 nnoremap <space>q :action CloseContent<cr>
@@ -73,7 +86,7 @@ nnoremap <space>e :action SearchEverywhere<cr>
 nnoremap <space>E :action Switcher<cr>
 nnoremap <space>t :action FileStructurePopup<cr>
 nnoremap <space>T :action GotoSymbol<cr>
-nnoremap <space>a :action GotoAction<cr>
+nnoremap <space>a :action Annotate<cr>
 nnoremap <space>b :action ToggleLineBreakpoint<cr>
 
 " code navigation
@@ -103,8 +116,8 @@ nnoremap ]c :action VcsShowNextChangeMarker<cr>
 
 
 " built-in navigation to navigated items works better
-nnoremap <c-o> :action Back<cr>
-nnoremap <c-i> :action Forward<cr>
+" nnoremap <c-o> :action Back<cr>
+" nnoremap <c-i> :action Forward<cr>
 " but preserve ideavim defaults
 nnoremap g<c-o> <c-o>
 nnoremap g<c-i> <c-i>
@@ -142,4 +155,4 @@ nnoremap f :<C-u>action AceAction<CR>
 " 在 Target 模式下会跳转到目标，并选中目标整个Word"
 nnoremap F :<C-u>action AceTargetAction<CR>
 " Press `g` to activate Line Mode
-" map g :action AceLineAction<CR>
+" nnoremap g :action AceLineAction<CR>
