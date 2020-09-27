@@ -23,6 +23,7 @@ brew "the_silver_searcher"
 brew "hub"
 brew "tmux"
 brew "tree"
+brew "openssl@1.1"
 brew "wget"
 brew "rsync"
 
@@ -55,6 +56,7 @@ brew "hexyl"
 brew "xsv"
 brew "jq"
 brew "hledger"
+brew "getantibody/tap/antibody"
 
 # dev
 brew "ruby"
