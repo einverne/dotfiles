@@ -1,33 +1,43 @@
 " enable plugin
 set easymotion
 set surround
+set clipboard=unnamed,autoselect
 
 let mapleader = ","
 let g:mapleader = ","
 
-" set clipboard=unnamed,autoselect
 set hlsearch
-set scrolloff=3
+set incsearch
+set scrolloff=5
 set ignorecase
 set smartcase
 set showmode
-set incsearch
-set history=1000
+set history=10000
 
 " source ~/.vimrc
 
 " general
-nnoremap ,a :<C-u>action GotoAction<CR>
-vnoremap ,a :<C-u>action GotoAction<CR>
-nnoremap ,e :<C-u>action SearchEverywhere<CR>
-vnoremap ,e :<C-u>action SearchEverywhere<CR>
-nnoremap ,s :<C-u>action FileStructurePopup<CR>
-nnoremap ,g :<C-u>action FindInPath<CR>
-vnoremap ,g :<C-u>action FindInPath<CR>
-nnoremap ,r :<C-u>action RenameElement<CR>
+nnoremap <Leader>e :<C-u>action SearchEverywhere<CR>
+vnoremap <Leader>e :<C-u>action SearchEverywhere<CR>
+nnoremap <Leader>s :<C-u>action FileStructurePopup<CR>
+" nnoremap <Leader>g :<C-u>action FindInPath<CR>
+" vnoremap <Leader>g :<C-u>action FindInPath<CR>
+nnoremap <Leader>r :<C-u>action RenameElement<CR>
+" Vertical split screen
+nnoremap <Leader>wv <C-W>v
+vnoremap <Leader>wv <C-W>v
+nnoremap <Leader>ws <C-W>s
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
 " vnoremap ,r :<C-u>action RecentFiles<CR>
 
-" jump on code
+" Redo
+nnoremap U <C-r>
+
+" go to somewhere
+nnoremap ga :<C-u>action GotoAction<CR>
 nnoremap gc :<C-u>action GotoClass<CR>
 nnoremap gd :<C-u>action GotoDeclaration<CR>
 nnoremap gs :<C-u>action GotoSuperMethod<CR>
@@ -42,11 +52,11 @@ nnoremap gp :<C-u>action FindInPath<CR>
 " nnoremap gl :<C-u>action Forward<CR>
 
 " code editing
-nnoremap \f :<C-u>action ReformatCode<CR>
+nnoremap <Leader>f :<C-u>action ReformatCode<CR>
 nnoremap == :<C-u>action ReformatCode<CR>
 vnoremap == :<C-u>action ReformatCode<CR>
-nnoremap \i :<C-u>action OptimizeImports<CR>
-vnoremap \i :<C-u>action OptimizeImports<CR>
+" nnoremap \i :<C-u>action OptimizeImports<CR>
+" vnoremap \i :<C-u>action OptimizeImports<CR>
 " nnoremap \r :<C-u>action RenameElement<CR>
 nnoremap q :<C-u>action ShowIntentionActions<CR>
 nnoremap cc :<C-u>action CommentByLineComment<CR>
