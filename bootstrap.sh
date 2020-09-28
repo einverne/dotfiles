@@ -13,10 +13,12 @@ echo "Setup hostname"
 sudo scutil --set HostName mac
 
 echo "Install from brew.sh"
-bash brew.sh
+# bash brew.sh
 
 echo "Install with Brew Bundle"
 set +e
+brew cleanup
+brew uninstall openssl
 brew bundle
 set -e
 
@@ -52,6 +54,9 @@ echo "Setup Tmux"
 ln -s $PWD/tmux/.tmux.conf $HOME/.tmux.conf
 ln -s $PWD/tmux/.tmux.conf.local $HOME/.tmux.conf.local
 
+echo "Setup idea vimrc"
+ln -s $PWD/idea/.ideavimrc $HOME/.ideavimrc
+
 ls -al $HOME
 
 echo "Setup applications"
@@ -66,12 +71,8 @@ sudo ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/cod
 
 # echo "Setup Ruby"
 # ./ruby/ruby
-# 
 # echo "Setup Go"
 # mkdir -p ~/go
-# 
-# echo "Setup Shadowsocks"
-# ./Shadowsocks/init
 
 echo "Setup macOS defaults"
 bash init_mac.sh
