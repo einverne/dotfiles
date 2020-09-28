@@ -31,7 +31,6 @@ nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
-" vnoremap ,r :<C-u>action RecentFiles<CR>
 
 " Redo
 nnoremap U <C-r>
@@ -47,6 +46,7 @@ nnoremap gl :<C-u>action JumpToLastChange<CR>
 nnoremap gu :<C-u>action ShowUsages<CR>
 nnoremap gt :<C-u>action GotoTest<CR>
 nnoremap gp :<C-u>action FindInPath<CR>
+nnoremap gr :<C-u>action RecentFiles<CR>
 " cmd + [ and cmd + ]
 " nnoremap gh :<C-u>action Back<CR>
 " nnoremap gl :<C-u>action Forward<CR>
