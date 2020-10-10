@@ -851,6 +851,34 @@
                         ]
                     },
                     {
+                        "description": "Quit application by holding command-q",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to_if_held_down": [
+                                    {
+                                        "key_code": "q",
+                                        "modifiers": [
+                                            "left_command"
+                                        ],
+                                        "repeat": false
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Quit application by pressing command-q twice",
                         "manipulators": [
                             {
@@ -1941,6 +1969,38 @@
                                         ]
                                     }
                                 },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Use Delete as Move to Trash",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.apple.finder"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "delete_forward",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_or_backspace",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
