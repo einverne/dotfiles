@@ -10,6 +10,7 @@ tap "adoptopenjdk/openjdk"
 # primitives
 # https://en.wikipedia.org/wiki/List_of_GNU_Core_Utilities_commands
 brew "coreutils"
+brew "exa"
 brew "git"
 brew "neovim"
 brew "zsh"
