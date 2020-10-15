@@ -15,6 +15,8 @@ fi
 export ANDROID_HOME="$HOME/Android/Sdk"
 export PATH="$PATH:$ANDROID_HOME/bin/"
 
+export GOKU_EDN_CONFIG_FILE="$HOME/dotfiles/karabiner/karabiner.edn"
+
 if [[ -d ~/.pyenv ]]; then
     # pyenv
     export PATH="$HOME/.pyenv/bin:$PATH"
