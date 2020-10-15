@@ -26,6 +26,5 @@ alias proxy_http='export all_proxy=http://127.0.0.1:1081'
 # assh
 # https://github.com/moul/assh
 if [[ -f ~/.ssh/assh.yml ]]; then
-	echo "assh wrapper"
 	alias ssh="assh wrapper ssh --"
 fi
