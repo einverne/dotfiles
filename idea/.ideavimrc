@@ -1,11 +1,12 @@
 " enable plugin
 set easymotion
 set surround
-set clipboard=unnamed,autoselect
+" set clipboard=unnamed,autoselect
 
 let mapleader = ","
 let g:mapleader = ","
 
+" https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md
 set hlsearch
 set incsearch
 set scrolloff=5
@@ -13,20 +14,25 @@ set ignorecase
 set smartcase
 set showmode
 set history=10000
+" set showmode
 
 " source ~/.vimrc
 
 " general
 nnoremap <Leader>e :<C-u>action SearchEverywhere<CR>
 vnoremap <Leader>e :<C-u>action SearchEverywhere<CR>
-nnoremap <Leader>s :<C-u>action FileStructurePopup<CR>
-" nnoremap <Leader>g :<C-u>action FindInPath<CR>
-" vnoremap <Leader>g :<C-u>action FindInPath<CR>
+nnoremap <Leader>f :<C-u>action ReformatCode<CR>
+nnoremap <Leader>g :<C-u>action FindInPath<CR>
+vnoremap <Leader>g :<C-u>action FindInPath<CR>
 nnoremap <Leader>r :<C-u>action RenameElement<CR>
+nnoremap <Leader>o :<C-u>action RecentProjectListGroup<CR>
+nnoremap <Leader>d :<C-u>action ChooseDebugConfiguration<CR>
+nnoremap <Leader>w :<C-u>action CloseAllEditorsButActive<CR>
+
+" screen management
 " Vertical split screen
-nnoremap <Leader>wv <C-W>v
-vnoremap <Leader>wv <C-W>v
-nnoremap <Leader>ws <C-W>s
+nnoremap <Leader>\ <C-W>v
+nnoremap <Leader>- <C-W>s
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
 nnoremap <C-j> <C-W>j
@@ -52,7 +58,6 @@ nnoremap gr :<C-u>action RecentFiles<CR>
 " nnoremap gl :<C-u>action Forward<CR>
 
 " code editing
-nnoremap <Leader>f :<C-u>action ReformatCode<CR>
 nnoremap == :<C-u>action ReformatCode<CR>
 vnoremap == :<C-u>action ReformatCode<CR>
 " nnoremap \i :<C-u>action OptimizeImports<CR>
@@ -65,21 +70,19 @@ vnoremap cc :<C-u>action CommentByLineComment<CR>
 " show information
 nnoremap <C-I> :<C-u>action QuickJavaDoc<CR>
 
+" 在 Tab 间切换 Alt/Option + h/l
+nnoremap <space>h gT
+nnoremap <space>l gt
 
-" easy window navigation
-" nnoremap <c-l> <c-w>l
-" nnoremap <c-j> <c-w>j
-" nnoremap <c-h> <c-w>h
-" nnoremap <c-k> <c-w>k
-" 在 Tab 间切换 Alt + h/l
-nnoremap <a-h> gT
-nnoremap <a-l> gt
 " Ctrl+Shift+Tab Ctrl+Tab
 nnoremap <c-s-tab> gT
 nnoremap <c-tab> gt
 
 " clear the search buffer when hitting return
 " nnoremap <space><cr> :nohlsearch<cr>
+
+" show information
+nnoremap <C-I> :<C-u>action QuickJavaDoc<CR>
 
 " options
 nnoremap cow :action EditorToggleUseSoftWraps<cr>
@@ -100,10 +103,7 @@ nnoremap <space>a :action Annotate<cr>
 nnoremap <space>b :action ToggleLineBreakpoint<cr>
 
 " code navigation
-nnoremap <space>] :action GotoImplementation<cr>
-nnoremap <space>[ :action GotoSuperMethod<cr>
 nnoremap <space>u :action FindUsages<cr>
-nnoremap <space>gt :action GotoTest<cr>
 nnoremap <space>k :action HighlightUsagesInFile<cr>
 nnoremap \r :action RunClass<cr>
 nnoremap \R :action Run<cr>
@@ -111,14 +111,11 @@ nnoremap \d :action DebugClass<cr>
 nnoremap \D :action Debug<cr>
 nnoremap \c :action CheckStyleCurrentFileAction<cr>
 
-" code refactoring
-" nnoremap <space>rr :action RenameElement<cr>
-
 " unimpaired mappings
 nnoremap [<space> O<esc>j
 nnoremap ]<space> o<esc>k
-nnoremap [q :action PreviousOccurence<cr>
-nnoremap ]q :action NextOccurence<cr>
+nnoremap [q :action PreviousOccurrence<cr>
+nnoremap ]q :action NextOccurrence<cr>
 nnoremap [m :action MethodUp<cr>
 nnoremap ]m :action MethodDown<cr>
 nnoremap [c :action VcsShowPrevChangeMarker<cr>
@@ -166,3 +163,14 @@ nnoremap f :<C-u>action AceAction<CR>
 nnoremap F :<C-u>action AceTargetAction<CR>
 " Press `g` to activate Line Mode
 " nnoremap g :action AceLineAction<CR>
+
+" kick intellij commands
+" nnoremap R :<C-u>action ChooseRunConfiguration<CR>
+nnoremap D :<C-u>action ChooseRunConfiguration<CR>
+" nnoremap F5 :<C-u>action StepInto<CR>
+" nnoremap F6 :<C-u>action StepOver<CR>
+" nnoremap F8 :<C-u>action Resume<CR>
+
+" window
+nnoremap s; :<C-u>action CloseActiveTab<CR>
+nnoremap so :<C-u>action MoveEditorToOppositeTabGroup<CR>
