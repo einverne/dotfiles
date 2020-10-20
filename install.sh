@@ -3,7 +3,6 @@ VIMDIR=${1:-$HOME}
 
 # install ctags to solve "Exuberant ctags not found in PATH" error
 sudo apt-get install -y git zsh zsh-antigen vim vim-gtk tmux
-chsh -s $(which zsh)
 sudo apt-get install -y exuberant-ctags
 sudo apt-get install -y htop tree zip unzip wget nethogs
 
@@ -34,7 +33,6 @@ if [ "$use_vim_configs" == "Y" ] || [ "$use_vim_configs" == "y" ]; then
     # link zshrc
     ln -rsf $PWD/.zshrc $VIMDIR/.zshrc 2> /dev/null
 #curl -L git.io/antigen > $VIMDIR/antigen.zsh
-    git clone git@github.com:zsh-users/antigen.git $HOME/antigen
 fi
 
 # install asdf

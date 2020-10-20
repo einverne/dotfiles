@@ -4,19 +4,14 @@ dotfiles config contain vim, zsh, tmux configurations.
 
     git clone git@github.com:einverne/dotfiles.git
 	cd dotfiles
-	bash bootstrap.sh
+	./install
 
 ## Overview
 
-- zsh
-- vim
-- tmux
-
-With
-
-- [antigen](https://gtk.pw/antigen) to manage zsh plugins, `source ~/.zshrc` to install all zsh plugins
-- [vim-plug](https://github.com/junegunn/vim-plug) to manage vim plugins, vim-plug relate configuration is under `vim-plug_vimrc`. In Vim, `:PlugInstall` to install all vim plugins.
-- [tpm](https://github.com/tmux-plugins/tpm) to manage tmux plugins, in tmux, press `Ctrl +B` + `I` to install all tmux plugins.
+- using [dotbot](https://github.com/anishathalye/dotbot/) to manage dotfiles
+- zsh, using [zinit](https://github.com/zdharma/zinit/) as plugin management
+- vim, using [vim-plug](https://github.com/junegunn/vim-plug) to manage vim plugins, vim-plug relate configuration is under `vim-plug_vimrc`. In Vim, `:PlugInstall` to install all vim plugins.
+- tmux, using [tpm](https://github.com/tmux-plugins/tpm) to manage tmux plugins, in tmux, press `Ctrl +B` + `I` to install all tmux plugins.
 
 ### zsh config
 to see `.zshrc` file

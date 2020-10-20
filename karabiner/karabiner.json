@@ -2606,10 +2606,11 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "md\\.obsidian",
-                                            "com\\.jetbrains\\.intellij",
-                                            "com.electron.lark",
-                                            "com\\.google\\.Chrome"
+                                            "^md\\.obsidian",
+                                            "^com\\.jetbrains\\.intellij",
+                                            "^com\\.electron\\.lark",
+                                            "^com\\.tencent\\.xinWeChat",
+                                            "^com\\.google\\.Chrome"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -2633,10 +2634,11 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "md\\.obsidian",
-                                            "com\\.jetbrains\\.intellij",
-                                            "com.electron.lark",
-                                            "com\\.google\\.Chrome"
+                                            "^md\\.obsidian",
+                                            "^com\\.jetbrains\\.intellij",
+                                            "^com\\.electron\\.lark",
+                                            "^com\\.tencent\\.xinWeChat",
+                                            "^com\\.google\\.Chrome"
                                         ],
                                         "type": "frontmost_application_if"
                                     }

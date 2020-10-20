@@ -1,6 +1,7 @@
 alias tmux="TERM=screen-256color tmux -2"
 alias vi="vim"
 alias ls="exa"
+alias cd="z"
 alias mux="TERM=screen-256color tmuxinator"
 #alias ls="ls -alh"
 alias cp="cp -i"

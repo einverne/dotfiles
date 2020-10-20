@@ -1,0 +1,10 @@
+- defaults:
+    link:
+      relink: true
+
+- create:
+  - ~/Git
+  - ~/projects
+
+- shell:
+  - cd ~/Git && git clone git@github.com:einverne/einverne.github.io.git

@@ -12,9 +12,6 @@ fi
 echo "Setup hostname"
 sudo scutil --set HostName mac
 
-echo "Install from brew.sh"
-# bash brew.sh
-
 echo "Install with Brew Bundle"
 set +e
 brew cleanup
@@ -41,23 +38,6 @@ ln -s $PWD/git/global.gitconfig $HOME/.gitconfig
 echo "Setup Zsh"
 sudo sh -c 'echo /usr/local/bin/zsh >> /etc/shells'
 sudo chsh -s $(which zsh)
-if [ -f ~/.zshrc ]; then
-	cat ~/.zshrc
-	mv ~/.zshrc ~/zshrc.bak
-fi
-ln -s $PWD/.zshrc $HOME/.zshrc
-
-echo "Setup Vim"
-ln -s $PWD/.vimrc $HOME/.vimrc
-
-echo "Setup Tmux"
-ln -s $PWD/tmux/.tmux.conf $HOME/.tmux.conf
-ln -s $PWD/tmux/.tmux.conf.local $HOME/.tmux.conf.local
-
-echo "Setup idea vimrc"
-ln -s $PWD/idea/.ideavimrc $HOME/.ideavimrc
-
-ls -al $HOME
 
 echo "Setup applications"
 echo "- fzf"
@@ -69,10 +49,5 @@ echo "Link editors"
 mkdir -p ~/Applications/
 sudo ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code /usr/local/bin/code
 
-# echo "Setup Ruby"
-# ./ruby/ruby
-# echo "Setup Go"
-# mkdir -p ~/go
-
 echo "Setup macOS defaults"
-bash init_mac.sh
+bash etc/init_mac.sh

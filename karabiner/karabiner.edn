@@ -45,10 +45,11 @@
  :applications {:chrome ["^com\\.google\\.Chrome$"]
                 :chrome-canary [ "^com\\.google\\.Chrome\\.canary$"]
                 :chromes ["^com\\.google\\.Chrome$" "^com\\.google\\.Chrome\\.canary$"]
-                :ctrlnp ["md\\.obsidian",
-                         "com\\.jetbrains\\.intellij",
-                         "com.electron.lark"
-                         "com\\.google\\.Chrome"]
+                :ctrlnp ["^md\\.obsidian",
+                         "^com\\.jetbrains\\.intellij",
+                         "^com\\.electron\\.lark"
+                         "^com\\.tencent\\.xinWeChat"
+                         "^com\\.google\\.Chrome"]
                 :finder ["^com\\.apple\\.finder$"]
                 :terminals ["com\\.apple\\.Terminal",
                             "com\\.googlecode\\.iterm2"]

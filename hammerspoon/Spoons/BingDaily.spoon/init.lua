@@ -80,7 +80,7 @@ end
 function obj:init()
 	create_dir(obj.bing_path)
     if obj.timer == nil then
-        obj.timer = hs.timer.doEvery(60, function() bingRequest() end)
+        obj.timer = hs.timer.doEvery(7200, function() bingRequest() end)
         obj.timer:setNextTrigger(5)
     else
         obj.timer:start()

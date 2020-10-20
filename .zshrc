@@ -1,98 +1,138 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# you need to git clone git@github.com:zsh-users/antigen.git to $HOME
-if [[ -d $HOME/antigen ]]; then
-    source $HOME/antigen/antigen.zsh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ -f "$HOME/antigen.zsh" ]]; then
-    source $HOME/antigen.zsh
+if [[ ! -f ~/.zinit/bin/zinit.zsh ]]; then
+	mkdir ~/.zinit
+	git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
 fi
 
-if [[ -f "$HOME/dotfiles/wp-completion.bash" ]]; then
-	autoload bashcompinit
-	bashcompinit
-	source $HOME/dotfiles/wp-completion.bash
-fi
+# load zinit
+source ~/.zinit/bin/zinit.zsh
+
+# 快速目录跳转
+zinit ice lucid wait='1'
+# Turbo mode with "wait"
+zinit light-mode lucid wait for \
+  is-snippet OMZ::lib/history.zsh \
+  MichaelAquilina/zsh-you-should-use \
+  romkatv/zsh-prompt-benchmark \
+  zdharma/history-search-multi-word \
+  atload"unalias zi; alias zi='zinit'" \
+    ajeetdsouza/zoxide
+
+# Ref: zdharma/fast-syntax-highlighting
+# Note: Use wait 1 second works for kubectl
+zinit wait lucid for \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma/fast-syntax-highlighting \
+  atload"zpcdreplay" wait"1" \
+    OMZP::kubectl \
+  blockf \
+    zsh-users/zsh-completions \
+  atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+  as"completion" is-snippet \
+    https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
+    https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
+
+# 语法高亮
+zinit ice lucid wait='0' atinit='zpcompinit'
+zinit light zdharma/fast-syntax-highlighting
+
+# 自动建议
+zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
+zinit light zsh-users/zsh-autosuggestions
+
+# 补全
+zinit ice lucid wait='0'
+zinit light zsh-users/zsh-completions
+
+# 加载 OMZ 框架及部分插件
+zinit snippet OMZ::lib/completion.zsh
+zinit snippet OMZ::lib/history.zsh
+zinit snippet OMZ::lib/key-bindings.zsh
+zinit snippet OMZ::lib/theme-and-appearance.zsh
+zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+zinit snippet OMZ::plugins/git-flow/git-flow.plugin.zsh
+zinit snippet OMZ::plugins/autojump/autojump.plugin.zsh
+zinit snippet OMZ::plugins/mvn/mvn.plugin.zsh
+zinit snippet OMZ::plugins/tmux/tmux.plugin.zsh
+zinit snippet OMZ::plugins/tmuxinator/tmuxinator.plugin.zsh
+zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
+zinit snippet OMZ::plugins/pip/pip.plugin.zsh
+
+zinit ice lucid wait='1'
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+
+# Gitignore plugin – commands gii and gi
+zinit ice wait"2" lucid
+zinit load voronkovich/gitignore.plugin.zsh
+
+zinit load djui/alias-tips
+
 
 export ASDF_DIR=$(brew --prefix asdf)
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle asdf
-antigen bundle gem
-antigen bundle git
-antigen bundle git-extras
-antigen bundle git-flow
-antigen bundle mvn
-antigen bundle tig
-antigen bundle heroku
-antigen bundle lein
-antigen bundle command-not-found
-antigen bundle tmux
-antigen bundle tmuxinator
-antigen bundle docker
-antigen bundle docker-compose
+# ASDF
+if [ -d "$HOME/.asdf" ]; then
+#   zinit ice wait lucid
+#   zinit light asdf-vm/asdf
+# OR
+  load_asdf() {
+    source $HOME/.asdf/asdf.sh
+  }
 
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen bundle Tarrasch/zsh-autoenv
-antigen bundle rupa/z
-antigen bundle supercrabtree/k
-antigen bundle zsh-users/zsh-history-substring-search
-#antigen bundle tylerreckart/hyperzsh
-#antigen bundle extract
-antigen bundle z
-#antigen bundle mafredri/zsh-async
-#antigen bundle sindresorhus/pure
-antigen bundle unixorn/autoupdate-antigen.zshplugin
+  zinit light-mode wait lucid for \
+    atload'load_asdf' \
+      zdharma/null
+fi
 
-antigen bundle djui/alias-tips
+# zinit light denysdovhan/spaceship-prompt
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# Python Plugins
-antigen bundle pip
-antigen bundle python
-antigen bundle virtualenv
-
+zinit ice as"program" from"gh-r" mv"exa* -> exa" pick"exa/exa" lucid atload"alias ls='exa --icons'"
+zinit light ogham/exa
 
 # OS specific plugins
 case `uname` in
 Darwin)
-	antigen bundle brew
-    antigen bundle brew-cask
-    antigen bundle osx
+	# zinit bundle kiurchv/asdf.plugin.zsh
 	;;
 FreeBSD)
 	;;
 esac
 
-if type brew &>/dev/null; then
-	echo "brew completion"
-    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-    #fpath=$(brew --prefix)/share/zsh-completions:$fpath
-	fpath=($HOME/.asdf/completions $fpath)
+#if type brew &>/dev/null; then
+#	echo "brew completion"
+#    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+#    #fpath=$(brew --prefix)/share/zsh-completions:$fpath
+#	fpath=($HOME/.asdf/completions $fpath)
+#fi
 
-
+#. $(brew --prefix asdf)/asdf.sh
+#. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+# Compinit : After zinits, before cdreplay
+# https://carlosbecker.com/posts/speeding-up-zsh/
+autoload -Uz compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit;
+else
+  compinit -C;
 fi
 
-autoload -Uz compinit && compinit
-. $(brew --prefix asdf)/asdf.sh
-. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
-
-
 # Load the theme.
-# antigen theme agnoster
-# workaround for https://github.com/zsh-users/antigen/issues/675
-THEME=denysdovhan/spaceship-prompt
-antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
+# zinit theme agnoster
+# workaround for https://github.com/zsh-users/zinit/issues/675
 
-# Tell Antigen that you're done.
-antigen apply
+
+# Tell zinit that you're done.
+# zinit apply
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 
@@ -118,14 +158,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-#transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
-#tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; } 
+#transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
+#tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }
 
 source $HOME/dotfiles/zsh/common.zsh
 source $HOME/dotfiles/zsh/keybindings.zsh
@@ -147,7 +183,7 @@ fi
 
 ZSH_DISABLE_COMPFIX=true
 
-fpath=(~/.zsh/completions $fpath)
+# fpath=(~/.zsh/completions $fpath)
 
 # space
 SPACESHIP_DIR_SHOW="${SPACESHIP_DIR_SHOW=true}"
@@ -162,4 +198,5 @@ SPACESHIP_DIR_COLOR="${SPACESHIP_DIR_COLOR="cyan"}"
 # usage adb-screencap > screen.png
 alias adbcap="adb shell screencap -p"
 
-
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

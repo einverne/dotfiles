@@ -6,6 +6,16 @@ require 'autoscript'
 require 'ime'
 -- require 'usb'
 
+
+local module = {
+	'ime',
+	'autoscript'
+}
+
+local function loadModuleByName(modName)
+end
+
+
 -- hs.loadSpoon("ReloadConfiguration")
 -- spoon.ReloadConfiguration:start()
 -- hs.alert.show("Config reload!")
@@ -107,6 +117,8 @@ end
 function ssidChangedCallback()
     newSSID = hs.wifi.currentNetwork()
 
+	local devices = hs.usb.attachedDevices()
+
     if newSSID == homeSSID and lastSSID ~= homeSSID then
         -- We just joined our home WiFi network
 		hs.alert.show("Welcome home!")
@@ -123,10 +135,10 @@ function ssidChangedCallback()
 
 	if newSSID == workSSID then
 		hs.alert.show("work karabiner setup")
-		selectKarabinerProfile("Work")
+		selectKarabinerProfile("goku")
 	else
 		hs.alert.show("built-in karabiner setup")
-		selectKarabinerProfile("Built-in")
+		selectKarabinerProfile("goku")
 	end
 
     lastSSID = newSSID
@@ -194,10 +206,15 @@ else
     end
 end
 
+function reloadConfig()
+	hs.reload()
+	hs.execute("/bin/launchctl kickstart -k \"gui/${UID}/homebrew.mxcl.yabai\"")
+end
+
 hsreload_keys = {hyper, "R"}
 hsreload_keys = hsreload_keys or {{"cmd", "shift", "ctrl"}, "R"}
 if string.len(hsreload_keys[2]) > 0 then
-    hs.hotkey.bind(hsreload_keys[1], hsreload_keys[2], "Reload Configuration", function() hs.reload() end)
+    hs.hotkey.bind(hsreload_keys[1], hsreload_keys[2], "Reload Configuration", reloadConfig)
 	hs.notify.new({title="Hammerspoon config reloaded", informativeText="Manually trigged via keyboard shortcut"}):send()
 end
 
@@ -339,19 +356,6 @@ if spoon.ClipShow then
         spoon.ModalMgr:deactivate({"clipshowM"})
     end)
 
-    -- Register clipshowM with modal supervisor
-    hsclipsM_keys = hsclipsM_keys or {"alt", "C"}
-    if string.len(hsclipsM_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hsclipsM_keys[1], hsclipsM_keys[2], "Enter clipshowM Environment", function()
-            -- We need to take action upon hsclipsM_keys is pressed, since pressing another key to showing ClipShow panel is redundant.
-            spoon.ClipShow:toggleShow()
-            -- Need a little trick here. Since the content type of system clipboard may be "URL", in which case we don't need to activate clipshowM.
-            if spoon.ClipShow.canvas:isShowing() then
-                spoon.ModalMgr:deactivateAll()
-                spoon.ModalMgr:activate({"clipshowM"})
-            end
-        end)
-    end
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -368,14 +372,6 @@ if spoon.HSaria2 then
     end
 end
 
-----------------------------------------------------------------------------------------------------
--- Register Hammerspoon Search
-if spoon.HSearch then
-    hsearch_keys = hsearch_keys or {"alt", "G"}
-    if string.len(hsearch_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hsearch_keys[1], hsearch_keys[2], 'Launch Hammerspoon Search', function() spoon.HSearch:toggleShow() end)
-    end
-end
 
 ----------------------------------------------------------------------------------------------------
 -- Register Hammerspoon API manual: Open Hammerspoon manual in default browser
@@ -424,15 +420,6 @@ if spoon.CountDown then
             spoon.ModalMgr:activate({"countdownM"}, "#FF6347", true)
         end)
     end
-end
-
-----------------------------------------------------------------------------------------------------
--- Register lock screen
-hslock_keys = hslock_keys or {"alt", "L"}
-if string.len(hslock_keys[2]) > 0 then
-    spoon.ModalMgr.supervisor:bind(hslock_keys[1], hslock_keys[2], "Lock Screen", function()
-        hs.caffeinate.lockScreen()
-    end)
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -550,12 +537,16 @@ if string.len(hstype_keys[2]) > 0 then
 end
 
 ----------------------------------------------------------------------------------------------------
--- Register Hammerspoon console
-hsconsole_keys = hsconsole_keys or {"alt", "Z"}
-if string.len(hsconsole_keys[2]) > 0 then
-    spoon.ModalMgr.supervisor:bind(hsconsole_keys[1], hsconsole_keys[2], "Toggle Hammerspoon Console", function() hs.toggleConsole() end)
-end
-
-----------------------------------------------------------------------------------------------------
 -- Finally we initialize ModalMgr supervisor
 spoon.ModalMgr.supervisor:enter()
+
+stackline = require "stackline.stackline.stackline"
+local myStackline = {
+	appearance = {
+		showIcons = true,           -- default is true
+	},
+	features =  {
+		clickToFocus = true
+	}
+}
+stackline:init(myStackline)

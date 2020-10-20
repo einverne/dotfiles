@@ -9,5 +9,11 @@ jobs:
     - name: build
       env:
         CI_MODE: true
-      run: bash ./bootstrap.sh
-
+      run: |
+        make
+        make bootstrap
+        make dotfiles
+        make macos
+        make asdf
+        make brew
+        make tmux

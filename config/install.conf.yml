@@ -1,0 +1,42 @@
+- defaults:
+    link:
+      relink: true
+      force: true
+
+- clean: ['~']
+
+- link:
+   ~/.dotfiles:
+      force: true
+      path: ''
+
+- link:
+    ~/.zshrc:
+      path: .zshrc
+    ~/.gitconfig:
+      path: git/global.gitconfig
+    ~/.gitignore_global:
+      path: git/gitignore_global
+    ~/.tmux.conf:
+      path: tmux/.tmux.conf
+    ~/.tmux.conf.local:
+      path: tmux/.tmux.conf.local
+    ~/.vim:
+      path: .vim
+    ~/.vimrc:
+      path: .vimrc
+    ~/.ideavimrc:
+      path: idea/.ideavimrc
+    ~/.hammerspoon:
+      if: '[ `uname` = Darwin ]'
+      path: hammerspoon
+    ~/.mackup.cfg:
+      path: mackup/mackup.cfg
+    ~/.Brewfile:
+      path: Brewfile
+    ~/.skhdrc:
+      path: skhd/skhdrc
+    ~/.yabairc:
+      path: yabai/yabairc
+    ~/.yabai_focus_display:
+      path: yabai/yabai_focus_display

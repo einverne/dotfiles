@@ -1,0 +1,69 @@
+#!/usr/bin/env sh
+
+# global settings
+yabai -m config mouse_follows_focus          on
+yabai -m config focus_follows_mouse          autofous
+yabai -m config window_placement             second_child
+yabai -m config window_topmost               off
+yabai -m config window_shadow                on
+yabai -m config window_opacity               off
+yabai -m config window_opacity_duration      0.0
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.85
+yabai -m config split_ratio                  0.55
+yabai -m config auto_balance                 off
+yabai -m config mouse_modifier               fn
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            stack
+
+# border
+yabai -m config window_border                off
+yabai -m config window_border_width          6
+yabai -m config active_window_border_color   0xff775759
+yabai -m config normal_window_border_color   0xff555555
+yabai -m config insert_feedback_color        0xffd75f5f
+
+# general space settings
+yabai -m config layout                       bsp
+yabai -m config top_padding                  5
+yabai -m config bottom_padding               5
+yabai -m config left_padding                 5
+yabai -m config right_padding                5
+yabai -m config window_gap                   4
+
+yabai -m window --stack next
+
+
+# space label
+yabai -m space 1 --label main
+yabai -m space 2 --label code
+yabai -m space 3 --label git
+yabai -m space 4 --label other
+
+yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
+yabai -m rule --add label="Adobe Lightroom Classic" app="Adobe Lightroom Classic" manage=off space=main
+yabai -m rule --add label="Alfred Preferences" app="^Alfred Preferences$" manage=off
+yabai -m rule --add label="App Store" app="^App Store$" manage=off
+yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
+yabai -m rule --add label="Dash" app="Dash" manage=off
+yabai -m rule --add label="DataGrip" app="DataGrip" manage=off
+yabai -m rule --add app="^Discord$" space=7 grid=1:1:0:0:1:1 manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="GoldenDict" app="GoldenDict" manage=off
+yabai -m rule --add label="IntelliJ IDEA" app="IntelliJ IDEA" manage=off space=code
+yabai -m rule --add label="Preview" app="Preview" manage=off
+yabai -m rule --add label="System Preferences" app="^System Preferences$" manage=off
+yabai -m rule --add label="SmartGit" app="SmartGit" manage=off space=git
+yabai -m rule --add label="VirtualBox" app="^VirtualBox$" manage=off
+
+
+
+# signals
+# focus mouse hovered window when a window is closed, minimized or terminated
+yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+yabai -m signal --add event=window_minimized action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+
+
+echo "yabai configuration loaded.."
