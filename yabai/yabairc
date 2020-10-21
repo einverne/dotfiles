@@ -48,14 +48,17 @@ yabai -m rule --add label="App Store" app="^App Store$" manage=off
 yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
 yabai -m rule --add label="Dash" app="Dash" manage=off
 yabai -m rule --add label="DataGrip" app="DataGrip" manage=off
+yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 yabai -m rule --add app="^Discord$" space=7 grid=1:1:0:0:1:1 manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add label="GoldenDict" app="GoldenDict" manage=off
+yabai -m rule --add label="kitty" app="kitty" manage=off
 yabai -m rule --add label="IntelliJ IDEA" app="IntelliJ IDEA" manage=off space=code
 yabai -m rule --add label="Preview" app="Preview" manage=off
 yabai -m rule --add label="System Preferences" app="^System Preferences$" manage=off
 yabai -m rule --add label="SmartGit" app="SmartGit" manage=off space=git
 yabai -m rule --add label="VirtualBox" app="^VirtualBox$" manage=off
+yabai -m rule --add label="Zotero" app="^Zotero$" manage=off
 
 
 
@@ -64,6 +67,5 @@ yabai -m rule --add label="VirtualBox" app="^VirtualBox$" manage=off
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=window_minimized action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-
 
 echo "yabai configuration loaded.."

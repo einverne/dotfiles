@@ -101,7 +101,7 @@
 # 0x2F = Fullstop / >
 # 0x2C = Slash
 # open terminal
-# cmd - return : /Applications/iTerm.app/Contents/MacOS/iTerm2 --single-instance -d ~ &> /dev/null
+cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~ &> /dev/null
 
 # close focused window
 # alt - w : yabai -m window --close
@@ -137,10 +137,10 @@ alt + shift - k : yabai -m window --swap north
 alt + shift - l : yabai -m window --swap east
 
 # stack window
-alt + ctrl + shift - h  : yabai -m window --stack west
-alt + ctrl + shift - j  : yabai -m window --stack south
-alt + ctrl + shift - k  : yabai -m window --stack north
-alt + ctrl + shift - l  : yabai -m window --stack east
+# alt + ctrl + shift - h  : yabai -m window --stack west
+# alt + ctrl + shift - j  : yabai -m window --stack south
+# alt + ctrl + shift - k  : yabai -m window --stack north
+# alt + ctrl + shift - l  : yabai -m window --stack east
 
 # make floating window fill screen, make it float if not already floating
 ctrl + alt + cmd - t : yabai -m window --toggle float; \
@@ -226,35 +226,34 @@ alt + cmd - w : yabai -m window --resize top:0:-80
 alt + cmd - s : yabai -m window --resize right:80:0
 
 # decrease region size
-alt + cmd + ctrl - a : yabai -m window --resize left:80:0
-alt + cmd + ctrl - r : yabai -m window --resize bottom:0:-80
-alt + cmd + ctrl - w : yabai -m window --resize top:0:80
-alt + cmd + ctrl - s : yabai -m window --resize right:-80:0
+# alt + cmd + ctrl - a : yabai -m window --resize left:80:0
+# alt + cmd + ctrl - r : yabai -m window --resize bottom:0:-80
+# alt + cmd + ctrl - w : yabai -m window --resize top:0:80
+# alt + cmd + ctrl - s : yabai -m window --resize right:-80:0
 
 # set insertion point for focused container
 ctrl + alt - h : yabai -m window --insert west
-ctrl + alt - m : yabai -m window --insert west
-ctrl + alt - n : yabai -m window --insert south
-ctrl + alt - e : yabai -m window --insert north
-ctrl + alt - i : yabai -m window --insert east
+ctrl + alt - j : yabai -m window --insert south
+ctrl + alt - k : yabai -m window --insert north
+ctrl + alt - l : yabai -m window --insert east
 
 # rotate tree
-alt - r : yabai -m space --rotate 90
+# alt - r : yabai -m space --rotate 90
 
 # mirror tree y-axis
-alt + shift - x : yabai -m space --mirror vertical
+# alt + shift - x : yabai -m space --mirror vertical
 
 # mirror tree x-axis
-alt - x : yabai -m space --mirror horizontal
+# alt - x : yabai -m space --mirror horizontal
 
 # toggle desktop padding
-alt - a : yabai -m space --toggle padding
+# alt - a : yabai -m space --toggle padding
 
 # toggle window fullscreen
-alt - f : yabai -m window --toggle fullscreen
+# alt - f : yabai -m window --toggle fullscreen
 
 # toggle window native fullscreen
-shift + alt - f : yabai -m window --toggle native-fullscreen
+# shift + alt - f : yabai -m window --toggle native-fullscreen
 
 # toggle window zoom
 alt - z : yabai -m window --toggle zoom-fullscreen
@@ -263,40 +262,33 @@ alt - z : yabai -m window --toggle zoom-fullscreen
 alt - c : yabai -m window --toggle split
 
 # toggle window fade
-alt - q : yabai -m window --toggle fade
+# alt - q : yabai -m window --toggle fade
 
 # float / unfloat window and center on screen
 alt - t : yabai -m window --toggle float;\
           yabai -m window --grid 6:6:1:1:4:4
 
 # toggle sticky
-alt - s : yabai -m window --toggle sticky
+# alt - s : yabai -m window --toggle sticky
 
 # toggle border
-alt - b : yabai -m window --toggle border
+# alt - b : yabai -m window --toggle border
 
 # classic pip
-alt - p : yabai -m window --toggle float;\
-          yabai -m window --toggle sticky;\
-          yabai -m window --toggle topmost;\
-          yabai -m window --grid 5:5:3:0:2:2
+# alt - p : yabai -m window --toggle float;\
+#           yabai -m window --toggle sticky;\
+#           yabai -m window --toggle topmost;\
+#           yabai -m window --grid 5:5:3:0:2:2
 
 # toggle sticky, float and resize to picture-in-picture size
-alt + shift - p : yabai -m window --toggle sticky;\
-                  yabai -m window --toggle topmost;\
-                  yabai -m window --toggle border;\
-                  yabai -m window --toggle pip
+# alt + shift - p : yabai -m window --toggle sticky;\
+#                  yabai -m window --toggle topmost;\
+#                  yabai -m window --toggle border;\
+#                  yabai -m window --toggle pip
 
 # float next window to be tiled
 # shift + alt - t : chunkc set window_float_next 1
 
-# change layout of desktop
-ctrl + alt - a : yabai -m space --layout bsp; \
-                 terminal-notifier -title Yabai -message "Bsp mode activated"
-ctrl + alt - r: yabai -m space --layout float; \
-                 terminal-notifier -title Yabai -message "Float mode activated"
-ctrl + alt - s : yabai -m space --layout stack; \
-                 terminal-notifier -title Yabai -message "Stack mode activated"
 
 # ctrl + alt - l : yabai -m space --deserialize ~/.chunkwm_layout
 # ctrl + alt + cmd - l : yabai -m space --serialize ~/.chunkwm_layout
@@ -306,9 +298,9 @@ cmd + shift - 4 -> : yabai -m window --toggle border; sleep 3; yabai -m window -
 ctrl + cmd + shift - 4 -> : yabai -m window --toggle border; sleep 3; yabai -m window --toggle border;
 
 # MPC commands
-ctrl + alt + cmd + shift - 0x23 : mpc toggle
-ctrl + alt + cmd - 0x2B : mpc prev
-ctrl + alt + cmd - 0x2F : mpc next
+# ctrl + alt + cmd + shift - 0x23 : mpc toggle
+# ctrl + alt + cmd - 0x2B : mpc prev
+# ctrl + alt + cmd - 0x2F : mpc next
 
 # Reload yabai
 ctrl + alt + cmd - z : osascript -e 'tell application "Keyboard Maestro Engine" to do script "Hide All Windows"' && \
@@ -334,19 +326,18 @@ ctrl + alt + cmd - c : ids=$(yabai -m query --windows --space | jq -r ".[] | sel
 alt - 0x2C : yabai -m space --balance
 
 # Toggle space windows gap
-alt - d : yabai -m space --toggle gap
+# alt - d : yabai -m space --toggle gap
 
 # Toggle space windows padding
-alt - g : yabai -m space --toggle padding
+# alt - g : yabai -m space --toggle padding
 
 # Task randomizer
-ctrl + alt + cmd + shift - d : osascript ~/Library/Scripts/omnifocus-task-randomizer.applescript
+# ctrl + alt + cmd + shift - d : osascript ~/Library/Scripts/omnifocus-task-randomizer.applescript
 
 # Hyper 1-0
-ctrl + alt + cmd + shift - 1 : /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge
+# ctrl + alt + cmd + shift - 1 : /Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge
 
 # change layout of desktop
 ctrl + alt - a : yabai -m space --layout bsp
 ctrl + alt - d : yabai -m space --layout float
 ctrl + alt - s : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
-

@@ -84,24 +84,24 @@ local reading_layout = {
 	{"Miwork",        nil, right_monitor,  hs.layout.top50,     nil, nil},
 }
 
-hs.hotkey.bind(hyper, "1", function()
-	hs.application.launchOrFocus('Google Chrome')
-	hs.application.launchOrFocus('iTerm')
-	hs.application.launchOrFocus('Miwork')
-
-	hs.layout.apply(reading_layout)
-end)
+-- hs.hotkey.bind(hyper, "1", function()
+-- 	hs.application.launchOrFocus('Google Chrome')
+-- 	hs.application.launchOrFocus('iTerm')
+-- 	hs.application.launchOrFocus('Miwork')
+-- 
+-- 	hs.layout.apply(reading_layout)
+-- end)
 
 local coding_layout = {
 	{"IntelliJ IDEA Ultimate", nil, middle_monitor, hs.layout.maximized, nil, nil},
 	{"iTerm",         nil, left_monitor,   hs.layout.maximized, nil, nil},
 }
 
-hs.hotkey.bind(hyper, "2", function()
-	hs.application.launchOrFocus('IntelliJ IDEA')
-
-	hs.layout.apply(coding_layout)
-end)
+-- hs.hotkey.bind(hyper, "2", function()
+-- 	hs.application.launchOrFocus('IntelliJ IDEA')
+-- 
+-- 	hs.layout.apply(coding_layout)
+-- end)
 
 
 wifiWatcher = nil
@@ -206,6 +206,8 @@ else
     end
 end
 
+
+
 function reloadConfig()
 	hs.reload()
 	hs.execute("/bin/launchctl kickstart -k \"gui/${UID}/homebrew.mxcl.yabai\"")
@@ -243,6 +245,24 @@ end
 for _, v in pairs(hspoon_list) do
     hs.loadSpoon(v)
 end
+
+hs.hotkey.bind({}, "F12", function()
+    local app = hs.application.get("kitty")
+    if app then
+        if not app:mainWindow() then
+            app:selectMenuItem({"kitty", "New OS window"})
+        elseif app:isFrontmost() then
+            app:hide()
+        else
+            app:activate()
+        end
+    else
+        hs.application.launchOrFocus("kitty")
+		app = hs.application.get("kitty")
+    end
+
+	app:mainWindow():moveToUnit'[100, 80, 0, 0]'
+end)
 
 ----------------------------------------------------------------------------------------------------
 -- Then we create/register all kinds of modal keybindings environments.
@@ -498,12 +518,12 @@ end
 
 ----------------------------------------------------------------------------------------------------
 -- Register AClock
-if spoon.AClock then
-    hsaclock_keys = hsaclock_keys or {"alt", "T"}
-    if string.len(hsaclock_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hsaclock_keys[1], hsaclock_keys[2], "Toggle Floating Clock", function() spoon.AClock:toggleShow() end)
-    end
-end
+-- if spoon.AClock then
+--     hsaclock_keys = hsaclock_keys or {"alt", "T"}
+--     if string.len(hsaclock_keys[2]) > 0 then
+--         spoon.ModalMgr.supervisor:bind(hsaclock_keys[1], hsaclock_keys[2], "Toggle Floating Clock", function() spoon.AClock:toggleShow() end)
+--     end
+-- end
 
 -- Register WinRectangle
 if spoon.WinRectangle then
