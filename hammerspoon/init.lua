@@ -539,14 +539,3 @@ end
 ----------------------------------------------------------------------------------------------------
 -- Finally we initialize ModalMgr supervisor
 spoon.ModalMgr.supervisor:enter()
-
-stackline = require "stackline.stackline.stackline"
-local myStackline = {
-	appearance = {
-		showIcons = true,           -- default is true
-	},
-	features =  {
-		clickToFocus = true
-	}
-}
-stackline:init(myStackline)

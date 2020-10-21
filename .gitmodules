@@ -8,6 +8,3 @@
 [submodule "dotbot-asdf"]
 	path = dotbot-asdf
 	url = https://github.com/sobolevn/dotbot-asdf.git
-[submodule "hammerspoon/stackline"]
-	path = hammerspoon/stackline
-	url = https://github.com/AdamWagner/stackline.git
