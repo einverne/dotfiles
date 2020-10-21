@@ -19296,7 +19296,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "osascript -e 'tell application \"Alfred 4\" to run trigger \"search menu bar\" in workflow \"com.tedwise.menubarsearch\" with argument \"\"'"
+                                        "shell_command": "open \"/Applications/kitty.app\""
                                     }
                                 ],
                                 "type": "basic"
@@ -19331,7 +19331,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "osascript -e 'tell application \"Alfred 4\" to run trigger \"search menu bar\" in workflow \"com.tedwise.menubarsearch\" with argument \"\"'"
+                                        "shell_command": "open \"/Applications/kitty.app\""
                                     },
                                     {
                                         "set_variable": {

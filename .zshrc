@@ -125,6 +125,7 @@ if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 else
   compinit -C;
 fi
+kitty + complete setup zsh | source /dev/stdin
 
 # Load the theme.
 # zinit theme agnoster

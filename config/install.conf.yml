@@ -5,6 +5,9 @@
 
 - clean: ['~']
 
+- create:
+  - ~/.config
+
 - link:
    ~/.dotfiles:
       force: true
@@ -34,6 +37,10 @@
       path: mackup/mackup.cfg
     ~/.Brewfile:
       path: Brewfile
+    ~/.config/kitty/kitty.conf:
+      path: kitty/kitty.conf
+    ~/.config/kitty/base16-solarized-dark-256.conf:
+      path: kitty/base16-solarized-dark-256.conf
     ~/.skhdrc:
       path: skhd/skhdrc
     ~/.yabairc:
