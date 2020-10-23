@@ -102,7 +102,7 @@
 	save = stash save
 	pop = stash pop
 [commit]
-	gpgSign = true
+	gpgSign = false
 
 [branch]
 	autosetuprebase = always
