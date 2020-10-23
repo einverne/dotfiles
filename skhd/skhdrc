@@ -101,7 +101,7 @@
 # 0x2F = Fullstop / >
 # 0x2C = Slash
 # open terminal
-cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~ &> /dev/null
+# cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~ &> /dev/null
 
 # close focused window
 # alt - w : yabai -m window --close

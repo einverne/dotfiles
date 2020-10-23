@@ -19,7 +19,7 @@ obj.license = "MIT - https://opensource.org/licenses/MIT"
 --- Logger object used within the Spoon. Can be accessed to set the default log level for the messages coming from the Spoon.
 obj.logger = hs.logger.new('WinRectangle')
 
-log = hs.logger.new('WinRectangle', 'debug')
+local log = hs.logger.new('WinRectangle', 'debug')
 
 
 obj.grid = 50

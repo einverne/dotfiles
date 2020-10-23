@@ -233,7 +233,6 @@ if not hspoon_list then
         --"CountDown",
         "HCalendar",
         --"HSaria2",
-        "SpeedMenu",
         "WinWin",
 		"WifiNotifier",
 		"WinRectangle",
@@ -256,12 +255,11 @@ hs.hotkey.bind({}, "F12", function()
         else
             app:activate()
         end
+		app:mainWindow():moveToUnit'[100, 80, 0, 0]'
     else
         hs.application.launchOrFocus("kitty")
 		app = hs.application.get("kitty")
     end
-
-	app:mainWindow():moveToUnit'[100, 80, 0, 0]'
 end)
 
 ----------------------------------------------------------------------------------------------------

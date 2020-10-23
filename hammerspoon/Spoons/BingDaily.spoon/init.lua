@@ -3,7 +3,7 @@
 --- Use Bing daily picture as your wallpaper, automatically.
 ---
 --- Download: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/BingDaily.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/BingDaily.spoon.zip)
-log = hs.logger.new('BingDaily', 'debug')
+local log = hs.logger.new('BingDaily', 'debug')
 
 local obj={}
 obj.__index = obj
