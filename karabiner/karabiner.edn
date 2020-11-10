@@ -52,7 +52,8 @@
                          "^com\\.google\\.Chrome"]
                 :finder ["^com\\.apple\\.finder$"]
                 :terminals ["com\\.apple\\.Terminal",
-                            "com\\.googlecode\\.iterm2"]
+                            "com\\.googlecode\\.iterm2",
+                            "net.kovidgoyal.kitty"]
                 }
  :input-sources {:squirrel {:input_mode_id "com.googlecode.rimeime.inputmethod.Squirrel"
                   :input_source_id "com.googlecode.rimeime.inputmethod.Squirrel.Rime"
