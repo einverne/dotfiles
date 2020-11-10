@@ -39,6 +39,7 @@ if [[ -d "$HOME/.asdf/installs/java/adoptopenjdk-8.0.265+1/" ]]; then
 	export JAVA_HOME=$HOME/.asdf/installs/java/adoptopenjdk-8.0.265+1/
 	export PATH=$PATH:$JAVA_HOME/bin/
 fi
+. ~/.asdf/plugins/java/set-java-home.zsh
 # if [[ -d "/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/" ]]; then
 # 	export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
 # 	export PATH=$PATH:$JAVA_HOME/bin/
