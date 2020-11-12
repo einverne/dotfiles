@@ -17,6 +17,8 @@ export PATH="$PATH:$ANDROID_HOME/bin/"
 
 export GOKU_EDN_CONFIG_FILE="$HOME/dotfiles/karabiner/karabiner.edn"
 
+export PATH="/usr/local/sbin:$PATH"
+
 if [[ -d ~/.pyenv ]]; then
     # pyenv
     export PATH="$HOME/.pyenv/bin:$PATH"
