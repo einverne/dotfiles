@@ -1,8 +1,15 @@
 " enable plugin
 set easymotion
 set surround
+set multiple-cursors
+set nu
+" 相对行号
+set rnu
 " set clipboard=unnamed,autoselect
 
+" Use comma as leader key, there are other modifier keys in this config,
+" like space, \, t(in normal mode for toggle something),
+" g(in normal mode for goto somewhere)
 let mapleader = ","
 let g:mapleader = ","
 
@@ -12,15 +19,15 @@ set incsearch
 set scrolloff=5
 set ignorecase
 set smartcase
+" 当前模式
 set showmode
 set history=10000
-" set showmode
 
 " source ~/.vimrc
 
+noremap <Leader>r <ESC>:source ~/.ideavimrc<cr>
+
 " general
-nnoremap <Leader>e :<C-u>action SearchEverywhere<CR>
-vnoremap <Leader>e :<C-u>action SearchEverywhere<CR>
 nnoremap <Leader>f :<C-u>action ReformatCode<CR>
 nnoremap <Leader>g :<C-u>action FindInPath<CR>
 vnoremap <Leader>g :<C-u>action FindInPath<CR>
@@ -31,23 +38,24 @@ nnoremap <Leader>w :<C-u>action CloseAllEditorsButActive<CR>
 
 " screen management
 " Vertical split screen
-nnoremap <Leader>\ <C-W>v
-nnoremap <Leader>- <C-W>s
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
+nnoremap <Leader>\ <C-w>v
+nnoremap <Leader>- <C-w>s
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
 
 " Redo
 nnoremap U <C-r>
 
-" go to somewhere
+" go to somewhere (g in normal mode for goto somewhere)
 nnoremap ga :<C-u>action GotoAction<CR>
 nnoremap gc :<C-u>action GotoClass<CR>
 nnoremap gd :<C-u>action GotoDeclaration<CR>
 nnoremap gs :<C-u>action GotoSuperMethod<CR>
 nnoremap gi :<C-u>action GotoImplementation<CR>
 nnoremap gf :<C-u>action GotoFile<CR>
+nnoremap gm :<C-u>action GotoSymbol<CR>
 nnoremap gl :<C-u>action JumpToLastChange<CR>
 nnoremap gu :<C-u>action ShowUsages<CR>
 nnoremap gt :<C-u>action GotoTest<CR>
@@ -79,7 +87,7 @@ nnoremap <c-s-tab> gT
 nnoremap <c-tab> gt
 
 " clear the search buffer when hitting return
-" nnoremap <space><cr> :nohlsearch<cr>
+nnoremap <space><cr> :nohlsearch<cr>
 
 " show information
 nnoremap <C-I> :<C-u>action QuickJavaDoc<CR>
@@ -101,10 +109,10 @@ nnoremap <space>t :action FileStructurePopup<cr>
 nnoremap <space>T :action GotoSymbol<cr>
 nnoremap <space>a :action Annotate<cr>
 nnoremap <space>b :action ToggleLineBreakpoint<cr>
-
-" code navigation
 nnoremap <space>u :action FindUsages<cr>
 nnoremap <space>k :action HighlightUsagesInFile<cr>
+
+" Run and debug
 nnoremap \r :action RunClass<cr>
 nnoremap \R :action Run<cr>
 nnoremap \d :action DebugClass<cr>
@@ -132,7 +140,12 @@ nnoremap g<c-i> <c-i>
 " built in search looks better
 " nnoremap / :action Find<cr>
 " but preserve ideavim search
-nnoremap g/ /
+nnoremap g/ <ESC>:action FindInPath<cr>
+noremap ' <ESC>:action Replace<cr>
+noremap g' <ESC>:action ReplaceInPath<cr>
+
+nnoremap [[ :action MethodUp<cr>
+nnoremap ]] :action MethodDown<cr>
 
 " easy motion"
 map , <Plug>(easymotion-prefix)
@@ -174,3 +187,6 @@ nnoremap D :<C-u>action ChooseRunConfiguration<CR>
 " window
 nnoremap s; :<C-u>action CloseActiveTab<CR>
 nnoremap so :<C-u>action MoveEditorToOppositeTabGroup<CR>
+
+" multiple cursors
+" <A-n>, <A-n>, <A-p>, g<A-n>
