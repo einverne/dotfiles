@@ -1,49 +1,59 @@
-local function Chinese()
+log = hs.logger.new('ime', 'debug')
+
+local function zh()
     hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Rime")
 end
 
-local function English()
+local function en()
     hs.keycodes.currentSourceID("com.apple.keylayout.ABC")
+end
+
+local function ko()
+    hs.keycodes.currentSourceID("com.apple.inputmethod.Korean.HNCRomaja")
 end
 
 -- app to expected ime config
 local app2Ime = {
-    {'/System/Library/CoreServices/Finder.app', 'Chinese'},
-    {'/Applications/Alfred 4.app', 'Chinese'},
-    {'/Applications/Bitwarden.app', 'Chinese'},
-    {'/Applications/Dash.app', 'Chinese'},
-    {'/Applications/iTerm.app', 'Chinese'},
-    {'/Applications/Lark.app', 'Chinese'},
-    {'/Applications/Xcode.app', 'Chinese'},
-    {'/Applications/GoldenDict.app', 'Chinese'},
-    {'/Applications/Google Chrome.app', 'Chinese'},
-    {'/Applications/DingTalk.app', 'Chinese'},
-    {'/Applications/Kindle.app', 'Chinese'},
-    {'/Applications/NeteaseMusic.app', 'Chinese'},
-    {'/Applications/WeChat.app', 'Chinese'},
-    {'/Applications/Lark.app', 'Chinese'},
-    {'/Applications/System Preferences.app', 'Chinese'},
-    {'/Applications/MindNode.app', 'Chinese'},
-    {'/Applications/Obsidian.app', 'Chinese'},
-    {'/Applications/Preview.app', 'Chinese'},
-    {'/Applications/Sketch.app', 'Chinese'},
-    {'/Applications/wechatwebdevtools.app', 'Chinese'},
-    {'/Applications/WeChat.app', 'Chinese'},
-    {'/Users/einverne/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/201.8538.31/IntelliJ IDEA.app', 'Chinese'},
+    {'/System/Library/CoreServices/Finder.app', 'zh'},
+    {'/Applications/Alfred 4.app', 'zh'},
+    {'/Applications/Bitwarden.app', 'zh'},
+    {'/Applications/Dash.app', 'zh'},
+    {'/Applications/iTerm.app', 'zh'},
+    {'/Applications/Lark.app', 'zh'},
+    {'/Applications/Xcode.app', 'zh'},
+    {'/Applications/GoldenDict.app', 'zh'},
+    {'/Applications/Google Chrome.app', 'zh'},
+    {'/Applications/DingTalk.app', 'zh'},
+    {'/Applications/KakaoTalk.app', 'ko'},
+    {'/Applications/Kindle.app', 'zh'},
+    {'/Applications/kitty.app', 'zh'},
+    {'/Applications/NeteaseMusic.app', 'zh'},
+    {'/Applications/Lark.app', 'zh'},
+    {'/Applications/System Preferences.app', 'zh'},
+    {'/Applications/MindNode.app', 'zh'},
+    {'/Applications/Obsidian.app', 'zh'},
+    {'/Applications/Preview.app', 'zh'},
+    {'/Applications/Sketch.app', 'zh'},
+    {'/Applications/wechatwebdevtools.app', 'zh'},
+    {'/Applications/WeChat.app', 'zh'},
+    {'/Users/einverne/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/201.8538.31/IntelliJ IDEA.app', 'zh'},
 }
 
 function updateFocusAppInputMethod()
     local focusAppPath = hs.window.frontmostWindow():application():path()
+	log.d(focusAppPath)
 	-- hs.alert.show(focusAppPath)
     for index, app in pairs(app2Ime) do
         local appPath = app[1]
         local expectedIme = app[2]
 
         if focusAppPath == appPath then
-            if expectedIme == 'English' then
-                English()
-            else
-                Chinese()
+            if expectedIme == 'en' then
+                en()
+            elseif expectedIme == 'zh' then
+                zh()
+			else
+				ko()
             end
             break
         end
@@ -64,7 +74,10 @@ end)
 
 -- Handle cursor focus and application's screen manage.
 function applicationWatcher(appName, eventType, appObject)
-    if (eventType == hs.application.watcher.activated) then
+	log.i(eventType)
+	log.i("tet")
+	log.i(hs.application.watcher.activated)
+    if eventType == hs.application.watcher.activated then
         updateFocusAppInputMethod()
     end
 end
