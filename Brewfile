@@ -18,6 +18,7 @@ brew "zsh"
 brew "zsh-completions"
 brew "tmux"
 brew "gnupg"
+brew "gnu-sed"
 # https://github.com/junegunn/fzf
 brew "fzf"
 # https://github.com/ggreer/the_silver_searcher
