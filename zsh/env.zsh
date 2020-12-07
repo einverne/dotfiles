@@ -135,3 +135,9 @@ if [[ -d $HOME/go ]]; then
 	export GOPATH=$HOME/go
 	export PATH="$PATH:$GOPATH/bin"
 fi
+
+if [[ -d $HOME/.cargo ]]; then
+	export PATH="$PATH:$HOME/.cargo/bin"
+fi
+
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"

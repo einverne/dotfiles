@@ -76,7 +76,7 @@ zinit load voronkovich/gitignore.plugin.zsh
 zinit load djui/alias-tips
 
 
-export ASDF_DIR=$(brew --prefix asdf)
+export ASDF_DIR=$HOME/.asdf
 
 
 # ASDF
@@ -119,6 +119,13 @@ esac
 #. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
 # Compinit : After zinits, before cdreplay
 # https://carlosbecker.com/posts/speeding-up-zsh/
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
 if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
   compinit;
