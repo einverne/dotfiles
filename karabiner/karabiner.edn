@@ -433,7 +433,7 @@
                  [:t :quote]
                  [:o :open_bracket] ; [
                  [:p :close_bracket] ; ]
-                 [:open_bracket :!Sclose_bracket] ; }
+                 [:open_bracket :!Sclose_bracket]
                  [:caps_lock [:km "Match symbols"]]
                  [:a :slash]
                  [:s :!Shyphen]
@@ -449,38 +449,19 @@
                  [:c :!S7]
                  [:v :!Scomma]
                  [:b [:slash :slash :spacebar]]]} ; -> //
-        {:des "okey (alfred)"
+        {:des "Open related applications"
          :rules [:o-mode
                  [:1 :!C1]
                  [:2 :!C2]
                  [:3 :!C3]
                  [:4 :!C4]
-                 [:5 :!C5]
-                 [:6 :!C6]
-                 [:q [:alfred "search downloads" "recentdownloads.ddjfreedom"]]
-                 [:w :!CObackslash] ; 1Password search
-                 [:e [:km "Make 2Do task"]]
-                 [:r [:km "Make 2Do task with note as current URL"]]
-                 [:t [:km "Make 2Do task with Safari title as name + note as current URL"]]
-                 ;[:i [:alfred "search alfred" "nikivi.utilities" "?"]]
                  [:i [:open "/Applications/iTerm.app"]]
-                 [:caps_lock [:alfred "search desktop" "com.vitorgalvao.alfred.directories"]]
-                 [:a [:alfred "search files" "nikivi.manage.notes"]] ; TODO: add blog, drafts
                  [:b [:open "/Applications/Obsidian.app"]]
-                 [:w [:open "/Applications/Lark.app"]]
-                 [:s [:alfred "search code" "nikivi.manage.notes"]]
-                 [:d [:alfred "search repos" "net.deanishe.alfred-git-repos"]]
-                 [:f [:alfred "search folders" "nikivi.search.folders"]]
-                 [:g [:km "2Do with current url as note (github)"]]
-                 [:j [:alfred "run" "iansinnott.keyboardmaestro"]]
-                 [:k [:open "/Applications/kitty.app"]]
-                 [:grave_accent_and_tilde [:alfred "search processes" "com.vitorgalvao.alfred.processcontrol"]]
-                 [:x [:alfred "search workflows" "org.jeef.workflowdirectory"]]
+                 [:e [:open "/Applications/Lark.app"]]
+                 [:w [:open "/Applications/WeChat.app"]]
+                 [:g [:open "/Applications/GoldenDict.app"]]
                  ;[:c [:alfred "search emoji" "com.github.jsumners.alfred-emoji"]]
                  [:c [:open "/Applications/Google Chrome.app"]]
-                 [:v [:alfred "search clones" "com.vitorgalvao.alfred.directories"]]
-                 [:n [:alfred "search lists" "nikivi.learn.anything"]]
-                 [:m [:alfred "search lists" "nikivi.awesome.lists"]]
                  [:spacebar [:alfred "search PDFs" "nikivi.search.files"]]]}
         {:des "capskey (todo + trello)"
          :rules [:caps-mode
