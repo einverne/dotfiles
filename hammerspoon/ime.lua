@@ -24,7 +24,7 @@ local app2Ime = {
     {'/Applications/GoldenDict.app', 'zh'},
     {'/Applications/Google Chrome.app', 'zh'},
     {'/Applications/DingTalk.app', 'zh'},
-    {'/Applications/KakaoTalk.app', 'ko'},
+    {'/Applications/KakaoTalk.app', 'zh'},
     {'/Applications/Kindle.app', 'zh'},
     {'/Applications/kitty.app', 'zh'},
     {'/Applications/NeteaseMusic.app', 'zh'},
@@ -36,7 +36,9 @@ local app2Ime = {
     {'/Applications/Sketch.app', 'zh'},
     {'/Applications/wechatwebdevtools.app', 'zh'},
     {'/Applications/WeChat.app', 'zh'},
-    {'/Users/einverne/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/201.8538.31/IntelliJ IDEA.app', 'zh'},
+    {'/Users/einverne/Applications/JetBrains Toolbox/IntelliJ IDEA Ultimate.app', 'zh'},
+    {'/Users/einverne/Applications/JetBrains Toolbox/Android Studio.app', 'zh'},
+    {'/Users/einverne/Applications/JetBrains Toolbox/PyCharm Professional.app', 'zh'},
 }
 
 function updateFocusAppInputMethod()
