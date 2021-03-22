@@ -31,7 +31,6 @@ brew "wget"
 brew "rsync"
 
 # tools
-brew "lastpass-cli"
 brew "youtube-dl"
 brew "ffmpeg"
 brew "imagemagick"
@@ -57,8 +56,8 @@ brew "jq"
 # brew "hledger"
 
 # dev
-brew "ruby"
-brew "go"
+# brew "ruby"
+# brew "go"
 # brew "postgresql"
 brew "youtube-dl"
 # brew "heroku"
@@ -66,8 +65,7 @@ brew "youtube-dl"
 # brew "yarn"
 # brew "wrk"
 
-if ENV.key? 'CI_MODE'
-cask "alfred"
+if ENV.key? 'CI_MODE' cask "alfred"
 cask "appcleaner"
 cask "bartender"
 cask "calibre"
