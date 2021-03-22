@@ -246,7 +246,7 @@ for _, v in pairs(hspoon_list) do
 end
 
 hs.hotkey.bind({}, "F12", function()
-    local app = hs.application.get("kitty")
+    local app = hs.application.get("net.kovidgoyal.kitty")
     if app then
         if not app:mainWindow() then
             app:selectMenuItem({"kitty", "New OS window"})
@@ -257,8 +257,8 @@ hs.hotkey.bind({}, "F12", function()
         end
 		app:mainWindow():moveToUnit'[100, 80, 0, 0]'
     else
-        hs.application.launchOrFocus("kitty")
-		app = hs.application.get("kitty")
+        hs.application.launchOrFocus("/Applications/kitty.app")
+		app = hs.application.get("net.kovidgoyal.kitty")
     end
 end)
 
@@ -491,28 +491,28 @@ end
 
 ----------------------------------------------------------------------------------------------------
 -- cheatsheetM modal environment (Because KSheet Spoon is NOT loaded, cheatsheetM will NOT be activated)
-if spoon.KSheet then
-    spoon.ModalMgr:new("cheatsheetM")
-    local cmodal = spoon.ModalMgr.modal_list["cheatsheetM"]
-    cmodal:bind('', 'escape', 'Deactivate cheatsheetM', function()
-        spoon.KSheet:hide()
-        spoon.ModalMgr:deactivate({"cheatsheetM"})
-    end)
-    cmodal:bind('', 'Q', 'Deactivate cheatsheetM', function()
-        spoon.KSheet:hide()
-        spoon.ModalMgr:deactivate({"cheatsheetM"})
-    end)
-
-    -- Register cheatsheetM with modal supervisor
-    hscheats_keys = hscheats_keys or {"alt", "S"}
-    if string.len(hscheats_keys[2]) > 0 then
-        spoon.ModalMgr.supervisor:bind(hscheats_keys[1], hscheats_keys[2], "Enter cheatsheetM Environment", function()
-            spoon.KSheet:show()
-            spoon.ModalMgr:deactivateAll()
-            spoon.ModalMgr:activate({"cheatsheetM"})
-        end)
-    end
-end
+-- if spoon.KSheet then
+--     spoon.ModalMgr:new("cheatsheetM")
+--     local cmodal = spoon.ModalMgr.modal_list["cheatsheetM"]
+--     cmodal:bind('', 'escape', 'Deactivate cheatsheetM', function()
+--         spoon.KSheet:hide()
+--         spoon.ModalMgr:deactivate({"cheatsheetM"})
+--     end)
+--     cmodal:bind('', 'Q', 'Deactivate cheatsheetM', function()
+--         spoon.KSheet:hide()
+--         spoon.ModalMgr:deactivate({"cheatsheetM"})
+--     end)
+-- 
+--     -- Register cheatsheetM with modal supervisor
+--     hscheats_keys = hscheats_keys or {"alt", "S"}
+--     if string.len(hscheats_keys[2]) > 0 then
+--         spoon.ModalMgr.supervisor:bind(hscheats_keys[1], hscheats_keys[2], "Enter cheatsheetM Environment", function()
+--             spoon.KSheet:show()
+--             spoon.ModalMgr:deactivateAll()
+--             spoon.ModalMgr:activate({"cheatsheetM"})
+--         end)
+--     end
+-- end
 
 ----------------------------------------------------------------------------------------------------
 -- Register AClock
@@ -529,9 +529,9 @@ if spoon.WinRectangle then
 end
 
 -- Register Caffeine
-if spoon.Caffeine then
-	spoon.Caffeine:start()
-end
+-- if spoon.Caffeine then
+-- 	spoon.Caffeine:start()
+-- end
 
 if spoon.wifiNotifier then
 	spoon.wifiNotifier:start()
@@ -539,20 +539,20 @@ end
 
 ----------------------------------------------------------------------------------------------------
 -- Register browser tab typist: Type URL of current tab of running browser in markdown format. i.e. [title](link)
-hstype_keys = hstype_keys or {"alt", "V"}
-if string.len(hstype_keys[2]) > 0 then
-    spoon.ModalMgr.supervisor:bind(hstype_keys[1], hstype_keys[2], "Type Browser Link", function()
-        local safari_running = hs.application.applicationsForBundleID("com.apple.Safari")
-        local chrome_running = hs.application.applicationsForBundleID("com.google.Chrome")
-        if #safari_running > 0 then
-            local stat, data = hs.applescript('tell application "Safari" to get {URL, name} of current tab of window 1')
-            if stat then hs.eventtap.keyStrokes("[" .. data[2] .. "](" .. data[1] .. ")") end
-        elseif #chrome_running > 0 then
-            local stat, data = hs.applescript('tell application "Google Chrome" to get {URL, title} of active tab of window 1')
-            if stat then hs.eventtap.keyStrokes("[" .. data[2] .. "](" .. data[1] .. ")") end
-        end
-    end)
-end
+-- hstype_keys = hstype_keys or {"alt", "V"}
+-- if string.len(hstype_keys[2]) > 0 then
+--     spoon.ModalMgr.supervisor:bind(hstype_keys[1], hstype_keys[2], "Type Browser Link", function()
+--         local safari_running = hs.application.applicationsForBundleID("com.apple.Safari")
+--         local chrome_running = hs.application.applicationsForBundleID("com.google.Chrome")
+--         if #safari_running > 0 then
+--             local stat, data = hs.applescript('tell application "Safari" to get {URL, name} of current tab of window 1')
+--             if stat then hs.eventtap.keyStrokes("[" .. data[2] .. "](" .. data[1] .. ")") end
+--         elseif #chrome_running > 0 then
+--             local stat, data = hs.applescript('tell application "Google Chrome" to get {URL, title} of active tab of window 1')
+--             if stat then hs.eventtap.keyStrokes("[" .. data[2] .. "](" .. data[1] .. ")") end
+--         end
+--     end)
+-- end
 
 ----------------------------------------------------------------------------------------------------
 -- Finally we initialize ModalMgr supervisor
