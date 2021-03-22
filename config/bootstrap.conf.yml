@@ -36,5 +36,4 @@
       update_shell
 
 - cask:
-  - lastpass
   - syncthing
