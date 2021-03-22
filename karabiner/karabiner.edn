@@ -18,6 +18,8 @@
   ;; R  | right_shift
   ;; need to prefix C T O S F with ! or #
 
+  ;; https://github.com/nikitavoloboev/dotfiles/blob/master/karabiner/karabiner.edn
+
 :profiles
  {:goku {:default true
          :sim     50  ;; simultaneous_threshold_milliseconds (def: 50)
@@ -47,8 +49,9 @@
                 :chromes ["^com\\.google\\.Chrome$" "^com\\.google\\.Chrome\\.canary$"]
                 :ctrlnp ["^md\\.obsidian",
                          "^com\\.jetbrains\\.intellij",
-                         "^com\\.electron\\.lark"
-                         "^com\\.tencent\\.xinWeChat"
+                         "com\\.jetbrains\\.pycharm",
+                         "^com\\.electron\\.lark",
+                         "^com\\.tencent\\.xinWeChat",
                          "^com\\.google\\.Chrome"]
                 :finder ["^com\\.apple\\.finder$"]
                 :terminals ["com\\.apple\\.Terminal",
@@ -67,41 +70,41 @@
  ;; recommended for non-typing keys like `.` or tab or space
  ;; or keys like z which are used less often
  :simlayers {
-             :2-mode {:key :2}
-             :3-mode {:key :3}
-             :4-mode {:key :4}
-             :tab-mode {:key :tab}
-             :q-mode {:key :q}
-             :w-mode {:key :w}
-             :e-mode {:key :e}
-             :r-mode {:key :r}
-             :t-mode {:key :t}
-             :i-mode {:key :i}
+             ;;:2-mode {:key :2}
+             ;;:3-mode {:key :3}
+             ;;:4-mode {:key :4}
+             ;;:tab-mode {:key :tab}
+             ;;:q-mode {:key :q}
+             ;;:w-mode {:key :w}
+             ;;:e-mode {:key :e}
+             ;;:r-mode {:key :r}
+             ;;:t-mode {:key :t}
+             ;;:i-mode {:key :i}
              :o-mode {:key :o}
-             :caps-mode {:key :caps_lock}
+             ;;:caps-mode {:key :caps_lock}
              :a-mode {:key :a}
              :s-mode {:key :s}
-             :d-mode {:key :d}
-             :f-mode {:key :f}
-             :g-mode {:key :g}
-             :semicolon-mode {:key :semicolon}
-             :tilde-mode {:key :grave_accent_and_tilde}
-             :z-mode {:key :z}
-             :x-mode {:key :x}
-             :c-mode {:key :c}
-             :v-mode {:key :v}
-             :b-mode {:key :b}
-             :n-mode {:key :n}
-             :m-mode {:key :m}
-             :comma-mode {:key :comma}
-             :dot-mode {:key :period}
-             :spacebar-mode {:key :spacebar}
-             :go-mode {:key :period :condi ["in-go" 1]}
-             :js-mode {:key :period :condi ["in-js" 1]}
-             :swift-mode {:key :period :condi ["in-swift" 1]}
-             :rust-mode {:key :period :condi ["in-rust" 1]}
-             :py-mode {:key :period :condi ["in-python" 1]}
-             :elixir-mode {:key :period :condi ["in-elixir" 1]}
+             ;;:d-mode {:key :d}
+             ;;:f-mode {:key :f}
+             ;;:g-mode {:key :g}
+             ;;:semicolon-mode {:key :semicolon}
+             ;;:tilde-mode {:key :grave_accent_and_tilde}
+             ;;:z-mode {:key :z}
+             ;;:x-mode {:key :x}
+             ;;:c-mode {:key :c}
+             ;;:v-mode {:key :v}
+             ;;:b-mode {:key :b}
+             ;;:n-mode {:key :n}
+             ;;:m-mode {:key :m}
+             ;;:comma-mode {:key :comma}
+             ;;:dot-mode {:key :period}
+             ;;:spacebar-mode {:key :spacebar}
+             ;;:go-mode {:key :period :condi ["in-go" 1]}
+             ;;:js-mode {:key :period :condi ["in-js" 1]}
+             ;;:swift-mode {:key :period :condi ["in-swift" 1]}
+             ;;:rust-mode {:key :period :condi ["in-rust" 1]}
+             ;;:py-mode {:key :period :condi ["in-python" 1]}
+             ;;:elixir-mode {:key :period :condi ["in-elixir" 1]}
              }
  :main [
     ;; each manipulator has a description and multiple rules
@@ -455,11 +458,13 @@
                  [:2 :!C2]
                  [:3 :!C3]
                  [:4 :!C4]
-                 [:i [:open "/Applications/iTerm.app"]]
+                 [:t [:open "/Applications/iTerm.app"]]
                  [:b [:open "/Applications/Obsidian.app"]]
                  [:e [:open "/Applications/Lark.app"]]
                  [:w [:open "/Applications/WeChat.app"]]
                  [:g [:open "/Applications/GoldenDict.app"]]
+                 [:t [:open "/Applications/Telegram.app"]]
+                 [:j [:open "/Users/einverne/Applications/JetBrains Toolbox/IntelliJ IDEA Ultimate.app"]]
                  ;[:c [:alfred "search emoji" "com.github.jsumners.alfred-emoji"]]
                  [:c [:open "/Applications/Google Chrome.app"]]
                  [:spacebar [:alfred "search PDFs" "nikivi.search.files"]]]}
