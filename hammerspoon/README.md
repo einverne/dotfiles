@@ -1,10 +1,10 @@
 # hammerspoon configuration
 
-hammerspoon is my configuration for [Hammerspoon](http://www.hammerspoon.org/). It has highly modal-based, vim-style keybindings, provides some functionality like desktop widgets, window management, application launcher, instant search, aria2 frontend ... etc.
+hammerspoon is my configuration for [Hammerspoon](http://www.hammerspoon.org/). It has highly modal-based, vim-style keybindings, provides some functionality like desktop widgets, window management, application launcher, instant search, ... etc.
 
 ## Get started
 
-- Install [Hammerspoon](http://www.hammerspoon.org/) first.
+- Install [Hammerspoon](http://www.hammerspoon.org/) first `brew install --cask hammerspoon`
 - `git clone https://github.com/einverne/dotfiles.git ~/dotfiles`
 - `ln -s ~/dotfiles/hammerspoon ~/.hammerspoon`
 - Reload the configutation.
@@ -47,20 +47,21 @@ Option+r Enter windows management:
 - Tab to show help
 
 ### Switch windows
-I personally use the application called Context to switch between different windows, however this config provider another way to quickly switch between windows. Try with `Option+Tab`.
+I personally use the application called [Context](https://contexts.co/) to switch between different windows, however this config provide another way to quickly switch between windows. Try with `Option+Tab`.
 
 ## Toggle hammerspoon console
 
 `Option+z`
 
 ## Move windows between monitors
+If you have multiple monitors, you can use the following shortcut to move window to different monitor:
 
 - Hyper key + N, to move current window to next monitor
 - Hpper key + P, to move current window to previous monitor
 
 ### Application launcher
 
-Press `option + a` to enter application launcher. The shorcut information will show on the center of the screen. But I personally prefer Alfred.
+Press `option + a` to enter application launcher. The shorcut information will show on the center of the screen. But I personally prefer [Alfred](https://www.alfredapp.com/).
 
 ## Hammerspoon API manual
 
@@ -84,26 +85,6 @@ Press `option + a` to enter application launcher. The shorcut information will s
 ### Screenshots
 
 These screenshots demostrate what awesome-hammerspoon is capable of. Learn more about [built-in Spoons](https://github.com/ashfinal/awesome-hammerspoon/wiki/The-built-in-Spoons).
-
-#### Desktop widgets
-
-![widgets](https://github.com/ashfinal/bindata/raw/master/screenshots/awesome-hammerspoon-deskwidgets.png)
-
-
-#### Window manpulation <kbd>⌥</kbd> + <kbd>R</kbd>
-
-![winresize](https://github.com/ashfinal/bindata/raw/master/screenshots/awesome-hammerspoon-winresize.gif)
-
-
-#### aria2 Frontend <kbd>⌥</kbd> + <kbd>D</kbd>
-
-You need to [run aria2 with RPC enabled](https://github.com/ashfinal/awesome-hammerspoon/wiki/Run-aria2-with-rpc-enabled) before using this. Config aria2 host and token in `~/.hammerspoon/private/config.lua`, then you're ready to go.
-
-```lua
-hsaria2_host = "http://localhost:6800/jsonrpc" -- default host
-hsaria2_secret = "token" -- YOUR OWN SECRET
-```
-
 
 ## Customization
 
@@ -138,6 +119,8 @@ Some resources you may find helpful:
 
 
 ## Thanks to
+
+- [ashfinal](https://github.com/ashfinal/awesome-hammerspoon/)
 
 - [https://github.com/zzamboni/oh-my-hammerspoon](https://github.com/zzamboni/oh-my-hammerspoon)
 
