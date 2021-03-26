@@ -18,6 +18,8 @@
       path: .zshrc
     ~/.gitconfig:
       path: git/global.gitconfig
+    ~/.gitconfig-work:
+      path: git/work.gitconfig
     ~/.gitignore_global:
       path: git/gitignore_global
     ~/.tmux.conf:
