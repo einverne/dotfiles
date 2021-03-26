@@ -21,7 +21,7 @@ zinit light-mode lucid wait for \
   MichaelAquilina/zsh-you-should-use \
   romkatv/zsh-prompt-benchmark \
   zdharma/history-search-multi-word \
-  atload"unalias zi; alias zi='zinit'" \
+  atload"alias zi='zinit'" \
     ajeetdsouza/zoxide
 
 # Ref: zdharma/fast-syntax-highlighting
