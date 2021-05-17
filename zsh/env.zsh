@@ -22,8 +22,10 @@ export PATH="/usr/local/sbin:$PATH"
 if [[ -d ~/.pyenv ]]; then
     # pyenv
     export PATH="$HOME/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+	if command -v pyenv 1>/dev/null 2>&1; then
+		eval "$(pyenv init --path)"
+		eval "$(pyenv virtualenv-init -)"
+	fi
 fi
 
 # if [[ -d ~/.jenv ]]; then
@@ -41,7 +43,7 @@ if [[ -d "$HOME/.asdf/installs/java/adoptopenjdk-8.0.265+1/" ]]; then
 	export JAVA_HOME=$HOME/.asdf/installs/java/adoptopenjdk-8.0.265+1/
 	export PATH=$PATH:$JAVA_HOME/bin/
 fi
-. ~/.asdf/plugins/java/set-java-home.zsh
+# . ~/.asdf/plugins/java/set-java-home.zsh
 # if [[ -d "/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/" ]]; then
 # 	export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
 # 	export PATH=$PATH:$JAVA_HOME/bin/
@@ -138,6 +140,14 @@ fi
 
 if [[ -d $HOME/.cargo ]]; then
 	export PATH="$PATH:$HOME/.cargo/bin"
+fi
+
+if [[ -d /usr/lib/dart/bin ]]; then
+	export PATH="$PATH:/usr/lib/dart/bin"
+fi
+
+if [[ -d $HOME/.asdf/installs/rust/1.51.0/bin ]]; then
+	export PATH="$PATH:$HOME/.asdf/installs/rust/1.51.0/bin"
 fi
 
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
