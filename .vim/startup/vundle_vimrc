@@ -35,7 +35,7 @@ Plug 'scrooloose/nerdcommenter'
 " 目录树美化
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'davidhalter/jedi-vim'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
 Plug 'tomasr/molokai'
 Plug 'terryma/vim-multiple-cursors'
@@ -50,28 +50,28 @@ Plug 'WolfgangMehner/vim-plugins'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plug 'vim-scripts/L9'
-Plug 'vim-scripts/perl-support.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " syntax highlight for Dockerfile
-Plug 'ekalinin/Dockerfile.vim'
+" Plug 'ekalinin/Dockerfile.vim'
 Plug 'hotoo/pangu.vim'
-Plug 'chr4/nginx.vim'
+" Plug 'chr4/nginx.vim'
 Plug 'mileszs/ack.vim'
 " Plug 'jlanzarotta/bufexplorer'
 
-Plug 'mikelue/vim-maven-plugin'
+" Plug 'mikelue/vim-maven-plugin'
 " Plug 'w0rp/ale'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript'] }
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+" Plug 'garbas/vim-snipmate'
 Plug 'ntpeters/vim-better-whitespace'
 Plug '907th/vim-auto-save'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': '.install -all'}
 Plug 'junegunn/fzf.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
+Plug 'nathangrigg/vim-beancount'
 
 " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
@@ -241,4 +241,13 @@ let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets th
 
 let g:WebDevIconsDefaultFolderSymbolColor = s:beige " sets the color for folders that did not match any rule
 let g:WebDevIconsDefaultFileSymbolColor = s:blue " sets the color for files that did not match any rule
+
+" beancount
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+let g:beancount_root = "~/Sync/beancount/main.bean"
+let g:beancount_account_completion = 'chunks'
+let g:beancount_detailed_first = 1
+autocmd FileType bean inoremap . .<c-o>:AlignCommodity<cr>
+autocmd FileType bean inoremap <Tab> <c-x><c-o>
 

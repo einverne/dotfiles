@@ -151,3 +151,7 @@ if [[ -d $HOME/.asdf/installs/rust/1.51.0/bin ]]; then
 fi
 
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+if [[ -d $HOME/Sync/beancount ]]; then
+	export BEANCOUNT_ROOT=$HOME/Sync/beancount
+fi

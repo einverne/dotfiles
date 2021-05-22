@@ -31,3 +31,4 @@ alias proxy_http='export all_proxy=http://127.0.0.1:1081'
 if [[ -f ~/.ssh/assh.yml ]]; then
 	alias ssh="assh wrapper ssh --"
 fi
+
