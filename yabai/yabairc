@@ -50,17 +50,22 @@ yabai -m rule --add label="Dash" app="Dash" manage=off
 yabai -m rule --add label="DataGrip" app="DataGrip" manage=off
 yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
 yabai -m rule --add app="^Discord$" space=7 grid=1:1:0:0:1:1 manage=off
+yabai -m rule --add label="EventViewer" app="EventViewer" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
-yabai -m rule --add label="GoldenDict" app="GoldenDict" manage=off
-yabai -m rule --add label="KakaoTalk" app="KakaoTalk" manage=off
+yabai -m rule --add label="GoldenDict" app="GoldenDict" manage=off space=main
+yabai -m rule --add label="KakaoTalk" app="KakaoTalk" manage=off space=main
 yabai -m rule --add label="kitty" app="kitty" manage=off
+yabai -m rule --add label="NeteaseMusic" app="NeteaseMusic" manage=off
 yabai -m rule --add label="IntelliJ IDEA" app="IntelliJ IDEA" manage=off space=code
 yabai -m rule --add label="Preview" app="Preview" manage=off
 yabai -m rule --add label="System Preferences" app="^System Preferences$" manage=off
 yabai -m rule --add label="SmartGit" app="SmartGit" manage=off space=git
+yabai -m rule --add label="Sketch" app="Sketch" manage=off
+yabai -m rule --add label="Telegram" app="Telegram" manage=off space=main
 yabai -m rule --add label="VirtualBox" app="^VirtualBox$" manage=off
-yabai -m rule --add label="WeChat" app="^WeChat$" manage=off
-yabai -m rule --add label="Zotero" app="^Zotero$" manage=off
+yabai -m rule --add label="VMware Fusion" app="^VMware Fusion$" manage=off space=main
+yabai -m rule --add label="WeChat" app="^WeChat$" manage=off space=main
+yabai -m rule --add label="Zotero" app="^Zotero$" manage=off space=main
 
 
 # signals
