@@ -101,6 +101,7 @@ nnoremap tp :action ActivateProjectToolWindow<CR>
 
 " actions
 nnoremap <space>q :action CloseContent<cr>
+nnoremap <space>w :action CloseContent<cr>
 nnoremap <space>Q :action ReopenClosedTab<cr>
 nnoremap <space>\ :action VimFilePrevious<cr>
 nnoremap <space>e :action SearchEverywhere<cr>
