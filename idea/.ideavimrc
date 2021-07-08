@@ -97,6 +97,7 @@ nnoremap cow :action EditorToggleUseSoftWraps<cr>
 nnoremap col :action EditorToggleShowWhitespaces<cr>
 nnoremap ta :action Annotate<cr>
 nnoremap tb :action ToggleLineBreakpoint<cr>
+nnoremap tm :action ToggleBookmark<cr>
 nnoremap tp :action ActivateProjectToolWindow<CR>
 
 " actions
