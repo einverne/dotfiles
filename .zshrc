@@ -85,7 +85,7 @@ if [ -d "$HOME/.asdf" ]; then
 #   zinit light asdf-vm/asdf
 # OR
   load_asdf() {
-    source $HOME/.asdf/asdf.sh
+    . $HOME/.asdf/asdf.sh
   }
 
   zinit light-mode wait lucid for \
@@ -127,12 +127,12 @@ if type brew &>/dev/null; then
 fi
 fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
-if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
-  compinit;
-else
-  compinit -C;
-fi
-kitty + complete setup zsh | source /dev/stdin
+# if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+#   compinit;
+# else
+#   compinit -C;
+# fi
+# kitty + complete setup zsh | source /dev/stdin
 
 # Load the theme.
 # zinit theme agnoster
@@ -208,3 +208,5 @@ alias adbcap="adb shell screencap -p"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

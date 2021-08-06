@@ -242,6 +242,8 @@ let g:NERDTreePatternMatchHighlightColor['.*_spec\.rb$'] = s:rspec_red " sets th
 let g:WebDevIconsDefaultFolderSymbolColor = s:beige " sets the color for folders that did not match any rule
 let g:WebDevIconsDefaultFileSymbolColor = s:blue " sets the color for files that did not match any rule
 
+let g:snipMate = {'snippet_version': 1}
+
 " beancount
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
@@ -250,4 +252,7 @@ let g:beancount_account_completion = 'chunks'
 let g:beancount_detailed_first = 1
 autocmd FileType bean inoremap . .<c-o>:AlignCommodity<cr>
 autocmd FileType bean inoremap <Tab> <c-x><c-o>
+
+let b:beancount_root = '~/Sync/beancount/main.bean'
+
 

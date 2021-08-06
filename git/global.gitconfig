@@ -1,7 +1,7 @@
 [user]
 	email = einverne@gmail.com
 	name = Ein Verne
-	signingkey = 926634D64ACAD792
+	signingkey = EA6859610FD61EEACDFA27CCF80B65F734D9DD7D
 [push]
 	default = matching
 #[http]
