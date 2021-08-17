@@ -12,7 +12,16 @@ export PATH="$NODE_HOME/bin/:$PATH"
 if [[ -d $HOME/phabricator/ ]]; then
 	export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
 fi
-export ANDROID_HOME="$HOME/Android/Sdk"
+
+case $OSTYPE in
+	darwin*)
+		export ANDROID_HOME="$HOME/Library/Android/sdk"
+	;;
+	linux*)
+		export ANDROID_HOME="$HOME/Android/Sdk"
+	;;
+esac
+
 export PATH="$PATH:$ANDROID_HOME/bin/"
 
 export GOKU_EDN_CONFIG_FILE="$HOME/dotfiles/karabiner/karabiner.edn"
@@ -32,6 +41,10 @@ fi
 
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
 	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
+
+if [[ -d $HOME/flutter ]]; then
+	export PATH="$PATH:$HOME/flutter/flutter_sdk/bin"
 fi
 
 # if [[ -d ~/.jenv ]]; then
