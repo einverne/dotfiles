@@ -16,3 +16,4 @@ karabiner/automatic_backups/*
 karabiner/karabiner.json
 .idea/*
 *.pyc
+.DS_Store
