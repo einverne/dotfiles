@@ -16,6 +16,8 @@
 - link:
     ~/.zshrc:
       path: .zshrc
+    ~/.p10k.zsh:
+      path: .p10k.zsh
     ~/.gitconfig:
       path: git/global.gitconfig
     ~/.gitconfig-work:
