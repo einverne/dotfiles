@@ -8,7 +8,7 @@ dotfiles config contain vim, zsh, tmux configurations.
 
 ## Overview
 
-- using [dotbot](https://github.com/anishathalye/dotbot/) to manage dotfiles
+- using [dotbot](https://github.com/anishathalye/dotbot/) to manage dotfiles, [read more](https://blog.einverne.info/post/2020/08/use-dotbot-dotfiles-management.html)
 - zsh, using [zinit](https://github.com/zdharma/zinit/) as plugin management
 - vim, using [vim-plug](https://github.com/junegunn/vim-plug) to manage vim plugins, vim-plug relate configuration is under `vim-plug_vimrc`. In Vim, `:PlugInstall` to install all vim plugins.
 - tmux, using [tpm](https://github.com/tmux-plugins/tpm) to manage tmux plugins, in tmux, press `Ctrl +B` + `I` to install all tmux plugins.
