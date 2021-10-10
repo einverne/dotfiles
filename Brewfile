@@ -46,8 +46,6 @@ brew "cmake"
 brew "sqlite"
 brew "xz"
 brew "zlib"
-brew "musicbrainz-picard"
-brew "plex"
 
 # productivity
 brew "ripgrep"
@@ -105,6 +103,8 @@ cask "postman"
 cask "upic"
 cask "via"
 cask "vlc"
+cask "musicbrainz-picard"
+cask "plex"
 
 # Quick look
 cask "qlcolorcode"
