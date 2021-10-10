@@ -2,7 +2,7 @@ local LOGLEVEL = 'debug'
 
 log = hs.logger.new('init', 'debug')
 
-require 'autoscript'
+-- require 'autoscript'
 require 'ime'
 -- require 'usb'
 
@@ -105,7 +105,8 @@ local coding_layout = {
 
 
 wifiWatcher = nil
-homeSSID = "EinVerne_5G"
+homeSSID = "PhRouter_5G"
+homeDDID1 = "EinVerne_5G"
 lastSSID = hs.wifi.currentNetwork()
 
 workSSID = "MIOffice-5G"
@@ -121,23 +122,27 @@ function ssidChangedCallback()
 
     if newSSID == homeSSID and lastSSID ~= homeSSID then
         -- We just joined our home WiFi network
-		hs.alert.show("Welcome home!")
+		-- hs.alert.show("Welcome home!")
+		hs.notify.new({title="Wifi", informativeText="Welcome home"}):send()
         hs.audiodevice.defaultOutputDevice():setVolume(25)
 		-- result = hs.network.configuration:setLocation("Home")
 		-- hs.alert.show(result)
     elseif newSSID ~= homeSSID and lastSSID == homeSSID then
         -- We just departed our home WiFi network
-		hs.alert.show("left home!")
+		-- hs.alert.show("left home!")
+		hs.notify.new({title="Wifi", informativeText="Left home"}):send()
         hs.audiodevice.defaultOutputDevice():setVolume(0)
 		-- result = hs.network.configuration:setLocation("Automatic")
 		-- hs.alert.show(result)
     end
 
 	if newSSID == workSSID then
-		hs.alert.show("work karabiner setup")
+		-- hs.alert.show("work karabiner setup")
+		hs.notify.new({title="Wifi", informativeText="work karabiner setup"}):send()
 		selectKarabinerProfile("goku")
 	else
-		hs.alert.show("built-in karabiner setup")
+		-- hs.alert.show("built-in karabiner setup")
+		hs.notify.new({title="Wifi", informativeText="built-in karabiner setup"}):send()
 		selectKarabinerProfile("goku")
 	end
 
@@ -173,7 +178,8 @@ hs.network.reachability.forAddress(homeDNS):setCallback(function(self, flags)
 		hs.alert.show("switch to Home network location")
 		networkConf:setLocation("Home")
 	elseif (flags & hs.network.reachability.flags.reachable) == 0 and currentLocation ~= homeLocationUUID then
-		hs.alert.show("switch back to Automatic network location")
+		-- hs.alert.show("switch back to Automatic network location")
+		hs.notify.new({title="", informativeText="switch back to Automatic network location"}):send()
 		networkConf:setLocation("Automatic")
 	end
 end):start()
