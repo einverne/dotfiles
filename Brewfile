@@ -46,6 +46,8 @@ brew "cmake"
 brew "sqlite"
 brew "xz"
 brew "zlib"
+brew "musicbrainz-picard"
+brew "plex"
 
 # productivity
 brew "ripgrep"
