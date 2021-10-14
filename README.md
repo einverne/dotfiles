@@ -6,8 +6,9 @@ Set up using dotbot:
     git clone git@github.com:einverne/dotfiles.git
 	cd dotfiles
 	# under Linux, install essential packages
-	sh install.sh
-	./install
+	make linux
+	# under macOS
+	make macos
 
 ## Overview
 

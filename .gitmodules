@@ -8,3 +8,9 @@
 [submodule "dotbot-asdf"]
 	path = dotbot-asdf
 	url = https://github.com/sobolevn/dotbot-asdf.git
+[submodule "dotbot-apt-get"]
+	path = dotbot-apt-get
+	url = https://github.com/rubenvereecken/dotbot-apt-get
+[submodule "dotbot-snap"]
+	path = dotbot-snap
+	url = https://github.com/DrDynamic/dotbot-snap.git

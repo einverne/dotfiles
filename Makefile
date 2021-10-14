@@ -14,6 +14,12 @@ bootstrap: _prepare dotfiles _bootstrap ## Bootstrap new machine
 dotfiles: ## Update dotfiles
 	@./install
 
+linux:
+	@./install -c config/apt.conf.yml --plugin-dir dotbot-apt-get
+
+snap:
+	@./install -c config/snap.conf.yml --plugin-dir dotbot-snap
+
 macos: ## Run macos script
 	@./macos/init_mac.sh
 

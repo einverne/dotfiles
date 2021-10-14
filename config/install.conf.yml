@@ -35,6 +35,12 @@
     ~/.ideavimrc:
       if: '[ `uname` = Darwin ]'
       path: idea/.ideavimrc
+    ~/.config/espanso:
+      if: '[ `uname` = Linux ]'
+      path: espanso
+    ~/Library/Preferences/espanso:
+      if: '[ `uname` = Darwin ]'
+      path: espanso
     ~/.hammerspoon:
       if: '[ `uname` = Darwin ]'
       path: hammerspoon
