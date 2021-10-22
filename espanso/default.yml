@@ -1,0 +1,52 @@
+# espanso configuration file
+
+# This is the default configuration file, change it as you like it
+# You can refer to the official documentation:
+# https://espanso.org/docs/
+
+# Matches are the substitution rules, when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Simple text replacement
+  - trigger: ":espanso"
+    replace: "Hi there!"
+  - trigger: ":blog"
+    replace: "https://blog.einverne.info"
+  - trigger: ":photo"
+    replace: "https://photo.einverne.info"
+  - trigger: ":homer"
+    replace: "https://homer.einverne.info"
+  - trigger: ":ev"
+    replace: "einverne"
+  - trigger: ":name"
+    replace: "einverne"
+    word: true
+  - trigger: ":div"
+    replace: "<div>$|$</div>"
+  - trigger: ":pve"
+    replace: "Proxmox VE"
+
+  # Dates
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%m/%d/%Y"
+  - trigger: ":now"
+    replace: "{{mytime}}"
+    vars:
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+
+  # Shell commands
+  - trigger: ":ip"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "curl 'ip.gs'"
