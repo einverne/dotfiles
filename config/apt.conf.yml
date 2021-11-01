@@ -1,4 +1,4 @@
-- apt-get:
+- apt:
   - git
   - curl
   - wget
