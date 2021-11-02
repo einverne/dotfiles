@@ -14,7 +14,7 @@
     command: |
       if cd ~/.zinit/bin;
       then git pull;
-      else git clone https://github.com/zdharma/zinit.git ~/.zinit/bin; fi
+      else git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin; fi
 
 # Change default shell to zsh
 - shell:
