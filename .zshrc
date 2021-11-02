@@ -35,7 +35,7 @@ zinit light junegunn/fzf
 zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"
 zinit load docker/compose
 
-
+zinit load agkozak/zsh-z
 # Ref: zdharma/fast-syntax-highlighting
 # Note: Use wait 1 second works for kubectl
 zinit wait lucid for \
