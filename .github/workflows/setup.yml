@@ -10,7 +10,8 @@ jobs:
       env:
         CI_MODE: true
       run: |
-        make
+        make bootstrap
+        make tmux
   macos:
     name: macos-bootstrap
     runs-on: macos-latest
@@ -23,7 +24,7 @@ jobs:
         make
         make bootstrap
         make dotfiles
-        make macos
-        make asdf
-        make brew
+        #make macos
+        #make asdf
+        #make brew
         make tmux
