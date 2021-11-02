@@ -1,9 +1,3 @@
-- brew:
-  - git
-  - mackup
-  - mas
-  - zsh
-
 # Setup zinit
 - create:
   - ~/.zinit
@@ -34,6 +28,3 @@
       }
 
       update_shell
-
-- cask:
-  - syncthing
