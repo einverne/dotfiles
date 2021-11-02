@@ -20,7 +20,7 @@ zinit light-mode lucid wait for \
   is-snippet OMZ::lib/history.zsh \
   MichaelAquilina/zsh-you-should-use \
   romkatv/zsh-prompt-benchmark \
-  zdharma/history-search-multi-word \
+  zdharma-continuum/history-search-multi-word \
   atload"alias zi='zinit'" \
     ajeetdsouza/zoxide
 
@@ -36,7 +36,7 @@ zinit load docker/compose
 # Note: Use wait 1 second works for kubectl
 zinit wait lucid for \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma/fast-syntax-highlighting \
+    zdharma-continuum/fast-syntax-highlighting \
   atload"zpcdreplay" wait"1" \
     OMZP::kubectl \
   blockf \
@@ -49,7 +49,7 @@ zinit wait lucid for \
 
 # 语法高亮
 zinit ice lucid wait='0' atinit='zpcompinit'
-zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
 
 # 自动建议
 zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
