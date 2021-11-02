@@ -7,7 +7,7 @@ fi
 
 if [[ ! -f ~/.zinit/bin/zinit.zsh ]]; then
 	mkdir ~/.zinit
-	git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
+	git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin
 fi
 
 # load zinit
@@ -23,6 +23,14 @@ zinit light-mode lucid wait for \
   zdharma/history-search-multi-word \
   atload"alias zi='zinit'" \
     ajeetdsouza/zoxide
+
+# binary release, unpack provide fzf
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf
+
+zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"
+zinit load docker/compose
+
 
 # Ref: zdharma/fast-syntax-highlighting
 # Note: Use wait 1 second works for kubectl
