@@ -19,14 +19,14 @@ zinit ice lucid wait='1'
 zinit light-mode lucid wait for \
   is-snippet OMZ::lib/history.zsh \
   MichaelAquilina/zsh-you-should-use \
-  romkatv/zsh-prompt-benchmark \
-  zdharma-continuum/history-search-multi-word
+  zdharma-continuum/history-search-multi-word \
+#   atload"alias zi='zinit'"
 
-zinit ice wait"2" as"command" from"gh-r" lucid \
-  mv"zoxide*/zoxide -> zoxide" \
-  atclone"./zoxide init zsh > init.zsh" \
-  atpull"%atclone" src"init.zsh" nocompile'!'
-zinit light ajeetdsouza/zoxide
+# zinit ice wait"2" as"command" from"gh-r" lucid \
+#   mv"zoxide*/zoxide -> zoxide" \
+#   atclone"./zoxide init zsh > init.zsh" \
+#   atpull"%atclone" src"init.zsh" nocompile'!'
+# zinit light ajeetdsouza/zoxide
 
 # binary release, unpack provide fzf
 zinit ice from"gh-r" as"program"
@@ -107,8 +107,8 @@ fi
 # zinit light denysdovhan/spaceship-prompt
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-zinit ice as"program" from"gh-r" mv"exa* -> exa" pick"exa/exa" lucid atload"alias ls='exa --icons'"
-zinit light ogham/exa
+# zinit ice as"program" from"gh-r" mv"exa* -> exa" pick"exa/exa" lucid atload"alias ls='exa --icons'"
+# zinit light ogham/exa
 
 # OS specific plugins
 case `uname` in

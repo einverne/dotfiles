@@ -29,7 +29,7 @@ export GOKU_EDN_CONFIG_FILE="$HOME/dotfiles/karabiner/karabiner.edn"
 export PATH="/usr/local/sbin:$PATH"
 
 export PATH="$HOME/.local/bin:$PATH"
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"
 
 
 if [[ -d $HOME/.pyenv ]]; then

@@ -72,6 +72,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': '.install -all'}
 Plug 'junegunn/fzf.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
 Plug 'nathangrigg/vim-beancount'
+Plug 'hashivim/vim-terraform'
 
 " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
