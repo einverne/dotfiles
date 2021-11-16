@@ -105,6 +105,7 @@ cask "via"
 cask "vlc"
 cask "musicbrainz-picard"
 cask "plex"
+cask "plexamp"
 
 # Quick look
 cask "qlcolorcode"
