@@ -1,3 +1,4 @@
+" see more https://blog.einverne.info/post/2020/12/my-idea-vimrc-config.html
 " enable plugin
 set easymotion
 set surround
