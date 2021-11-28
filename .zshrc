@@ -32,8 +32,8 @@ zinit light-mode lucid wait for \
 zinit ice from"gh-r" as"program"
 zinit light junegunn/fzf
 
-zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"
-zinit load docker/compose
+# zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"
+# zinit load docker/compose
 
 zinit load agkozak/zsh-z
 # Ref: zdharma/fast-syntax-highlighting
