@@ -17,7 +17,7 @@
     command: |
       if cd ~/.tmux/plugins/tpm;
       then git pull;
-      else git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+      else git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi
 
 # Change default shell to zsh
 - shell:
