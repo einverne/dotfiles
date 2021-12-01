@@ -1,6 +1,7 @@
 # Setup zinit
 - create:
   - ~/.zinit
+  - ~/.tmux
 
 - shell:
   - description: Clone zinit
