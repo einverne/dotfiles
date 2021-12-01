@@ -2,7 +2,7 @@
 VIMDIR=${1:-$HOME}
 
 # install ctags to solve "Exuberant ctags not found in PATH" error
-sudo apt-get install -y git zsh zsh-antigen vim vim-gtk tmux
+sudo apt-get install -y git zsh vim tmux
 sudo apt-get install -y exuberant-ctags
 sudo apt-get install -y htop tree zip unzip wget nethogs
 
