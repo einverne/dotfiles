@@ -31,3 +31,4 @@ if [[ -f ~/.ssh/assh.yml ]]; then
 	alias ssh="assh wrapper ssh --"
 fi
 
+alias pstop='watch "ps aux | sort -nrk 3,3 | head -n 5"'
