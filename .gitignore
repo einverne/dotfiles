@@ -17,3 +17,4 @@ karabiner/karabiner.json
 .idea/*
 *.pyc
 .DS_Store
+dotfiles.iml

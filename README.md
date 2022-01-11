@@ -1,11 +1,13 @@
-dotfiles config contain vim, zsh, tmux configurations.
+dotfiles config contains vim, zsh, tmux configurations.
 
 ## MacOS setup
 Set up using dotbot:
 
     git clone git@github.com:einverne/dotfiles.git
 	cd dotfiles
-	# under Linux, install essential packages
+    # to bootstrap
+    make bootstrap
+	# under Linux desktop, install essential packages
 	make linux
 	# under macOS
 	make macos
@@ -13,7 +15,7 @@ Set up using dotbot:
 ## Overview
 
 - using [dotbot](https://github.com/anishathalye/dotbot/) to manage dotfiles, [read more](https://blog.einverne.info/post/2020/08/use-dotbot-dotfiles-management.html)
-- zsh, using [zinit](https://blog.einverne.info/post/2020/10/use-zinit-to-manage-zsh-plugins.html) as plugin management
+- zsh, using [zinit](https://blog.einverne.info/post/2020/10/use-zinit-to-manage-zsh-plugins.html) as zsh plugin management
 - vim, using [vim-plug](https://github.com/junegunn/vim-plug) to manage vim plugins, vim-plug relate configuration is under `vim-plug_vimrc`. In Vim, `:PlugInstall` to install all vim plugins.
 - tmux, using [tpm](https://blog.einverne.info/post/2017/12/tmux-plugins.html) to manage tmux plugins, in tmux, press `Ctrl +B` + `I` to install all tmux plugins.
 - other useful tools, like [fzf](https://blog.einverne.info/post/2019/08/fzf-usage.html) to fuzzy search, ripgrep for recursively searching directories, zoxide to replace cd, exa to replace ls

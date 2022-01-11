@@ -11,6 +11,7 @@
       then git pull;
       else git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin; fi
 
+# Setup tmux plugin manager
 - shell:
   - description: Clone TPM
     quiet: true
