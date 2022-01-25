@@ -43,6 +43,12 @@ if [[ -d $HOME/.pyenv ]]; then
 	fi
 fi
 
+if [[ -d $HOME/.poetry ]]; then
+	# poetry
+	export POETRY_ROOT="$HOME/.poetry/bin"
+	export PATH="$POETRY_ROOT:$PATH"
+fi
+
 if [[ -d /home/linuxbrew/.linuxbrew ]]; then
 	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
