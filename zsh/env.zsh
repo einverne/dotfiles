@@ -184,3 +184,11 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 if [[ -d $HOME/Sync/beancount ]]; then
 	export BEANCOUNT_ROOT=$HOME/Sync/beancount
 fi
+
+
+[[ -e "/home/einverne/lib/oracle-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/einverne/lib/oracle-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh"
+export PATH=/home/einverne/bin:$PATH
+
+
+export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.fly/bin:$PATH"
