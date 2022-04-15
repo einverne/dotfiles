@@ -32,6 +32,8 @@ zinit light-mode lucid wait for \
 zinit ice from"gh-r" as"program"
 zinit light junegunn/fzf
 
+zinit light Aloxaf/fzf-tab
+
 # zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"
 # zinit load docker/compose
 
