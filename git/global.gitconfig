@@ -1,6 +1,7 @@
 [user]
 	email = einverne@gmail.com
 	name = Ein Verne
+	signingkey = 926634D64ACAD792
 [push]
 	default = matching
 #[http]
@@ -132,3 +133,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = master
+[log]
+	date = local
