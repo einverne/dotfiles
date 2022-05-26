@@ -103,7 +103,7 @@ if [ -d "$HOME/.asdf" ]; then
 
   zinit light-mode wait lucid for \
     atload'load_asdf' \
-      zdharma/null
+      zdharma-continuum/null
 fi
 
 # zinit light denysdovhan/spaceship-prompt
