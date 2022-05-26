@@ -1,5 +1,5 @@
 [user]
-	email = einverne@gmail.com
+	email = git@einverne.info
 	name = Ein Verne
 	signingkey = 926634D64ACAD792
 [push]
@@ -79,15 +79,15 @@
         git push -u origin $BRANCH_NAME; \
         hub pull-request; \
     };f "
-	
+
 	### rebase ###
-	
+
 	# rebase - forward-port local commits to the updated upstream head.
 	rb = rebase
-	
+
 	# rebase - continue the rebasing process after resolving a conflict manually and updating the index with the resolution.
 	rbc = rebase --continue
-	
+
 	# rebase - restart the rebasing process by skipping the current patch.
 	rbs = rebase --skip
 
