@@ -18,3 +18,4 @@ karabiner/karabiner.json
 *.pyc
 .DS_Store
 dotfiles.iml
+.vscode

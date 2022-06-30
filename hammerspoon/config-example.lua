@@ -21,7 +21,6 @@ hspoon_list = {
 hsapp_list = {
     {key = 'a', name = 'Atom'},
     {key = 'c', id = 'com.google.Chrome'},
-    {key = 'd', name = 'ShadowsocksX'},
     {key = 'e', name = 'Emacs'},
     {key = 'f', name = 'Finder'},
     {key = 'i', name = 'iTerm'},
@@ -34,7 +33,6 @@ hsapp_list = {
     {key = 's', name = 'Safari'},
     {key = 't', name = 'Terminal'},
     {key = 'v', id = 'com.apple.ActivityMonitor'},
-    {key = 'w', name = 'Mweb'},
     {key = 'y', id = 'com.apple.systempreferences'},
 }
 

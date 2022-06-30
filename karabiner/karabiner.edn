@@ -458,15 +458,15 @@
                  [:2 :!C2]
                  [:3 :!C3]
                  [:4 :!C4]
-                 [:t [:open "/Applications/iTerm.app"]]
                  [:b [:open "/Applications/Obsidian.app"]]
+                 [:c [:open "/Applications/Google Chrome.app"]]
                  [:e [:open "/Applications/Lark.app"]]
                  [:w [:open "/Applications/WeChat.app"]]
                  [:g [:open "/Applications/GoldenDict.app"]]
-                 [:t [:open "/Applications/Telegram.app"]]
+                 [:v [:open "/Applications/Visual Studio Code.app"]]
                  [:j [:open "/Users/einverne/Applications/JetBrains Toolbox/IntelliJ IDEA Ultimate.app"]]
+                 [:t [:open "/Applications/iTerm.app"]]
                  ;[:c [:alfred "search emoji" "com.github.jsumners.alfred-emoji"]]
-                 [:c [:open "/Applications/Google Chrome.app"]]
                  [:spacebar [:alfred "search PDFs" "nikivi.search.files"]]]}
         {:des "capskey (todo + trello)"
          :rules [:caps-mode

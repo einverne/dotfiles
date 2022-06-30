@@ -31,27 +31,28 @@ zinit light-mode lucid wait for \
 # binary release, unpack provide fzf
 zinit ice from"gh-r" as"program"
 zinit light junegunn/fzf
-
 zinit light Aloxaf/fzf-tab
 
 # zinit ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"
 # zinit load docker/compose
+zinit ice as"program" from"gh-r" mv"docker-c* -> docker-compose"
+zinit light "docker/compose"
 
 zinit load agkozak/zsh-z
 # Ref: zdharma/fast-syntax-highlighting
 # Note: Use wait 1 second works for kubectl
-zinit wait lucid for \
-  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting \
-  atload"zpcdreplay" wait"1" \
-    OMZP::kubectl \
-  blockf \
-    zsh-users/zsh-completions \
-  atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions \
-  as"completion" is-snippet \
-    https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
-    https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
+#zinit wait lucid for \
+#  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+#    zdharma-continuum/fast-syntax-highlighting \
+##  atload"zpcdreplay" wait"1" \
+#    #OMZP::kubectl \
+#  blockf \
+#    zsh-users/zsh-completions \
+#  atload"!_zsh_autosuggest_start" \
+#    zsh-users/zsh-autosuggestions \
+#  as"completion" is-snippet \
+#    https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
+#    https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
 
 # 语法高亮
 zinit ice lucid wait='0' atinit='zpcompinit'
@@ -72,7 +73,7 @@ zinit snippet OMZ::lib/key-bindings.zsh
 zinit snippet OMZ::lib/theme-and-appearance.zsh
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
-zinit snippet OMZ::plugins/git-flow/git-flow.plugin.zsh
+#zinit snippet OMZ::plugins/git-flow/git-flow.plugin.zsh
 zinit snippet OMZ::plugins/mvn/mvn.plugin.zsh
 zinit snippet OMZ::plugins/tmux/tmux.plugin.zsh
 zinit snippet OMZ::plugins/tmuxinator/tmuxinator.plugin.zsh
@@ -94,16 +95,16 @@ export ASDF_DIR=$HOME/.asdf
 
 # ASDF
 if [ -d "$HOME/.asdf" ]; then
-#   zinit ice wait lucid
-#   zinit light asdf-vm/asdf
+   zinit ice wait lucid
+   zinit light asdf-vm/asdf
 # OR
-  load_asdf() {
-    . $HOME/.asdf/asdf.sh
-  }
-
-  zinit light-mode wait lucid for \
-    atload'load_asdf' \
-      zdharma-continuum/null
+#   load_asdf() {
+#     . $HOME/.asdf/asdf.sh
+#   }
+#
+#   zinit light-mode wait lucid for \
+#     atload'load_asdf' \
+#       zdharma-continuum/null
 fi
 
 # zinit light denysdovhan/spaceship-prompt
@@ -140,6 +141,12 @@ if type brew &>/dev/null; then
 fi
 fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
+
+if [ -d "$HOME/.asdf" ]; then
+	source $HOME/.asdf/asdf.sh
+	source $HOME/.asdf/completions/asdf.bash
+fi
+
 # if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 #   compinit;
 # else
