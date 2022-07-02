@@ -10,8 +10,7 @@
       mv "$HOME/.termux" "$HOME/.termux.bak.$(date +%Y.%m.%d-%H:%M:%S)"
   - description: install tools
     command: |
-      pkg install -y libcurl wget curl openssh vim git zsh unrar unzip less tree htop tsu neofetch fzf ncurses-utils
-  - termux-setup-storage
+      pkg install -y termux-tools libcurl wget curl openssh vim git zsh unrar unzip less tree htop tsu neofetch fzf ncurses-utils
   - termux-reload-settings
 
 - link:
