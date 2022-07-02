@@ -11,6 +11,11 @@ _bootstrap:
 
 bootstrap: _prepare dotfiles _bootstrap ## Bootstrap new machine
 
+termux: _prepare dotfiles termux ## Bootstrap new termux
+
+termux:
+	@./install -c config/termux.conf.yml
+
 dotfiles: ## Update dotfiles
 	@./install
 

@@ -12,6 +12,17 @@ Set up using dotbot:
 	# under macOS
 	make macos
 
+## Termux setup
+Install dependency first:
+
+	pkg install make python vim git
+
+then:
+
+	git clone git@github.com:einverne/dotfiles.git
+	cd dotfiles
+	make termux
+
 ## Overview
 
 - using [dotbot](https://github.com/anishathalye/dotbot/) to manage dotfiles, [read more](https://blog.einverne.info/post/2020/08/use-dotbot-dotfiles-management.html)
