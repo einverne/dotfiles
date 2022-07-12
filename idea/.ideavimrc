@@ -17,7 +17,7 @@ let g:mapleader = ","
 " https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md
 set hlsearch
 set incsearch
-set scrolloff=5
+set scrolloff=2
 set ignorecase
 set smartcase
 " 当前模式
@@ -26,7 +26,8 @@ set history=10000
 
 " source ~/.vimrc
 
-noremap <Leader>r <ESC>:source ~/.ideavimrc<cr>
+" map r to reload ideavimrc in normal mode
+noremap <space>r <ESC>:source ~/.ideavimrc<cr>
 
 " general
 nnoremap <Leader>f :<C-u>action ReformatCode<CR>
