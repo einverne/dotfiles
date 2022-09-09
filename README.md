@@ -91,7 +91,7 @@ There are following alias in `.zshrc` :
 
 - fe : open file using $EDITOR
 - fo : open file Ctrl-o using open, Ctrl-e use $EDITOR
-- fd : cd path
+- fcd : cd path  (fd to replace find)
 - fkill : kill process
 - tm : tm new tmux session
 - fs : tmux attach tmux session
