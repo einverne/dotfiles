@@ -73,6 +73,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
 Plug 'nathangrigg/vim-beancount'
 Plug 'hashivim/vim-terraform'
+Plug 'wakatime/vim-wakatime'
 
 " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
@@ -256,4 +257,4 @@ autocmd FileType bean inoremap <Tab> <c-x><c-o>
 
 let b:beancount_root = '~/Sync/beancount/main.bean'
 
-
+let g:vim_markdown_toc_autofit = 1
