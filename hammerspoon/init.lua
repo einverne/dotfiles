@@ -1,3 +1,5 @@
+hs.window.animationDuration = 0
+
 local LOGLEVEL = 'debug'
 
 log = hs.logger.new('init', 'debug')
@@ -31,8 +33,6 @@ pressedF18 = function() k:enter() end
 releasedF18 = function() k:exit() end
 
 f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
-
-
 
 hyper = {"ctrl", "alt", "cmd", "shift"}
 
@@ -542,6 +542,7 @@ end
 if spoon.wifiNotifier then
 	spoon.wifiNotifier:start()
 end
+
 
 ----------------------------------------------------------------------------------------------------
 -- Register browser tab typist: Type URL of current tab of running browser in markdown format. i.e. [title](link)
