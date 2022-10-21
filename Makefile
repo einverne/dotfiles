@@ -26,6 +26,7 @@ snap:
 	@./install -c config/snap.conf.yml --plugin-dir dotbot-snap
 
 macos: ## Run macos script
+	@./mac_bootstrap.sh
 	@./macos/init_mac.sh
 
 brew: ## Install brew & cask packages

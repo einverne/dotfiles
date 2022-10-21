@@ -20,10 +20,10 @@ brew bundle
 set -e
 
 echo "Setup workspace"
-mkdir -p ~/projects
+mkdir -p ~/Git/
 
 echo "Setup Git"
-ln -s ./git/work.gitconfig ~/projects/.gitconfig
+ln -s ./git/work.gitconfig ~/Git/.gitconfig
 if [ -f $HOME/.gitconfig ]; then
 	cat $HOME/.gitconfig
 	mv $HOME/.gitconfig $HOME/.gitconfig.bak
@@ -49,5 +49,3 @@ echo "Link editors"
 mkdir -p ~/Applications/
 sudo ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code /usr/local/bin/code
 
-echo "Setup macOS defaults"
-bash etc/init_mac.sh
