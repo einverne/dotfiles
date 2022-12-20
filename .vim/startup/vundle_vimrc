@@ -74,6 +74,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
 Plug 'nathangrigg/vim-beancount'
 Plug 'hashivim/vim-terraform'
 Plug 'wakatime/vim-wakatime'
+Plug 'editorconfig/editorconfig-vim'
 
 " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
