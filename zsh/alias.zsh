@@ -21,8 +21,8 @@ alias mvn-purge="mvn dependency:purge-local-repository"
 # https://stackoverflow.com/a/15503178/1820217
 alias gitlog="git ls-files -z | xargs -0n1 git blame -w --show-email | perl -n -e '/^.*?\((.*?)\s+[\d]{4}/; print $1,"\n"' | sort -f | uniq -c | sort -n"
 
-alias proxy='export all_proxy=socks5://127.0.0.1:1080'
-alias unproxy='unset all_proxy'
+alias proxy='export http_proxy=http://127.0.0.1:1080 https_proxy=http://127.0.0.1:1080 all_proxy=socks5://127.0.0.1:1080'
+alias unproxy='unset http_proxy;unset https_proxy;unset all_proxy'
 alias proxy_http='export all_proxy=http://127.0.0.1:1081'
 
 # assh

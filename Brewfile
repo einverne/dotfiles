@@ -31,6 +31,7 @@ brew "wget"
 brew "rsync"
 
 # tools
+brew "ipinfo-cli"
 brew "youtube-dl"
 brew "ffmpeg"
 brew "imagemagick"
