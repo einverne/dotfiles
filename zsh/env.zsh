@@ -69,7 +69,7 @@ if [[ -d "/usr/local/jdk1.8.0_131" ]]; then
     export PATH=$PATH:$JAVA_HOME/bin/
 fi
 if [[ -d "$HOME/.asdf/installs/java/adoptopenjdk-8.0.265+1/" ]]; then
-	export JAVA_HOME=$HOME/.asdf/installs/java/adoptopenjdk-8.0.265+1/
+	export JAVA_HOME=$HOME/.asdf/installs/java/openjdk-17/
 	export PATH=$PATH:$JAVA_HOME/bin/
 fi
 # . ~/.asdf/plugins/java/set-java-home.zsh
