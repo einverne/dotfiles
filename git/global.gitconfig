@@ -126,7 +126,7 @@
 [includeIf "gitdir:~/projects/"]
     path = ~/projects/.gitconfig
 
-[includeIf "gitdir:~/mifi-credit/"]
+[includeIf "gitdir:~/smart/"]
 	path = .gitconfig-work
 [filter "lfs"]
 	clean = git-lfs clean -- %f
