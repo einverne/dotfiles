@@ -137,3 +137,5 @@
 	defaultBranch = master
 [log]
 	date = local
+[http]
+	postBuffer = 524288000
