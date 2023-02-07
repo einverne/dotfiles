@@ -71,9 +71,13 @@ local function bingRequest()
 end
 
 function create_dir(path)
-	if hs.fs.dir(path) == nil then
-		hs.fs.mkdir(path)
-		log.i("path: " .. path .. " create successfully!")
+	if hs.fs.displayName(path) == nil then
+		local result = hs.fs.mkdir(path)
+		if result == true then
+            log.i("path: " .. path .. " create successfully!")
+		else
+            log.i("path: " .. path .. " create failed!")
+        end
 	end
 end
 
