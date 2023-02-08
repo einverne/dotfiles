@@ -1,8 +1,6 @@
 - brew:
-  - git
   - mackup
   - mas
-  - zsh
 
 - cask:
   - syncthing

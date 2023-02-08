@@ -1,0 +1,54 @@
+# bootstrap: macos
+- create:
+    - ~/.config/kitty
+
+- link:
+    ~/Library/Preferences/espanso:
+      if: '[ `uname` = Darwin ]'
+      path: espanso
+    ~/.hammerspoon:
+      if: '[ `uname` = Darwin ]'
+      path: hammerspoon
+    ~/.mackup.cfg:
+      if: '[ `uname` = Darwin ]'
+      path: mackup/mackup.cfg
+    ~/.Brewfile:
+      if: '[ `uname` = Darwin ]'
+      path: Brewfile
+    ~/.config/kitty/kitty.conf:
+      if: '[ `uname` = Darwin ]'
+      path: kitty/kitty.conf
+    ~/.config/kitty/base16-solarized-dark-256.conf:
+      if: '[ `uname` = Darwin ]'
+      path: kitty/base16-solarized-dark-256.conf
+    ~/.skhdrc:
+      if: '[ `uname` = Darwin ]'
+      path: skhd/skhdrc
+    ~/.yabairc:
+      if: '[ `uname` = Darwin ]'
+      path: yabai/yabairc
+    ~/.yabai_focus_display:
+      if: '[ `uname` = Darwin ]'
+      path: yabai/yabai_focus_display
+
+- brew:
+    - git
+    - zsh
+    - tmux
+    - pyenv
+    - assh
+    - ripgrep
+    - ffmpeg
+
+- tap:
+    - homebrew/cask-fonts
+
+- cask:
+    - kitty
+    - iterm2
+    - warp
+    - syncthing
+    - hammerspoon
+    - obsidian
+    - bigwig-club/brew/upic
+    - visual-studio-code

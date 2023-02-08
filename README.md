@@ -1,16 +1,19 @@
-dotfiles config contains vim, zsh, tmux configurations.
+This is my personal dotfiles which contain config for vim, zsh, tmux, git, fzf, etc;
 
-## MacOS setup
-Set up using dotbot:
+## macOS setup
+Set up by using [dotbot](https://blog.einverne.info/post/2020/08/use-dotbot-dotfiles-management.html):
 
+    cd ~
     git clone git@github.com:einverne/dotfiles.git
 	cd dotfiles
-    # to bootstrap
+    # to bootstrap config for vim, zsh, tmux, git, fzf, etc
     make bootstrap
 	# under Linux desktop, install essential packages
 	make linux
-	# under macOS
-	make macos
+	# under macOS, install applications by brew
+	make mac
+
+Log out and log in again, zinit will install all plugins automatically. If you tried to edit file by vi, the vim-plug will install all plugins automatically.
 
 ## Termux setup
 Install dependency first:
@@ -29,10 +32,16 @@ then:
 - zsh, using [zinit](https://blog.einverne.info/post/2020/10/use-zinit-to-manage-zsh-plugins.html) as zsh plugin management
 - vim, using [vim-plug](https://github.com/junegunn/vim-plug) to manage vim plugins, vim-plug relate configuration is under `vim-plug_vimrc`. In Vim, `:PlugInstall` to install all vim plugins.
 - tmux, using [tpm](https://blog.einverne.info/post/2017/12/tmux-plugins.html) to manage tmux plugins, in tmux, press `Ctrl +B` + `I` to install all tmux plugins.
-- other useful tools, like [fzf](https://blog.einverne.info/post/2019/08/fzf-usage.html) to fuzzy search, ripgrep for recursively searching directories, zoxide to replace cd, exa to replace ls
+- other useful tools, like [fzf](https://blog.einverne.info/post/2019/08/fzf-usage.html) to fuzzy search, ripgrep for recursively searching directories, zoxide to replace cd, exa to replace ls.
+
+GUI applications:
+
+- Kitty
+- Karabiner-Elements
+- Hammerspoon
 
 ### zsh config
-to see `.zshrc` file
+to see `.zshrc` file.
 
 ### Vim config
 vim-plug related configuration is under `vim-plug_vimrc`, to show all plugins list, use `:PluginList` in vim.
@@ -44,9 +53,9 @@ python related configurations is under `python_vimrc`.
 - bin/: executable shell scripts, Anything in bin/ will get added to your $PATH and be made available everywhere.
 - conf/: configuration file of zsh etc
 
-## Instruction under Linux
+## Instruction for vim
 
-Just run `./install.sh`, everything is done. Then Enter the vim run `:PlugInstall` to install all plugins.
+Enter the vim and then run `:PlugInstall` to install all plugins.
 
 ### install manually
 Or, you can do it manually follow the step:
@@ -63,28 +72,32 @@ with yum:
 
 	sudo yum install ctags-etags
 
+## Tmux config
+I take some Tmux config from [gpakosz](https://github.com/gpakosz/.tmux). If you want to learn more about tmux, you can check [this article](http://einverne.github.io/post/2017/07/tmux-introduction.html).
 
-## Tmux
-Tmux 配置參考了 [gpakosz](https://github.com/gpakosz/.tmux) 的大部分配置。Tmux 的基础部分可以参考[这篇](http://einverne.github.io/post/2017/07/tmux-introduction.html) 文章。
+You can manually install tmux plugins by `prefix + I`.
 
-需要满足
+Tmux need：
 
 - `tmux >= 2.1`
-- 在 tmux 运行的环境中，`$TERM` 需要设置为 `xterm-256color`
+- You should set `$TERM` environment for `xterm-256color`
 
-功能
+Tmux config:
 
-- 在保留`C-b` 的前提下，`C-a` 作为第二选择
-- `prefix + |` 开启垂直分割的新 panel， `prefix + -` 水平分割
-- `C-hjkl` 直接在多 panel 中跳转
-- Tmux 调整 Pane 窗口大小 `prefix + Shift + HJKL`
+- You can use `C-b` as prefix, and use `C-a` as second choice
+- `prefix + |` to split panel vertically， `prefix + -` split panel horizontally
+- `C-hjkl` to switch pane
+- `prefix + Shift + HJKL` to adjust pane size
 
-使用 Tmux Plugin Manager 管理，默认有如下插件
+I use Tmux Plugin Manager to manage tmux plugins, and by default I use following plugins:
 
     set -g @plugin 'tmux-plugins/tpm'
     set -g @plugin 'tmux-plugins/tmux-sensible'
     set -g @plugin 'tmux-plugins/tmux-yank'
-
+    set -g @plugin 'tmux-plugins/tmux-resurrect'
+    set -g @plugin 'tmux-plugins/tmux-continuum'
+    set -g @plugin 'tmux-plugins/tmux-open'
+    set -g @plugin 'tmux-plugins/tmux-copycat'
 
 ## fzf config
 There are following alias in `.zshrc` :

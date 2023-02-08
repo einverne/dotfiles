@@ -44,8 +44,3 @@ echo "- fzf"
 $(brew --prefix)/opt/fzf/install
 # echo "- neovim"
 # ./neovim/neovim
-
-echo "Link editors"
-mkdir -p ~/Applications/
-sudo ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code /usr/local/bin/code
-

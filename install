@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# init dotbot and it's submodules
 set -e
 
 CONFIG="config/install.conf.yml"

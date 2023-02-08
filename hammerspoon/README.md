@@ -7,7 +7,7 @@ hammerspoon is my configuration for [Hammerspoon](http://www.hammerspoon.org/). 
 - Install [Hammerspoon](http://www.hammerspoon.org/) first `brew install --cask hammerspoon`
 - `git clone https://github.com/einverne/dotfiles.git ~/dotfiles`
 - `ln -s ~/dotfiles/hammerspoon ~/.hammerspoon`
-- Reload the configutation.
+- Reload the configuration.
 
 ## Keep update
 
@@ -19,7 +19,7 @@ hammerspoon is my configuration for [Hammerspoon](http://www.hammerspoon.org/). 
 - `ime.lua`, auto switch different Input methods in different applications
 
 ## How to use
-Use Karabier-Elements to set <kbd>caps lock</kbd> as hyper key. Press caps lock is just like press Cmd+Control+Option+Shift at the same time.
+Use Karabiner-Elements to set <kbd>caps lock</kbd> as hyper key. Press caps lock is just like press Cmd+Control+Option+Shift at the same time.
 
 ## Reload config
 
