@@ -1,44 +1,53 @@
 # bootstrap linux, macos
 # Setup zinit
 - create:
-  - ~/.zinit
-  - ~/.tmux
+    - ~/.zinit
+    - ~/.tmux
 
 - shell:
-  - description: Clone zinit
-    quiet: true
-    command: |
-      if cd ~/.zinit/bin;
-      then git pull;
-      else git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin; fi
+    - description: Clone zinit
+      quiet: true
+      command: |
+        if cd ~/.zinit/bin;
+        then git pull;
+        else git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin; fi
 
 # Setup tmux plugin manager
 - shell:
-  - description: Clone TPM
-    quiet: true
-    command: |
-      if cd ~/.tmux/plugins/tpm;
-      then git pull;
-      else git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi
+    - description: Clone TPM
+      quiet: true
+      command: |
+        if cd ~/.tmux/plugins/tpm;
+        then git pull;
+        else git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi
+
+- shell:
+    - description: Install pyenv
+      quiet: true
+      command: |
+        if ! command -v pyenv &> /dev/null
+        then
+          curl https://pyenv.run | bash
+        fi
 
 # Change default shell to zsh
 - shell:
-  - description: Change default shell to zsh
-    quiet: true
-    command: |
-      update_shell() {
-        local shell_path;
-        shell_path="$(command -v zsh)"
-
-        fancy_echo "Changing your shell to zsh ..."
-        if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-          fancy_echo "Adding '$shell_path' to /etc/shells"
-          sudo sh -c "echo $shell_path >> /etc/shells"
-        fi
-        sudo chsh -s "$shell_path" "$USER"
-      }
-
-      update_shell
+    - description: Change default shell to zsh
+      quiet: true
+      command: |
+        update_shell() {
+          local shell_path;
+          shell_path="$(command -v zsh)"
+        
+          fancy_echo "Changing your shell to zsh ..."
+          if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
+            fancy_echo "Adding '$shell_path' to /etc/shells"
+            sudo sh -c "echo $shell_path >> /etc/shells"
+          fi
+          sudo chsh -s "$shell_path" "$USER"
+        }
+        
+        update_shell
 
 - link:
     ~/.config/espanso:

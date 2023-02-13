@@ -3,10 +3,10 @@
       relink: true
       force: true
 
-- clean: ['~']
+- clean: [ '~' ]
 
 - link:
-   ~/.dotfiles:
+    ~/.dotfiles:
       force: true
       path: ''
 
