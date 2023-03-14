@@ -54,6 +54,9 @@
         
         update_shell
 
+- create:
+    - ~/.config/
+
 - link:
     ~/.config/espanso:
       if: '[ `uname` = Linux ]'
