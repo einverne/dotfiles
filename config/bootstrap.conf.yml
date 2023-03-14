@@ -1,4 +1,9 @@
 # bootstrap linux, macos
+- defaults:
+    link:
+      relink: true
+      force: true
+
 # Setup zinit
 - create:
     - ~/.zinit
