@@ -26,15 +26,6 @@
         then git pull;
         else git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi
 
-- shell:
-    - description: Install pyenv
-      quiet: true
-      command: |
-        if ! command -v pyenv &> /dev/null
-        then
-          curl https://pyenv.run | bash
-        fi
-
 # Change default shell to zsh
 - shell:
     - description: Change default shell to zsh
