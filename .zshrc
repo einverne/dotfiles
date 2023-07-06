@@ -196,6 +196,7 @@ source $HOME/dotfiles/zsh/keybindings.zsh
 source $HOME/dotfiles/zsh/alias.zsh
 source $HOME/dotfiles/zsh/env.zsh
 source $HOME/dotfiles/zsh/fzf.zsh
+source $HOME/dotfiles/zsh/github-copilot-cli.zsh
 
 case `uname` in
 Darwin)
