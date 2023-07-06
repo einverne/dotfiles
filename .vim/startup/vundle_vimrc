@@ -75,6 +75,7 @@ Plug 'nathangrigg/vim-beancount'
 Plug 'hashivim/vim-terraform'
 Plug 'wakatime/vim-wakatime'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'chrisbra/csv.vim'
 
 " Git plugin not hosted on GitHub
 Plug 'git://git.wincent.com/command-t.git'
