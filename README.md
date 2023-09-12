@@ -1,4 +1,4 @@
-This is my personal dotfiles which contain config for vim, zsh, tmux, git, fzf, etc;
+This is my personal dotfiles which contain config for vim, zsh, tmux, git, fzf etc;
 
 ## macOS setup
 Set up by using [dotbot](https://blog.einverne.info/post/2020/08/use-dotbot-dotfiles-management.html):
@@ -13,7 +13,7 @@ Set up by using [dotbot](https://blog.einverne.info/post/2020/08/use-dotbot-dotf
 	# under macOS, install applications by brew
 	make mac
 
-Log out and log in again, zinit will install all plugins automatically. If you tried to edit file by vi, the vim-plug will install all plugins automatically.
+Log out and log in again, zinit will install all plugins automatically. If you use vi to edit file at first time, the vim-plug will install all vim plugins automatically.
 
 ## Termux setup
 Install dependency first:
