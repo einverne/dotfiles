@@ -1,0 +1,12 @@
+- defaults:
+    link:
+      relink: true
+      force: true
+
+- brew:
+  - hammerspoon
+
+- link:
+    ~/.hammerspoon:
+      if: '[ `uname` = Darwin ]'
+      path: hammerspoon

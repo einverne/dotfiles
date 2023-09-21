@@ -46,11 +46,11 @@
   }
  :applications {:chrome ["^com\\.google\\.Chrome$"]
                 :chrome-canary [ "^com\\.google\\.Chrome\\.canary$"]
+                :raycast ["^com\\.raycast\\.macos$"]
                 :chromes ["^com\\.google\\.Chrome$" "^com\\.google\\.Chrome\\.canary$"]
                 :ctrlnp ["^md\\.obsidian",
                          "^com\\.jetbrains\\.intellij",
                          "com\\.jetbrains\\.pycharm",
-                         "^com\\.electron\\.lark",
                          "^com\\.tencent\\.xinWeChat",
                          "^com\\.google\\.Chrome"]
                 :finder ["^com\\.apple\\.finder$"]
@@ -460,7 +460,6 @@
                  [:4 :!C4]
                  [:b [:open "/Applications/Obsidian.app"]]
                  [:c [:open "/Applications/Google Chrome.app"]]
-                 [:e [:open "/Applications/Lark.app"]]
                  [:w [:open "/Applications/WeChat.app"]]
                  [:g [:open "/Applications/GoldenDict.app"]]
                  [:v [:open "/Applications/Visual Studio Code.app"]]

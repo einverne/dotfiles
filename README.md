@@ -12,6 +12,7 @@ Set up by using [dotbot](https://blog.einverne.info/post/2020/08/use-dotbot-dotf
 	make linux
 	# under macOS, install applications by brew
 	make mac
+    ./install -c config/macos.conf.yaml
 
 Log out and log in again, zinit will install all plugins automatically. If you use vi to edit file at first time, the vim-plug will install all vim plugins automatically.
 

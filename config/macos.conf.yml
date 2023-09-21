@@ -15,6 +15,9 @@
     ~/Library/Preferences/espanso:
       if: '[ `uname` = Darwin ]'
       path: espanso
+    ~/.config/karabiner.edn:
+      if: '[ `uname` = Darwin ]'
+      path: karabiner/karabiner.edn
     ~/.hammerspoon:
       if: '[ `uname` = Darwin ]'
       path: hammerspoon
@@ -48,6 +51,7 @@
     - assh
     - ripgrep
     - ffmpeg
+    - yqrashawn/goku/goku
 
 - tap:
     - homebrew/cask-fonts
