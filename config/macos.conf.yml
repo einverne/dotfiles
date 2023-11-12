@@ -46,6 +46,7 @@
 - brew:
     - git
     - zsh
+    - htop
     - tmux
     - pyenv
     - assh
@@ -57,11 +58,19 @@
     - homebrew/cask-fonts
 
 - cask:
-    - kitty
-    - iterm2
-    - warp
-    - syncthing
-    - hammerspoon
-    - obsidian
     - bigwig-club/brew/upic
+    - font-fira-code
+    - hammerspoon
+    - iterm2
+    - jetbrains-toolbox
+    - karabiner-elements
+    - kitty
+    - mos
+    - obsidian
+    - raycast
+    - syncthing
+    - tailscale
+    - telegram-desktop
     - visual-studio-code
+    - warp
+    - zerotier-one
