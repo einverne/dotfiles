@@ -44,20 +44,24 @@
       path: yabai/yabai_focus_display
 
 - brew:
+    - assh
     - git
-    - zsh
+    - fd
+    - fzf
     - htop
     - tmux
     - pyenv
-    - assh
+    - pyenv-virtualenv
     - ripgrep
     - ffmpeg
+    - zsh
     - yqrashawn/goku/goku
 
 - tap:
     - homebrew/cask-fonts
 
 - cask:
+    - contexts
     - bigwig-club/brew/upic
     - font-fira-code
     - hammerspoon
@@ -65,8 +69,12 @@
     - jetbrains-toolbox
     - karabiner-elements
     - kitty
+    - keka
     - mos
+    - maczip
     - obsidian
+    - plexamp
+    - postman
     - raycast
     - syncthing
     - tailscale
