@@ -1,7 +1,3 @@
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-eval "$(pyenv init --path)"
 
 if [[ $(uname -m) == 'arm64' ]]; then
   # Set PATH, MANPATH, etc., for Homebrew.
