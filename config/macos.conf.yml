@@ -18,6 +18,9 @@
     ~/.config/karabiner.edn:
       if: '[ `uname` = Darwin ]'
       path: karabiner/karabiner.edn
+    ~/.config/karabiner:
+      if: '[ `uname` = Darwin ]'
+      path: karabiner
     ~/.hammerspoon:
       if: '[ `uname` = Darwin ]'
       path: hammerspoon
