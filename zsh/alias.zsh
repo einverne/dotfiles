@@ -32,3 +32,4 @@ if [[ -f ~/.ssh/assh.yml ]]; then
 fi
 
 alias pstop='watch "ps aux | sort -nrk 3,3 | head -n 5"'
+eval "$(gh copilot alias -- zsh)"
