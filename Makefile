@@ -32,6 +32,9 @@ macos: ## Run macos script
 	@./mac_bootstrap.sh
 	@./macos/init_mac.sh
 
+crontab:
+	@./install --plugin-dir crontab-dotbot -c config/crontab.conf.yml
+
 brew: ## Install brew & cask packages
 	@./install -c config/packages.conf.yml --plugin-dir dotbot-brew
 

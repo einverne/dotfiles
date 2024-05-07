@@ -1,0 +1,5 @@
+- crontab:
+    - cron: "*/1 * * * *"
+      command: mv ~/Downloads/*.md ~/Sync/wiki/WebClip/
+    - cron: "*/1 * * * *"
+      command: mv ~/Downloads/Attachments/* ~/Sync/wiki/Attachments/
