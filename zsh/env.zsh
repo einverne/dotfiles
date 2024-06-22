@@ -16,6 +16,7 @@ fi
 case $OSTYPE in
 	darwin*)
 		export ANDROID_HOME="$HOME/Library/Android/sdk"
+		export PATH="$PATH:$ANDROID_HOME/platform-tools"
 	;;
 	linux*)
 		export ANDROID_HOME="$HOME/Android/Sdk"
