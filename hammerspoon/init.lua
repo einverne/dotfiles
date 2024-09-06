@@ -252,19 +252,19 @@ for _, v in pairs(hspoon_list) do
 end
 
 hs.hotkey.bind({}, "F12", function()
-    local app = hs.application.get("net.kovidgoyal.kitty")
+    local app = hs.application.get("dev.warp.Warp-Stable")
     if app then
         if not app:mainWindow() then
-            app:selectMenuItem({"kitty", "New OS window"})
+            app:selectMenuItem({"Warp", "New Window"})
         elseif app:isFrontmost() then
             app:hide()
         else
             app:activate()
         end
-		app:mainWindow():moveToUnit'[100, 80, 0, 0]'
+        app:mainWindow():moveToUnit'[100, 80, 0, 0]'
     else
-        hs.application.launchOrFocus("/Applications/kitty.app")
-		app = hs.application.get("net.kovidgoyal.kitty")
+        hs.application.launchOrFocus("/Applications/Warp.app")
+        app = hs.application.get("dev.warp.Warp-Stable")
     end
 end)
 
