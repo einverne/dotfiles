@@ -12,6 +12,10 @@ local function ko()
     hs.keycodes.currentSourceID("com.apple.inputmethod.Korean.HNCRomaja")
 end
 
+local function jp()
+    hs.keycodes.currentSourceID("com.apple.inputmethod.Japanese.Japanese")
+end
+
 -- app to expected ime config
 local app2Ime = {
     {'/System/Library/CoreServices/Finder.app', 'zh'},
@@ -19,20 +23,17 @@ local app2Ime = {
     {'/Applications/Bitwarden.app', 'zh'},
     {'/Applications/Dash.app', 'zh'},
     {'/Applications/iTerm.app', 'zh'},
-    {'/Applications/Lark.app', 'zh'},
     {'/Applications/Xcode.app', 'zh'},
     {'/Applications/GoldenDict.app', 'zh'},
     {'/Applications/Google Chrome.app', 'zh'},
-    {'/Applications/DingTalk.app', 'zh'},
     {'/Applications/KakaoTalk.app', 'zh'},
     {'/Applications/kitty.app', 'zh'},
     {'/Applications/NeteaseMusic.app', 'zh'},
     {'/Applications/System Preferences.app', 'zh'},
     {'/Applications/MindNode.app', 'zh'},
     {'/Applications/Obsidian.app', 'zh'},
-    {'/Applications/Preview.app', 'zh'},
-    {'/Applications/Sketch.app', 'zh'},
     {'/Applications/wechatwebdevtools.app', 'zh'},
+    {'/Applications/Warp.app', 'en'}, -- 添加这一行
     {'/Applications/WeChat.app', 'zh'},
     {'/Users/einverne/Applications/JetBrains Toolbox/IntelliJ IDEA Ultimate.app', 'zh'},
     {'/Users/einverne/Applications/JetBrains Toolbox/PyCharm Professional.app', 'zh'},
@@ -51,6 +52,8 @@ function updateFocusAppInputMethod()
                 en()
             elseif expectedIme == 'zh' then
                 zh()
+            elseif expectedIme == 'jp' then
+                jp()
 			else
 				ko()
             end
