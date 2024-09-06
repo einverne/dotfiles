@@ -243,6 +243,7 @@ if not hspoon_list then
 		"WifiNotifier",
 		"WinRectangle",
 		"Caffeine",
+        "PomodoroTimer",
     }
 end
 
@@ -543,6 +544,14 @@ if spoon.wifiNotifier then
 	spoon.wifiNotifier:start()
 end
 
+log.d("PomodoroTimer Spoon loaded successfully")
+if spoon.PomodoroTimer then
+    hs.hotkey.bind({"cmd", "ctrl"}, "0", function()
+        log.d("PomodoroTimer hotkey pressed")
+        spoon.PomodoroTimer:toggle()
+    end)
+    log.d("PomodoroTimer hotkey bound")
+end
 
 ----------------------------------------------------------------------------------------------------
 -- Register browser tab typist: Type URL of current tab of running browser in markdown format. i.e. [title](link)
