@@ -32,6 +32,9 @@ if [[ -f ~/.ssh/assh.yml ]]; then
 fi
 
 alias pstop='watch "ps aux | sort -nrk 3,3 | head -n 5"'
-eval "$(gh copilot alias -- zsh)"
+if command -v gh &> /dev/null
+then
+	eval "$(gh copilot alias -- zsh)"
+fi
 
 alias qs='open -a QSpace'
