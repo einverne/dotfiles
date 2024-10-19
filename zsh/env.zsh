@@ -158,6 +158,11 @@ if [[ -d /usr/local/go ]]; then
     export GOROOT="/usr/local/go"
 fi
 
+if [[ -d /opt/homebrew/opt/php@8.1 ]]; then
+  export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+  export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
+fi
+
 if [[ -d $HOME/dotnet ]]; then
 	export DOTNET_ROOT=$HOME/dotnet
 	export PATH=$PATH:$DOTNET_ROOT
@@ -172,12 +177,16 @@ if [[ -d $HOME/.cargo ]]; then
 	export PATH="$PATH:$HOME/.cargo/bin"
 fi
 
+if [[ -d $HOME/.kube ]]; then
+	export KUBECONFIG=~/.kube/config
+fi
+
 if [[ -d /usr/lib/dart/bin ]]; then
 	export PATH="$PATH:/usr/lib/dart/bin"
 fi
 
-if [[ -d $HOME/.asdf/installs/rust/1.51.0/bin ]]; then
-	export PATH="$PATH:$HOME/.asdf/installs/rust/1.51.0/bin"
+if [[ -d $HOME/.asdf/installs/rust/1.81.0/bin ]]; then
+	export PATH="$PATH:$HOME/.asdf/installs/rust/1.81.0/bin"
 fi
 
 if [[ -d $HOME/Library/Application\ Support/JetBrains/Toolbox/scripts ]]; then
@@ -197,3 +206,8 @@ export PATH=/home/einverne/bin:$PATH
 
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/.fly/bin:$PATH"
+
+export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib/
+export CPATH=$CPATH:/opt/homebrew/include/
+
+
