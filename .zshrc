@@ -232,3 +232,6 @@ alias adbcap="adb shell screencap -p"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
+# Added by Windsurf
+export PATH="/Users/einverne/.codeium/windsurf/bin:$PATH"
