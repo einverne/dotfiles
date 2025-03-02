@@ -161,7 +161,10 @@ set tabstop=4
 set shiftwidth=4
 
 " 将tab自动转为空格
-" set expandtab
+set expandtab
+set softtabstop=4 " 在编辑时按 Tab 键时插入 4 个空格
+set shiftwidth=4 " 自动缩进使用 4 个空格
+
 set listchars=extends:>,precedes:<,tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
 
