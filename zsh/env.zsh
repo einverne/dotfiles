@@ -32,6 +32,10 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 # eval "$(zoxide init zsh)"
 
+if [[ -d $HOME/.asdf ]]; then
+    export ASDF_DATA_DIR="$HOME/.asdf"
+    export PATH="$ASDF_DATA_DIR/shims:$PATH"
+fi
 
 if [[ -d $HOME/.pyenv ]]; then
     # pyenv
@@ -57,6 +61,8 @@ fi
 if [[ -d $HOME/flutter ]]; then
 	export PATH="$PATH:$HOME/flutter/flutter_sdk/bin"
 fi
+
+export FLUTTER_ROOT=/Users/einverne/.asdf/installs/flutter/3.24.3-stable
 
 # if [[ -d ~/.jenv ]]; then
 #     # jenv
@@ -210,4 +216,4 @@ export PATH="$HOME/.fly/bin:$PATH"
 export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib/
 export CPATH=$CPATH:/opt/homebrew/include/
 
-
+eval "$(mise activate zsh)"

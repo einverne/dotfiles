@@ -89,24 +89,6 @@ zinit load voronkovich/gitignore.plugin.zsh
 
 zinit load djui/alias-tips
 
-
-export ASDF_DIR=$HOME/.asdf
-
-
-# ASDF
-if [ -d "$HOME/.asdf" ]; then
-   zinit ice wait lucid
-   zinit light asdf-vm/asdf
-# OR
-#   load_asdf() {
-#     . $HOME/.asdf/asdf.sh
-#   }
-#
-#   zinit light-mode wait lucid for \
-#     atload'load_asdf' \
-#       zdharma-continuum/null
-fi
-
 # zinit light denysdovhan/spaceship-prompt
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
@@ -141,11 +123,6 @@ if type brew &>/dev/null; then
 fi
 fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
-
-if [ -d "$HOME/.asdf" ]; then
-	source $HOME/.asdf/asdf.sh
-	source $HOME/.asdf/completions/asdf.bash
-fi
 
 # if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 #   compinit;
@@ -233,5 +210,37 @@ alias adbcap="adb shell screencap -p"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
+
+# Herd injected NVM configuration
+export NVM_DIR="/Users/einverne/Library/Application Support/Herd/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP binary.
+export PATH="/Users/einverne/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 7.4 configuration.
+export HERD_PHP_74_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/74/"
+export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
+
+
+# Herd injected PHP 8.1 configuration.
+export HERD_PHP_81_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/81/"
+
 # Added by Windsurf
 export PATH="/Users/einverne/.codeium/windsurf/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/einverne/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
