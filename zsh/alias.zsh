@@ -1,5 +1,6 @@
 # https://sw.kovidgoyal.net/kitty/faq.html#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
 #alias ssh="kitty +kitten ssh"
+alias k="kubectl"
 alias tmux="TERM=screen-256color tmux -2"
 alias vi="vim"
 #alias ls="exa"
