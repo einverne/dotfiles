@@ -1,7 +1,9 @@
 log = hs.logger.new('ime', 'debug')
 
+-- you can find the source id by running `hs.keycodes.currentSourceID()`
+
 local function zh()
-    hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Rime")
+    hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Hans")
 end
 
 local function en()
@@ -17,45 +19,54 @@ local function jp()
 end
 
 -- app to expected ime config
-local app2Ime = {
-    {'/System/Library/CoreServices/Finder.app', 'zh'},
-    {'/Applications/Alfred 4.app', 'zh'},
-    {'/Applications/Bitwarden.app', 'zh'},
-    {'/Applications/Dash.app', 'zh'},
-    {'/Applications/iTerm.app', 'zh'},
-    {'/Applications/Xcode.app', 'zh'},
-    {'/Applications/GoldenDict.app', 'zh'},
-    {'/Applications/Google Chrome.app', 'zh'},
-    {'/Applications/KakaoTalk.app', 'zh'},
-    {'/Applications/kitty.app', 'zh'},
-    {'/Applications/NeteaseMusic.app', 'zh'},
-    {'/Applications/System Preferences.app', 'zh'},
-    {'/Applications/MindNode.app', 'zh'},
-    {'/Applications/Obsidian.app', 'zh'},
-    {'/Applications/wechatwebdevtools.app', 'zh'},
-    {'/Applications/Warp.app', 'en'}, -- 添加这一行
-    {'/Applications/WeChat.app', 'zh'},
-    {'/Users/einverne/Applications/JetBrains Toolbox/IntelliJ IDEA Ultimate.app', 'zh'},
-    {'/Users/einverne/Applications/JetBrains Toolbox/PyCharm Professional.app', 'zh'},
+local appName2Ime = {
+    { 'Finder', 'en' },
+    { 'Bitwarden', 'en' },
+    { 'Code', 'en' },
+    { 'Dash', 'zh' },
+    { 'iTerm', 'zh' },
+    { 'GoldenDict', 'zh' },
+    { 'GoldenDict-ng', 'zh' },
+    { 'Google Chrome', 'zh' },
+    { 'IntelliJ IDEA', 'en' },
+    { 'KakaoTalk', 'ko' },
+    { 'kitty', 'en' },
+    { 'NeteaseMusic', 'zh' },
+    { 'MacVim', 'en' },
+    { 'Raycast', 'en' },
+    { 'System Preferences', 'en' },
+    { 'SmartGit', 'en' },
+    { 'MindNode', 'zh' },
+    { 'Obsidian', 'zh' },
+    { 'Postman', 'en' },
+    { 'PyCharm', 'en' },
+    { 'Vivaldi', 'zh' },
+    { 'wechatwebdevtools', 'zh' },
+    { 'Warp', 'en' },
+    { 'WeChat', 'zh' },
+    { 'Whistle', 'en' },
+    { 'Xcode', 'zh' },
 }
 
 function updateFocusAppInputMethod()
-    local focusAppPath = hs.window.frontmostWindow():application():path()
-	log.d(focusAppPath)
-	-- hs.alert.show(focusAppPath)
-    for index, app in pairs(app2Ime) do
-        local appPath = app[1]
+    local focusAppName = hs.window.frontmostWindow():application():name()
+    if focusAppName == nil then
+        return
+    end
+    -- hs.alert.show(focusAppPath)
+    for index, app in pairs(appName2Ime) do
+        local appName = app[1]
         local expectedIme = app[2]
 
-        if focusAppPath == appPath then
+        if focusAppName == appName then
             if expectedIme == 'en' then
                 en()
-            elseif expectedIme == 'zh' then
-                zh()
+            elseif expectedIme == 'ko' then
+                ko()
             elseif expectedIme == 'jp' then
                 jp()
-			else
-				ko()
+            else
+                zh()
             end
             break
         end
@@ -63,23 +74,23 @@ function updateFocusAppInputMethod()
 end
 
 -- helper hotkey to figure out the app path and name of current focused window
-hs.hotkey.bind({'ctrl', 'cmd'}, ".", function()
-    hs.alert.show("App path:        "
-    ..hs.window.focusedWindow():application():path()
-    .."\n"
-    .."App name:      "
-    ..hs.window.focusedWindow():application():name()
-    .."\n"
-    .."IM source id:  "
-    ..hs.keycodes.currentSourceID())
+hs.hotkey.bind({ 'ctrl', 'cmd' }, ".", function()
+    hs.alert.show("App path: "
+            .. hs.window.focusedWindow():application():path()
+            .. "\n"
+            .. "App name: "
+            .. hs.window.focusedWindow():application():name()
+            .. "\n"
+            .. "Bundle ID: "
+            .. hs.window.focusedWindow():application():bundleID()
+            .. "\n"
+            .. "IM source id: "
+            .. hs.keycodes.currentSourceID())
 end)
 
 -- Handle cursor focus and application's screen manage.
 function applicationWatcher(appName, eventType, appObject)
-	log.i(eventType)
-	log.i("tet")
-	log.i(hs.application.watcher.activated)
-    if eventType == hs.application.watcher.activated then
+    if (eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launched) then
         updateFocusAppInputMethod()
     end
 end
