@@ -127,7 +127,8 @@
     path = ~/projects/.gitconfig
 
 [includeIf "gitdir:~/smart/"]
-	path = .gitconfig-work
+	path = ~/smart/.gitconfig
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
