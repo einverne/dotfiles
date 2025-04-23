@@ -216,4 +216,6 @@ export PATH="$HOME/.fly/bin:$PATH"
 export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib/
 export CPATH=$CPATH:/opt/homebrew/include/
 
-eval "$(mise activate zsh)"
+if command -v mise &> /dev/null; then
+    eval "$(mise activate zsh)"
+fi
