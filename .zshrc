@@ -59,6 +59,21 @@ zinit ice lucid wait='0' atinit='zpcompinit'
 zinit light zdharma-continuum/fast-syntax-highlighting
 
 # 自动建议
+
+zinit light-mode lucid wait has"kubectl" for \
+  id-as"kubectl-completion" \
+  as"completion" \
+  atclone"kubectl completion zsh > _kubectl" \
+  atpull"%atclone" \
+  zdharma-continuum/null
+
+zinit light-mode lucid wait has"helm" for \
+  id-as"helm-completion" \
+  as"completion" \
+  atclone"helm completion zsh > _helm" \
+  atpull"%atclone" \
+  zdharma-continuum/null
+
 zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
 
