@@ -54,25 +54,12 @@ zinit load agkozak/zsh-z
 #    https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker \
 #    https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
 
+
 # 语法高亮
 zinit ice lucid wait='0' atinit='zpcompinit'
 zinit light zdharma-continuum/fast-syntax-highlighting
 
 # 自动建议
-
-zinit light-mode lucid wait has"kubectl" for \
-  id-as"kubectl-completion" \
-  as"completion" \
-  atclone"kubectl completion zsh > _kubectl" \
-  atpull"%atclone" \
-  zdharma-continuum/null
-
-zinit light-mode lucid wait has"helm" for \
-  id-as"helm-completion" \
-  as"completion" \
-  atclone"helm completion zsh > _helm" \
-  atpull"%atclone" \
-  zdharma-continuum/null
 
 zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
@@ -138,6 +125,21 @@ if type brew &>/dev/null; then
 fi
 fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
+
+zinit light-mode lucid wait has"kubectl" for \
+  id-as"kubectl-completion" \
+  as"completion" \
+  atclone"kubectl completion zsh > _kubectl" \
+  atpull"%atclone" \
+  zdharma-continuum/null
+
+zinit light-mode lucid wait has"helm" for \
+  id-as"helm-completion" \
+  as"completion" \
+  atclone"helm completion zsh > _helm" \
+  atpull"%atclone" \
+  zdharma-continuum/null
+zinit ice wait lucid atinit"zicompinit; zicdreplay"
 
 # if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 #   compinit;
