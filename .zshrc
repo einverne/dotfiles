@@ -126,22 +126,12 @@ fi
 fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
 
-zinit light-mode lucid wait has"kubectl" for \
-  id-as"kubectl-completion" \
-  as"completion" \
-  atclone"kubectl completion zsh > _kubectl" \
-  atpull"%atclone" \
-  atload"fpath+=(${ZINIT[COMPLETIONS_DIR]})" \
-  zdharma-continuum/null
+# Load kubectl and helm completions
+zinit ice lucid wait='1' has"kubectl"
+zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
 
-zinit light-mode lucid wait has"helm" for \
-  id-as"helm-completion" \
-  as"completion" \
-  atclone"helm completion zsh > _helm" \
-  atpull"%atclone" \
-  atload"fpath+=(${ZINIT[COMPLETIONS_DIR]})" \
-  zdharma-continuum/null
-zinit ice wait lucid atinit"zicompinit; zicdreplay"
+zinit ice lucid wait='1' has"helm"
+zinit snippet OMZ::plugins/helm/helm.plugin.zsh
 
 # if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 #   compinit;
