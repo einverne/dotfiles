@@ -131,6 +131,7 @@ zinit light-mode lucid wait has"kubectl" for \
   as"completion" \
   atclone"kubectl completion zsh > _kubectl" \
   atpull"%atclone" \
+  atload"fpath+=(${ZINIT[COMPLETIONS_DIR]})" \
   zdharma-continuum/null
 
 zinit light-mode lucid wait has"helm" for \
@@ -138,6 +139,7 @@ zinit light-mode lucid wait has"helm" for \
   as"completion" \
   atclone"helm completion zsh > _helm" \
   atpull"%atclone" \
+  atload"fpath+=(${ZINIT[COMPLETIONS_DIR]})" \
   zdharma-continuum/null
 zinit ice wait lucid atinit"zicompinit; zicdreplay"
 
