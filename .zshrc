@@ -82,7 +82,7 @@ zinit snippet OMZ::plugins/tmuxinator/tmuxinator.plugin.zsh
 zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
 zinit snippet OMZ::plugins/pip/pip.plugin.zsh
 
-zinit ice lucid wait='1'
+zinit ice lucid wait='1' has'git'
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 
 # Gitignore plugin – commands gii and gi
@@ -127,11 +127,17 @@ fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
 
 # Load kubectl and helm completions
-zinit ice lucid wait='1' has"kubectl" atclone"kubectl completion zsh > $ZINIT[COMPLETIONS_DIR]/_kubectl"
-zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+zinit ice lucid wait='1' has'kubectl' id-as'kubectl_completion' \
+  atclone'kubectl completion zsh > _kubectl' \
+  atpull'%atclone' \
+  as'completion' nocompile \
+  zdharma-continuum/null
 
-zinit ice lucid wait='1' has"helm" atclone"helm completion zsh > $ZINIT[COMPLETIONS_DIR]/_helm"
-zinit snippet OMZ::plugins/helm/helm.plugin.zsh
+zinit ice lucid wait='1' has'helm' id-as'helm_completion' \
+  atclone'helm completion zsh > _helm' \
+  atpull'%atclone' \
+  as'completion' nocompile \
+  zdharma-continuum/null
 
 # if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 #   compinit;
