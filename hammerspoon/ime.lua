@@ -46,6 +46,8 @@ local appName2Ime = {
     { 'WeChat', 'zh' },
     { 'Whistle', 'en' },
     { 'Xcode', 'zh' },
+    { 'Ghostty', 'en'},
+    { 'AeroSpace', 'en'}
 }
 
 function updateFocusAppInputMethod()

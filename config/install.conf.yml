@@ -34,3 +34,6 @@
     ~/.ideavimrc:
       if: '[ `uname` = Darwin ]'
       path: idea/.ideavimrc
+    ~/.aerospace.toml:
+      if: '[ `uname` = Darwin ]'
+      path: aerospace/aerospace.toml
