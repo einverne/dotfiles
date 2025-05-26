@@ -15,13 +15,13 @@ after-startup-command = []
 start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
-enable-normalization-flatten-containers = true
-enable-normalization-opposite-orientation-for-nested-containers = true
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 50
+accordion-padding = 0
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -42,6 +42,10 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
+
+[[on-window-detected]]
+if.app-name-regex-substring = '.*'
+run = 'layout floating'
 
 # if window title contains settings using floating layout
 [[on-window-detected]]
@@ -134,6 +138,13 @@ if.app-id = 'com.microsoft.teams2'
 if.during-aerospace-startup = false
 run = ['layout floating']
 
+[[on-window-detected]]
+if.app-id = 'org.hammerspoon.Hammerspoon'
+if.window-title-regex-substring = 'Hammerspoon'
+if.during-aerospace-startup = false
+run = ['layout floating']
+
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -187,11 +198,11 @@ run = ['layout floating']
     #     activate
     # end tell'
     # '''
-    alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+    # alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-slash = 'layout tiles horizontal vertical'
-    alt-comma = 'layout accordion horizontal vertical'
+    alt-comma = 'layout floating'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     alt-h = 'focus left'
@@ -215,10 +226,10 @@ run = ['layout floating']
     alt-3 = 'workspace 3'
     alt-4 = 'workspace 4'
     alt-5 = 'workspace 5'
-    alt-6 = 'workspace 6'
-    alt-7 = 'workspace 7'
-    alt-8 = 'workspace 8'
-    alt-9 = 'workspace 9'
+#    alt-6 = 'workspace 6'
+#    alt-7 = 'workspace 7'
+#    alt-8 = 'workspace 8'
+#    alt-9 = 'workspace 9'
     alt-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
     alt-b = 'workspace B'
     alt-c = 'workspace C'

@@ -215,15 +215,22 @@ end
 
 function reloadConfig()
     hs.reload()
-    hs.execute("/bin/launchctl kickstart -k \"gui/${UID}/homebrew.mxcl.yabai\"")
+    --hs.execute("/bin/launchctl kickstart -k \"gui/${UID}/homebrew.mxcl.yabai\"")
 end
 
 hsreload_keys = { hyper, "R" }
 hsreload_keys = hsreload_keys or { { "cmd", "shift", "ctrl" }, "R" }
 if string.len(hsreload_keys[2]) > 0 then
     hs.hotkey.bind(hsreload_keys[1], hsreload_keys[2], "Reload Configuration", reloadConfig)
-    hs.notify.new({ title = "Hammerspoon config reloaded", informativeText = "Manually trigged via keyboard shortcut" }):send()
+    hs.notify.new({ title = "Hammerspoon config reloaded", informativeText = "Manually trigger via keyboard shortcut" }):send()
 end
+
+-- Enhanced Spaces
+--local EnhancedSpaces = hs.loadSpoon('EnhancedSpaces')
+--EnhancedSpaces:new({
+--    mSpaces = { '1', '2', '3', 'E' }, -- default { '1', '2', '3' }
+--    startmSpace = 'E', -- default 2
+--})
 
 -- ModalMgr Spoon must be loaded explicitly, because this repository heavily relies upon it.
 hs.loadSpoon("ModalMgr")
@@ -272,13 +279,13 @@ end)
 -- Then we create/register all kinds of modal keybindings environments.
 ----------------------------------------------------------------------------------------------------
 -- Register windowHints (Register a keybinding which is NOT modal environment with modal supervisor)
-hswhints_keys = hswhints_keys or { "alt", "tab" }
-if string.len(hswhints_keys[2]) > 0 then
-    spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'Show Window Hints', function()
-        spoon.ModalMgr:deactivateAll()
-        hs.hints.windowHints()
-    end)
-end
+--hswhints_keys = hswhints_keys or { "alt", "tab" }
+--if string.len(hswhints_keys[2]) > 0 then
+--    spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'Show Window Hints', function()
+--        spoon.ModalMgr:deactivateAll()
+--        hs.hints.windowHints()
+--    end)
+--end
 
 ----------------------------------------------------------------------------------------------------
 -- appM modal environment
