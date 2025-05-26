@@ -144,6 +144,11 @@ if.window-title-regex-substring = 'Hammerspoon'
 if.during-aerospace-startup = false
 run = ['layout floating']
 
+[workspace-to-monitor-force-assignment]
+5 = 'BenQ EW2880U'
+6 = 'BenQ EW2880U'
+7 = 'BenQ EW2880U'
+8 = 'BenQ EW2880U'
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
