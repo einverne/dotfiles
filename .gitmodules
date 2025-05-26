@@ -17,3 +17,6 @@
 [submodule "crontab-dotbot"]
 	path = crontab-dotbot
 	url = https://github.com/fundor333/crontab-dotbot.git
+[submodule "hammerspoon/Spoons/EnhancedSpaces.spoon"]
+	path = hammerspoon/Spoons/EnhancedSpaces.spoon
+	url = https://github.com/franzbu/EnhancedSpaces.spoon.git
