@@ -329,14 +329,14 @@ for _, v in ipairs(hsapp_list) do
 end
 
 -- Then we register some keybindings with modal supervisor
-hsappM_keys = hsappM_keys or { "alt", "A" }
-if string.len(hsappM_keys[2]) > 0 then
-    spoon.ModalMgr.supervisor:bind(hsappM_keys[1], hsappM_keys[2], "Enter AppM Environment", function()
-        spoon.ModalMgr:deactivateAll()
-        -- Show the keybindings cheatsheet once appM is activated
-        spoon.ModalMgr:activate({ "appM" }, "#FFBD2E", true)
-    end)
-end
+-- hsappM_keys = hsappM_keys or { "alt", "A" }
+-- if string.len(hsappM_keys[2]) > 0 then
+--     spoon.ModalMgr.supervisor:bind(hsappM_keys[1], hsappM_keys[2], "Enter AppM Environment", function()
+--         spoon.ModalMgr:deactivateAll()
+--         -- Show the keybindings cheatsheet once appM is activated
+--         spoon.ModalMgr:activate({ "appM" }, "#FFBD2E", true)
+--     end)
+-- end
 
 ----------------------------------------------------------------------------------------------------
 -- clipshowM modal environment
