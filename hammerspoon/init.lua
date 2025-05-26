@@ -107,7 +107,7 @@ local coding_layout = {
 
 
 wifiWatcher = nil
-homeSSID = "PhRouter_5G"
+homeSSID = "EV_5G"
 homeDDID1 = "EinVerne_5G"
 lastSSID = hs.wifi.currentNetwork()
 
