@@ -102,6 +102,12 @@ if.during-aerospace-startup = false
 run = 'layout floating'
 
 [[on-window-detected]]
+if.app-id = 'com.obsproject.obs-studio'
+if.window-title-regex-substring = 'OBS.*'
+if.during-aerospace-startup = false
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-id = 'cc.ffitch.shottr'
 if.window-title-regex-substring = 'shottr'
 if.during-aerospace-startup = false
@@ -181,7 +187,7 @@ run = ['layout floating']
     #     activate
     # end tell'
     # '''
-    # alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+    alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-slash = 'layout tiles horizontal vertical'
