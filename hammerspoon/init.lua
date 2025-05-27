@@ -50,9 +50,9 @@ function moveWindowToDisplay(d)
     end
 end
 
--- hs.hotkey.bind(hyper, "m", moveWindowToDisplay(1))
--- hs.hotkey.bind(hyper, "8", moveWindowToDisplay(2))
--- hs.hotkey.bind(hyper, "9", moveWindowToDisplay(3))
+--hs.hotkey.bind(hyper, "m", moveWindowToDisplay(1))
+--hs.hotkey.bind(hyper, "8", moveWindowToDisplay(2))
+--hs.hotkey.bind(hyper, "9", moveWindowToDisplay(3))
 
 function movieWinBetweenMonitors(d)
     return function()
@@ -213,9 +213,14 @@ else
     end
 end
 
+function executeAeroSpaceCommand(command)
+    return hs.execute("/opt/homebrew/bin/aerospace " .. command)
+end
+
 function reloadConfig()
     hs.reload()
     --hs.execute("/bin/launchctl kickstart -k \"gui/${UID}/homebrew.mxcl.yabai\"")
+    executeAeroSpaceCommand("reload-config")
 end
 
 hsreload_keys = { hyper, "R" }
