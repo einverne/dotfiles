@@ -145,10 +145,9 @@ if.during-aerospace-startup = false
 run = ['layout floating']
 
 [workspace-to-monitor-force-assignment]
-5 = ['BenQ EW2880U', 'SA240Y', 'main']
-6 = ['BenQ EW2880U', 'SA240Y', 'main']
-7 = ['BenQ EW2880U', 'SA240Y', 'main']
-8 = ['BenQ EW2880U', 'SA240Y', 'main']
+3 = ['BenQ EW2880U', 'SA240Y', 'main']
+4 = ['BenQ EW2880U', 'SA240Y', 'main']
+
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
