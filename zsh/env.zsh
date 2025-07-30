@@ -32,22 +32,6 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 # eval "$(zoxide init zsh)"
 
-if [[ -d $HOME/.asdf ]]; then
-    export ASDF_DATA_DIR="$HOME/.asdf"
-    export PATH="$ASDF_DATA_DIR/shims:$PATH"
-fi
-
-if [[ -d $HOME/.pyenv ]]; then
-    # pyenv
-	export PYENV_ROOT="$HOME/.pyenv"
-	export PATH="$PYENV_ROOT/bin:$PATH"
-	if command -v pyenv 1>/dev/null 2>&1; then
-		eval "$(pyenv init -)"
-		# eval "$(pyenv init --path)"
-		eval "$(pyenv virtualenv-init -)"
-	fi
-fi
-
 if [[ -d $HOME/.poetry ]]; then
 	# poetry
 	export POETRY_ROOT="$HOME/.poetry/bin"
@@ -62,43 +46,16 @@ if [[ -d $HOME/flutter ]]; then
 	export PATH="$PATH:$HOME/flutter/flutter_sdk/bin"
 fi
 
-export FLUTTER_ROOT=/Users/einverne/.asdf/installs/flutter/3.24.3-stable
-
-# if [[ -d ~/.jenv ]]; then
-#     # jenv
-#     export PATH="$HOME/.jenv/bin:$PATH"
-#     eval "$(jenv init -)"
-# fi
-
 # JDK
 if [[ -d "/usr/local/jdk1.8.0_131" ]]; then
     export JAVA_HOME=/usr/local/jdk1.8.0_131
     export PATH=$PATH:$JAVA_HOME/bin/
-fi
-if [[ -d "$HOME/.asdf/installs/java/adoptopenjdk-8.0.265+1/" ]]; then
-	export JAVA_HOME=$HOME/.asdf/installs/java/openjdk-17/
-	export PATH=$PATH:$JAVA_HOME/bin/
-fi
-# . ~/.asdf/plugins/java/set-java-home.zsh
-# if [[ -d "/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/" ]]; then
-# 	export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
-# 	export PATH=$PATH:$JAVA_HOME/bin/
-# fi
-# export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"
-
-if [[ -d "~/.asdf/plugins/java/" ]]; then
-	. ~/.asdf/plugins/java/set-java-home.zsh
 fi
 
 # Maven
 if [[ -d "/opt/maven" ]]; then
     export M2_HOME=/opt/maven
     export M2=$M2_HOME/bin
-    export PATH=$M2:$PATH
-fi
-if [[ -d "$HOME/.asdf/installs/maven/3.6.3" ]]; then
-	export M2_HOME=$HOME/.asdf/installs/maven/3.6.3
-	export M2=$H2_HOME/bin
     export PATH=$M2:$PATH
 fi
 
@@ -146,19 +103,6 @@ fi
 
 export GPG_TTY=$(tty)
 
-if [[ -d ~/.rbenv/ ]]; then
-    # rbenv
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
-    export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-fi
-
-if [[ -d ~/.nvm ]]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
 if [[ -d /usr/local/go ]]; then
     export PATH="$PATH:/usr/local/go/bin"
     export GOROOT="/usr/local/go"
@@ -191,10 +135,6 @@ if [[ -d /usr/lib/dart/bin ]]; then
 	export PATH="$PATH:/usr/lib/dart/bin"
 fi
 
-if [[ -d $HOME/.asdf/installs/rust/1.81.0/bin ]]; then
-	export PATH="$PATH:$HOME/.asdf/installs/rust/1.81.0/bin"
-fi
-
 if [[ -d $HOME/Library/Application\ Support/JetBrains/Toolbox/scripts ]]; then
 	export PATH=$PATH:$HOME/Library/Application\ Support/JetBrains/Toolbox/scripts/
 fi
@@ -216,6 +156,12 @@ export PATH="$HOME/.fly/bin:$PATH"
 export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib/
 export CPATH=$CPATH:/opt/homebrew/include/
 
+# ------------------------------------------------------------------------------
+# mise (replaces asdf, nvm, pyenv, rbenv etc.)
+# This should be the last PATH modification to ensure it has the highest priority.
+# ------------------------------------------------------------------------------
 if command -v mise &> /dev/null; then
     eval "$(mise activate zsh)"
 fi
+
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
