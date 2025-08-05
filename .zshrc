@@ -262,9 +262,15 @@ export HERD_PHP_81_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Her
 export PATH="/Users/einverne/.codeium/windsurf/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/einverne/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+case `uname` in
+Darwin)
+	export PNPM_HOME="/Users/einverne/Library/pnpm"
+	case ":$PATH:" in
+	  *":$PNPM_HOME:"*) ;;
+	  *) export PATH="$PNPM_HOME:$PATH" ;;
+	esac
+	;;
 esac
 # pnpm end
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
