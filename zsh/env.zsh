@@ -2,16 +2,8 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-
 export EDITOR=vim
 #export TERM="screen-256color"
-
-export NODE_HOME=/usr/local/node-v6.11.4-linux-64/
-export PATH="$NODE_HOME/bin/:$PATH"
-
-if [[ -d $HOME/phabricator/ ]]; then
-	export PATH="$PATH:$HOME/phabricator/arcanist/bin/"
-fi
 
 case $OSTYPE in
 	darwin*)
@@ -71,11 +63,7 @@ export FLUTTER_ROOT=/Users/einverne/.asdf/installs/flutter/3.24.3-stable
 # fi
 
 # JDK
-if [[ -d "/usr/local/jdk1.8.0_131" ]]; then
-    export JAVA_HOME=/usr/local/jdk1.8.0_131
-    export PATH=$PATH:$JAVA_HOME/bin/
-fi
-if [[ -d "$HOME/.asdf/installs/java/adoptopenjdk-8.0.265+1/" ]]; then
+if [[ -d "$HOME/.asdf/installs/java/" ]]; then
 	export JAVA_HOME=$HOME/.asdf/installs/java/openjdk-17/
 	export PATH=$PATH:$JAVA_HOME/bin/
 fi
@@ -91,24 +79,13 @@ if [[ -d "~/.asdf/plugins/java/" ]]; then
 fi
 
 # Maven
-if [[ -d "/opt/maven" ]]; then
-    export M2_HOME=/opt/maven
-    export M2=$M2_HOME/bin
-    export PATH=$M2:$PATH
-fi
 if [[ -d "$HOME/.asdf/installs/maven/3.6.3" ]]; then
 	export M2_HOME=$HOME/.asdf/installs/maven/3.6.3
 	export M2=$H2_HOME/bin
     export PATH=$M2:$PATH
 fi
 
-# Tomcat
-if [[ -d "/opt/tomcat" ]]; then
-    export CATALINA_HOME=/opt/tomcat/
-    export PATH=$CATALINE_HOME:$PATH
-fi
 
-#
 # Hive
 if [[ -d "$HOME/apache-hive-2.3.4-bin" ]]; then
     export HIVE_HOME=$HOME/apache-hive-2.3.4-bin
@@ -122,26 +99,18 @@ if [[ -d "$HOME/hadoop/hadoop-2.9.1" ]]; then
     export HADDOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
     export HADOOP_SSH_OPTS="-p 222"
 
-    export HADOOP_MAPRED_HOME=$HADOOP_HOME 
-    export HADOOP_COMMON_HOME=$HADOOP_HOME 
+    export HADOOP_MAPRED_HOME=$HADOOP_HOME
+    export HADOOP_COMMON_HOME=$HADOOP_HOME
 
-    export HADOOP_HDFS_HOME=$HADOOP_HOME 
-    export YARN_HOME=$HADOOP_HOME 
-    export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native 
+    export HADOOP_HDFS_HOME=$HADOOP_HOME
+    export YARN_HOME=$HADOOP_HOME
+    export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
     export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
 
-    export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin 
-    export HADOOP_INSTALL=$HADOOP_HOME 
+    export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+    export HADOOP_INSTALL=$HADOOP_HOME
 
     export CLASSPATH=$CLASSPATH:$HADOOP_HOME/lib/*:.
-fi
-
-# Derby
-if [[ -d "$HOME/db-derby-10.14.2.0-bin" ]]; then
-    export DERBY_HOME=$HOME/db-derby-10.14.2.0-bin
-    export PATH=$PATH:$DERBY_HOME/bin
-
-    export CLASSPATH=$CLASSPATH:$DERBY_HOME/lib/derby.jar:$DERBY_HOME/lib/derbytools.jar
 fi
 
 export GPG_TTY=$(tty)
@@ -167,16 +136,6 @@ fi
 if [[ -d /opt/homebrew/opt/php@8.1 ]]; then
   export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
   export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
-fi
-
-if [[ -d $HOME/dotnet ]]; then
-	export DOTNET_ROOT=$HOME/dotnet
-	export PATH=$PATH:$DOTNET_ROOT
-fi
-
-if [[ -d $HOME/go ]]; then
-	export GOPATH=$HOME/go
-	export PATH="$PATH:$GOPATH/bin"
 fi
 
 if [[ -d $HOME/.cargo ]]; then
@@ -207,8 +166,6 @@ fi
 
 
 [[ -e "/home/einverne/lib/oracle-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/einverne/lib/oracle-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh"
-export PATH=/home/einverne/bin:$PATH
-
 
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/.fly/bin:$PATH"
@@ -216,6 +173,3 @@ export PATH="$HOME/.fly/bin:$PATH"
 export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib/
 export CPATH=$CPATH:/opt/homebrew/include/
 
-if command -v mise &> /dev/null; then
-    eval "$(mise activate zsh)"
-fi
