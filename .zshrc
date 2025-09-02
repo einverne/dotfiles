@@ -301,3 +301,8 @@ esac
 # pnpm end
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Initialize mise if available
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
