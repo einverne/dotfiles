@@ -4,7 +4,9 @@ This directory contains Claude Code skills that provide specialized expertise fo
 
 ## What are Skills?
 
-Skills are specialized capabilities that Claude can invoke to provide expert assistance in specific domains. Each skill contains detailed knowledge and best practices for its area of expertise.
+Skills are specialized capabilities that Claude can invoke to provide expert assistance in specific domains. Each skill is a folder containing a `SKILL.md` file with detailed knowledge and best practices for its area of expertise.
+
+At startup, Claude pre-loads the name and description of every installed skill, allowing it to know when each skill should be used without loading all content into context initially.
 
 ## Available Skills
 
@@ -116,37 +118,54 @@ You can explicitly ask Claude to use a specific skill:
 
 ## Skill Structure
 
-Each skill is a markdown file with:
+Each skill is organized as a directory containing a `SKILL.md` file:
 
-1. **Frontmatter**: Metadata including name and description
+```
+.claude/skills/
+├── skill-name/
+│   └── SKILL.md
+├── another-skill/
+│   └── SKILL.md
+└── README.md
+```
+
+### SKILL.md Format
+
+1. **YAML Frontmatter** (required):
 ```yaml
 ---
 name: skill-name
-description: Brief description of the skill
+description: What the skill does and when Claude should use it (max 1024 chars)
 ---
 ```
 
-2. **Content**: Detailed knowledge, best practices, examples, and guidelines
+**Frontmatter Requirements:**
+- `name`: Lowercase letters, numbers, and hyphens only (max 64 chars)
+- `description`: Should explain both WHAT the skill does and WHEN to use it
+- Optional: `allowed-tools` - Restrict which tools Claude can use (e.g., `[Read, Grep, Glob]` for read-only)
+
+2. **Markdown Content**: Detailed instructions, knowledge, best practices, and examples
 
 ## Creating Your Own Skills
 
 To add a custom skill:
 
-1. Create a new `.md` file in `.claude/skills/`
-2. Add frontmatter with name and description
-3. Write detailed instructions and knowledge
-4. Save and it's automatically available
+1. Create a new directory in `.claude/skills/`: `mkdir -p ~/.claude/skills/my-skill`
+2. Create `SKILL.md` file in that directory
+3. Add required frontmatter with name and description
+4. Write detailed instructions and knowledge
+5. The skill is automatically available on next Claude Code session
 
-Example:
+**Example:**
 ```markdown
 ---
-name: my-skill
-description: Description of what this skill does
+name: my-custom-skill
+description: Expert in [domain]. Use when the user needs help with [specific tasks].
 ---
 
 You are an expert in [domain]. Your role is to...
 
-## Key Concepts
+## Core Responsibilities
 ...
 
 ## Best Practices
@@ -178,9 +197,30 @@ Feel free to:
 - Share useful patterns you discover
 - Customize skills to match your workflow
 
+## Installation
+
+This repository uses dotbot to automatically symlink skills to `~/.claude/skills/` during bootstrap:
+
+```bash
+cd ~/dotfiles
+make bootstrap
+```
+
+The bootstrap process will:
+1. Create `~/.claude/` directory
+2. Symlink `~/.claude/skills` → `~/dotfiles/.claude/skills`
+3. Make all skills available to Claude Code
+
+You can also manually create the symlink:
+```bash
+ln -sf ~/dotfiles/.claude/skills ~/.claude/skills
+```
+
 ## Related Resources
 
-- [Claude Code Documentation](https://docs.claude.com/claude-code)
+- [Claude Code Skills Documentation](https://docs.claude.com/en/docs/claude-code/skills)
+- [Official Skills Repository](https://github.com/anthropics/skills)
+- [How to Create Custom Skills](https://support.claude.com/en/articles/12512198-how-to-create-custom-skills)
 - [Agents Directory](../agents/README.md) - For autonomous task execution
 - [Main Dotfiles README](../../README.md)
 
@@ -192,6 +232,10 @@ Keep skills updated with:
 - Platform-specific considerations
 - Security updates and warnings
 
+## Progressive Disclosure
+
+Skills use progressive disclosure - Claude loads only the name and description at startup. The full skill content is loaded only when needed, keeping the context window efficient while providing specialized expertise on demand.
+
 ---
 
-**Note**: Skills are loaded by Claude Code automatically. No installation or activation needed - just start using them!
+**Note**: Skills are loaded by Claude Code automatically from `~/.claude/skills/`. No manual installation or activation needed - just start using them!
