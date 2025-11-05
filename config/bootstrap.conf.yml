@@ -47,8 +47,13 @@
 
 - create:
     - ~/.config/
+    - ~/.claude/
 
 - link:
     ~/.config/espanso:
       if: '[ `uname` = Linux ]'
       path: espanso
+    ~/.claude/skills:
+      path: .claude/skills
+      relink: true
+      force: true

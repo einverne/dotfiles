@@ -41,6 +41,30 @@ GUI applications:
 - Karabiner-Elements
 - Hammerspoon
 
+## Claude Code Support
+
+This repository includes Claude Code skills and agents for enhanced AI assistance:
+
+### Skills (.claude/skills/)
+Specialized domain expertise that Claude can invoke:
+- **git-workflow**: Git operations and best practices
+- **shell-scripting**: Bash/Zsh scripting and automation
+- **dotfiles-manager**: Dotfiles organization and management
+- **debug-helper**: Debugging and troubleshooting
+- **performance-optimizer**: Code and script optimization
+- **test-expert**: Testing and TDD practices
+
+See [.claude/skills/README.md](.claude/skills/README.md) for detailed usage.
+
+### Agents (claude/agents/)
+Autonomous task execution specialists:
+- **code-reviewer**: Comprehensive code review
+- **backend-architect**: Backend design and architecture
+- **frontend-developer**: Frontend development
+- **typescript-pro**: TypeScript expertise
+- **flutter-expert**: Flutter development
+- **ui-ux-designer**: UI/UX design guidance
+
 ### zsh config
 to see `.zshrc` file.
 
