@@ -63,10 +63,10 @@ export FLUTTER_ROOT=/Users/einverne/.asdf/installs/flutter/3.24.3-stable
 # fi
 
 # JDK
-if [[ -d "$HOME/.asdf/installs/java/" ]]; then
-	export JAVA_HOME=$HOME/.asdf/installs/java/openjdk-17/
-	export PATH=$PATH:$JAVA_HOME/bin/
-fi
+#if [[ -d "$HOME/.asdf/installs/java/" ]]; then
+#	export JAVA_HOME=$HOME/.asdf/installs/java/adoptopenjdk-17.0.6+10/
+#	export PATH=$PATH:$JAVA_HOME/bin/
+#fi
 # . ~/.asdf/plugins/java/set-java-home.zsh
 # if [[ -d "/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/" ]]; then
 # 	export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
@@ -74,8 +74,8 @@ fi
 # fi
 # export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"
 
-if [[ -d "~/.asdf/plugins/java/" ]]; then
-	. ~/.asdf/plugins/java/set-java-home.zsh
+if [[ -d "$HOME/.asdf/plugins/java/" ]]; then
+	. $HOME/.asdf/plugins/java/set-java-home.zsh
 fi
 
 # Maven
