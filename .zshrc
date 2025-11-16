@@ -263,27 +263,27 @@ alias adbcap="adb shell screencap -p"
 
 
 # Herd injected NVM configuration
-export NVM_DIR="/Users/einverne/Library/Application Support/Herd/config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR="/Users/einverne/Library/Application Support/Herd/config/nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
+# [[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
 
 # Herd injected PHP 8.3 configuration.
-export HERD_PHP_83_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/83/"
+# export HERD_PHP_83_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/83/"
 
 
 # Herd injected PHP binary.
-export PATH="/Users/einverne/Library/Application Support/Herd/bin/":$PATH
+# export PATH="/Users/einverne/Library/Application Support/Herd/bin/":$PATH
 
 
 # Herd injected PHP 7.4 configuration.
-export HERD_PHP_74_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/74/"
-export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
-export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
+# export HERD_PHP_74_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/74/"
+# export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
+# export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
 
 
 # Herd injected PHP 8.1 configuration.
-export HERD_PHP_81_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/81/"
+# export HERD_PHP_81_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/81/"
 
 # Added by Windsurf
 export PATH="/Users/einverne/.codeium/windsurf/bin:$PATH"
