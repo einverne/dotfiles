@@ -19,6 +19,7 @@ export PATH="$PATH:$ANDROID_HOME/bin/"
 
 export GOKU_EDN_CONFIG_FILE="$HOME/dotfiles/karabiner/karabiner.edn"
 
+export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
 export PATH="$HOME/.local/bin:$PATH"
