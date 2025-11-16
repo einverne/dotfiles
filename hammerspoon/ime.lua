@@ -42,7 +42,6 @@ local appName2Ime = {
     { 'PyCharm', 'en' },
     { 'Vivaldi', 'zh' },
     { 'wechatwebdevtools', 'zh' },
-    { 'Warp', 'en' },
     { 'WeChat', 'zh' },
     { 'Whistle', 'en' },
     { 'Xcode', 'zh' },
