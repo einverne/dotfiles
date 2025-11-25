@@ -174,3 +174,5 @@ export PATH="$HOME/.fly/bin:$PATH"
 export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib/
 export CPATH=$CPATH:/opt/homebrew/include/
 
+# Added by Antigravity
+export PATH="/Users/einverne/.antigravity/antigravity/bin:$PATH"
