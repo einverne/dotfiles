@@ -176,3 +176,9 @@ export CPATH=$CPATH:/opt/homebrew/include/
 
 # Added by Antigravity
 export PATH="/Users/einverne/.antigravity/antigravity/bin:$PATH"
+
+if [ -f $HOME/.env ]; then
+    set -a
+    source $HOME/.env
+    set +a
+fi
