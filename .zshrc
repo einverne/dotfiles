@@ -163,10 +163,8 @@ fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
 
 # Load kubectl and helm completions
-zinit ice lucid wait='1' has'kubectl' id-as'kubectl_completion' \
-  atclone'kubectl completion zsh > _kubectl' \
-  atpull'%atclone' \
-  as'completion' nocompile \
+zinit ice lucid wait='1' has'kubectl' id-as'kubectl-completion' \
+  atload'source <(kubectl completion zsh); compdef k=kubectl' \
   zdharma-continuum/null
 
 zinit ice lucid wait='1' has'helm' id-as'helm_completion' \
