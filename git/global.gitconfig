@@ -124,11 +124,14 @@
 [hub]
     protocol = ssh
 
-[includeIf "gitdir:~/projects/"]
-    path = ~/projects/.gitconfig
+[includeIf "gitdir:~/personal/"]
+    path = ~/personal/.gitconfig
 
 [includeIf "gitdir:~/smart/"]
 	path = ~/smart/.gitconfig
+
+[includeIf "gitdir:~/Git/"]
+	path = ~/Git/.gitconfig
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

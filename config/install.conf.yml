@@ -19,7 +19,7 @@
       path: .p10k.zsh
     ~/.gitconfig:
       path: git/global.gitconfig
-    ~/.gitconfig-work:
+    ~/.work.gitconfig:
       path: git/work.gitconfig
     ~/.gitignore_global:
       path: git/gitignore_global
