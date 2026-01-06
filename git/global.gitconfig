@@ -110,6 +110,7 @@
     editor = vim
 	autocrlf = input
 	quotepath = false
+	excludesFile = ~/.gitignore_global
 [pull]
 	rebase = true
 
