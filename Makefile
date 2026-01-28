@@ -13,8 +13,11 @@ bootstrap: _prepare dotfiles _bootstrap ## Bootstrap new machine
 
 termux: _prepare dotfiles termux ## Bootstrap new termux
 
+work:
+	@./install -c config/macos_base.conf.yml --plugin-dir dotbot-brew
+
 mac:
-	@./install -c config/macos.conf.yml --plugin-dir dotbot-brew
+	@./install -c config/macos_base.conf.yml -c config/macos_personal.conf.yml --plugin-dir dotbot-brew
 
 termux:
 	@./install -c config/termux.conf.yml

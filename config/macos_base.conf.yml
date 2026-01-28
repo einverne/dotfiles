@@ -70,36 +70,23 @@
 #     - homebrew/cask-fonts
 
 - cask:
-    - anydesk
-    - appcleaner
     - bitwarden
-    - contexts
-    - bigwig-club/brew/upic
     - font-fira-code
     - google-chrome
     - hammerspoon
-    - iina
     - istat-menus
     - itsycal
     - jetbrains-toolbox
     - karabiner-elements
     - kitty
     - keka
-    - localsend
-    - maczip
-    # - menubarx
-    - mos
-    - obs
-    - obsidian
     - orbstack
+    - obsidian
     - postman
     - raycast
     - smartgit
     - shottr
-    - syncthing
     - tailscale
-    - telegram-desktop
     - visual-studio-code
     - warp
-    - zerotier-one
     # - nikitabobko/tap/aerospace

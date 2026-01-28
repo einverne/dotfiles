@@ -1,0 +1,14 @@
+- cask:
+    - anydesk
+    - appcleaner
+    - contexts
+    - bigwig-club/brew/upic
+    - iina
+    - localsend
+    - maczip
+    # - menubarx
+    - mos
+    - obs
+    - syncthing
+    - telegram-desktop
+    - zerotier-one
