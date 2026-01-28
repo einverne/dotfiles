@@ -21,6 +21,9 @@
     ~/.config/karabiner:
       if: '[ `uname` = Darwin ]'
       path: karabiner
+    ~/.config/ghostty:
+      if: '[ `uname` = Darwin ]'
+      path: .config/ghostty
     ~/.hammerspoon:
       if: '[ `uname` = Darwin ]'
       path: hammerspoon
@@ -51,7 +54,6 @@
     - coreutils
     - curl
     - diff-so-fancy
-    - espanso
     - git
     - fd
     - fzf
@@ -64,8 +66,8 @@
     - zsh
     - yqrashawn/goku/goku
 
-- tap:
-    - homebrew/cask-fonts
+# - tap:
+#     - homebrew/cask-fonts
 
 - cask:
     - anydesk
@@ -78,14 +80,14 @@
     - hammerspoon
     - iina
     - istat-menus
-    - iterm2
     - itsycal
     - jetbrains-toolbox
     - karabiner-elements
     - kitty
     - keka
+    - localsend
     - maczip
-    - menubarx
+    # - menubarx
     - mos
     - obs
     - obsidian
@@ -94,12 +96,10 @@
     - raycast
     - smartgit
     - shottr
-    - sonixd
     - syncthing
     - tailscale
     - telegram-desktop
     - visual-studio-code
     - warp
-    - youtube-music
     - zerotier-one
-    - nikitabobko/tap/aerospace
+    # - nikitabobko/tap/aerospace
