@@ -41,6 +41,6 @@ fi
 alias qs='open -a QSpace'
 
 # AI CLI tools with permission skip
-alias claude='claude --dangerously-skip-permissions'
-alias gemini='gemini --yolo'
-alias codex='codex --dangerously-bypass-approvals-and-sandbox'
+alias cc='claude --dangerously-skip-permissions'
+alias ge='gemini --yolo'
+alias cx='codex --dangerously-bypass-approvals-and-sandbox'
