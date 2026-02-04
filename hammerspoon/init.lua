@@ -275,8 +275,8 @@ hs.hotkey.bind({}, "F12", function()
         end
         app:mainWindow():moveToUnit '[100, 80, 0, 0]'
     else
-        hs.application.launchOrFocus("/Applications/Ghostty.app")
-        app = hs.application.get("com.mitchellh.ghostty")
+        hs.application.launchOrFocus("/Applications/Warp.app")
+        app = hs.application.get("dev.warp.Warp-Stable")
     end
 end)
 

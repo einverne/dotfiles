@@ -1,0 +1,117 @@
+# vim: ft=ghostty
+font-family                    = MesloLGS Nerd Font Mono
+font-size                      = 13
+font-thicken                   = true
+window-inherit-font-size       = true
+
+# Look and Feel
+theme                          = dark:disrupted_dark,light:disrupted_light
+window-padding-x               = 1
+window-padding-y               = 1
+window-padding-color           = extend
+window-step-resize             = false
+macos-icon                     = custom-style
+macos-icon-frame               = plastic
+macos-icon-ghost-color         = #efefef
+macos-icon-screen-color        = #5b6673
+adjust-cursor-thickness        = 2
+cursor-style                   = block
+cursor-style-blink             = false
+bold-color                     = bright
+link-url                       = true
+# macos-titlebar-style           = tabs  # in case I ever replace tmux
+macos-titlebar-style           = transparent
+mouse-hide-while-typing        = true
+window-save-state              = always
+background-opacity             = 0.98
+# background-blur                = true
+# unfocused-split-opacity        = 0.30
+
+# Other
+clipboard-paste-protection     = true
+clipboard-trim-trailing-spaces = true
+copy-on-select                 = true
+macos-auto-secure-input        = true
+macos-secure-input-indication  = true
+quit-after-last-window-closed  = false
+# command                        = direct:/opt/homebrew/bin/zsh
+shell-integration-features     = no-cursor,sudo,title
+
+# Key bindings
+macos-option-as-alt            = true
+keybind                        = cmd+right=text:\x05
+keybind                        = cmd+left=text:\x01
+keybind                        = cmd+backspace=text:\x15
+
+# Ctrl 0 - 9
+keybind                        = ctrl+0=text:\x1b[48;5u
+keybind                        = ctrl+1=text:\x1b[49;5u
+keybind                        = ctrl+2=text:\x1b[50;5u
+keybind                        = ctrl+3=text:\x1b[51;5u
+keybind                        = ctrl+4=text:\x1b[52;5u
+keybind                        = ctrl+5=text:\x1b[53;5u
+keybind                        = ctrl+6=text:\x1b[54;5u
+keybind                        = ctrl+7=text:\x1b[55;5u
+keybind                        = ctrl+8=text:\x1b[56;5u
+keybind                        = ctrl+9=text:\x1b[57;5u
+
+# Ctrl + . , ; /
+keybind                        = ctrl+.=text:\x1b[46;5u
+keybind                        = ctrl+,=text:\x1b[44;5u
+keybind                        = ctrl+;=text:\x1b[59;5u
+keybind                        = ctrl+/=text:\x1f
+
+# Shift + Enter
+# FIXME: does not work in Claude Code
+keybind                        = shift+enter=text:\x1b[13;2u
+# keybind                        = shift+enter=text:\x1b\r
+
+# Ctrl + I & Ctrl + M
+keybind                        = ctrl+i=text:\x1b[105;5u
+keybind                        = ctrl+m=text:\x1b[109;5u
+
+# Disable Ctrl+Z (prevent suspend)
+keybind                        = ctrl+z=ignore
+
+# Ctrl + Shift
+keybind                        = ctrl+shift+h=text:\x1b[72;6u
+keybind                        = ctrl+shift+j=text:\x1b[74;6u
+keybind                        = ctrl+shift+k=text:\x1b[75;6u
+keybind                        = ctrl+shift+l=text:\x1b[76;6u
+
+keybind                        = ctrl+shift+u=text:\x1b[117;6u
+keybind                        = ctrl+shift+o=text:\x1b[111;6u
+keybind                        = ctrl+shift+p=text:\x1b[112;6u
+
+keybind                        = ctrl+shift+s=text:\x1b[108;6u
+
+# tmux replacement
+# keybind = ctrl+n=new_window
+
+# keybind = ctrl+h=goto_split:left
+# keybind = ctrl+j=goto_split:bottom
+# keybind = ctrl+k=goto_split:top
+# keybind = ctrl+l=goto_split:right
+
+# keybind = ctrl+a>h=new_split:left
+# keybind = ctrl+a>j=new_split:down
+# keybind = ctrl+a>k=new_split:up
+# keybind = ctrl+a>l=new_split:right
+# keybind = alt+z=toggle_split_zoom
+
+# keybind = ctrl+a>c=new_tab
+# keybind = ctrl+a>n=next_tab
+# keybind = ctrl+a>p=previous_tab
+
+# macOS Standard Shortcuts
+keybind = cmd+c=copy_to_clipboard
+keybind = cmd+v=paste_from_clipboard
+keybind = cmd+n=new_window
+keybind = cmd+t=new_tab
+keybind = cmd+w=close_surface
+keybind = cmd+q=quit
+keybind = cmd+shift+comma=reload_config
+
+# Quake-style terminal (Quick Terminal)
+# Tabs aren't supported in the Quick Terminal.
+# keybind = global:f12=toggle_quick_terminal
