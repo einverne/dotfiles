@@ -1,0 +1,94 @@
+{
+  "name": "Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  // Features to add to the dev container
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": false,
+      "upgradePackages": false
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "21",
+      "jdkDistro": "ms",
+      "installMaven": true,
+      "installGradle": true
+    }
+  },
+  // VS Code extensions for interview use
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Language support
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "redhat.java",
+        "vscjava.vscode-java-pack",
+        "ms-vscode.cpptools-extension-pack",
+        // Code quality
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        // Tools
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "ms-vscode.live-server",
+        // Vim mode (optional, remove if not needed)
+        "vscodevim.vim"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/usr/bin/zsh"
+          }
+        },
+        "editor.fontSize": 14,
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+        "editor.rulers": [
+          80,
+          120
+        ],
+        "files.trimTrailingWhitespace": true
+      }
+    }
+  },
+  // Run after container is created
+  "postCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/post-create.sh 2>&1 | tee /tmp/post-create.log",
+  // Forward common development ports
+  "forwardPorts": [
+    3000,
+    5000,
+    8000,
+    8080,
+    8888
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "Frontend Dev Server"
+    },
+    "5000": {
+      "label": "App Server"
+    },
+    "8000": {
+      "label": "Django / FastAPI"
+    },
+    "8080": {
+      "label": "HTTP Server"
+    },
+    "8888": {
+      "label": "Jupyter"
+    }
+  },
+  "remoteUser": "codespace"
+}

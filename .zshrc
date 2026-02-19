@@ -283,9 +283,6 @@ alias adbcap="adb shell screencap -p"
 # Herd injected PHP 8.1 configuration.
 # export HERD_PHP_81_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/81/"
 
-# Added by Windsurf
-export PATH="/Users/einverne/.codeium/windsurf/bin:$PATH"
-
 # pnpm
 case `uname` in
 Darwin)
@@ -304,3 +301,4 @@ esac
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh --shims --quiet)"
 fi
+

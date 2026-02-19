@@ -55,7 +55,9 @@ if [[ -d $HOME/flutter ]]; then
 	export PATH="$PATH:$HOME/flutter/flutter_sdk/bin"
 fi
 
-export FLUTTER_ROOT=/Users/einverne/.asdf/installs/flutter/3.24.3-stable
+if [[ -d "$HOME/.asdf/installs/flutter" ]]; then
+  export FLUTTER_ROOT=$(ls -d "$HOME/.asdf/installs/flutter/"*-stable 2>/dev/null | tail -1)
+fi
 
 # if [[ -d ~/.jenv ]]; then
 #     # jenv
@@ -162,23 +164,25 @@ if [[ -d $HOME/Library/Application\ Support/JetBrains/Toolbox/scripts ]]; then
 	export PATH=$PATH:$HOME/Library/Application\ Support/JetBrains/Toolbox/scripts/
 fi
 
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+[[ -d /usr/local/opt/gnu-sed/libexec/gnubin ]] && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 if [[ -d $HOME/Sync/beancount ]]; then
 	export BEANCOUNT_ROOT=$HOME/Sync/beancount
 fi
 
 
-[[ -e "/home/einverne/lib/oracle-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/einverne/lib/oracle-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh"
+[[ -e "$HOME/lib/oracle-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "$HOME/lib/oracle-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh"
 
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/.fly/bin:$PATH"
 
-export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib/
-export CPATH=$CPATH:/opt/homebrew/include/
+if [[ -d /opt/homebrew ]]; then
+  export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib/
+  export CPATH=$CPATH:/opt/homebrew/include/
+fi
 
 # Added by Antigravity
-export PATH="/Users/einverne/.antigravity/antigravity/bin:$PATH"
+[[ -d "$HOME/.antigravity/antigravity/bin" ]] && export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 if [ -f $HOME/.env ]; then
     set -a

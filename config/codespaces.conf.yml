@@ -1,0 +1,29 @@
+- defaults:
+    link:
+      relink: true
+      force: true
+
+- clean: [ '~' ]
+
+- link:
+    ~/.dotfiles:
+      force: true
+      path: ''
+
+- link:
+    ~/.zshrc:
+      path: .zshrc
+    ~/.p10k.zsh:
+      path: .p10k.zsh
+    ~/.gitconfig:
+      path: git/global.gitconfig
+    ~/.gitignore_global:
+      path: git/gitignore_global
+    ~/.tmux.conf:
+      path: tmux/.tmux.conf
+    ~/.tmux.conf.local:
+      path: tmux/.tmux.conf.local
+    ~/.vimrc:
+      path: .vimrc
+    ~/.vim:
+      path: .vim
