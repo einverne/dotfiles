@@ -302,3 +302,13 @@ if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh --shims --quiet)"
 fi
 
+# OpenClaw Completion
+source "/home/einverne/.openclaw/completions/openclaw.zsh"
+
+# bun completions
+[ -s "/home/einverne/.bun/_bun" ] && source "/home/einverne/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
