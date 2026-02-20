@@ -173,6 +173,10 @@ zinit ice lucid wait='1' has'helm' id-as'helm_completion' \
   as'completion' nocompile \
   zdharma-continuum/null
 
+zinit ice lucid wait='1' has'mise' id-as'mise-completion' \
+  atload'eval "$(mise completion zsh)"' \
+  zdharma-continuum/null
+
 # if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 #   compinit;
 # else
