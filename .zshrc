@@ -307,7 +307,7 @@ if command -v mise >/dev/null 2>&1; then
 fi
 
 # OpenClaw Completion
-source "/home/einverne/.openclaw/completions/openclaw.zsh"
+[[ -f "/home/einverne/.openclaw/completions/openclaw.zsh" ]] && source "/home/einverne/.openclaw/completions/openclaw.zsh"
 
 # bun completions
 [ -s "/home/einverne/.bun/_bun" ] && source "/home/einverne/.bun/_bun"
