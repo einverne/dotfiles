@@ -316,3 +316,9 @@ source "/home/einverne/.openclaw/completions/openclaw.zsh"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# Entire CLI shell completion
+autoload -Uz compinit && compinit && source <(entire completion zsh)
+
+# Added by Nowledge Mem
+export PATH="$HOME/.local/bin:$PATH"
+
