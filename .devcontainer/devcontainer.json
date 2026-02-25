@@ -19,7 +19,7 @@
       "version": "lts"
     },
     "ghcr.io/devcontainers/features/java:1": {
-      "version": "21",
+      "version": "17",
       "jdkDistro": "ms",
       "installMaven": true,
       "installGradle": true
@@ -34,12 +34,10 @@
         "ms-python.vscode-pylance",
         "redhat.java",
         "vscjava.vscode-java-pack",
-        "ms-vscode.cpptools-extension-pack",
         // Code quality
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         // Tools
-        "eamodio.gitlens",
         "mhutchie.git-graph",
         "ms-vscode.live-server",
         // Vim mode (optional, remove if not needed)
