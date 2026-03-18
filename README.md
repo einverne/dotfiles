@@ -133,3 +133,29 @@ There are following alias in `.zshrc` :
 - fkill : kill process
 - tm : tm new tmux session
 - fs : tmux attach tmux session
+
+## karabiner config
+
+Karabiner-Elements configuration uses a hybrid approach since [Goku](https://github.com/yqrashawn/GokuRakuJoudo) does not support `keyboard_type_if` conditions needed for JIS keyboard remapping.
+
+### File structure
+
+- `karabiner.edn` - Goku source file for non-JIS rules (caps lock, ctrl+n/p, app-specific shortcuts, simlayers, etc.)
+- `jis-rules.json` - JIS keyboard layout remapping rules (20 rules, requires `keyboard_type_if` which Goku cannot express)
+- `merge-karabiner.sh` - Script to merge Goku-generated config with JIS rules
+
+### Usage
+
+```bash
+# 1. After editing karabiner.edn, run goku to generate base config
+goku
+
+# 2. Merge JIS rules into the generated config
+./karabiner/merge-karabiner.sh
+```
+
+### JIS rules overview
+
+The JIS rules remap a Japanese keyboard layout to produce US ANSI characters. Key mappings include `@` to `[`, `[` to `]`, `^` to `=`, `:` to `'`, `¥` to `` ` ``, and their shifted variants.
+
+The shift+bracket rules (`shift+@ → {`, `shift+[ → }`) intentionally exclude `command` from optional modifiers so that `Cmd+Shift+[` / `Cmd+Shift+]` pass through as raw keycodes for native tab switching in apps like Ghostty.
