@@ -41,7 +41,7 @@ macos-secure-input-indication  = true
 confirm-close-surface          = false
 quit-after-last-window-closed  = false
 auto-update                    = check
-scrollback-limit               = 10000
+scrollback-limit               = 500000
 # command                        = direct:/opt/homebrew/bin/zsh
 shell-integration-features     = no-cursor,sudo,title
 
