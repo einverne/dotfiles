@@ -20,8 +20,7 @@ zinit ice lucid wait='1'
 # Turbo mode with "wait"
 zinit light-mode lucid wait for \
   is-snippet OMZ::lib/history.zsh \
-  MichaelAquilina/zsh-you-should-use \
-  zdharma-continuum/history-search-multi-word \
+  MichaelAquilina/zsh-you-should-use
 #   atload"alias zi='zinit'"
 
 # zinit ice wait"2" as"command" from"gh-r" lucid \
