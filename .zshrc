@@ -306,6 +306,10 @@ if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh --shims --quiet)"
 fi
 
+if command -v atuin >/dev/null 2>&1; then
+  eval "$(atuin init zsh)"
+fi
+
 # OpenClaw Completion
 [[ -f "/home/einverne/.openclaw/completions/openclaw.zsh" ]] && source "/home/einverne/.openclaw/completions/openclaw.zsh"
 
