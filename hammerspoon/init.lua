@@ -264,10 +264,10 @@ for _, v in pairs(hspoon_list) do
 end
 
 hs.hotkey.bind({}, "F12", function()
-    local app = hs.application.get("dev.warp.Warp-Stable")
+    local app = hs.application.get("com.mitchellh.ghostty")
     if app then
         if not app:mainWindow() then
-            app:selectMenuItem({ "Warp", "New Window" })
+            app:selectMenuItem({ "Ghostty", "New Window" })
         elseif app:isFrontmost() then
             app:hide()
         else
@@ -275,8 +275,8 @@ hs.hotkey.bind({}, "F12", function()
         end
         app:mainWindow():moveToUnit '[100, 80, 0, 0]'
     else
-        hs.application.launchOrFocus("/Applications/Warp.app")
-        app = hs.application.get("dev.warp.Warp-Stable")
+        hs.application.launchOrFocus("/Applications/Ghostty.app")
+        app = hs.application.get("com.mitchellh.ghostty")
     end
 end)
 
