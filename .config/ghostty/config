@@ -3,6 +3,7 @@ font-family                    = MesloLGS Nerd Font Mono
 font-size                      = 13
 font-thicken                   = true
 window-inherit-font-size       = true
+shell-integration-features = ssh-env, ssh-terminfo
 
 # Look and Feel
 theme                          = dark:Gruvbox Dark Hard,light:Gruvbox Light Hard
