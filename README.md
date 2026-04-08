@@ -114,6 +114,15 @@ Tmux config:
 - `C-hjkl` to switch pane
 - `prefix + Shift + HJKL` to adjust pane size
 
+Copy mode:
+
+- Enter copy mode with `prefix + [`
+- Use `Space` to start selection, then `Enter` to copy
+- In vi mode, use `v` to start selection, then `y` to copy
+- You can also drag with the mouse, and copy on mouse release
+- Local sessions prefer the system clipboard directly; remote SSH sessions fall back to OSC 52 so copied text can reach the outer terminal clipboard
+- See `tmux/OSC52_CLIPBOARD.md` for more details about the remote clipboard setup
+
 I use Tmux Plugin Manager to manage tmux plugins, and by default I use following plugins:
 
     set -g @plugin 'tmux-plugins/tpm'
