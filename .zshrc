@@ -5,7 +5,24 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+typeset -U path PATH fpath FPATH
+
+# Drop stale asdf entries and remove legacy Node manager paths.
+typeset -a _dotfiles_clean_path
+_dotfiles_clean_path=()
+for _dotfiles_path_entry in "${path[@]}"; do
+  if [[ "$_dotfiles_path_entry" == "$HOME/.asdf"* ]]; then
+    continue
+  elif [[ "$_dotfiles_path_entry" == "$HOME/flutter/flutter_sdk/bin" ]]; then
+    continue
+  elif [[ "$_dotfiles_path_entry" == *"/Library/Application Support/Herd/config/"*/versions/node/*/bin ]]; then
+    continue
+  fi
+  _dotfiles_clean_path+=("$_dotfiles_path_entry")
+done
+path=("${_dotfiles_clean_path[@]}")
+unset _dotfiles_clean_path _dotfiles_path_entry
+unset ASDF_DIR ASDF_DATA_DIR
 
 if [[ ! -f ~/.zinit/bin/zinit.zsh ]]; then
 	mkdir ~/.zinit
@@ -102,10 +119,6 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 case `uname` in
 Darwin)
   # zinit bundle kiurchv/asdf.plugin.zsh
-  # Herd injected NVM configuration
-  export NVM_DIR="/Users/einverne/Library/Application Support/Herd/config/nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
   [[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
 
   # Herd injected PHP 8.3 configuration.
@@ -132,25 +145,9 @@ FreeBSD)
   ;;
 esac
 
-#if type brew &>/dev/null; then
-#	echo "brew completion"
-#    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-#    #fpath=$(brew --prefix)/share/zsh-completions:$fpath
-#	fpath=($HOME/.asdf/completions $fpath)
-#fi
-
-#. $(brew --prefix asdf)/asdf.sh
-#. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
 # Compinit : After zinits, before cdreplay
 # https://carlosbecker.com/posts/speeding-up-zsh/
 #
-
-
-if [[ -d "$HOME/.asdf" ]]; then
-  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-  asdf completion zsh > "${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf"
-  fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
-fi
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -158,7 +155,6 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
-fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
 
 # Load kubectl and helm completions
@@ -262,11 +258,6 @@ alias adbcap="adb shell screencap -p"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
-
-# Herd injected NVM configuration
-# export NVM_DIR="/Users/einverne/Library/Application Support/Herd/config/nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
 # [[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
 
 # Herd injected PHP 8.3 configuration.
@@ -298,11 +289,12 @@ Darwin)
 esac
 # pnpm end
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
 # Initialize mise if available
 if command -v mise >/dev/null 2>&1; then
-  eval "$(mise activate zsh --shims --quiet)"
+  export MISE_DATA_DIR="${MISE_DATA_DIR:-$HOME/.local/share/mise}"
+  # Current mise build returns no shell code for `activate --shims`, so add shims explicitly.
+  [[ -d "$MISE_DATA_DIR/shims" ]] && path=("$MISE_DATA_DIR/shims" $path)
+  eval "$(mise activate zsh --quiet)"
 fi
 
 if command -v atuin >/dev/null 2>&1; then
@@ -324,4 +316,3 @@ autoload -Uz compinit && compinit && source <(entire completion zsh)
 
 # Added by Nowledge Mem
 export PATH="$HOME/.local/bin:$PATH"
-
