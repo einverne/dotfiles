@@ -4,8 +4,6 @@ font-family                    = PingFang SC
 font-size                      = 13
 font-thicken                   = true
 window-inherit-font-size       = true
-shell-integration-features = ssh-env, ssh-terminfo
-
 # Look and Feel
 theme                          = dark:Gruvbox Dark Hard,light:Gruvbox Light Hard
 window-colorspace              = display-p3
@@ -45,7 +43,7 @@ quit-after-last-window-closed  = false
 auto-update                    = check
 scrollback-limit               = 500000
 # command                        = direct:/opt/homebrew/bin/zsh
-shell-integration-features     = no-cursor,sudo,title
+shell-integration-features     = no-cursor,sudo,title,ssh-env,ssh-terminfo
 
 # Key bindings
 macos-option-as-alt            = true
