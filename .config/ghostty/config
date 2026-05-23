@@ -1,5 +1,6 @@
 # vim: ft=ghostty
-font-family                    = MesloLGS Nerd Font Mono
+font-family                    = FiraCode Nerd Font Mono
+font-family                    = PingFang SC
 font-size                      = 13
 font-thicken                   = true
 window-inherit-font-size       = true
@@ -51,6 +52,7 @@ macos-option-as-alt            = true
 keybind                        = cmd+right=text:\x05
 keybind                        = cmd+left=text:\x01
 keybind                        = cmd+backspace=text:\x15
+keybind                        = ctrl+w=text:\x17
 
 # Ctrl 0 - 9
 keybind                        = ctrl+0=text:\x1b[48;5u
@@ -97,10 +99,10 @@ keybind                        = ctrl+shift+s=text:\x1b[108;6u
 # tmux replacement
 # keybind = ctrl+n=new_window
 
-# keybind = ctrl+h=goto_split:left
-# keybind = ctrl+j=goto_split:bottom
-# keybind = ctrl+k=goto_split:top
-# keybind = ctrl+l=goto_split:right
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
 
 # keybind = ctrl+a>h=new_split:left
 # keybind = ctrl+a>j=new_split:down
