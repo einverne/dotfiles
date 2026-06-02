@@ -3,6 +3,7 @@
   - mas
 
 - cask:
+  - font-fira-code
   - syncthing
 
 - brewfile:

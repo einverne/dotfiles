@@ -41,6 +41,11 @@ GUI applications:
 - Karabiner-Elements
 - Hammerspoon
 
+Terminal font:
+
+- Ghostty uses `Fira Code` as the primary terminal font, with `PingFang SC` as the Chinese fallback.
+- Install the font on macOS with `brew install --cask font-fira-code`.
+
 ## Claude Code Support
 
 This repository includes Claude Code skills and agents for enhanced AI assistance:
