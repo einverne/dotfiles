@@ -30,7 +30,6 @@ export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
 export PATH="$HOME/.local/bin:$PATH"
-# eval "$(zoxide init zsh)"
 
 if [[ -d $HOME/.pyenv ]]; then
     # pyenv

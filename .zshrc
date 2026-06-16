@@ -40,12 +40,6 @@ zinit light-mode lucid wait for \
   MichaelAquilina/zsh-you-should-use
 #   atload"alias zi='zinit'"
 
-# zinit ice wait"2" as"command" from"gh-r" lucid \
-#   mv"zoxide*/zoxide -> zoxide" \
-#   atclone"./zoxide init zsh > init.zsh" \
-#   atpull"%atclone" src"init.zsh" nocompile'!'
-# zinit light ajeetdsouza/zoxide
-
 # binary release, unpack provide fzf
 zinit ice from"gh-r" as"program"
 zinit light junegunn/fzf
