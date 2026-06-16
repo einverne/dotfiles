@@ -263,20 +263,23 @@ for _, v in pairs(hspoon_list) do
     hs.loadSpoon(v)
 end
 
-hs.hotkey.bind({}, "F12", function()
-    local app = hs.application.get("com.mitchellh.ghostty")
-    if app then
-        if not app:mainWindow() then
-            app:selectMenuItem({ "Ghostty", "New Window" })
-        elseif app:isFrontmost() then
-            app:hide()
-        else
-            app:activate()
+local function ghosttyResize()
+    hs.timer.doAfter(0.3, function()
+        local app = hs.application.get("com.mitchellh.ghostty")
+        local win = app and app:mainWindow()
+        if win then
+            win:moveToUnit(hs.geometry(0, 0, 1, 0.8))
         end
-        app:mainWindow():moveToUnit '[100, 80, 0, 0]'
+    end)
+end
+
+hs.hotkey.bind({}, "F12", function()
+    local frontApp = hs.application.frontmostApplication()
+    if frontApp and frontApp:bundleID() == "com.mitchellh.ghostty" then
+        hs.osascript.applescript('tell application "System Events" to set visible of process "Ghostty" to false')
     else
-        hs.application.launchOrFocus("/Applications/Ghostty.app")
-        app = hs.application.get("com.mitchellh.ghostty")
+        hs.execute("open -a '/Applications/Ghostty.app'")
+        ghosttyResize()
     end
 end)
 
