@@ -306,7 +306,11 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Entire CLI shell completion
-autoload -Uz compinit && compinit && source <(entire completion zsh)
+source <(entire completion zsh) 2>/dev/null || true
 
 # Added by Nowledge Mem
 export PATH="$HOME/.local/bin:$PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/einverne/.local/bin:$PATH"
