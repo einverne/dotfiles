@@ -1,0 +1,136 @@
+# Herdr configuration
+# Docs: https://herdr.dev
+# Place file at: ~/.config/herdr/config.toml
+
+# ─── Theme ────────────────────────────────────────────────────────────────────
+[theme]
+name = "catppuccin"
+auto_switch = true
+dark_name = "catppuccin"
+light_name = "catppuccin-latte"
+
+# ─── Terminal ─────────────────────────────────────────────────────────────────
+[terminal]
+# Use login shell on macOS so PATH / env is fully loaded
+shell_mode = "auto"
+# New panes inherit the source pane's working directory
+new_cwd = "follow"
+
+# ─── Update ───────────────────────────────────────────────────────────────────
+[update]
+channel = "stable"
+version_check = true
+manifest_check = true
+
+# ─── Keybindings ──────────────────────────────────────────────────────────────
+[keys]
+# Prefix key (tmux-compatible default)
+prefix = "ctrl+b"
+
+# ── General ───────────────────────────────────────────────────────────────────
+help             = "prefix+?"
+settings         = "prefix+s"
+detach           = "prefix+q"
+reload_config    = "prefix+shift+r"
+
+# ── Navigation (prefix mode) ──────────────────────────────────────────────────
+goto             = "prefix+g"
+workspace_picker = "prefix+w"
+
+# ── Workspaces ────────────────────────────────────────────────────────────────
+new_workspace    = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace  = "prefix+shift+d"
+
+# ── Git worktrees ─────────────────────────────────────────────────────────────
+new_worktree     = "prefix+shift+g"
+
+# ── Tabs ──────────────────────────────────────────────────────────────────────
+new_tab          = "prefix+c"
+rename_tab       = "prefix+shift+t"
+previous_tab     = "prefix+p"
+next_tab         = "prefix+n"
+switch_tab       = "prefix+1..9"
+
+# ── Agents / panes ────────────────────────────────────────────────────────────
+open_notification_target = "prefix+o"
+
+# ── Navigate mode (after prefix+g) ────────────────────────────────────────────
+navigate_workspace_up    = "up"
+navigate_workspace_down  = "down"
+navigate_pane_left       = "h"
+navigate_pane_down       = "j"
+navigate_pane_up         = "k"
+navigate_pane_right      = "l"
+
+# ── Custom command bindings ────────────────────────────────────────────────────
+# Open lazygit in a temporary pane (closes on exit)
+[[keys.command]]
+key     = "prefix+alt+g"
+type    = "pane"
+command = "lazygit"
+
+# Open btop system monitor in a temporary pane
+[[keys.command]]
+key     = "prefix+alt+m"
+type    = "pane"
+command = "btop"
+
+# ─── UI ───────────────────────────────────────────────────────────────────────
+[ui]
+sidebar_width              = 28
+sidebar_min_width          = 20
+sidebar_max_width          = 38
+mouse_capture              = true
+confirm_close              = true
+prompt_new_tab_name        = true
+pane_borders               = true
+pane_gaps                  = true
+show_agent_labels_on_pane_borders = true
+agent_panel_sort           = "spaces"
+
+# ── Toast notifications ────────────────────────────────────────────────────────
+[ui.toast]
+# "system" = native macOS notification; use "herdr" for in-app toasts
+delivery       = "system"
+delay_seconds  = 1
+
+[ui.toast.herdr]
+position = "bottom-right"
+
+[ui.toast.clipboard]
+enabled  = true
+position = "bottom-center"
+
+# ── Sound alerts ──────────────────────────────────────────────────────────────
+[ui.sound]
+enabled = false
+
+# ─── Session ──────────────────────────────────────────────────────────────────
+[session]
+# Resume AI-agent sessions after server restart
+resume_agents_on_restore = true
+
+# ─── Remote ───────────────────────────────────────────────────────────────────
+[remote]
+manage_ssh_config = true
+
+# ─── Experimental ─────────────────────────────────────────────────────────────
+[experimental]
+allow_nested   = false
+pane_history   = true
+
+# CJK IME: reveal cursor so input candidate window tracks TUI cursor position.
+# Useful when using Chinese/Japanese input methods with Claude Code, etc.
+reveal_hidden_cursor_for_cjk_ime = true
+cjk_ime_agents = ["claude", "codex", "gemini", "kiro"]
+cjk_ime_cursor_shape = "steady_bar"
+
+# macOS: temporarily switch to ASCII layout while prefix mode is active
+# so prefix shortcuts always register even with a CJK IME enabled.
+switch_ascii_input_source_in_prefix = true
+
+# ─── Advanced ─────────────────────────────────────────────────────────────────
+[advanced]
+# 10 MB scrollback per pane (matches Ghostty default)
+scrollback_limit_bytes = 10000000
