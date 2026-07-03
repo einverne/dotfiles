@@ -2,7 +2,6 @@
 # Install on macOS with: brew install --cask font-fira-code
 # Keep PingFang SC as the fallback for Chinese glyphs.
 font-family                    = Fira Code
-font-family                    = PingFang SC
 font-size                      = 13
 font-thicken                   = true
 window-inherit-font-size       = true
