@@ -1,10 +1,15 @@
 -- todo_overlay.lua
 -- Floating Todo overlay reading Obsidian Kanban markdown (Todo / Doing lanes).
 --
--- View mode (default): canvas has no mouseCallback -> NSWindow ignores mouse
---   events entirely, i.e. true click-through.
--- Edit mode (hotkey):  mouseCallback installed, items become clickable:
---   click = toggle done, alt-click = delete line, cmd-click = open file.
+-- Two canvases:
+--  * main panel  - view mode (default): no mouseCallback -> true click-through;
+--                  edit mode: items clickable (click = toggle done,
+--                  alt-click = delete line, cmd-click = open file).
+--  * control bar - tiny always-clickable canvas on the panel's top-right
+--                  corner holding the [✎ edit toggle] and [＋ add] buttons.
+--                  Click-through is window-level all-or-nothing, so the
+--                  buttons must live on their own window to stay clickable
+--                  while the main panel is transparent to clicks.
 --
 -- File edits are line-surgical: only the target line is rewritten, everything
 -- else (including the %% kanban:settings %% block) is preserved byte-for-byte.
@@ -18,7 +23,7 @@ local log = hs.logger.new('todo_overlay', 'info')
 ----------------------------------------------------------------------------
 M.config = {
     filePath   = os.getenv("HOME") .. "/Sync/wiki/Kanban/Live Kanban.md",
-    sections   = { "Todo", "Doing", "Done" }, -- kanban lanes to display, in order
+    sections   = { "Todo" }, -- kanban lanes to display, in order
     maxItems   = 12,                  -- per-section display cap
 
     width      = 300,                 -- content width (pt)
@@ -37,14 +42,12 @@ M.config = {
 
     hotkeys = {
         toggle = { { "ctrl", "alt", "cmd", "shift" }, "T" }, -- show / hide
-        edit   = { { "ctrl", "alt", "cmd", "shift" }, "E" }, -- edit mode on/off
         add    = { { "ctrl", "alt", "cmd", "shift" }, "A" }, -- quick add todo
     },
 
     theme = {
         light = {
             bg     = { white = 0.98, alpha = 0.85 },
-            border = { white = 0, alpha = 0.08 },
             header = { white = 0.45, alpha = 1 },
             text   = { white = 0.15, alpha = 1 },
             done   = { white = 0.60, alpha = 1 },
@@ -53,7 +56,6 @@ M.config = {
         },
         dark = {
             bg     = { white = 0.13, alpha = 0.85 },
-            border = { white = 1, alpha = 0.10 },
             header = { white = 0.60, alpha = 1 },
             text   = { white = 0.92, alpha = 1 },
             done   = { white = 0.50, alpha = 1 },
@@ -66,7 +68,8 @@ M.config = {
 ----------------------------------------------------------------------------
 -- Internal state (single long-lived canvas + reusable watchers/timers)
 ----------------------------------------------------------------------------
-local canvas          -- hs.canvas, created once in start()
+local canvas          -- hs.canvas main panel, created once in start()
+local controlCanvas   -- hs.canvas button bar, always clickable
 local pathWatcher     -- hs.pathwatcher on the parent directory
 local screenWatcher   -- hs.screen.watcher, repositions on display changes
 local themeWatcher    -- hs.distributednotifications for dark mode switches
@@ -76,7 +79,7 @@ local hotkeyObjs = {}
 local items = {}       -- parsed items: { text, raw, lineNo, done, section }
 local lastContent      -- raw file content of the last render (dirty check)
 local visible  = true
-local editMode = false
+local editMode = false -- view mode = click-through main panel
 
 ----------------------------------------------------------------------------
 -- Markdown parsing / file surgery
@@ -227,6 +230,42 @@ local function styledItem(item, theme)
     return st
 end
 
+-- Control bar: [✎ edit toggle][＋ add], anchored to the panel's top-right.
+-- Lives on its own always-clickable canvas; see the file header for why.
+local CTRL_BTN, CTRL_GAP = 20, 4
+
+local function renderControls(theme, panelFrame)
+    if not controlCanvas then return end
+    local cfg = M.config
+    local w = CTRL_BTN * 2 + CTRL_GAP
+    controlCanvas:frame({
+        x = panelFrame.x + panelFrame.w - cfg.shadowPad - cfg.padding.x - w + 4,
+        y = panelFrame.y + cfg.shadowPad + cfg.padding.y - 3,
+        w = w,
+        h = CTRL_BTN,
+    })
+    controlCanvas:replaceElements({
+        {
+            type = "text", id = "edit", trackMouseDown = true,
+            text = hs.styledtext.new("✎", {
+                font = { size = cfg.fontSize + 1 },
+                color = editMode and theme.accent or theme.header,
+                paragraphStyle = { alignment = "center" },
+            }),
+            frame = { x = 0, y = 0, w = CTRL_BTN, h = CTRL_BTN },
+        },
+        {
+            type = "text", id = "add", trackMouseDown = true,
+            text = hs.styledtext.new("＋", {
+                font = { size = cfg.fontSize + 2 },
+                color = theme.header,
+                paragraphStyle = { alignment = "center" },
+            }),
+            frame = { x = CTRL_BTN + CTRL_GAP, y = 0, w = CTRL_BTN, h = CTRL_BTN },
+        },
+    })
+end
+
 -- Rebuild all canvas elements and resize/reposition the canvas.
 -- Called only when content, theme, edit mode or screen layout changed, so a
 -- full element rebuild (single redraw) is cheap and flicker-free.
@@ -237,13 +276,14 @@ local function render()
     local contentW = cfg.width - 2 * pad.x
     local els = {}
 
-    -- [1] background: filled after we know the total height
+    -- [1] background: frame is filled in after we know the total height;
+    -- accent border marks edit mode
     els[1] = {
         type = "rectangle",
         action = editMode and "strokeAndFill" or "fill",
         fillColor = theme.bg,
-        strokeColor = editMode and theme.accent or theme.border,
-        strokeWidth = editMode and 2 or 1,
+        strokeColor = theme.accent,
+        strokeWidth = 2,
         roundedRectRadii = { xRadius = cfg.corner, yRadius = cfg.corner },
         withShadow = true,
         shadow = { blurRadius = 14, color = theme.shadow, offset = { h = -4, w = 0 } },
@@ -295,24 +335,19 @@ local function render()
         }))
     end
 
-    if editMode then
-        y = y + 2
-        addText(hs.styledtext.new("click toggle · ⌥click delete · ⌘click open", {
-            font = { size = cfg.headerFontSize - 1 }, color = theme.header,
-        }))
-    end
-
     local totalH = (y - cfg.itemGap) + pad.y - sp
     els[1].frame = { x = sp, y = sp, w = cfg.width, h = totalH }
 
     local sf = targetScreen():frame()
-    canvas:frame({
+    local panelFrame = {
         x = sf.x + sf.w - cfg.width - cfg.margin.x - sp,
         y = sf.y + cfg.margin.y - sp,
         w = cfg.width + 2 * sp,
         h = totalH + 2 * sp,
-    })
+    }
+    canvas:frame(panelFrame)
     canvas:replaceElements(els)
+    renderControls(theme, panelFrame)
 end
 
 ----------------------------------------------------------------------------
@@ -347,6 +382,7 @@ local function findItemByLine(lineNo)
     end
 end
 
+-- Main panel clicks (installed only in edit mode)
 local function onMouse(_, event, id)
     if event ~= "mouseDown" then return end
     local lineNo = tonumber(tostring(id):match("^item:(%d+)$"))
@@ -364,12 +400,14 @@ local function onMouse(_, event, id)
     end
 end
 
-local function applyEditMode()
-    if not canvas then return end
-    -- mouseCallback(nil) restores ignoresMouseEvents on the underlying
-    -- NSWindow, i.e. full click-through in view mode.
-    canvas:mouseCallback(editMode and onMouse or nil)
-    render()
+-- Control bar clicks (always active)
+local function onControlMouse(_, event, id)
+    if event ~= "mouseDown" then return end
+    if id == "edit" then
+        M.toggleEdit()
+    elseif id == "add" then
+        M.promptAdd()
+    end
 end
 
 ----------------------------------------------------------------------------
@@ -380,15 +418,19 @@ function M.toggleShow()
     if visible then
         M.refresh(true) -- content may have changed while hidden
         canvas:show()
+        controlCanvas:show()
     else
         canvas:hide()
+        controlCanvas:hide()
     end
 end
 
 function M.toggleEdit()
-    if not visible then M.toggleShow() end
     editMode = not editMode
-    applyEditMode()
+    -- mouseCallback(nil) restores ignoresMouseEvents on the underlying
+    -- NSWindow, i.e. full click-through in view mode.
+    canvas:mouseCallback(editMode and onMouse or nil)
+    render() -- recolor the ✎ button to reflect the state
 end
 
 function M.promptAdd()
@@ -400,12 +442,22 @@ end
 function M.start()
     if canvas then return M end
 
-    canvas = hs.canvas.new({ x = 0, y = 0, w = M.config.width, h = 10 })
-    canvas:level(hs.canvas.windowLevels[M.config.level] or hs.canvas.windowLevels.floating)
-    canvas:behavior(hs.canvas.windowBehaviors.canJoinAllSpaces
+    local level = hs.canvas.windowLevels[M.config.level] or hs.canvas.windowLevels.floating
+    local behavior = hs.canvas.windowBehaviors.canJoinAllSpaces
         + hs.canvas.windowBehaviors.stationary
-        + hs.canvas.windowBehaviors.fullScreenAuxiliary)
+        + hs.canvas.windowBehaviors.fullScreenAuxiliary
+
+    canvas = hs.canvas.new({ x = 0, y = 0, w = M.config.width, h = 10 })
+    canvas:level(level)
+    canvas:behavior(behavior)
     canvas:clickActivating(false)
+    -- view mode by default: no mouseCallback -> click-through
+
+    controlCanvas = hs.canvas.new({ x = 0, y = 0, w = 10, h = 10 })
+    controlCanvas:level(level + 1) -- keep the buttons above the panel
+    controlCanvas:behavior(behavior)
+    controlCanvas:clickActivating(false)
+    controlCanvas:mouseCallback(onControlMouse)
 
     refreshDebounce = hs.timer.delayed.new(0.25, function() M.refresh(false) end)
 
@@ -429,11 +481,11 @@ function M.start()
 
     local hk = M.config.hotkeys
     hotkeyObjs[#hotkeyObjs + 1] = hs.hotkey.bind(hk.toggle[1], hk.toggle[2], "Toggle Todo Overlay", M.toggleShow)
-    hotkeyObjs[#hotkeyObjs + 1] = hs.hotkey.bind(hk.edit[1], hk.edit[2], "Todo Overlay Edit Mode", M.toggleEdit)
     hotkeyObjs[#hotkeyObjs + 1] = hs.hotkey.bind(hk.add[1], hk.add[2], "Add Todo", M.promptAdd)
 
     M.refresh(true)
     canvas:show()
+    controlCanvas:show()
     log.i("started, watching " .. M.config.filePath)
     return M
 end
@@ -445,6 +497,7 @@ function M.stop()
     if refreshDebounce then refreshDebounce:stop(); refreshDebounce = nil end
     for _, k in ipairs(hotkeyObjs) do k:delete() end
     hotkeyObjs = {}
+    if controlCanvas then controlCanvas:delete(); controlCanvas = nil end
     if canvas then canvas:delete(); canvas = nil end
 end
 

@@ -81,13 +81,17 @@ Press `option + a` to enter application launcher. The shorcut information will s
 
 ## Todo Overlay
 
-A floating panel pinned to the top-right corner of the screen, showing the Todo / Doing / Done lanes of an Obsidian Kanban markdown file (default: `~/Sync/wiki/Kanban/Live Kanban.md`). The panel is click-through by default, visible on all Spaces, refreshes automatically when the file changes, and follows the system light/dark appearance.
+A floating panel pinned to the top-right corner of the screen, showing lanes of an Obsidian Kanban markdown file (default: `~/Sync/wiki/Kanban/Live Kanban.md`). The panel is click-through by default so it never steals clicks from the windows below, visible on all Spaces, refreshes automatically when the file changes, and follows the system light/dark appearance.
+
+Two buttons sit on the panel's top-right corner and are always clickable:
+
+- `✎` toggle edit mode (the button and the panel border turn accent-colored while active)
+- `＋` add a todo (inserted under the first configured lane)
 
 Shortcuts:
 
 - Hyper key + T, show/hide the overlay
-- Hyper key + E, toggle edit mode (the panel gets an accent border)
-- Hyper key + A, quick add a todo (inserted under `## Todo`)
+- Hyper key + A, quick add a todo
 
 In edit mode, items become clickable:
 
