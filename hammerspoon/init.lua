@@ -8,6 +8,10 @@ log = hs.logger.new('init', 'debug')
 require 'ime'
 -- require 'usb'
 
+-- Todo overlay pinned to the top-right corner (see todo_overlay.lua for config)
+local todo_overlay = require 'todo_overlay'
+todo_overlay.start()
+
 
 local module = {
     'ime',

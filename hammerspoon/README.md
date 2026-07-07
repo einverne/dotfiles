@@ -17,6 +17,7 @@ hammerspoon is my configuration for [Hammerspoon](http://www.hammerspoon.org/). 
 
 - `autoscript.lua`, auto commit and push my personal notes.
 - `ime.lua`, auto switch different Input methods in different applications
+- `todo_overlay.lua`, floating Todo overlay on the top-right corner, reading todos from an Obsidian Kanban markdown file
 
 ## How to use
 Use Karabiner-Elements to set <kbd>caps lock</kbd> as hyper key. Press caps lock is just like press Cmd+Control+Option+Shift at the same time.
@@ -77,6 +78,24 @@ Press `option + a` to enter application launcher. The shorcut information will s
 ## Auto type url in markdown format
 
 `Option+v` to auto type url in markdown format.
+
+## Todo Overlay
+
+A floating panel pinned to the top-right corner of the screen, showing the Todo / Doing / Done lanes of an Obsidian Kanban markdown file (default: `~/Sync/wiki/Kanban/Live Kanban.md`). The panel is click-through by default, visible on all Spaces, refreshes automatically when the file changes, and follows the system light/dark appearance.
+
+Shortcuts:
+
+- Hyper key + T, show/hide the overlay
+- Hyper key + E, toggle edit mode (the panel gets an accent border)
+- Hyper key + A, quick add a todo (inserted under `## Todo`)
+
+In edit mode, items become clickable:
+
+- Click an item to toggle done (`- [ ]` <-> `- [x]`)
+- <kbd>Option</kbd> + click to delete the item
+- <kbd>Cmd</kbd> + click to open the kanban file in the default app (e.g. Obsidian)
+
+All settings (file path, lanes, size, fonts, colors, hotkeys) live in the `M.config` table at the top of `todo_overlay.lua`.
 
 ## Toggle Hammerspoon console
 
