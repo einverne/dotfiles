@@ -14,6 +14,13 @@ Set up by using [dotbot](https://blog.einverne.info/post/2020/08/use-dotbot-dotf
 	make mac
     ./install -c config/macos.conf.yaml
 
+Disable `.DS_Store` creation on network and USB volumes (also included in `macos/init_mac.sh`):
+
+```bash
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+```
+
 Log out and log in again, zinit will install all plugins automatically. If you use vi to edit file at first time, the vim-plug will install all vim plugins automatically.
 
 ## Termux setup
