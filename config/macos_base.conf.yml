@@ -61,6 +61,7 @@
     - tmux
     - pyenv
     - pyenv-virtualenv
+    - pipx
     - ripgrep
     - ffmpeg
     - zsh
