@@ -133,9 +133,11 @@ fi
 
 if [[ -d $HOME/.kube ]]; then
     export KUBECONFIG=~/.kube/config
-    for kubeconfig_file in "$HOME/.kube/configs/"*.yaml; do
-        export KUBECONFIG="$KUBECONFIG:$kubeconfig_file"
-    done
+    if [[ -d $HOME/.kube/configs ]]; then
+        for kubeconfig_file in "$HOME/.kube/configs/"*.yaml(N); do
+            export KUBECONFIG="$KUBECONFIG:$kubeconfig_file"
+        done
+    fi
 fi
 
 if [[ -d /usr/lib/dart/bin ]]; then
