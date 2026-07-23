@@ -57,6 +57,7 @@ brew "jq"
 # brew "hledger"
 
 # dev
+brew "mise"          # 运行时版本管理器 (Python/Node/Flutter 等)
 # brew "ruby"
 # brew "go"
 # brew "postgresql"

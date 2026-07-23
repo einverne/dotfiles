@@ -59,6 +59,7 @@
     - fzf
     - htop
     - tmux
+    - mise
     - pyenv
     - pyenv-virtualenv
     - pipx

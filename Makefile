@@ -44,15 +44,8 @@ brew: ## Install brew & cask packages
 tmux: ## Install non-brew tools eg. tmux package manager
 	@./install -c config/tmux.conf.yml
 
-mise: ## Ensure mise is installed
-	@if command -v mise >/dev/null 2>&1; then \
-		echo "mise already installed"; \
-	elif command -v brew >/dev/null 2>&1; then \
-		brew install mise; \
-	else \
-		echo "Please install mise manually: https://mise.jdx.dev"; \
-		exit 1; \
-	fi
+mise: ## Install mise standalone (normally installed via `make brew`)
+	@brew install mise
 
 update: ## Update everything
 	@make _prepare
@@ -61,4 +54,4 @@ update: ## Update everything
 vim: ## Setup vim
 	@./install -c config/vim.conf.yml
 
-all: _prepare dotfiles _bootstrap brew tmux mise ## Run all tasks at once
+all: _prepare dotfiles _bootstrap brew tmux ## Run all tasks at once (brew installs mise)

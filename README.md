@@ -5,13 +5,13 @@ Set up by using [dotbot](https://blog.einverne.info/post/2020/08/use-dotbot-dotf
 
     cd ~
     git clone git@github.com:einverne/dotfiles.git
-	cd dotfiles
+    cd dotfiles
     # to bootstrap config for vim, zsh, tmux, git, fzf, etc
     make bootstrap
-	# under Linux desktop, install essential packages
-	make linux
-	# under macOS, install applications by brew
-	make mac
+    # under Linux desktop, install essential packages
+    make linux
+    # under macOS, install applications by brew
+    make mac
     ./install -c config/macos.conf.yaml
 
 Disable `.DS_Store` creation on network and USB volumes (also included in `macos/init_mac.sh`):
@@ -26,13 +26,13 @@ Log out and log in again, zinit will install all plugins automatically. If you u
 ## Termux setup
 Install dependency first:
 
-	pkg install make python vim git
+    pkg install make python vim git
 
 then:
 
-	git clone git@github.com:einverne/dotfiles.git
-	cd dotfiles
-	make termux
+    git clone git@github.com:einverne/dotfiles.git
+    cd dotfiles
+    make termux
 
 ## Overview
 
@@ -44,7 +44,6 @@ then:
 
 GUI applications:
 
-- Kitty
 - Karabiner-Elements
 - Hammerspoon
 
@@ -103,11 +102,11 @@ Enter vim, run `:PlugInstall`, after install all plugin, you will meet an error,
 
 For Ubuntu and derivatives:
 
-	sudo apt-get install exuberant-ctags
+    sudo apt-get install exuberant-ctags
 
 with yum:
 
-	sudo yum install ctags-etags
+    sudo yum install ctags-etags
 
 ## Tmux config
 I take some Tmux config from [gpakosz](https://github.com/gpakosz/.tmux). If you want to learn more about tmux, you can check [this article](http://einverne.github.io/post/2017/07/tmux-introduction.html).
