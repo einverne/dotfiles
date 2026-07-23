@@ -31,6 +31,9 @@
       path: .vim
     ~/.vimrc:
       path: .vimrc
+    ~/.config/nvim:
+      path: .config/nvim
+      create: true
     ~/.ideavimrc:
       if: '[ `uname` = Darwin ]'
       path: idea/.ideavimrc
