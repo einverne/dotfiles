@@ -38,5 +38,4 @@ alias qs='open -a QSpace'
 
 # AI CLI tools with permission skip
 alias cc='headroom wrap claude --dangerously-skip-permissions'
-alias ge='gemini --yolo'
 alias cx='headroom wrap codex --dangerously-bypass-approvals-and-sandbox'
