@@ -47,3 +47,5 @@ dump.rdb
 .history
 
 *.gitignored.*
+
+**/.claude/settings.local.json
