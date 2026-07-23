@@ -2,7 +2,7 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-export EDITOR=vim
+export EDITOR=nvim
 #export TERM="screen-256color"
 export MISE_DATA_DIR="${MISE_DATA_DIR:-$HOME/.local/share/mise}"
 

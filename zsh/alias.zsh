@@ -2,7 +2,7 @@
 #alias ssh="kitty +kitten ssh"
 alias k="kubectl"
 alias tmux="TERM=screen-256color tmux -2"
-alias vi="vim"
+alias vi="nvim"
 #alias ls="exa"
 alias mux="TERM=screen-256color tmuxinator"
 #alias ls="ls -alh"
