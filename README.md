@@ -1,18 +1,26 @@
-This is my personal dotfiles which contain config for vim, zsh, tmux, git, fzf etc;
+This is my personal dotfiles which contain config for Neovim, vim, zsh, tmux, git, fzf etc.
+
+Configuration files live in this repo and are symlinked into `$HOME` by [dotbot](https://github.com/anishathalye/dotbot/); the `Makefile` wraps every install/update command. Edit a file in the repo and the change takes effect immediately through the symlink — then commit and push to sync it to your other machines.
 
 ## macOS setup
-Set up by using [dotbot](https://blog.einverne.info/post/2020/08/use-dotbot-dotfiles-management.html):
 
-    cd ~
-    git clone git@github.com:einverne/dotfiles.git
-    cd dotfiles
-    # to bootstrap config for vim, zsh, tmux, git, fzf, etc
-    make bootstrap
-    # under Linux desktop, install essential packages
-    make linux
-    # under macOS, install applications by brew
-    make mac
-    ./install -c config/macos.conf.yaml
+Bootstrap a brand-new machine with [dotbot](https://blog.einverne.info/post/2020/08/use-dotbot-dotfiles-management.html):
+
+```bash
+cd ~
+git clone git@github.com:einverne/dotfiles.git
+cd dotfiles
+
+make bootstrap   # create all symlinks (nvim, vim, zsh, tmux, git, fzf, ...)
+make mac         # install GUI apps + CLI tools via brew (neovim, mise, ripgrep, fd, ...)
+make macos       # apply macOS system defaults (optional)
+```
+
+Then finish the first-run steps:
+
+- **Log out and log back in** — zinit installs all zsh plugins automatically.
+- **Run `nvim` once** — [lazy.nvim](https://github.com/folke/lazy.nvim) bootstraps and installs every Neovim plugin; [Mason](https://github.com/mason-org/mason.nvim) installs the language server the first time you open a file of that type.
+- **In tmux, press `Ctrl-b` + `I`** — [tpm](https://github.com/tmux-plugins/tpm) installs all tmux plugins.
 
 Disable `.DS_Store` creation on network and USB volumes (also included in `macos/init_mac.sh`):
 
@@ -21,7 +29,31 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 ```
 
-Log out and log in again, zinit will install all plugins automatically. If you use vi to edit file at first time, the vim-plug will install all vim plugins automatically.
+### Updating an existing machine
+
+```bash
+cd ~/dotfiles
+git pull
+make dotfiles    # rebuild symlinks (run after pulling new links, e.g. the nvim config)
+# or
+make update      # update everything, including submodules
+```
+
+### `make` command reference
+
+Run `make help` to list every documented target.
+
+| Command | What it does |
+| --- | --- |
+| `make bootstrap` | New-machine init: create symlinks + base bootstrap |
+| `make dotfiles` | Rebuild symlinks only (run after editing `config/install.conf.yml`) |
+| `make mac` | Install macOS apps and CLI tools via brew (includes `mise`) |
+| `make brew` | Batch-install from `~/.Brewfile` via `brew bundle` (includes `mise`) |
+| `make mise` | Install `mise` standalone (normally covered by the brew flow) |
+| `make tmux` | Install non-brew tools such as the tmux plugin manager |
+| `make macos` | Run the macOS system-defaults scripts |
+| `make linux` / `make termux` | Provision a Linux / Termux environment |
+| `make update` | Update everything |
 
 ## Termux setup
 Install dependency first:
@@ -38,8 +70,10 @@ then:
 
 - using [dotbot](https://github.com/anishathalye/dotbot/) to manage dotfiles, [read more](https://blog.einverne.info/post/2020/08/use-dotbot-dotfiles-management.html)
 - zsh, using [zinit](https://blog.einverne.info/post/2020/10/use-zinit-to-manage-zsh-plugins.html) as zsh plugin management
-- vim, using [vim-plug](https://github.com/junegunn/vim-plug) to manage vim plugins, vim-plug relate configuration is under `vim-plug_vimrc`. In Vim, `:PlugInstall` to install all vim plugins.
+- **Neovim**, the primary editor, using [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins. Config lives under `.config/nvim/`. `vi` is aliased to `nvim` and `$EDITOR` is `nvim`. See the [Neovim config](#neovim-config) section below.
+- vim (legacy), kept for compatibility and still driven by [vim-plug](https://github.com/junegunn/vim-plug). Run `vim` directly to use it; `:PlugInstall` installs its plugins.
 - tmux, using [tpm](https://blog.einverne.info/post/2017/12/tmux-plugins.html) to manage tmux plugins, in tmux, press `Ctrl +B` + `I` to install all tmux plugins.
+- [mise](https://mise.jdx.dev) to manage runtime versions (Python / Node / Flutter, ...), installed via brew.
 - other useful tools, like [fzf](https://blog.einverne.info/post/2019/08/fzf-usage.html) to fuzzy search, ripgrep for recursively searching directories, zoxide to replace cd, exa to replace ls.
 
 GUI applications:
@@ -79,17 +113,34 @@ Autonomous task execution specialists:
 ### zsh config
 to see `.zshrc` file.
 
-### Vim config
-vim-plug related configuration is under `vim-plug_vimrc`, to show all plugins list, use `:PluginList` in vim.
+### Neovim config
 
-python related configurations is under `python_vimrc`.
+Neovim is the primary editor. Its config is a modular Lua setup under `.config/nvim/`, symlinked to `~/.config/nvim` and managed by [lazy.nvim](https://github.com/folke/lazy.nvim).
+
+```
+.config/nvim/
+├── init.lua                 # entry: leader → options → keymaps → autocmds → lazy
+├── lua/config/              # options, keymaps, autocmds, lazy bootstrap
+└── lua/plugins/             # one file per plugin group
+```
+
+- First launch installs every plugin automatically; language servers are installed on demand by [Mason](https://github.com/mason-org/mason.nvim).
+- Requires a [Nerd Font](https://www.nerdfonts.com/) terminal font plus `ripgrep` and `fd` (all in the brew install) for icons and Telescope search.
+- Manage things in-editor with `:Lazy` (plugins), `:Mason` (language servers) and `:checkhealth`.
+- Leader key is `,`. See `.config/nvim/README.md` for the full keymap table and the Vim→Neovim plugin mapping.
+
+### Vim config (legacy)
+
+The original Vim setup is kept for compatibility — run `vim` directly to use it (`vi` is aliased to `nvim`). vim-plug related configuration is under `vim-plug_vimrc`, to show all plugins list, use `:PluginList` in vim. Python related configurations are under `python_vimrc`.
 
 ## Components
 
 - bin/: executable shell scripts, Anything in bin/ will get added to your $PATH and be made available everywhere.
 - conf/: configuration file of zsh etc
 
-## Instruction for vim
+## Instruction for vim (legacy)
+
+> Neovim is the primary editor (see [Neovim config](#neovim-config)). The steps below apply only to the legacy `vim`.
 
 Enter the vim and then run `:PlugInstall` to install all plugins.
 
