@@ -68,12 +68,12 @@ zinit load agkozak/zsh-z
 
 
 # 语法高亮
-zinit ice lucid wait='0' atinit='zpcompinit'
+zinit ice lucid atinit='zpcompinit'
 zinit light zdharma-continuum/fast-syntax-highlighting
 
 # 自动建议
 
-zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
+zinit ice lucid atload'!_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
 
 # 补全
