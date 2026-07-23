@@ -81,7 +81,8 @@ zinit ice lucid wait='0'
 zinit light zsh-users/zsh-completions
 
 # 加载 OMZ 框架及部分插件
-zinit snippet OMZ::lib/completion.zsh
+# Skip OMZ completion.zsh here: zsh-completions + one compinit pass are enough,
+# and OMZ::lib/completion.zsh resets WORDCHARS.
 zinit snippet OMZ::lib/history.zsh
 zinit snippet OMZ::lib/key-bindings.zsh
 zinit snippet OMZ::lib/theme-and-appearance.zsh
@@ -145,11 +146,9 @@ esac
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-
-  autoload -Uz compinit
-  compinit
 fi
 autoload -Uz compinit
+compinit
 
 # Load kubectl and helm completions
 zinit ice lucid wait='1' has'kubectl' id-as'kubectl-completion' \
@@ -306,7 +305,9 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Entire CLI shell completion
-source <(entire completion zsh) 2>/dev/null || true
+if command -v entire >/dev/null 2>&1; then
+  source <(entire completion zsh)
+fi
 
 # Added by Nowledge Mem
 export PATH="$HOME/.local/bin:$PATH"
@@ -325,3 +326,16 @@ export ANTHROPIC_BASE_URL="http://127.0.0.1:8787"
 export ENABLE_TOOL_SEARCH="true"
 export OPENAI_BASE_URL="http://127.0.0.1:8787/v1"
 # <<< headroom persistent env <<<
+
+# Added by Antigravity IDE
+export PATH="/Users/einverne/.antigravity-ide/antigravity-ide/bin:$PATH"
+
+# >>> open-knowledge cli >>>
+# ! Contents within this block are managed by OpenKnowledge. Do not edit.
+# ! Delete this whole block to opt out — OpenKnowledge will not re-add it.
+[ -f "$HOME/.ok/env.sh" ] && . "$HOME/.ok/env.sh"
+# <<< open-knowledge cli <<<
+
+
+# Added by MiniMax Code
+export PATH="/Users/einverne/.mavis/bin:$PATH"
