@@ -28,7 +28,6 @@ local appName2Ime = {
     { 'GoldenDict', 'zh' },
     { 'GoldenDict-ng', 'zh' },
     { 'Google Chrome', 'zh' },
-    { 'IntelliJ IDEA', 'en' },
     { 'KakaoTalk', 'ko' },
     { 'kitty', 'en' },
     { 'NeteaseMusic', 'zh' },
