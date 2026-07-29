@@ -2,16 +2,24 @@
 -- 编辑体验增强插件合集。
 
 return {
-  -- flash：快速跳转，替代 vim-easymotion。保留原 f / gl 的跳转习惯。
+  -- flash：快速跳转，替代 vim-easymotion。f/F 改成多字符搜索跳转 (jump)，t/T 保留原生 till。
+  -- 关掉 char 模式：它默认把 f F t T 做成单字符移动，会盖掉下面的多字符 jump() 映射。
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      modes = {
+        char = { enabled = false },
+      },
+    },
     keys = {
-      { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash 跳转" },
-      { "F", mode = { "n", "x", "o" }, function() require("flash").jump({ search = { mode = "search" } }) end, desc = "Flash 词跳转" },
-      { "gl", mode = { "n", "x", "o" }, function() require("flash").jump({ search = { forward = true, wrap = false } }) end, desc = "Flash 行跳转" },
+      -- f 双向、F 向后；t/T 不映射，回归原生 till 动作
+      { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash 跳转 (双向)" },
+      { "F", mode = { "n", "x", "o" }, function() require("flash").jump({ search = { forward = false, wrap = false } }) end, desc = "Flash 跳转 (向后)" },
       { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter 选择" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash 远程操作" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search 搜索选择" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "命令行搜索切换 Flash 高亮" },
     },
   },
 
