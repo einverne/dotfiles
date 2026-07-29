@@ -14,6 +14,8 @@ brew "coreutils"
 brew "exa"
 brew "git"
 brew "neovim"
+# nvim-treesitter main 分支用 tree-sitter CLI 编译 parser，缺失会导致启动报 ENOENT
+brew "tree-sitter-cli"
 brew "zsh"
 brew "zsh-completions"
 brew "tmux"
