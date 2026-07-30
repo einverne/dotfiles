@@ -56,3 +56,14 @@ autocmd("TextYankPost", {
     vim.highlight.on_yank({ timeout = 200 })
   end,
 })
+
+-- 自动保存：离开插入模式或普通模式下修改内容后静默写入
+autocmd({ "InsertLeave", "TextChanged" }, {
+  group = augroup("auto_save", { clear = true }),
+  pattern = "*",
+  callback = function()
+    if vim.bo.modifiable and vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
+      vim.cmd("silent! update")
+    end
+  end,
+})
