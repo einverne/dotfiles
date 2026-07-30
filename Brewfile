@@ -53,6 +53,7 @@ brew "zlib"
 # productivity
 brew "ripgrep"
 brew "fd"
+brew "pngpaste"      # nvim obsidian.nvim 粘贴剪贴板图片 (:Obsidian paste_img)
 # brew "hexyl"
 # brew "xsv"
 brew "jq"

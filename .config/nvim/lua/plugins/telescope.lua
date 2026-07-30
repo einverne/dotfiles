@@ -11,14 +11,15 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     keys = {
-      { "<leader><leader>", "<cmd>Telescope git_files<cr>", desc = "查找 Git 文件" },
+      -- 全局内容搜索，替代 ack.vim (需要 ripgrep)。
+      -- 原来挂在 <leader>a 上，但被 nvim-treesitter-textobjects 的参数交换映射
+      -- (BufReadPost 时用 vim.keymap.set 设置) 覆盖，实际按不出来，所以挪到 <leader><leader>。
+      { "<leader><leader>", "<cmd>Telescope live_grep<cr>", desc = "全局内容搜索" },
       { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "查找文件" },
-      { "<leader><CR>", "<cmd>Telescope buffers<cr>", desc = "查找 Buffer" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "查找 Buffer" },
       { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "当前文件内查找行" },
       { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "最近打开的文件" },
       { "<leader>C", "<cmd>Telescope colorscheme<cr>", desc = "切换配色" },
-      -- 全局内容搜索，替代 ack.vim (需要 ripgrep)
-      { "<leader>a", "<cmd>Telescope live_grep<cr>", desc = "全局内容搜索" },
       { "<leader>ag", "<cmd>Telescope grep_string<cr>", desc = "搜索光标下的词" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "查找帮助" },
     },
