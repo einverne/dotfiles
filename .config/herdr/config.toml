@@ -88,7 +88,7 @@ prompt_new_tab_name        = true
 pane_borders               = true
 pane_gaps                  = true
 show_agent_labels_on_pane_borders = true
-agent_panel_sort           = "spaces"
+agent_panel_sort = "spaces"
 
 # ── Toast notifications ────────────────────────────────────────────────────────
 [ui.toast]

@@ -21,7 +21,7 @@ brew install herdr
 ./install
 ```
 
-这会将 `herdr/config.toml` 软链接到 `~/.config/herdr/config.toml`。
+这会将 `.config/herdr/config.toml` 软链接到 `~/.config/herdr/config.toml`。
 
 ---
 

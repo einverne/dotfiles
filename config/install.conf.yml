@@ -41,5 +41,5 @@
       if: '[ `uname` = Darwin ]'
       path: aerospace/aerospace.toml
     ~/.config/herdr/config.toml:
-      path: herdr/config.toml
+      path: .config/herdr/config.toml
       create: true
