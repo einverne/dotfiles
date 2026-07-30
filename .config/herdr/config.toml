@@ -65,17 +65,21 @@ navigate_pane_up         = "k"
 navigate_pane_right      = "l"
 
 # ── Custom command bindings ────────────────────────────────────────────────────
-# Open lazygit in a temporary pane (closes on exit)
+# Open lazygit in a session-modal popup (closes on exit, tab layout untouched)
 [[keys.command]]
 key     = "prefix+alt+g"
-type    = "pane"
+type    = "popup"
 command = "lazygit"
+width   = "92%"
+height  = "90%"
 
-# Open btop system monitor in a temporary pane
+# Open btop system monitor in a session-modal popup
 [[keys.command]]
 key     = "prefix+alt+m"
-type    = "pane"
+type    = "popup"
 command = "btop"
+width   = "92%"
+height  = "90%"
 
 # ─── UI ───────────────────────────────────────────────────────────────────────
 [ui]

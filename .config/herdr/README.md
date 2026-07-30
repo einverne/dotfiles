@@ -1,10 +1,6 @@
 # Herdr
 
-Herdr 是一个专为 AI 编程 Agent 设计的终端工作区管理器，类似于 tmux，但原生集成了 Claude Code、Codex、Gemini 等 AI 工具的状态感知。
-
-官网：<https://herdr.dev>
-
----
+[Herdr](https://herdr.dev) 是一个专为 AI 编程 Agent 设计的终端工作区管理器，类似于 tmux，但原生集成了 Claude Code、Codex、Gemini 等 AI 工具的状态感知。
 
 ## 安装
 
@@ -97,8 +93,18 @@ herdr server stop            # 停止 server
 
 | 快捷键 | 功能 |
 |--------|------|
-| `<prefix> Alt+G` | 在临时 pane 中打开 `lazygit` |
-| `<prefix> Alt+M` | 在临时 pane 中打开 `btop`（系统监控） |
+| `<prefix> Alt+G` | 在 popup 中打开 `lazygit`（92% × 90%） |
+| `<prefix> Alt+M` | 在 popup 中打开 `btop`（系统监控，92% × 90%） |
+
+`[[keys.command]]` 的 `type` 有三种：
+
+| `type` | 行为 | 支持 `width`/`height` |
+|--------|------|----------------------|
+| `pane` | 在当前 tab 里新开临时 pane，命令退出即关闭，会挤压现有布局 | 否 |
+| `popup` | 会话级模态终端，浮在上层，不改变 tab 布局 | 是 |
+| `shell` | 完全后台 detached 运行，无 UI | 否 |
+
+`width` / `height` 接受终端单元格数或百分比字符串（`"80%"`）。给非 `popup` 类型设置尺寸会触发配置 diagnostic。
 
 ---
 
@@ -162,7 +168,7 @@ herdr channel set preview    # 预览版
 
 | 区块 | 说明 |
 |------|------|
-| `[theme]` | 主题，支持 catppuccin / tokyo-night / dracula / nord / gruvbox 等 |
+| `[theme]` | 主题名与明暗自动切换，合法值见下方「内置主题」 |
 | `[terminal]` | 默认 shell、新 pane 工作目录策略 |
 | `[keys]` | 所有快捷键绑定，`[[keys.command]]` 挂载自定义命令 |
 | `[ui]` | 侧边栏宽度、鼠标、边框、通知、声音 |
@@ -170,6 +176,50 @@ herdr channel set preview    # 预览版
 | `[remote]` | SSH 远程会话配置 |
 | `[experimental]` | CJK IME 光标修复、嵌套运行等实验性功能 |
 | `[advanced]` | 每个 pane 的 scrollback 缓存上限 |
+
+### 内置主题
+
+`name` / `dark_name` / `light_name` 三个字段只接受以下 18 个值（herdr 0.7.4）：
+
+| 深色 | 对应浅色 |
+|------|----------|
+| `catppuccin` | `catppuccin-latte` |
+| `tokyo-night` | `tokyo-night-day` |
+| `gruvbox` | `gruvbox-light` |
+| `one-dark` | `one-light` |
+| `solarized` | `solarized-light` |
+| `kanagawa` | `kanagawa-lotus` |
+| `rose-pine` | `rose-pine-dawn` |
+| `dracula` | 无浅色变体 |
+| `nord` | 无浅色变体 |
+| `vesper` | 无浅色变体 |
+| `terminal` | 直接沿用外层终端自身配色 |
+
+命名规则并不统一：深色版多数是裸名（`gruvbox`、`kanagawa`），但 `one-dark` 带后缀；浅色版则各用上游自己的传统叫法（`catppuccin-latte`、`kanagawa-lotus`、`rose-pine-dawn`）。写成 `gruvbox-dark`、`gruvbox_light` 这类都是无效值，而且 **`herdr config check` 对未知主题名仍然返回 `config: ok`，不会报错**，所以拼错只能靠界面没变色发现。
+
+`auto_switch = true` 时实际生效的是 `dark_name` / `light_name`（跟随宿主终端的明暗外观切换），`name` 仅作回退值。因此换主题需要三个字段一起改，只改 `name` 在自动模式下没有效果。本配置当前使用：
+
+```toml
+[theme]
+name = "gruvbox"
+auto_switch = true
+dark_name = "gruvbox"
+light_name = "gruvbox-light"
+```
+
+改完后热重载生效（因为 `~/.config/herdr/config.toml` 是指向本仓库的软链接，编辑仓库内文件即可，无需重跑 `./install`）：
+
+```bash
+herdr config check           # 先校验语法
+herdr server reload-config   # 或在 TUI 中按 <prefix> Shift+R
+```
+
+此外 `[theme.custom]` 可以在基础主题之上覆盖单个色值，接受 hex（`#rrggbb`）、颜色名、`rgb(r,g,b)`，或 `panel_bg = "reset"`：
+
+```toml
+[theme.custom]
+accent = "#f5c2e7"
+```
 
 ### CJK 输入法说明
 
@@ -189,8 +239,34 @@ cjk_ime_agents = ["claude", "codex", "gemini", "kiro"]
 
 ## 日志位置
 
+日志按 session 分目录存放（herdr 0.7.x）：
+
 ```
-~/.config/herdr/herdr.log
-~/.config/herdr/herdr-client.log
-~/.config/herdr/herdr-server.log
+~/.config/herdr/sessions/<session>/herdr-server.log
+~/.config/herdr/sessions/<session>/herdr-client.log
+~/.config/herdr/sessions/<session>/session.json
+~/.config/herdr/sessions/<session>/session-history.json
 ```
+
+`~/.config/herdr/` 根目录下同名的 `herdr-server.log` / `herdr-client.log` 是旧版路径，新版已不再写入，排查问题时不要看错。查看当前目录对应的 session：
+
+```bash
+tail -f ~/.config/herdr/sessions/dotfiles/herdr-server.log
+```
+
+### 自定义命令闪退排查
+
+popup / pane 类型的自定义命令在命令退出时就会关闭，所以命令不存在时表现为「一闪而过」。日志里的退出码能直接定位原因：
+
+```
+pane.exit status="ExitStatus { code: 127, signal: None }"
+```
+
+| 退出码 | 含义 |
+|--------|------|
+| `127` | 命令未找到 —— 对应的工具没安装，或不在 herdr server 的 PATH 中 |
+| `126` | 找到了但无法执行 —— 权限不足或架构不匹配 |
+
+注意 popup 在日志中也记为 `pane.spawn` / `pane.exit`（内部复用 pane terminal 实现）。
+
+本配置依赖的外部命令：`lazygit`、`btop`，均已在 `Brewfile-essentials` 与 `config/macos_base.conf.yml` 中声明。

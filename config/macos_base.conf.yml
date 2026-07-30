@@ -57,7 +57,9 @@
     - git
     - fd
     - fzf
+    - btop
     - htop
+    - lazygit
     - tmux
     - mise
     - pyenv
