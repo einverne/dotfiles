@@ -5,10 +5,10 @@ onboarding = false
 
 # ─── Theme ────────────────────────────────────────────────────────────────────
 [theme]
-name = "catppuccin"
+name = "gruvbox"
 auto_switch = true
-dark_name = "catppuccin"
-light_name = "catppuccin-latte"
+dark_name = "gruvbox"
+light_name = "gruvbox-light"
 
 # ─── Terminal ─────────────────────────────────────────────────────────────────
 [terminal]
