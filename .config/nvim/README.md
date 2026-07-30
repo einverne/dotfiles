@@ -154,7 +154,9 @@ Neovim 里同一个按键被多处注册时：**buffer-local 映射优先于全�
 | `gf` / `<CR>` | 跟随光标所在的 `[[双链]]` 跳转到对应笔记（不存在则新建）；`<CR>` 不在链接上时是切换 checkbox |
 | `]o` / `[o` | 光标跳到当前笔记内下一个 / 上一个链接（只移动光标，不打开） |
 
-`gf`、`<CR>`、`]o`/`[o` 都是插件进入 markdown buffer 时自动注册的 buffer-local 映射，不在本仓库配置里，关闭方式是设 `vim.g.obsidian_default_keymap = false`。
+`<CR>`、`]o`/`[o` 是插件进入 markdown buffer 时自动注册的 buffer-local 映射，不在本仓库配置里，关闭方式是设 `vim.g.obsidian_default_keymap = false`。
+`gf` 则是本仓库在 `plugins/obsidian.lua` 里额外补的 buffer-local 映射：插件本身只给 `includeexpr` 配合原生 `gf` 用，但原生 `gf` 依赖 `'isfname'` 先在光标处圈出一段"像文件名"的字符，
+默认 `isfname` 不含 `[`、`]` 和空格，光标停在方括号或标题里的空格上时原生 `gf`会直接失效（`includeexpr` 都不会被调用）；这里改成光标在链接范围内就用 `:Obsidian follow_link`，其余情况落回原生 `gf`。
 
 ### 新建笔记的模板
 

@@ -163,16 +163,32 @@ return {
       local function bind_new_note(buf)
         vim.keymap.set("n", "<C-n>", "<cmd>Obsidian new<cr>", { buffer = buf, desc = "Obsidian 新建笔记" })
       end
+
+      -- gf 跟随 [[双链]]：原生 gf 依赖 'isfname' 先在光标处圈出一段文件名，
+      -- 圈不到就不会去调用下面 bufenter_callback 设的 includeexpr，而默认 isfname
+      -- 不含 `[`、`]` 和空格，光标停在方括号或标题里的空格上时原生 gf 直接失效。
+      -- 这里绕开 isfname，光标在链接范围内就直接 follow_link，否则落回原生 gf。
+      local function bind_gf(buf)
+        vim.keymap.set("n", "gf", function()
+          if require("obsidian.api").cursor_link() then
+            return "<cmd>Obsidian follow_link<cr>"
+          end
+          return "gf"
+        end, { buffer = buf, expr = true, desc = "跟随 [[双链]]（否则原生 gf）" })
+      end
+
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "markdown",
         callback = function(args)
           bind_new_note(args.buf)
+          bind_gf(args.buf)
         end,
       })
       -- ft = "markdown" 触发插件加载时，当前 buffer 的 FileType 事件已经过去，
       -- 上面的 autocmd 补不上，这里手动给当前 buffer 补一次。
       if vim.bo.filetype == "markdown" then
         bind_new_note(0)
+        bind_gf(0)
       end
     end,
   },
