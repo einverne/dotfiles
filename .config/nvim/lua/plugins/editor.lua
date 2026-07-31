@@ -24,7 +24,40 @@ return {
   },
 
   -- 成对符号操作 (cs"' / ds( / ysiw)，替代 tpope/vim-surround。
-  { "kylechui/nvim-surround", event = "VeryLazy", opts = {} },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    opts = {
+      surrounds = {
+        -- l = link：把词/选区包成 markdown 链接 [文字](URL)，URL 取自系统剪贴板。
+        -- 典型流程是浏览器里 Cmd-C 复制地址，回到 nvim 光标停在词上按 ysiwl。
+        -- l 不在默认 surround 表里（默认是 ( { " t 这些），不会撞键，所以直接全局注册。
+        ["l"] = {
+          -- 写成函数而不是静态表：每次调用时现读剪贴板，写成表会在配置加载那一刻被固化。
+          -- %s 全删是为了去掉复制时常带上的换行，URL 里本来也不该有空白。
+          add = function()
+            local url = vim.fn.getreg("+"):gsub("%s", "")
+            return { { "[" }, { "](" .. url .. ")" } }
+          end,
+          -- %b[] / %b() 是 Lua 的平衡匹配，链接文字里再嵌方括号也能圈出完整的链接
+          find = "%b[]%b()",
+          -- delete / change.target 的捕获组约定见 :h nvim-surround.config.get_selections()：
+          -- 第 1、3 组是「左右分隔符」的文本捕获，第 2、4 组必须是空的位置捕获 ()。
+          -- 网上流传的版本把第 3 组写成 (.-) 去捕获 URL，那会被当成分隔符连着开头的
+          -- "[x" 一起删掉；第 2、4 组写成文本捕获则直接报 "must be empty"。
+          -- 这里左分隔符是 "["、右分隔符是 "](url)"，和上面 add 的产出正好对称。
+          delete = "^(%[)().-(%]%b())()$", -- dsl：拆掉链接，只留显示文字
+          change = {
+            target = "^(%[)().-(%]%b())()$", -- csll：文字不动，只把 URL 换成剪贴板里的新值
+            replacement = function()
+              local url = vim.fn.getreg("+"):gsub("%s", "")
+              return { { "[" }, { "](" .. url .. ")" } }
+            end,
+          },
+        },
+      },
+    },
+  },
 
   -- 注释：gcc 注释当前行，gc 注释选区，替代 nerdcommenter。
   {

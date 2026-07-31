@@ -37,6 +37,7 @@ lua/plugins/*.lua        # 各插件的独立配置
 | --- | --- | --- |
 | lazy.nvim | vim-plug | 插件管理 |
 | nvim-lspconfig + mason + nvim-cmp | YouCompleteMe / jedi-vim | 补全、跳转、诊断 |
+| LuaSnip + friendly-snippets | — | 代码片段展开（Vim 时代没装独立片段插件） |
 | nvim-treesitter | 正则语法高亮 | 精准高亮与缩进 |
 | telescope.nvim | fzf.vim | 模糊查找文件/全文检索内容/buffer |
 | nvim-tree.lua | NERDTree | 文件树 (F2) |
@@ -78,6 +79,8 @@ lua/plugins/*.lua        # 各插件的独立配置
 | `S` | Flash Treesitter 选择 |
 | `gcc` / `gc` | 注释行 / 选区 (Comment.nvim) |
 | `ys{motion}{c}` / `ds{c}` / `cs{c1}{c2}` | 加 / 删 / 改 成对符号 (nvim-surround) |
+| `ysiwl` / `Sl`（可视模式） | 把光标下的词 / 选区包成 markdown 链接，URL 取自系统剪贴板（见下方「Markdown 链接」） |
+| `csll` / `dsl` | 换掉链接的 URL（`cs` 要 target + replacement 两个字符）/ 拆掉链接只留显示文字 |
 | `Tab`（普通/可视模式） | 跳到配对括号 |
 | `<M-j>` / `<M-k>` | 当前行/选区上移一行 / 下移一行 |
 | `,ss` | 清除当前 buffer 行尾空白 |
@@ -135,6 +138,84 @@ Neovim 里同一个按键被多处注册时：**buffer-local 映射优先于全�
 
 > 历史遗留：`,a` 曾经同时被 telescope（全局内容搜索）和 treesitter-textobjects（参数交换）注册，
 > 后者总是覆盖前者，导致全局搜索按键失效。现已把全局搜索挪到 `,,`，`,a` 现在专属于参数交换，不再冲突。
+
+## 代码片段 (LuaSnip)
+
+片段引擎是 [LuaSnip](https://github.com/L3MON4D3/LuaSnip)，片段库是 [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)（VSCode 格式，按 filetype 懒加载），
+两者都在 `plugins/cmp.lua` 里作为 nvim-cmp 的依赖引入，展开出来的候选走 `luasnip` 这个补全来源。
+
+用法：**插入模式**敲片段前缀 → nvim-cmp 弹出候选（图标是 Snippet）→ 确认展开 → 在占位符之间跳。
+
+| 按键 | 作用 |
+| --- | --- |
+| `<CR>` | 确认候选，展开片段 |
+| `<Tab>` / `<S-Tab>` | 展开后：跳到下一个 / 上一个占位符 |
+| `<C-Space>` | 手动唤出补全菜单（前缀太短没自动弹时用） |
+
+> ⚠️ `<Tab>` 在**补全菜单可见时**是「选下一项」，只有菜单关掉、片段已展开后才是「跳占位符」。
+> 所以确认候选请用 `<CR>`，习惯性按 `<Tab>` 只会在候选列表里往下走。
+> （普通/可视模式的 `Tab` 是跳配对括号，和这里无关。）
+
+### 常用 markdown 片段
+
+| 前缀 | 展开成 |
+| --- | --- |
+| `l` / `link` | `[text](url)` |
+| `img` | `![alt text](path)` |
+| `u` / `url` | `<url>` |
+| `h1` … `h6` | 各级标题 |
+| `b` / `i` / `bi` | `**粗体**` / `*斜体*` / `***粗斜体***` |
+| `code` / `codeblock` | 行内代码 / 围栏代码块（带语言占位符） |
+| `task` / `task2` … `task5` | 1 ~ 5 条 `- [ ]` 待办 |
+| `2x3table` / `3x3table` / `3x5table` … | N 行 M 列的表格骨架 |
+| `quote` / `strikethrough` / `horizontal rule` | 引用 / `~~删除线~~` / `----------` |
+
+完整清单见 `~/.local/share/nvim/lazy/friendly-snippets/snippets/markdown.json`。
+
+### 加自己的片段
+
+`cmp.lua` 里调的是不带参数的 `lazy_load()`，只会扫 runtimepath 上各插件自带的 `snippets/` 目录，
+**不会**读本仓库里的片段。要放自己的片段，得给它传 `paths`：
+
+```lua
+require("luasnip.loaders.from_vscode").lazy_load({
+  paths = { vim.fn.stdpath("config") .. "/snippets" },
+})
+```
+
+## Markdown 链接
+
+插链接有三条路，按「文字是否已经存在」来选：
+
+| 场景 | 做法 | 产出 |
+| --- | --- | --- |
+| 从零敲一个链接 | 插入模式 `link` → `<CR>` → `<Tab>` 填 URL | `[text](url)` |
+| 文字已在 buffer 里，URL 在剪贴板 | 光标停在词上 `ysiwl`；或可视选中后 `Sl` | `[文字](剪贴板 URL)` |
+| 改已有链接的 URL / 拆掉链接 | 光标在链接内 `csll` / `dsl` | 换 URL / 只留显示文字 |
+| 链接到仓库里的另一篇笔记 | 插入模式敲 `[[` 触发笔记名补全；或可视模式 `,oL` | `[[笔记名]]` |
+
+这套按键是本仓库在 `plugins/editor.lua` 里给 nvim-surround 自定义的 `l`（link）surround：
+
+| 按键 | 作用 |
+| --- | --- |
+| `ysiwl` | 光标下的词 → `[词](剪贴板 URL)` |
+| `Sl`（可视模式选中后） | 选区 → `[选区](剪贴板 URL)` |
+| `csll` | 光标在链接内，把 URL 换成剪贴板里的新值，显示文字不动 |
+| `dsl` | 拆掉链接，只留下显示文字 |
+
+几个实现上的坑：
+
+- `csll` 是**两个** `l`：`cs{target}{replacement}` 要求 target 和 replacement 各一个字符，只按 `csl` 会卡在等待第二个字符的状态。`ds{target}` 只要一个，所以是 `dsl`。
+- `add` 写成函数而不是静态字符串，才能在**每次调用时**现读剪贴板；写成表的话 URL 会在 lazy.nvim 求值 `opts` 那一刻被固化。
+- 顺带把剪贴板里的空白字符全删掉，避免从浏览器复制时带上的换行插进链接里。
+- `delete` / `change.target` 的捕获组有硬性约定（`:h nvim-surround.config.get_selections()`）：**第 1、3 组是左右分隔符的文本捕获，第 2、4 组必须是空的位置捕获 `()`**。
+  写成 `(.-)` 这类文本捕获会被当成分隔符删掉。这里左分隔符是 `[`、右分隔符是 `](url)`，和 `add` 的产出正好对称。
+- 只写 `add` 的话就只能加不能删改，`dsl` / `csll` 依赖 `find` / `delete` / `change`。
+  模式里的 `%b[]` 是 Lua 的平衡匹配，`[see [x] here](url)` 这种嵌套方括号也能圈出完整链接。
+- `l` 不在 nvim-surround 的默认 surround 表里（默认是 `(` `{` `"` `t` 这些），所以全局注册不会撞键。
+
+第三条路产出的是 `[[双链]]` 而不是 `[](...)`，因为 `plugins/obsidian.lua` 里设了 `link.style = "wiki"`，
+对齐 vault 的 `app.json`（`useMarkdownLinks=false`）—— 这是刻意的，改成 markdown 链接会和 Obsidian App 那边不一致。
 
 ## Obsidian 笔记（`,o` 前缀）
 
