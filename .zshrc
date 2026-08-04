@@ -316,16 +316,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # Added by Antigravity CLI installer
 export PATH="/Users/einverne/.local/bin:$PATH"
 
-# >>> headroom persistent env >>>
-export HEADROOM_PORT="8787"
-export HEADROOM_HOST="127.0.0.1"
-export HEADROOM_MODE="token"
-export HEADROOM_BACKEND="anthropic"
-export HEADROOM_TELEMETRY="off"
-export ANTHROPIC_BASE_URL="http://127.0.0.1:8787"
-export ENABLE_TOOL_SEARCH="true"
-export OPENAI_BASE_URL="http://127.0.0.1:8787/v1"
-# <<< headroom persistent env <<<
+
 
 # Added by Antigravity IDE
 export PATH="/Users/einverne/.antigravity-ide/antigravity-ide/bin:$PATH"
@@ -335,7 +326,3 @@ export PATH="/Users/einverne/.antigravity-ide/antigravity-ide/bin:$PATH"
 # ! Delete this whole block to opt out — OpenKnowledge will not re-add it.
 [ -f "$HOME/.ok/env.sh" ] && . "$HOME/.ok/env.sh"
 # <<< open-knowledge cli <<<
-
-
-# Added by MiniMax Code
-export PATH="/Users/einverne/.mavis/bin:$PATH"
