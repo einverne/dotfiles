@@ -41,6 +41,7 @@ lua/plugins/*.lua        # 各插件的独立配置
 | nvim-treesitter | 正则语法高亮 | 精准高亮与缩进 |
 | telescope.nvim | fzf.vim | 模糊查找文件/全文检索内容/buffer |
 | nvim-tree.lua | NERDTree | 文件树 (F2) |
+| outline.nvim | tagbar | 代码大纲 (F3，基于 LSP document symbols) |
 | lualine.nvim | vim-airline | 状态栏 |
 | gitsigns.nvim | — | Git 行内标记与 hunk 操作 |
 | flash.nvim | vim-easymotion | 快速跳转 (f / F / S) |
@@ -70,6 +71,7 @@ lua/plugins/*.lua        # 各插件的独立配置
 | `,C`  | 切换配色 |
 | `F2`  | 切换文件树 |
 | `,n`  | 在文件树中定位当前文件 |
+| `F3`  | 切换代码大纲 (outline.nvim) |
 
 ### 跳转 / 编辑
 
