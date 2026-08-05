@@ -267,9 +267,11 @@ for _, v in pairs(hspoon_list) do
     hs.loadSpoon(v)
 end
 
-local function muxyResize()
+local ghosttyBundleID = "com.mitchellh.ghostty"
+
+local function ghosttyResize()
     hs.timer.doAfter(0.3, function()
-        local app = hs.application.get("com.muxy.app")
+        local app = hs.application.get(ghosttyBundleID)
         local win = app and app:mainWindow()
         if win then
             win:moveToUnit(hs.geometry(0, 0, 1, 0.8))
@@ -279,11 +281,11 @@ end
 
 hs.hotkey.bind({}, "F12", function()
     local frontApp = hs.application.frontmostApplication()
-    if frontApp and frontApp:bundleID() == "com.muxy.app" then
-        hs.osascript.applescript('tell application "System Events" to set visible of process "Muxy" to false')
+    if frontApp and frontApp:bundleID() == ghosttyBundleID then
+        frontApp:hide()
     else
-        hs.execute("open -a '/Applications/Muxy.app'")
-        muxyResize()
+        hs.execute("open -a '/Applications/Ghostty.app'")
+        ghosttyResize()
     end
 end)
 

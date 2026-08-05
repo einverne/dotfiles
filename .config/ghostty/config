@@ -123,4 +123,5 @@ keybind = cmd+q=quit
 # cmd+shift+comma=reload_config is Ghostty default, no need to rebind
 
 # Quake-style terminal (Quick Terminal)
+# F12 is bound in hammerspoon/init.lua instead (toggles the Ghostty app window)
 # keybind = global:f12=toggle_quick_terminal
