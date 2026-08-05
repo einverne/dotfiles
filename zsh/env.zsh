@@ -36,9 +36,13 @@ if [[ -d $HOME/.pyenv ]]; then
 	export PYENV_ROOT="$HOME/.pyenv"
 	export PATH="$PYENV_ROOT/bin:$PATH"
 	if command -v pyenv 1>/dev/null 2>&1; then
-		eval "$(pyenv init -)"
-		# eval "$(pyenv init --path)"
-		eval "$(pyenv virtualenv-init -)"
+		# ~120ms of forks; cached and refreshed when the pyenv binary changes.
+		# --no-rehash drops the `pyenv rehash` that the generated snippet would
+		# otherwise run on every startup (~256ms). Shims are still regenerated
+		# by `pyenv install`/`uninstall`; run `pyenv rehash` by hand after
+		# pip-installing a package whose entry points you want on PATH.
+		zsh_cached_eval pyenv-init-norehash pyenv init - --no-rehash
+		zsh_cached_eval pyenv-virtualenv-init pyenv virtualenv-init -
 	fi
 fi
 
@@ -52,33 +56,37 @@ if [[ -d /home/linuxbrew/.linuxbrew ]]; then
 	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
-# Pin Flutter SDK env vars to the mise-managed 3.35 stable toolchain.
-_dotfiles_flutter_root="$(_dotfiles_tool_root flutter@3.35.0-stable 2>/dev/null)"
-if [[ -n "$_dotfiles_flutter_root" ]]; then
-  export FLUTTER_ROOT="$_dotfiles_flutter_root"
-fi
-unset _dotfiles_flutter_root
-
 # if [[ -d ~/.jenv ]]; then
 #     # jenv
 #     export PATH="$HOME/.jenv/bin:$PATH"
 #     eval "$(jenv init -)"
 # fi
 
-_dotfiles_java_home="$(_dotfiles_tool_root java 2>/dev/null)"
-if [[ -n "$_dotfiles_java_home" ]]; then
-	export JAVA_HOME="$_dotfiles_java_home"
-fi
-unset _dotfiles_java_home
+# Pin the SDK env vars to the mise-managed toolchains. Every `mise where` costs
+# ~25ms, so resolve them once into a cached snippet that is refreshed when the
+# mise binary changes. Run `zsh_cache_clear` after installing a new toolchain.
+_dotfiles_mise_env() {
+	local root
+	print -r -- '# mise-managed SDK roots'
 
-# Maven
-_dotfiles_maven_home="$(_dotfiles_tool_root maven mvn 2>/dev/null)"
-if [[ -n "$_dotfiles_maven_home" ]]; then
-	export M2_HOME="$_dotfiles_maven_home"
-	export M2="$M2_HOME/bin"
-    export PATH="$M2:$PATH"
-fi
-unset _dotfiles_maven_home
+	# Pin Flutter to the mise-managed 3.35 stable toolchain.
+	root="$(_dotfiles_tool_root flutter@3.35.0-stable 2>/dev/null)"
+	[[ -n "$root" ]] && print -r -- "export FLUTTER_ROOT=${(q)root}"
+
+	root="$(_dotfiles_tool_root java 2>/dev/null)"
+	[[ -n "$root" ]] && print -r -- "export JAVA_HOME=${(q)root}"
+
+	# Maven
+	root="$(_dotfiles_tool_root maven mvn 2>/dev/null)"
+	if [[ -n "$root" ]]; then
+		print -r -- "export M2_HOME=${(q)root}"
+		print -r -- 'export M2="$M2_HOME/bin"'
+		print -r -- 'export PATH="$M2:$PATH"'
+	fi
+}
+
+zsh_cached_eval -r "$commands[mise]" mise-sdk-env _dotfiles_mise_env
+unset -f _dotfiles_mise_env
 
 
 # Hive
@@ -108,7 +116,8 @@ if [[ -d "$HOME/hadoop/hadoop-2.9.1" ]]; then
     export CLASSPATH=$CLASSPATH:$HADOOP_HOME/lib/*:.
 fi
 
-export GPG_TTY=$(tty)
+# zsh keeps the tty in $TTY, so this normally costs no fork.
+export GPG_TTY=${TTY:-$(tty)}
 
 if [[ -d ~/.rbenv/ ]]; then
     # rbenv

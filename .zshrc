@@ -7,7 +7,7 @@ fi
 
 typeset -U path PATH fpath FPATH
 
-# Drop stale asdf entries and remove legacy Node manager paths.
+# Drop stale asdf and legacy Flutter entries.
 typeset -a _dotfiles_clean_path
 _dotfiles_clean_path=()
 for _dotfiles_path_entry in "${path[@]}"; do
@@ -15,14 +15,28 @@ for _dotfiles_path_entry in "${path[@]}"; do
     continue
   elif [[ "$_dotfiles_path_entry" == "$HOME/flutter/flutter_sdk/bin" ]]; then
     continue
-  elif [[ "$_dotfiles_path_entry" == *"/Library/Application Support/Herd/config/"*/versions/node/*/bin ]]; then
-    continue
   fi
   _dotfiles_clean_path+=("$_dotfiles_path_entry")
 done
 path=("${_dotfiles_clean_path[@]}")
 unset _dotfiles_clean_path _dotfiles_path_entry
 unset ASDF_DIR ASDF_DATA_DIR
+
+# Homebrew's completions have to be on fpath before compinit runs. `brew shellenv`
+# in .zprofile exports HOMEBREW_PREFIX; probe the standard prefixes only when it
+# is missing, so this never has to fork `brew --prefix`.
+if [[ -z $HOMEBREW_PREFIX ]]; then
+  for _dotfiles_brew_prefix in /opt/homebrew /usr/local /home/linuxbrew/.linuxbrew; do
+    if [[ -x $_dotfiles_brew_prefix/bin/brew ]]; then
+      HOMEBREW_PREFIX=$_dotfiles_brew_prefix
+      break
+    fi
+  done
+  unset _dotfiles_brew_prefix
+fi
+if [[ -n $HOMEBREW_PREFIX && -d $HOMEBREW_PREFIX/share/zsh/site-functions ]]; then
+  fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
+fi
 
 if [[ ! -f ~/.zinit/bin/zinit.zsh ]]; then
 	mkdir ~/.zinit
@@ -68,6 +82,16 @@ zinit load agkozak/zsh-z
 
 
 # 语法高亮
+# This ice runs the one and only compinit of the startup, so everything that
+# contributes to fpath has to be in place above. Rebuild the completion dump at
+# most once a day; the rest of the time -C skips the security audit and the
+# dump rewrite, which together cost ~250ms.
+ZSH_COMPDUMP=${ZDOTDIR:-$HOME}/.zcompdump
+ZINIT[ZCOMPDUMP_PATH]=$ZSH_COMPDUMP
+() {
+  setopt localoptions extendedglob
+  [[ -n $ZSH_COMPDUMP(#qN.mh-24) ]] && ZINIT[COMPINIT_OPTS]=-C
+}
 zinit ice lucid atinit='zpcompinit'
 zinit light zdharma-continuum/fast-syntax-highlighting
 
@@ -83,7 +107,7 @@ zinit light zsh-users/zsh-completions
 # 加载 OMZ 框架及部分插件
 # Skip OMZ completion.zsh here: zsh-completions + one compinit pass are enough,
 # and OMZ::lib/completion.zsh resets WORDCHARS.
-zinit snippet OMZ::lib/history.zsh
+# OMZ::lib/history.zsh is already pulled in by the turbo block near the top.
 zinit snippet OMZ::lib/key-bindings.zsh
 zinit snippet OMZ::lib/theme-and-appearance.zsh
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
@@ -111,44 +135,33 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # zinit light ogham/exa
 
 # OS specific plugins
-case `uname` in
-Darwin)
+# $OSTYPE is set by zsh itself, so this needs no `uname` fork (~12ms each).
+case $OSTYPE in
+darwin*)
   # zinit bundle kiurchv/asdf.plugin.zsh
-  [[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
 
-  # Herd injected PHP 8.3 configuration.
-  export HERD_PHP_83_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/83/"
-
-
-  # Herd injected PHP binary.
-  export PATH="/Users/einverne/Library/Application Support/Herd/bin/":$PATH
-
-
-  # Herd injected PHP 7.4 configuration.
-  export HERD_PHP_74_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/74/"
-  export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
-  export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
-
-
-  # Herd injected PHP 8.1 configuration.
-  export HERD_PHP_81_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/81/"
+  # Homebrew PHP 7.4 (the formula is no longer installed; kept for when it is).
+  if [[ -d /opt/homebrew/opt/php@7.4 ]]; then
+    export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
+    export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
+  fi
 
   # Added by Windsurf
   export PATH="/Users/einverne/.codeium/windsurf/bin:$PATH"
   ;;
-FreeBSD)
+freebsd*)
   ;;
 esac
 
-# Compinit : After zinits, before cdreplay
+# compinit already ran from the fast-syntax-highlighting ice above; a second
+# pass only re-audits and rewrites the same dump.
 # https://carlosbecker.com/posts/speeding-up-zsh/
 #
-
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+# Byte-compile the dump so the next startup loads the .zwc instead of
+# re-parsing ~40k lines of completion definitions.
+if [[ -s $ZSH_COMPDUMP && ( ! -s $ZSH_COMPDUMP.zwc || $ZSH_COMPDUMP -nt $ZSH_COMPDUMP.zwc ) ]]; then
+  zcompile -R -- $ZSH_COMPDUMP.zwc $ZSH_COMPDUMP
 fi
-autoload -Uz compinit
-compinit
 
 # Load kubectl and helm completions
 zinit ice lucid wait='1' has'kubectl' id-as'kubectl-completion' \
@@ -209,6 +222,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 #transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
 #tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }
 
+source $HOME/dotfiles/zsh/cache.zsh
 source $HOME/dotfiles/zsh/common.zsh
 source $HOME/dotfiles/zsh/keybindings.zsh
 source $HOME/dotfiles/zsh/alias.zsh
@@ -216,11 +230,11 @@ source $HOME/dotfiles/zsh/env.zsh
 source $HOME/dotfiles/zsh/fzf.zsh
 source $HOME/dotfiles/zsh/github-copilot-cli.zsh
 
-case `uname` in
-Darwin)
+case $OSTYPE in
+darwin*)
 	source $HOME/dotfiles/zsh/osx.zsh
 	;;
-FreeBSD)
+freebsd*)
 	;;
 esac
 
@@ -251,28 +265,9 @@ alias adbcap="adb shell screencap -p"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
-# [[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
-
-# Herd injected PHP 8.3 configuration.
-# export HERD_PHP_83_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/83/"
-
-
-# Herd injected PHP binary.
-# export PATH="/Users/einverne/Library/Application Support/Herd/bin/":$PATH
-
-
-# Herd injected PHP 7.4 configuration.
-# export HERD_PHP_74_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/74/"
-# export PATH="/opt/homebrew/opt/php@7.4/bin:$PATH"
-# export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
-
-
-# Herd injected PHP 8.1 configuration.
-# export HERD_PHP_81_INI_SCAN_DIR="/Users/einverne/Library/Application Support/Herd/config/php/81/"
-
 # pnpm
-case `uname` in
-Darwin)
+case $OSTYPE in
+darwin*)
 	export PNPM_HOME="/Users/einverne/Library/pnpm"
 	case ":$PATH:" in
 	  *":$PNPM_HOME:"*) ;;
@@ -291,14 +286,14 @@ if command -v mise >/dev/null 2>&1; then
 fi
 
 if command -v atuin >/dev/null 2>&1; then
-  eval "$(atuin init zsh)"
+  zsh_cached_eval atuin-init atuin init zsh
 fi
 
 # OpenClaw Completion
-[[ -f "/home/einverne/.openclaw/completions/openclaw.zsh" ]] && source "/home/einverne/.openclaw/completions/openclaw.zsh"
+[[ -f "$HOME/.openclaw/completions/openclaw.zsh" ]] && source "$HOME/.openclaw/completions/openclaw.zsh"
 
 # bun completions
-[ -s "/home/einverne/.bun/_bun" ] && source "/home/einverne/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -306,7 +301,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Entire CLI shell completion
 if command -v entire >/dev/null 2>&1; then
-  source <(entire completion zsh)
+  zsh_cached_eval entire-completion entire completion zsh
 fi
 
 # Added by Nowledge Mem
