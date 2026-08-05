@@ -35,6 +35,14 @@ return {
             },
           },
         },
+        pickers = {
+          -- <leader>fb 的 buffer 列表：按最近使用排序，最常用的排最前面。
+          buffers = {
+            show_all_buffers = true, -- 包括未加载 (unloaded) 的 buffer
+            sort_mru = true, -- 全部 buffer 按最近使用 (MRU) 排序，而不只是把当前/上一个提到前面
+            ignore_current_buffer = true, -- 不显示当前正在编辑的 buffer
+          },
+        },
       })
       pcall(telescope.load_extension, "fzf")
     end,

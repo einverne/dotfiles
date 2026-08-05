@@ -16,6 +16,7 @@ ln -s ~/dotfiles/.config/nvim ~/.config/nvim
 
 ```bash
 brew install ripgrep fd    # Telescope 内容搜索 / 文件查找
+xcode-select --install     # make + C 编译器，telescope-fzf-native 要编译原生库
 # 终端字体需为 Nerd Font，图标才能正常显示
 ```
 
@@ -268,3 +269,28 @@ obsidian.nvim 只认 `{{date}}` / `{{title}}`，套上去只会把原始标记�
 - `:Mason`     管理语言服务器
 - `:checkhealth` 排查环境问题
 - `:checkhealth obsidian` 排查笔记仓库配置
+
+### 重新编译 telescope-fzf-native
+
+telescope 的模糊排序默认是纯 Lua 的 `fzy` 算法，候选一多就会卡。
+`plugins/telescope.lua` 里把 [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim) 作为依赖引入，
+用 `build = "make"` 编出一个 C 实现的原生排序器顶替掉默认的 sorter——注意它替换的只是**排序**，
+真正列文件 / 搜内容的仍然是 `fd` 和 `rg`。
+
+判断有没有生效，看编译产物在不在：
+
+```bash
+ls ~/.local/share/nvim/lazy/telescope-fzf-native.nvim/build/libfzf.so
+```
+
+文件不存在（换新机器、`make` 当时失败、误删 build 目录）就在 nvim 里重编：
+
+```vim
+:Lazy build telescope-fzf-native.nvim
+```
+
+> ⚠️ 编译失败是**静默**的：`telescope.lua` 里用 `pcall(telescope.load_extension, "fzf")` 包住加载，
+> 缺编译器的机器上 nvim 不会报错，只会悄悄退回 Lua 排序，表现为"最近搜起来有点慢"。
+> 这是有意的健壮性取舍，代价就是得靠上面那条 `ls` 主动自查。
+
+> macOS 上产物也叫 `.so` 而不是 `.dylib`，这是对的：Lua 的 `package.cpath` 按约定加载 `.so`。
