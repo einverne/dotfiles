@@ -39,10 +39,8 @@
  :devices {
            :kybs [  ;; default for all keyboards
                   {:vendor_id 1452}
-                  {:vendor_id 9494 :product_id 17}
                   ]
     :apple [{:vendor_id 1452 :product_id 832}]
-    :quickfire [{:vendor_id 9494 :product_id 17}]
   }
  :applications {:chrome ["^com\\.google\\.Chrome$"]
                 :chrome-canary [ "^com\\.google\\.Chrome\\.canary$"]
@@ -56,7 +54,9 @@
                 :finder ["^com\\.apple\\.finder$"]
                 :terminals ["com\\.apple\\.Terminal",
                             "com\\.googlecode\\.iterm2",
-                            "net.kovidgoyal.kitty"]
+                            "net\\.kovidgoyal\\.kitty",
+                            "com\\.mitchellh\\.ghostty",
+                            "com\\.muxy\\.app"]
                 }
  :input-sources {:squirrel {:input_mode_id "com.googlecode.rimeime.inputmethod.Squirrel"
                   :input_source_id "com.googlecode.rimeime.inputmethod.Squirrel.Rime"
@@ -126,20 +126,6 @@
     ;; (custom variables) & modifiers -> Advanced
     ;; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/examples.org#custom-variable
 
-    ;; Setup for quickfire keyboard
-    {:des "CM Storm keyboard setup"
-     :rules [:quickfire
-                 [:##left_command :left_option]
-                 [:##left_option :left_command]
-                 [:##right_command :right_option]
-                 [:##right_option :right_command]
-             ]}
-
-        {:des "swap cmd <-> option when using specific devices"
-         :rules [
-                 [:##left_command :left_option [:quickfire]]
-                 [:##left_option :left_command [:quickfire]]
-                 ] }
         {:des "caps lock -> escape(alone) and caps lock -> hyper"
          :rules [
                  [:##caps_lock :!CTOleft_shift nil {:alone :escape}]
@@ -176,47 +162,8 @@
          :rules [
                  [:##right_command :f16]
                  ]}
-        {:des "colonkey (shift)"
-         :rules [:semicolon-mode
-                 [:1 :!T1]
-                 [:2 :!T2]
-                 [:3 :!T3]
-                 [:4 :!T4]
-                 [:5 :!T5]
-                 [:q :!Sq]
-                 [:w :!Sw]
-                 [:e :!Se]
-                 [:r :!Sr]
-                 [:t :!St]
-                 [:y :!Sy]
-                 [:u :!Su]
-                 [:i :!Si]
-                 [:o :!So]
-                 [:p :!Sp]
-                 [:a :!Sa]
-                 [:s :!Ss]
-                 [:d :!Sd]
-                 [:f :!Sf]
-                 [:g :!Sg]
-                 [:h :!Sh]
-                 [:j :!Sj]
-                 [:k :!Sk]
-                 [:l :!Sl]
-                 [:grave_accent_and_tilde [:!Sgrave_accent_and_tilde]] ; -> ~
-                 [:z :!Sz]
-                 [:x :!Sx]
-                 [:c :!Sc]
-                 [:v :!Sv]
-                 [:b :!Sb]
-                 [:n :!Sn]
-                 [:m :!Sm]]}
         {:des "jsim"
-         :rules [[[:j :k] [:alfred "search google" "net.deanishe.alfred-searchio"]]
-                 [[:j :semicolon] [:alfred "search tabs" "net.deanishe.alfred.safari"]]
-                 [[:j :l] :!Cspacebar]]} ; Alfred
-        {:des "ksim"
-         :rules [[[:k :l] [:alfred "search dash" "com.kapeli.dash.workflow"]]
-                 [[:k :m] [:alfred "search youtube" "net.deanishe.alfred-searchio"]]]}
+         :rules [[[:j :l] :!Cspacebar]]} ; launcher (Cmd+Space)
         {:des "2key (move + alfred)"
          :rules [:2-mode
                  [:j "say '2 j press'"]
