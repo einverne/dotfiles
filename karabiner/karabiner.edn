@@ -32,7 +32,6 @@
                       ;; key is fired twice when 500ms is elapsed (otherwise seen as a hold command)
          }}
  :templates {
-    :alfred "osascript -e 'tell application \"Alfred 4\" to run trigger \"%s\" in workflow \"%s\" with argument \"%s\"'"
     :km "osascript -e 'tell application \"Keyboard Maestro Engine\" to do script \"%s\"'"
     :open "open \"%s\""
   }
@@ -164,10 +163,9 @@
                  ]}
         {:des "jsim"
          :rules [[[:j :l] :!Cspacebar]]} ; launcher (Cmd+Space)
-        {:des "2key (move + alfred)"
+        {:des "2key (move)"
          :rules [:2-mode
                  [:j "say '2 j press'"]
-                 [:o [:alfred "soulver" "app.soulver.alfredworkflow"]]
                  [:j :!Cdown_arrow]
                  [:k :!Cup_arrow]
                  [:l :!Cright_arrow]
@@ -198,7 +196,6 @@
                  [:t [:km "list: Newsletters"]]
                  [:o [:km "list: Blogs"]]
                  [:p [:km "list: Podcasts"]]
-                 [:k [:km "list: Alfred workflows"]]
                  [:l [:km "list: Command line tools"]]
                  [:n [:km "list: Events"]]]}
         {:des "tabkey (websites)"
@@ -335,7 +332,6 @@
                  [:i [:km "open: Feedback Assistant"]]
                  [:o [:km "open: Developer"]]
                  ;[:caps_lock [:km "open: Preview"]]
-                 [:a [:km "open: Alfred Preferences"]]
                  [:j [:km "open: Dictionary"]]
                  [:k [:km "open: Preview"]]
                  [:l [:km "open: Books"]]
@@ -411,13 +407,10 @@
                  [:g [:open "/Applications/GoldenDict.app"]]
                  [:v [:open "/Applications/Visual Studio Code.app"]]
                  [:j [:open "/Users/einverne/Applications/JetBrains Toolbox/IntelliJ IDEA Ultimate.app"]]
-                 [:t [:open "/Applications/iTerm.app"]]
-                 ;[:c [:alfred "search emoji" "com.github.jsumners.alfred-emoji"]]
-                 [:spacebar [:alfred "search PDFs" "nikivi.search.files"]]]}
+                 [:t [:open "/Applications/iTerm.app"]]]}
         {:des "capskey (todo + trello)"
          :rules [:caps-mode
                  [:0 :down_arrow]
-                 [:1 [:alfred "Screenshot -> Imgur" "com.vitorgalvao.alfred.webscreenshot"]]
                  [:2 :!TO2] ; Screenshot -> Clipboard
                  [:3 :!TO3] ; Screenshot -> Annotate
                  [:4 :!TO9] ; Picture of screen -> Clipboard
@@ -512,14 +505,12 @@
                  [:##j :down_arrow]
                  [:##k :up_arrow]
                  [:##l :right_arrow]
-                 [:semicolon :!CTO0] ; Search Alfred Snippets
                  [:quote [:!Cleft_arrow :!CSright_arrow]] ; Highlight current line
                  [:c :!Cdelete_or_backspace]
                  [:v :left_shift]
                  [:##b :!Cleft_arrow]
                  [:n :!Cv] ; Paste
-                 [:##m :!Cright_arrow]
-                 [:period :!COS0]]} ; Selection -> Alfred Snippets TODO: 
+                 [:##m :!Cright_arrow]]}
         {:des "dkey (mouse)"
          :rules [:d-mode
                  [:i :!Ckeypad_hyphen] ; Zoom out
@@ -550,7 +541,6 @@
                  ;[:q [:km "open: MindNode"]]
                  [:q [:km "open: Chrome Canary"]]
                  [:w [:km "Save clipboard link"]]
-                 [:e :!CO8] ; Alfred clipboard history search
                  [:r [:km "Centre mouse to active app"]]
                  [:i :!Treturn_or_enter]
                  [:o :!Oreturn_or_enter]
@@ -570,7 +560,6 @@
                  [:n :!Freturn_or_enter]
                  [:m :!Sreturn_or_enter]
                  [:comma  [:km "Add safari link to selected markdown text"]]
-                 [:period :!CTO4] ; Alfred file action
                  [:spacebar :!CTq]]} ; Selection -> Web Searches
         {:des "gkey (actions)"
          :rules [:g-mode
@@ -590,9 +579,7 @@
                  [:period :!COS6]]} ; Toggle Night Shift on/off.
         {:des "tilkey (actions + language switches)"
          :rules [:tilde-mode
-                 [:w [:alfred "toggle wifi" "nikivi.wifi.tools"]]
                  [:e :!CTk] ; Turn on/off BTT TouchBar
-                 [:r [:alfred "restart wifi" "nikivi.wifi.tools"]]
                  [:d [:km "Commit dotfiles"]]
                  [:f [:km "Commit learning"]]
                  [:h [:km "Commit home"]]
@@ -614,7 +601,6 @@
                  [:p [:km "open: FaceTime"]]
                  [:d [:km "New Spark email"]]
                  [:f [:km "open: Spark"]]
-                 [:g [:alfred "search contacts" "nikivi.search.content"]]
                  [:h [:km "Create new contact"]]
                  [:j [:km "w: Element"]]
                  [:k [:km "open: Telegram"]]
@@ -631,19 +617,7 @@
                  [:spacebar :!CSOz]]} ; Selection -> Twitter
         {:des "xkey (spotify)"
          :rules [:x-mode
-                 [:o [:km "Paste current Spotify song link"]]
-                 [:open_bracket [:alfred "twitter_search_current_track" "com.vdesabou.spotify.mini.player"]]
-                 [:close_bracket [:alfred "add_current_track_to" "com.vdesabou.spotify.mini.player" "spotify:playlist:2N82DnDsPGMnpJhN8sVFJu"]] ; Add song to Bliss playlist
-                 [:j [:alfred "show_alfred_playlist" "com.vdesabou.spotify.mini.player"]]
-                 [:k [:alfred "show_current_track" "com.vdesabou.spotify.mini.player"]]
-                 [:semicolon [:alfred "add_current_track_to_alfred_playlist_or_your_music" "com.vdesabou.spotify.mini.player"]] ; Add song to Likes playlist
-                 [:quote [:alfred "add_current_track_to" "com.vdesabou.spotify.mini.player" "spotify:playlist:0ESjwZeTcHOWzY3FYO5zs5"]] ; Add song to Focus playlist
-                 [:n [:alfred "add_current_track_to" "com.vdesabou.spotify.mini.player"]]
-                 [:m [:alfred "remove_current_track_from" "com.vdesabou.spotify.mini.player"]]
-                 ;[:comma [:alfred "youtube_search_current_track" "com.vdesabou.spotify.mini.player"]] ; TODO: twitter search
-                 [:comma [:alfred "show_search_online" "com.vdesabou.spotify.mini.player"]] ; TODO: split up further into binds for direct searches of tracks/artists/all
-                 [:period [:alfred "youtube_search_current_track" "com.vdesabou.spotify.mini.player"]]
-                 [:slash [:alfred "reddit_search_current_track" "com.vdesabou.spotify.mini.player"]]]}
+                 [:o [:km "Paste current Spotify song link"]]]}
         {:des "ckey (run + dots)"
          :rules [:c-mode
                  [:tab [:km "proj: Learning"]]
@@ -656,7 +630,6 @@
                  [:j [:km "run: Bash"]]
                  [:k [:km "run: Go"]]
                  [:l [:km "run: Python"]]
-                 [:semicolon [:alfred "search learning" "nikivi.private.directories"]]
                  [:quote [:km "proj: Go"]]
                  [:n [:km "run: Node"]]
                  [:m [:km "run: Swift"]]
@@ -669,9 +642,6 @@
                  [:e [:km "Change macOS appearance (dark/light)"]]
                  [:i :display_brightness_decrement]
                  [:o :display_brightness_increment]
-                 [:p [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:37i9dQZEVXcMHpP6EcIqNe"]] ; Discover Weekly
-                 [:open_bracket [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:0ERn0U4qZIKC8Dy7RrMMsn"]] ; Likes 
-                 [:close_bracket [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:2N82DnDsPGMnpJhN8sVFJu"]] ; Bliss
                  ;[:a [:km "Repeat Spotify song"]] ; TODO: do in background
                  [:s [:km "Play/pause Spotify"]]
                  [:d :!CO9] ; Connect/disconnect AirPods
@@ -679,19 +649,11 @@
                  [:j :mute]
                  [:k :vk_consumer_play]
                  [:l :vk_consumer_next]
-                 [:semicolon [:alfred "spot_mini" "com.vdesabou.spotify.mini.player"]]
-                 [:grave_accent_and_tilde [:alfred "artist_radio" "com.vdesabou.spotify.mini.player"]]
-                 [:z [:alfred "song_radio" "com.vdesabou.spotify.mini.player"]]
-                 [:b [:alfred "show_playlists" "com.vdesabou.spotify.mini.player"]]
                  [:n :volume_decrement]
                  [:m :volume_increment]
-                 [:comma [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:0ESjwZeTcHOWzY3FYO5zs5"]] ; Focus
-                 [:period [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:5QOChSDsvLTtBwXmIn8Pss"]] ; Ambient
-                 [:slash [:alfred "play" "com.vdesabou.spotify.mini.player" "spotify:playlist:5fIL0WiQ79QtgsP4Y4L20V"]] ; Inspired
                  [:spacebar :!CSOv]]} ; Selection -> Google Images
         {:des "bkey (break)"
          :rules [:b-mode
-                 [:9 [:alfred "search hn" "com.vitorgalvao.alfred.hackerboard"]]
                  [:0 [:km "w: HN (show new)"]]
                  [:q [:km "w: KM forum"]]
                  [:w [:km "w: Swift forum"]]
@@ -708,7 +670,6 @@
                  [:s [:km "w: Lobsters"]]
                  [:d [:km "w: Reddit"]]
                  [:f [:km "w: Reddit (all)"]]
-                 [:g [:km "w: Alfred Forum"]]
                  [:h [:km "w: Product Hunt (new)"]]
                  [:j [:km "w: Reddit (new)"]]
                  [:k [:km "w: GitHub (front page)"]]
@@ -723,51 +684,6 @@
                  [:period [:km "w: YouTube (subs)"]]
                  [:slash [:km "w: GitHub (explore)"]]
                  [:spacebar :!TOSs]]} ; Selection -> DuckDuckGo
-        {:des "nkey (alfred)"
-         :rules [:n-mode
-                 [:1 :!O1]
-                 [:2 :!O2]
-                 [:3 :!O3]
-                 [:4 :!O4]
-                 [:5 :!O5]
-                 [:6 :!O6]
-                 [:q [:alfred "search github" "nikivi.search.the.web"]]
-                 [:w [:alfred "search twitter" "nikivi.search.the.web"]]
-                 [:e [:alfred "search subs" "net.deanishe.alfred-reddit"]]
-                 [:r [:alfred "search reddit" "nikivi.search.the.web"]]
-                 [:t [:alfred "ssh" "net.deanishe.alfred-ssh"]]
-                 [:a [:alfred "search shares" "nikivi.ask.create.share"]]
-                 [:s [:alfred "search websites" "nikivi.web.searches"]]
-                 [:d [:alfred "search stack overflow" "net.deanishe.alfred-stackoverflow"]]
-                 ;[:d [:alfred "search packages" "com.sindresorhus.npms"]]
-                 [:f [:alfred "search repos" "me.lachlan.githubjump"]]
-                 [:g [:alfred "search godoc" "nikivi.search.the.web"]]
-                 [:h [:alfred "search hn" "nikivi.search.the.web"]]
-                 [:grave_accent_and_tilde [:alfred "search learn anything" "nikivi.learn.anything"]]
-                 [:z [:alfred "search lobsters" "nikivi.search.the.web"]]
-                 [:x [:alfred "search stack" "net.deanishe.alfred-stackoverflow"]]
-                 [:c [:alfred "search wiki" "nikivi.mind"]]
-                 [:v [:alfred "search links" "nikivi.mind"]]
-                 ;[:v [:alfred "search pinboard" "nikivi.search.the.web"]] ; TODO: topics/search/more?
-                 [:b [:alfred "search bookmarks" "net.deanishe.alfred.safari"]]
-                 [:spacebar [:alfred "search history" "net.deanishe.alfred.safari"]]]}
-        {:des "mkey (dash)"
-         :rules [:m-mode
-                 [:3 [:alfred "search alfred" "nikivi.utilities" "d3 "]]
-                 [:q [:alfred "search alfred" "nikivi.utilities" "tldr "]]
-                 [:w [:alfred "search alfred" "nikivi.utilities" "django "]]
-                 [:e [:alfred "search alfred" "nikivi.utilities" "html "]]
-                 [:r [:alfred "search alfred" "nikivi.utilities" "react "]]
-                 [:t [:alfred "search alfred" "nikivi.utilities" "ts "]]
-                 [:a [:alfred "search alfred" "nikivi.utilities" "man "]]
-                 [:d [:alfred "search alfred" "nikivi.utilities" "docker "]]
-                 [:f [:alfred "search alfred" "nikivi.utilities" "apple "]]
-                 [:s [:alfred "search alfred" "nikivi.utilities" "lodash "]]
-                 [:d [:alfred "search alfred" "nikivi.utilities" "node "]]
-                 [:g [:alfred "search alfred" "nikivi.utilities" "godoc "]]
-                 [:c [:alfred "search alfred" "nikivi.utilities" "css "]]
-                 [:v [:alfred "search alfred" "nikivi.utilities" "vim "]]
-                 [:b [:alfred "search alfred" "nikivi.utilities" "bash "]]]}
         {:des "commakey (words)"
          :rules [:comma-mode
                  [:w [:n :i :k :i :v :i]] ; -> nikivi
