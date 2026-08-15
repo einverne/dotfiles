@@ -1,48 +1,42 @@
-{
-  ;; !  | means mandatory
-  ;; #  | means optional
-  ;; !! | mandatory command + control + optional + shift (hyper)
-  ;; ## | optional any
+{;; !  | means mandatory
+ ;; #  | means optional
+ ;; !! | mandatory command + control + optional + shift (hyper)
+ ;; ## | optional any
 
-  ;; to understand better how modifiers work in karabiner
-  ;; https://pqrs.org/osx/karabiner/json.html#from-event-definition-modifiers
+ ;; to understand better how modifiers work in karabiner
+ ;; https://pqrs.org/osx/karabiner/json.html#from-event-definition-modifiers
 
-  ;; C  | left_command
-  ;; T  | left_control
-  ;; O  | left_option
-  ;; S  | left_shift
-  ;; F  | fn
-  ;; Q  | right_command
-  ;; W  | right_control
-  ;; E  | right_option
-  ;; R  | right_shift
-  ;; need to prefix C T O S F with ! or #
+ ;; C  | left_command
+ ;; T  | left_control
+ ;; O  | left_option
+ ;; S  | left_shift
+ ;; F  | fn
+ ;; Q  | right_command
+ ;; W  | right_control
+ ;; E  | right_option
+ ;; R  | right_shift
+ ;; need to prefix C T O S F with ! or #
 
-  ;; https://github.com/nikitavoloboev/dotfiles/blob/master/karabiner/karabiner.edn
+ ;; https://github.com/nikitavoloboev/dotfiles/blob/master/karabiner/karabiner.edn
 
-:profiles
+ :profiles
  {:goku {:default true
-         :sim     50  ;; simultaneous_threshold_milliseconds (def: 50)
-                      ;; keys need to be pressed within this threshold to be considered simultaneous
-         :delay    0  ;; to_delayed_action_delay_milliseconds (def: 500)
-                      ;; time after which the key press is delayed
-         :alone   85  ;; to_if_alone_timeout_milliseconds (def: 1000)
-                      ;; hold for .. ms to register single tap
-         :held    500 ;; to_if_held_down_threshold_milliseconds (def: 500)
-                      ;; key is fired twice when 500ms is elapsed (otherwise seen as a hold command)
+         :sim 50 ;; simultaneous_threshold_milliseconds (def: 50)
+         ;; keys need to be pressed within this threshold to be considered simultaneous
+         :delay 0 ;; to_delayed_action_delay_milliseconds (def: 500)
+         ;; time after which the key press is delayed
+         :alone 85 ;; to_if_alone_timeout_milliseconds (def: 1000)
+         ;; hold for .. ms to register single tap
+         :held 500 ;; to_if_held_down_threshold_milliseconds (def: 500)
+         ;; key is fired twice when 500ms is elapsed (otherwise seen as a hold command)
          }}
- :templates {
-    :km "osascript -e 'tell application \"Keyboard Maestro Engine\" to do script \"%s\"'"
-    :open "open \"%s\""
-  }
- :devices {
-           :kybs [  ;; default for all keyboards
-                  {:vendor_id 1452}
-                  ]
-    :apple [{:vendor_id 1452 :product_id 832}]
-  }
+ :templates {:km "osascript -e 'tell application \"Keyboard Maestro Engine\" to do script \"%s\"'"
+             :open "open \"%s\""}
+ :devices {:kybs [;; default for all keyboards
+                  {:vendor_id 1452}]
+           :apple [{:vendor_id 1452 :product_id 832}]}
  :applications {:chrome ["^com\\.google\\.Chrome$"]
-                :chrome-canary [ "^com\\.google\\.Chrome\\.canary$"]
+                :chrome-canary ["^com\\.google\\.Chrome\\.canary$"]
                 :raycast ["^com\\.raycast\\.macos$"]
                 :chromes ["^com\\.google\\.Chrome$" "^com\\.google\\.Chrome\\.canary$"]
                 :ctrlnp ["^md\\.obsidian",
@@ -55,21 +49,18 @@
                             "com\\.googlecode\\.iterm2",
                             "net\\.kovidgoyal\\.kitty",
                             "com\\.mitchellh\\.ghostty",
-                            "com\\.muxy\\.app"]
-                }
+                            "com\\.muxy\\.app"]}
  :input-sources {:squirrel {:input_mode_id "com.googlecode.rimeime.inputmethod.Squirrel"
-                  :input_source_id "com.googlecode.rimeime.inputmethod.Squirrel.Rime"
-                  :language "zh-Hans"}
+                            :input_source_id "com.googlecode.rimeime.inputmethod.Squirrel.Rime"
+                            :language "zh-Hans"}
                  :us {:input_mode_id ""
                       :input_source_id "com.apple.keylayout.US"
                       :language "en"}}
- :layers {
-          :hyper-mode {:key :caps_lock :alone {:key :escape}}}
+ :layers {:hyper-mode {:key :caps_lock :alone {:key :escape}}}
  ;; simlayers are basically "hyper" keys
  ;; recommended for non-typing keys like `.` or tab or space
  ;; or keys like z which are used less often
- :simlayers {
-             ;;:2-mode {:key :2}
+ :simlayers {;;:2-mode {:key :2}
              ;;:3-mode {:key :3}
              ;;:4-mode {:key :4}
              ;;:tab-mode {:key :tab}
@@ -105,62 +96,48 @@
              ;;:py-mode {:key :period :condi ["in-python" 1]}
              ;;:elixir-mode {:key :period :condi ["in-elixir" 1]}
              }
- :main [
-    ;; each manipulator has a description and multiple rules
+ :main [;; each manipulator has a description and multiple rules
 
-    ;;{:des "..."                               ;; -> description
-    ;; :rules[
-    ;;          [<from>  <to>  <conditions>]    ;; -> rule 1
-    ;;          [<from>  <to>  <conditions>]    ;; -> rule 2
-    ;; ]}
+        ;;{:des "..."                               ;; -> description
+        ;; :rules[
+        ;;          [<from>  <to>  <conditions>]    ;; -> rule 1
+        ;;          [<from>  <to>  <conditions>]    ;; -> rule 2
+        ;; ]}
 
-    ;; rule [:period ["period-mode" 1] nil {:afterup ["period-mode" 0] :alone :period}]
-    ;;       |_____| |_______________| |_| |_________________________________________|
-    ;;        <from>    <to>      <conditions>         <other options>
-    ;;
-    ;; karabiner docs: ;; https://pqrs.org/osx/karabiner/json.html#complex_modifications-manipulator-definition
-    ;; <other options> includs ~to_if_alone~, ~to_if_held_down~,~to_after_key_up~, ~to_delayed_action~ and ~parameters~.
-    ;;
+        ;; rule [:period ["period-mode" 1] nil {:afterup ["period-mode" 0] :alone :period}]
+        ;;       |_____| |_______________| |_| |_________________________________________|
+        ;;        <from>    <to>      <conditions>         <other options>
+        ;;
+        ;; karabiner docs: ;; https://pqrs.org/osx/karabiner/json.html#complex_modifications-manipulator-definition
+        ;; <other options> includs ~to_if_alone~, ~to_if_held_down~,~to_after_key_up~, ~to_delayed_action~ and ~parameters~.
+        ;;
 
-    ;; (custom variables) & modifiers -> Advanced
-    ;; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/examples.org#custom-variable
+        ;; (custom variables) & modifiers -> Advanced
+        ;; https://github.com/yqrashawn/GokuRakuJoudo/blob/master/examples.org#custom-variable
 
         {:des "caps lock -> escape(alone) and caps lock -> hyper"
-         :rules [
-                 [:##caps_lock :!CTOleft_shift nil {:alone :escape}]
-                 ]}
+         :rules [[:##caps_lock :!CTOleft_shift nil {:alone :escape}]]}
         {:des "Ctrl np -> down up"
-         :rules [
-                 [:!Tn :down_arrow [:ctrlnp]]
-                 [:!Tp :up_arrow [:ctrlnp]]
-                 ]}
+         :rules [[:!Tn :down_arrow [:ctrlnp]]
+                 [:!Tp :up_arrow [:ctrlnp]]]}
         {:des "F2 as Rename in Finder"
-         :rules [
-                 [:##f2 :return_or_enter [:finder]]]}
+         :rules [[:##f2 :return_or_enter [:finder]]]}
         {:des "Disable Cmd+H Hide"
-         :rules [
-                 [:!Ch nil nil [:kybs]]
-                 ]}
+         :rules [[:!Ch nil nil [:kybs]]]}
         {:des "Ctrl W -> Delete last word"
-         :rules [
-                 [:!Tw :!Tw [:terminals]]
+         :rules [[:!Tw :!Tw [:terminals]]
                  [:!Ww :!Ww [:terminals]]
                  [:!Tw :!TOSdelete_or_backspace [:!terminals]]
-                 [:!Ww :!TOSdelete_or_backspace [:!terminals]]
-                  ]}
+                 [:!Ww :!TOSdelete_or_backspace [:!terminals]]]}
         {:des "Cmd + Q held 1 second to quit"
-         :rules [
-                 [:!Cq nil nil {:held :!Cq :repeat false}]]}
+         :rules [[:!Cq nil nil {:held :!Cq :repeat false}]]}
         {:des "Quit application by pressing command-q twice"
          :rules [[:!C#Pq [:!Cq ["command-q" 0]] ["command-q" 1]]
                  [:!C#Pq ["command-q" 1] nil {:delayed {:invoked ["command-q" 0] :canceled ["commandq" 0]}}]]}
         {:des "Use Delete as Move to Trash"
-         :rules [
-                 [:##delete_forward :!Cdelete_or_backspace [:finder]]]}
+         :rules [[:##delete_forward :!Cdelete_or_backspace [:finder]]]}
         {:des "right_command to f16"
-         :rules [
-                 [:##right_command :f16]
-                 ]}
+         :rules [[:##right_command :f16]]}
         {:des "jsim"
          :rules [[[:j :l] :!Cspacebar]]} ; launcher (Cmd+Space)
         {:des "2key (move)"
@@ -559,7 +536,7 @@
                  [:z :!Ospacebar] ; Switch language (Russian <-> English)
                  [:n :!Freturn_or_enter]
                  [:m :!Sreturn_or_enter]
-                 [:comma  [:km "Add safari link to selected markdown text"]]
+                 [:comma [:km "Add safari link to selected markdown text"]]
                  [:spacebar :!CTq]]} ; Selection -> Web Searches
         {:des "gkey (actions)"
          :rules [:g-mode
@@ -687,71 +664,71 @@
         {:des "commakey (words)"
          :rules [:comma-mode
                  [:w [:n :i :k :i :v :i]] ; -> nikivi
-                 [:a [:n :i :k :i :t :a :v :o :l :o :b :o :e :v ]]]} ; -> nikitavoloboev
-         {:des "dotkey (1-3, q-u, caps, tab)"
-          :rules [:dot-mode
-                  [:1 [:!Sc :l :o :s :e :spacebar :!S3]] ; -> Close #
-                  [:2 [:!Sr :e :f :spacebar :!S3]] ; -> Ref #
-                  [:3 [:!Sf :i :x :spacebar :!S3]] ; -> Fix #
-                  [:q [:!Sa :spacebar :slash :slash :spacebar]] ; -> // (on same line)
-                  [:w [:km "VSCode/XCode/Sublime comment on top of line"]]
-                  [:e [:!St :!So :!Sd :!So :!Ssemicolon :spacebar]] ; -> TODO:
-                  [:r [:km "VSCode/XCode/Sublime comment on top of line with TODO"]]
-                  [:t [:!Sn :!So :!St :!Se :!Ssemicolon :spacebar]] ; -> NOTE:
-                  [:y [:p :l :e :a :s :e :spacebar]] ; -> please
-                  [:u [:u :p :d :a :t :e :spacebar]] ; -> update
-                  [:caps_lock [:!Cf :!St :!So :!Sd :!So :!Ssemicolon :return_or_enter]] ; -> search TODO: in file
-                  [:grave_accent_and_tilde [:!CSf :!St :!So :!Sd :!So :!Ssemicolon :return_or_enter]] ; -> search TODO: globally
-                  [:left_gui [:!St :h :a :n :k :s :spacebar]] ; -> Thanks
-                  [:spacebar [:!St :h :a :n :k :spacebar :y :o :u :period :spacebar]]]} ; -> Thank you.
-         {:des "jsdot"
-          :rules [:js-mode
-                  [:tab [:km "w: MDN"]]
-                  [:a [:c :o :n :s :o :l :e :period :l :o :g :!S9 :!S0 :left_arrow]] ; -> console.log()
-                  ;[:a [:c :o :n :s :o :l :e :period :w :a :r :n :!S9 :!S0 :left_arrow]] ; -> console.warn()
-                  [:s [:equal_sign :!Speriod :spacebar]] ; -> =>
-                  [:d [:r :e :t :u :r :n :spacebar]] ; -> return
-                  [:f [:!Cf :c :o :n :s :o :l :e :period :l :o :g :!S9 :return_or_enter]] ; -> search console.log( in file
-                  ;[:f [:!Cf :c :o :n :s :o :l :e :period :w :a :r :n :!S9 :return_or_enter]] ; -> search console.warn( in file
-                  [:g [:right_arrow :spacebar :equal_sign :!Speriod :spacebar :!Sopen_bracket :return_or_enter]] ; -> => {}
-                  [:j [:right_arrow :spacebar :equal_sign :spacebar]] ; -> =
-                  [:k [:right_arrow :spacebar :!Sopen_bracket :return_or_enter]] ; -> {  }
-                  [:z [:spacebar :c :l :a :s :s :!Sn :a :m :e :equal_sign :!Squote :!Squote :left_arrow]] ; -> className=""
-                  ;[:x [:t :a :c :h :y :o :n :s :spacebar]] ; -> tachyons
-                  ;[:c [:spacebar :s :t :y :l :e :equal_sign :!Sopen_bracket :!Sopen_bracket :!Sclose_bracket :!Sclose_bracket :left_arrow :left_arrow]] ; -> style={{}}
-                  [:c [:spacebar :s :t :y :l :e :equal_sign :!Sopen_bracket :!Sclose_bracket :left_arrow]] ; -> style={}
-                  [:v [:j :a :v :a :s :c :r :i :p :t :spacebar]] ; -> javascript
-                  [:b [:t :y :p :e :s :c :r :i :p :t :spacebar]]]} ; -> typescript
+                 [:a [:n :i :k :i :t :a :v :o :l :o :b :o :e :v]]]} ; -> nikitavoloboev
+        {:des "dotkey (1-3, q-u, caps, tab)"
+         :rules [:dot-mode
+                 [:1 [:!Sc :l :o :s :e :spacebar :!S3]] ; -> Close #
+                 [:2 [:!Sr :e :f :spacebar :!S3]] ; -> Ref #
+                 [:3 [:!Sf :i :x :spacebar :!S3]] ; -> Fix #
+                 [:q [:!Sa :spacebar :slash :slash :spacebar]] ; -> // (on same line)
+                 [:w [:km "VSCode/XCode/Sublime comment on top of line"]]
+                 [:e [:!St :!So :!Sd :!So :!Ssemicolon :spacebar]] ; -> TODO:
+                 [:r [:km "VSCode/XCode/Sublime comment on top of line with TODO"]]
+                 [:t [:!Sn :!So :!St :!Se :!Ssemicolon :spacebar]] ; -> NOTE:
+                 [:y [:p :l :e :a :s :e :spacebar]] ; -> please
+                 [:u [:u :p :d :a :t :e :spacebar]] ; -> update
+                 [:caps_lock [:!Cf :!St :!So :!Sd :!So :!Ssemicolon :return_or_enter]] ; -> search TODO: in file
+                 [:grave_accent_and_tilde [:!CSf :!St :!So :!Sd :!So :!Ssemicolon :return_or_enter]] ; -> search TODO: globally
+                 [:left_gui [:!St :h :a :n :k :s :spacebar]] ; -> Thanks
+                 [:spacebar [:!St :h :a :n :k :spacebar :y :o :u :period :spacebar]]]} ; -> Thank you.
+        {:des "jsdot"
+         :rules [:js-mode
+                 [:tab [:km "w: MDN"]]
+                 [:a [:c :o :n :s :o :l :e :period :l :o :g :!S9 :!S0 :left_arrow]] ; -> console.log()
+                 ;[:a [:c :o :n :s :o :l :e :period :w :a :r :n :!S9 :!S0 :left_arrow]] ; -> console.warn()
+                 [:s [:equal_sign :!Speriod :spacebar]] ; -> =>
+                 [:d [:r :e :t :u :r :n :spacebar]] ; -> return
+                 [:f [:!Cf :c :o :n :s :o :l :e :period :l :o :g :!S9 :return_or_enter]] ; -> search console.log( in file
+                 ;[:f [:!Cf :c :o :n :s :o :l :e :period :w :a :r :n :!S9 :return_or_enter]] ; -> search console.warn( in file
+                 [:g [:right_arrow :spacebar :equal_sign :!Speriod :spacebar :!Sopen_bracket :return_or_enter]] ; -> => {}
+                 [:j [:right_arrow :spacebar :equal_sign :spacebar]] ; -> =
+                 [:k [:right_arrow :spacebar :!Sopen_bracket :return_or_enter]] ; -> {  }
+                 [:z [:spacebar :c :l :a :s :s :!Sn :a :m :e :equal_sign :!Squote :!Squote :left_arrow]] ; -> className=""
+                 ;[:x [:t :a :c :h :y :o :n :s :spacebar]] ; -> tachyons
+                 ;[:c [:spacebar :s :t :y :l :e :equal_sign :!Sopen_bracket :!Sopen_bracket :!Sclose_bracket :!Sclose_bracket :left_arrow :left_arrow]] ; -> style={{}}
+                 [:c [:spacebar :s :t :y :l :e :equal_sign :!Sopen_bracket :!Sclose_bracket :left_arrow]] ; -> style={}
+                 [:v [:j :a :v :a :s :c :r :i :p :t :spacebar]] ; -> javascript
+                 [:b [:t :y :p :e :s :c :r :i :p :t :spacebar]]]} ; -> typescript
         {:des "godot"
-         :rules[:go-mode
-                [:tab [:km "w: GoDoc"]]
-                [:a [:f :m :t :period :!Sp :r :i :n :t :l :n :!S9 :!S0 :left_arrow]] ; -> fmt.Println()
-                [:s [:!Ssemicolon :equal_sign :spacebar]] ; -> :=
-                [:d [:r :e :t :u :r :n :spacebar]] ; -> return
-                [:f [:!Cf :f :m :t :period :p :return_or_enter]] ; -> search fmt.p in file
-                [:g [:i :f :spacebar :e :r :r :spacebar :!S1 :equal_sign :spacebar :n :i :l :spacebar :!Sopen_bracket :return_or_enter]] ; -> if err != nil {}
-                [:j [:grave_accent_and_tilde :j :s :o :n :!Ssemicolon :!Squote :!Squote :grave_accent_and_tilde :left_arrow :left_arrow]] ; -> `json:""`
-                [:z [:l :o :g :period :!Sp :r :i :n :t :l :n :!S9 :!S0 :left_arrow]] ; -> log.Println()
-                [:x [:f :m :t :period :!Sp :r :i :n :t :l :n :!S9 :!S0 :left_arrow :!Squote :hyphen :hyphen]] ; -> fmt.Println("--")
-                [:c [:!STsemicolon]] ; Selection -> Go Playground
-                [:v [:g :o :l :a :n :g :spacebar]] ; -> golang
-                [:b [:l :o :g :period :!Sf :a :t :a :l :!S9 :e :r :r :!S0]]]} ; -> log.Fatal(err)
+         :rules [:go-mode
+                 [:tab [:km "w: GoDoc"]]
+                 [:a [:f :m :t :period :!Sp :r :i :n :t :l :n :!S9 :!S0 :left_arrow]] ; -> fmt.Println()
+                 [:s [:!Ssemicolon :equal_sign :spacebar]] ; -> :=
+                 [:d [:r :e :t :u :r :n :spacebar]] ; -> return
+                 [:f [:!Cf :f :m :t :period :p :return_or_enter]] ; -> search fmt.p in file
+                 [:g [:i :f :spacebar :e :r :r :spacebar :!S1 :equal_sign :spacebar :n :i :l :spacebar :!Sopen_bracket :return_or_enter]] ; -> if err != nil {}
+                 [:j [:grave_accent_and_tilde :j :s :o :n :!Ssemicolon :!Squote :!Squote :grave_accent_and_tilde :left_arrow :left_arrow]] ; -> `json:""`
+                 [:z [:l :o :g :period :!Sp :r :i :n :t :l :n :!S9 :!S0 :left_arrow]] ; -> log.Println()
+                 [:x [:f :m :t :period :!Sp :r :i :n :t :l :n :!S9 :!S0 :left_arrow :!Squote :hyphen :hyphen]] ; -> fmt.Println("--")
+                 [:c [:!STsemicolon]] ; Selection -> Go Playground
+                 [:v [:g :o :l :a :n :g :spacebar]] ; -> golang
+                 [:b [:l :o :g :period :!Sf :a :t :a :l :!S9 :e :r :r :!S0]]]} ; -> log.Fatal(err)
         {:des "pydot"
-          :rules[:py-mode
+         :rules [:py-mode
                  [:a [:p :r :i :n :t :!S9 :!S0 :left_arrow]] ; -> print()
                  [:s [:hyphen :!Speriod]] ; -> ->
                  [:d [:r :e :t :u :r :n :spacebar]] ; -> return
                  [:v [:p :y :t :h :o :n :spacebar]]]} ; -> python
         {:des "swiftdot"
-         :rules[:swift-mode
-                [:a [:p :r :i :n :t :!S9 :!S0 :left_arrow]] ; -> print()
-                [:v [:s :w :i :f :t :spacebar]]]} ; -> swift
+         :rules [:swift-mode
+                 [:a [:p :r :i :n :t :!S9 :!S0 :left_arrow]] ; -> print()
+                 [:v [:s :w :i :f :t :spacebar]]]} ; -> swift
         {:des "rustdot"
-          :rules[:rust-mode
+         :rules [:rust-mode
                  [:a [:p :r :i :n :t :l :n :!S1 :!S9 :!S0 :left_arrow]] ; -> println!()
                  [:v [:r :u :s :t :spacebar]]]} ; -> rust
         {:des "elixdot"
-          :rules[:elixir-mode
+         :rules [:elixir-mode
                  [:a [:!Si :!So :period :p :u :t :s :!S9 :!S0 :left_arrow]] ; -> IO.puts()
                  [:v [:e :l :i :x :i :r :spacebar]]]} ; -> elixir
         {:des "spacekey (websites)"
@@ -785,4 +762,4 @@
                  [:comma [:km "w: Diagrams"]]
                  [:period [:km "w: YouTube"]]
                  [:slash [:km "w: GitHub PR"]]]} ; TODO:
-]}
+        ]}
