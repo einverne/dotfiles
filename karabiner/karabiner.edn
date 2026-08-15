@@ -35,7 +35,8 @@
  :devices {:kybs [;; default for all keyboards
                   {:vendor_id 1452}]
            :apple [{:vendor_id 1452 :product_id 832}]}
- :applications {:chrome ["^com\\.google\\.Chrome$"]
+ :applications {:bitwarden ["com.bitwarden.desktop"]
+                :chrome ["^com\\.google\\.Chrome$"]
                 :chrome-canary ["^com\\.google\\.Chrome\\.canary$"]
                 :raycast ["^com\\.raycast\\.macos$"]
                 :chromes ["^com\\.google\\.Chrome$" "^com\\.google\\.Chrome\\.canary$"]
@@ -384,7 +385,7 @@
                  [:g [:open "/Applications/GoldenDict.app"]]
                  [:v [:open "/Applications/Visual Studio Code.app"]]
                  [:j [:open "/Users/einverne/Applications/JetBrains Toolbox/IntelliJ IDEA Ultimate.app"]]
-                 [:t [:open "/Applications/iTerm.app"]]]}
+                 [:t [:open "/Applications/Ghostty.app"]]]}
         {:des "capskey (todo + trello)"
          :rules [:caps-mode
                  [:0 :down_arrow]
