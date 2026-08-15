@@ -1,0 +1,36 @@
+#!/bin/sh
+# Rebuild karabiner.json from karabiner.edn via goku, then normalize the
+# output to Karabiner-Elements' own serialization style (strip default-valued
+# parameters, sort object keys, format with karabiner_cli) so the file stays
+# byte-identical whether goku or Karabiner-Elements wrote it last.
+set -e
+
+JSON="$HOME/.config/karabiner/karabiner.json"
+CLI="/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
+
+/opt/homebrew/bin/goku
+
+/usr/bin/python3 - "$JSON" <<'PYEOF'
+import json, sys
+
+path = sys.argv[1]
+d = json.load(open(path))
+
+KE_DEFAULTS = {
+    'basic.simultaneous_threshold_milliseconds': 50,
+    'basic.to_delayed_action_delay_milliseconds': 500,
+    'basic.to_if_alone_timeout_milliseconds': 1000,
+    'basic.to_if_held_down_threshold_milliseconds': 500,
+    'mouse_motion_to_scroll.speed': 100,
+}
+for p in d.get('profiles', []):
+    params = p.get('complex_modifications', {}).get('parameters')
+    if params:
+        for k, v in list(params.items()):
+            if KE_DEFAULTS.get(k) == v:
+                del params[k]
+
+json.dump(d, open(path, 'w'), indent=4, sort_keys=True, ensure_ascii=False)
+PYEOF
+
+"$CLI" --format-json "$JSON"

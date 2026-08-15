@@ -214,15 +214,47 @@ Karabiner-Elements configuration uses a hybrid approach since [Goku](https://git
 - `karabiner.edn` - Goku source file for non-JIS rules (caps lock, ctrl+n/p, app-specific shortcuts, simlayers, etc.)
 - `jis-rules.json` - JIS keyboard layout remapping rules (20 rules, requires `keyboard_type_if` which Goku cannot express)
 - `merge-karabiner.sh` - Script to merge Goku-generated config with JIS rules
+- `local.karabiner-goku.plist` - LaunchAgent that watches `karabiner.edn` and rebuilds `karabiner.json` on change
+- `../bin/karabiner-goku-build` - Build pipeline: goku → normalize → `karabiner_cli --format-json`
+
+### How it works
+
+`~/.config/karabiner` is symlinked to this repo's `karabiner/` directory by dotbot,
+so the generated `karabiner.json` in the repo is always the live config — no manual
+sync needed.
+
+A LaunchAgent (`local.karabiner-goku`) watches `~/.config/karabiner.edn` with
+watchexec and runs `bin/karabiner-goku-build` on every change, which:
+
+1. runs `goku` to compile the edn into `karabiner.json`
+2. strips `parameters` entries equal to Karabiner-Elements defaults and sorts
+   object keys alphabetically
+3. formats the file with `karabiner_cli --format-json`
+
+Step 2–3 make the output byte-identical to what Karabiner-Elements itself writes
+when it rewrites the config (on restart or GUI changes), so the two programs no
+longer flip-flop the file format and git diffs stay clean.
+
+The LaunchAgent is installed by `config/macos_base.conf.yml` during `./install`
+(it also stops the old `brew services` goku watcher, which would bypass the
+formatting steps — do not re-enable it).
+
+Requires goku >= 0.8.0 (0.6.0 crashes with StackOverflowError). Note: goku's
+`-c` flag is broken; use `GOKU_EDN_CONFIG_FILE=/path/to.edn goku -d` to test an
+alternative edn file.
 
 ### Usage
 
 ```bash
-# 1. After editing karabiner.edn, run goku to generate base config
-goku
+# Editing karabiner.edn triggers a rebuild automatically (via LaunchAgent).
+# To rebuild manually:
+./bin/karabiner-goku-build
 
-# 2. Merge JIS rules into the generated config
+# To merge JIS rules into the generated config (JIS keyboards only):
 ./karabiner/merge-karabiner.sh
+
+# Format the edn source (joker preserves comments; avoid jet, it strips them):
+joker --format --write karabiner/karabiner.edn
 ```
 
 ### JIS rules overview

@@ -7,6 +7,15 @@
         then
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         fi
+    - description: Install goku watcher LaunchAgent (rebuilds karabiner.json from karabiner.edn)
+      quiet: true
+      command: |
+        if [ "$(uname)" = Darwin ]; then
+          brew services stop yqrashawn/goku/goku 2>/dev/null || true
+          cp -f karabiner/local.karabiner-goku.plist ~/Library/LaunchAgents/
+          launchctl bootout "gui/$(id -u)/local.karabiner-goku" 2>/dev/null || true
+          launchctl bootstrap "gui/$(id -u)" ~/Library/LaunchAgents/local.karabiner-goku.plist || true
+        fi
 
 - create:
     - ~/.config/kitty
@@ -68,6 +77,7 @@
     - ripgrep
     - ffmpeg
     - zsh
+    - watchexec
     - yqrashawn/goku/goku
 
 # - tap:
