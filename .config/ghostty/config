@@ -44,6 +44,9 @@ quit-after-last-window-closed  = false
 auto-update                    = check
 scrollback-limit               = 500000
 # command                        = direct:/opt/homebrew/bin/zsh
+# Use the ubiquitous terminfo entry so local shells, SSH hosts, and older
+# ncurses apps do not fail with: Error opening terminal: xterm-ghostty.
+term                           = xterm-256color
 shell-integration-features     = no-cursor,sudo,title,ssh-env,ssh-terminfo
 
 # Key bindings
