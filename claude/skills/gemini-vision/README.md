@@ -1,6 +1,6 @@
 # Gemini Vision Skill
 
-Google Gemini API skill for advanced image understanding tasks.
+Image understanding skill using Google Gemini by default, with Atlas Cloud as an optional provider.
 
 ## Quick Start
 
@@ -10,6 +10,16 @@ Google Gemini API skill for advanced image understanding tasks.
    ```bash
    export GEMINI_API_KEY="your-api-key"
    ```
+
+Optional Atlas Cloud setup:
+
+```bash
+export ATLASCLOUD_API_KEY="your-api-key"
+python scripts/analyze-image.py image.jpg "What's in this image?" --provider atlas
+```
+
+Atlas Cloud uses `google/gemini-3.5-flash` by default. The script submits the multimodal request once and does not retry paid POST requests.
+The optional path accepts PNG, JPEG, and WEBP images up to 20 MB for captioning, classification, and visual QA. File API references, PDFs, detection, and segmentation remain on the default Gemini path.
 
 ## Skill Structure
 
@@ -46,6 +56,9 @@ python scripts/analyze-image.py image.jpg "What's in this image?"
 
 # Multiple images
 python scripts/analyze-image.py img1.jpg img2.jpg "What's different?"
+
+# Optional Atlas Cloud provider
+python scripts/analyze-image.py image.jpg "Describe this" --provider atlas
 
 # Upload file
 python scripts/upload-file.py large_image.jpg
@@ -96,6 +109,7 @@ The skill checks for `GEMINI_API_KEY` in this order:
 - **gemini-2.5-flash-lite**: Lightweight, high volume
 - **gemini-2.0-flash**: Object detection
 - **gemini-1.5-pro/flash**: Previous generation
+- **google/gemini-3.5-flash**: Atlas Cloud default for `--provider atlas`
 
 ## Documentation
 
