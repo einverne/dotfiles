@@ -56,6 +56,36 @@ return {
         { name = "private", path = "~/Sync/private-wiki" },
         { name = "research", path = "~/Sync/Research-wiki" },
         { name = "japanese", path = "~/Sync/japanese-learning-notes" },
+        -- ESP32 调查手册（VitePress 站点）。目录约定和 wiki 不同，下面这些都对着
+        -- ~/Sync/esp32/.obsidian/app.json 和 writing/style-guide.md 覆盖：
+        -- 新笔记进 writing/drafts（docs/ 里的页面都会发布），模板在 writing/templates，
+        -- 附件在 docs/assets；不排除 node_modules 的话 VitePress 依赖里的 md 会混进搜索。
+        {
+          name = "esp32",
+          path = "~/Sync/esp32",
+          overrides = {
+            notes_subdir = "writing/drafts",
+            templates = { folder = "writing/templates" },
+            note = { template = "article.md" },
+            unique_note = { folder = "writing/drafts", template = "article.md" },
+            attachments = { folder = "docs/assets" },
+            file = { ignore_filters = { "node_modules/", "docs/.vitepress/", "scripts/" } },
+          },
+        },
+        -- Proxmox VE 使用指南，和 esp32 同一套 VitePress 结构（见 writing/style-guide.md）。
+        -- 默认模板用 chapter.md，客户机 / 排错页用 ,oF 改插 guest.md / troubleshooting.md。
+        {
+          name = "proxmox",
+          path = "~/Sync/proxmox",
+          overrides = {
+            notes_subdir = "writing/drafts",
+            templates = { folder = "writing/templates" },
+            note = { template = "chapter.md" },
+            unique_note = { folder = "writing/drafts", template = "chapter.md" },
+            attachments = { folder = "docs/assets" },
+            file = { ignore_filters = { "node_modules/", "docs/.vitepress/", "scripts/" } },
+          },
+        },
       },
 
       -- app.json: newFileFolderPath=Zettelkasten，新笔记统一落在这里
@@ -168,9 +198,13 @@ return {
       -- 圈不到就不会去调用下面 bufenter_callback 设的 includeexpr，而默认 isfname
       -- 不含 `[`、`]` 和空格，光标停在方括号或标题里的空格上时原生 gf 直接失效。
       -- 这里绕开 isfname，光标在链接范围内就直接 follow_link，否则落回原生 gf。
+      -- follow_link 本质是对插件内置的 obsidian-ls 发 textDocument/definition，
+      -- 而 obsidian-ls 只在 workspaces 里的笔记上启动（插件会给这类 buffer 设 b:obsidian_buffer）。
+      -- 仓库外的 markdown（dotfiles 的 README 等）也会命中 FileType，不判断的话
+      -- 会报 "textDocument/definition is not supported by any server"。
       local function bind_gf(buf)
         vim.keymap.set("n", "gf", function()
-          if require("obsidian.api").cursor_link() then
+          if vim.b.obsidian_buffer and require("obsidian.api").cursor_link() then
             return "<cmd>Obsidian follow_link<cr>"
           end
           return "gf"

@@ -16,6 +16,18 @@ return {
       -- (BufReadPost 时用 vim.keymap.set 设置) 覆盖，实际按不出来，所以挪到 <leader><leader>。
       { "<leader><leader>", "<cmd>Telescope live_grep<cr>", desc = "全局内容搜索" },
       { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "查找文件" },
+      -- 连隐藏文件 (.env、.obsidian/) 和 .gitignore 忽略的文件 (node_modules、dist) 一起搜。
+      -- 只排除 .git/：rg --hidden 会把 .git/objects 里成千上万个对象文件全列出来。
+      {
+        "<leader>F",
+        function()
+          require("telescope.builtin").find_files({
+            find_command = { "rg", "--files", "--color", "never", "--hidden", "--no-ignore", "-g", "!.git/" },
+            prompt_title = "Find All Files",
+          })
+        end,
+        desc = "查找全部文件（含隐藏 / 忽略）",
+      },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "查找 Buffer" },
       { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "当前文件内查找行" },
       { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "最近打开的文件" },

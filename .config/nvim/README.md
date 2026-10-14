@@ -62,7 +62,8 @@ lua/plugins/*.lua        # 各插件的独立配置
 
 | 按键    | 功能 |
 |-------| --- |
-| `,f`  | 查找文件 |
+| `,f`  | 按文件名查找（跳过隐藏文件和 `.gitignore` 忽略的文件） |
+| `,F`  | 按文件名查找全部文件，含隐藏文件和被忽略的文件（只排除 `.git/`） |
 | `,,`  | 全局内容搜索 (Telescope live_grep) |
 | `,fb` | 切换 buffer |
 | `,m`  | 最近打开的文件 |
@@ -73,6 +74,32 @@ lua/plugins/*.lua        # 各插件的独立配置
 | `F2`  | 切换文件树 |
 | `,n`  | 在文件树中定位当前文件 |
 | `F3`  | 切换代码大纲 (outline.nvim) |
+
+`,f` / `,F` 都只匹配路径和文件名，不搜内容（搜内容用 `,,`）。搜索范围是 nvim 的工作目录（`:pwd`），不是当前文件所在的项目；要搜别的项目先 `:cd` 过去，或用 `:Telescope find_files cwd=~/Sync/esp32`。`,F` 会把 `node_modules` 也列进来，前端项目里结果可能上千条，先多输几个字缩小范围。
+
+### Buffer 切换与关闭
+
+除 `,fb` 外都是 Neovim / Vim 自带的，本仓库没有额外映射。
+
+| 按键 / 命令 | 功能 |
+| --- | --- |
+| `]b` / `[b` | 下一个 / 上一个 buffer（Neovim 0.11 起内置） |
+| `]B` / `[B` | 最后一个 / 第一个 buffer |
+| `<C-^>`（`Ctrl+6`） | 在当前和上一个 buffer 之间来回切 |
+| `,fb` | Telescope 模糊搜索 buffer，按最近使用排序 |
+| `:b 关键字` + `<Tab>` | 按文件名补全并跳转，例如 `:b esp32-s3` |
+| `:ls` / `:b 编号` | 列出 buffer / 按 buffer 编号跳转 |
+| `:LualineBuffersJump N` | 跳到顶部标签栏第 N 个 buffer |
+| `:bd` | 关闭当前 buffer（有未保存修改时拒绝） |
+| `:bd!` | 不保存，强制关闭当前 buffer |
+| `:bp \| bd #` | 关闭当前 buffer 但保留窗口布局（先切到上一个 buffer 再关） |
+| `:bd 编号` / `:bd 文件名` | 关闭指定 buffer |
+| `:%bd \| e#` | 关闭其他所有 buffer，只留当前这个 |
+| `,fb` 中按 `<M-d>` | 在 Telescope 列表里关闭选中的 buffer，`<Tab>` 多选后可一次关多个 |
+
+顶部标签栏是 lualine 的 `buffers` 组件（`mode = 2`），标签上的数字是第几个标签，不是 `:ls` 里的 buffer 编号，所以 `:b 3` 往往跳不到第 3 个标签，按位置跳要用 `:LualineBuffersJump 3`。
+
+`:bd` 会连同显示这个 buffer 的窗口一起关掉：分屏时布局会乱；如果它是最后一个文件 buffer 且开着 nvim-tree（`F2`），屏幕会只剩文件树。想只关 buffer 不动窗口，用 `:bp | bd #`。
 
 ### 跳转 / 编辑
 
@@ -234,13 +261,14 @@ require("luasnip.loaders.from_vscode").lazy_load({
 | `,ot` / `,oy` / `,oT` / `,od` | 今天 / 昨天 / 明天 / 日记列表 |
 | `,ox` / `,or` / `,op` | 切换勾选 / 重命名(同步反链) / 粘贴图片 |
 | `,oL` / `,oN` / `,oe` | 选区：链接已有笔记 / 新建并链接 / 抽成新笔记 |
-| `,ow` | 切换仓库 (wiki / private / research / japanese) |
+| `,ow` | 切换仓库 (wiki / private / research / japanese / esp32 / proxmox) |
 | `gf` / `<CR>` | 跟随光标所在的 `[[双链]]` 跳转到对应笔记（不存在则新建）；`<CR>` 不在链接上时是切换 checkbox |
 | `]o` / `[o` | 光标跳到当前笔记内下一个 / 上一个链接（只移动光标，不打开） |
 
 `<CR>`、`]o`/`[o` 是插件进入 markdown buffer 时自动注册的 buffer-local 映射，不在本仓库配置里，关闭方式是设 `vim.g.obsidian_default_keymap = false`。
 `gf` 则是本仓库在 `plugins/obsidian.lua` 里额外补的 buffer-local 映射：插件本身只给 `includeexpr` 配合原生 `gf` 用，但原生 `gf` 依赖 `'isfname'` 先在光标处圈出一段"像文件名"的字符，
 默认 `isfname` 不含 `[`、`]` 和空格，光标停在方括号或标题里的空格上时原生 `gf`会直接失效（`includeexpr` 都不会被调用）；这里改成光标在链接范围内就用 `:Obsidian follow_link`，其余情况落回原生 `gf`。
+`follow_link` 走的是插件内置的 obsidian-ls（`textDocument/definition`），它只挂在 workspaces 里配置的仓库的笔记上；仓库外的 markdown（如本 README）一律走原生 `gf`，否则会报 `textDocument/definition is not supported by any server activated for this buffer`。
 
 ### 新建笔记的模板
 
