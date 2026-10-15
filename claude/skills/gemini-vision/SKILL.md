@@ -1,6 +1,6 @@
 ---
 name: gemini-vision
-description: Guide for implementing Google Gemini API image understanding - analyze images with captioning, classification, visual QA, object detection, segmentation, and multi-image comparison. Use when analyzing images, answering visual questions, detecting objects, or processing documents with vision.
+description: Guide for image understanding with Google Gemini by default or Atlas Cloud as an optional provider - analyze images with captioning, classification, visual QA, object detection, segmentation, and multi-image comparison. Use when analyzing images, answering visual questions, detecting objects, or processing documents with vision.
 license: MIT
 allowed-tools:
   - Bash
@@ -19,6 +19,8 @@ This skill enables Claude to use Google's Gemini API for advanced image understa
 
 1. **Get API Key**: Obtain from [Google AI Studio](https://aistudio.google.com/apikey)
 2. **Install SDK**: `pip install google-genai` (Python 3.9+)
+
+Atlas Cloud is optional. Set `ATLASCLOUD_API_KEY` and pass `--provider atlas`; the existing Gemini path remains the default.
 
 ### API Key Configuration
 
@@ -67,6 +69,10 @@ The skill checks for `GEMINI_API_KEY` in this order:
 - **gemini-2.5-flash-lite**: Lightweight, segmentation + detection
 - **gemini-2.0-flash**: Object detection support
 - **gemini-1.5-pro/flash**: Previous generation
+- **google/gemini-3.5-flash**: Atlas Cloud default when `--provider atlas` is selected
+
+The Atlas path sends one non-retried chat-completion request with inline image data. A failed request is returned to the caller instead of being submitted again.
+Use Atlas for PNG, JPEG, or WEBP captioning, classification, and visual QA. Keep the default Gemini provider for File API references, PDFs, object detection, and segmentation.
 
 ## Usage Examples
 
@@ -81,6 +87,9 @@ python scripts/analyze-image.py https://example.com/image.jpg "Describe this"
 
 # Specify model
 python scripts/analyze-image.py image.jpg "Caption this" --model gemini-2.5-pro
+
+# Use Atlas Cloud's OpenAI-compatible multimodal endpoint
+python scripts/analyze-image.py image.jpg "Caption this" --provider atlas
 ```
 
 ### Object Detection (2.0+)

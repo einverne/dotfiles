@@ -15,10 +15,19 @@ API Key Lookup Order:
 """
 
 import argparse
+import base64
+import json
 import os
 import sys
 from pathlib import Path
 from typing import List, Optional
+import urllib.error
+import urllib.request
+
+
+ATLAS_BASE_URL = "https://api.atlascloud.ai/v1"
+ATLAS_DEFAULT_MODEL = "google/gemini-3.5-flash"
+GEMINI_DEFAULT_MODEL = "gemini-2.5-flash"
 
 def find_api_key() -> Optional[str]:
     """
@@ -65,11 +74,117 @@ def find_api_key() -> Optional[str]:
     return None
 
 
+def find_atlas_api_key() -> Optional[str]:
+    """Find ATLASCLOUD_API_KEY without accepting it as a CLI argument."""
+    api_key = os.environ.get('ATLASCLOUD_API_KEY')
+    if api_key:
+        return api_key
+
+    skill_dir = Path(__file__).parent.parent
+    project_dir = skill_dir.parent.parent.parent
+    for env_path in (skill_dir / '.env', project_dir / '.env'):
+        if env_path.exists():
+            with open(env_path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith('ATLASCLOUD_API_KEY='):
+                        return line.split('=', 1)[1].strip().strip('"\'')
+    return None
+
+
+def image_to_data_url(path: str) -> str:
+    """Load a local or remote image and return an OpenAI-compatible data URL."""
+    mime_types = {
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+        '.jpeg': 'image/jpeg',
+        '.webp': 'image/webp',
+        '.heic': 'image/heic',
+        '.heif': 'image/heif',
+        '.pdf': 'application/pdf'
+    }
+
+    if path.startswith(('http://', 'https://')):
+        import requests
+        response = requests.get(path, timeout=60)
+        response.raise_for_status()
+        content_type = response.headers.get('content-type', '').split(';')[0]
+        if not content_type or content_type == 'application/octet-stream':
+            content_type = mime_types.get(Path(path).suffix.lower(), 'image/jpeg')
+        image_bytes = response.content
+    else:
+        path_obj = Path(path)
+        if not path_obj.exists():
+            raise FileNotFoundError(f"File not found: {path}")
+        content_type = mime_types.get(path_obj.suffix.lower(), 'image/jpeg')
+        image_bytes = path_obj.read_bytes()
+
+    if content_type not in {'image/png', 'image/jpeg', 'image/webp'}:
+        raise ValueError(
+            f"Atlas Cloud inline vision supports PNG, JPEG, and WEBP; got {content_type}."
+        )
+    if len(image_bytes) > 20 * 1024 * 1024:
+        raise ValueError("Atlas Cloud inline images must be 20 MB or smaller.")
+
+    encoded = base64.b64encode(image_bytes).decode('ascii')
+    return f"data:{content_type};base64,{encoded}"
+
+
+def build_atlas_payload(image_paths: List[str], prompt: str, model: str) -> dict:
+    content = [
+        {
+            'type': 'image_url',
+            'image_url': {'url': image_to_data_url(path)}
+        }
+        for path in image_paths
+    ]
+    content.append({'type': 'text', 'text': prompt})
+    return {
+        'model': model,
+        'messages': [{'role': 'user', 'content': content}]
+    }
+
+
+def analyze_image_atlas(image_paths: List[str], prompt: str, model: str) -> str:
+    """Analyze images through Atlas Cloud with one non-retried POST."""
+    api_key = find_atlas_api_key()
+    if not api_key:
+        raise RuntimeError(
+            "ATLASCLOUD_API_KEY not found in the environment or an existing .env file."
+        )
+
+    payload = build_atlas_payload(image_paths, prompt, model)
+    request = urllib.request.Request(
+        f"{ATLAS_BASE_URL}/chat/completions",
+        data=json.dumps(payload).encode(),
+        headers={
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json',
+            'User-Agent': 'gemini-vision-skill/atlas-cloud'
+        },
+        method='POST'
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=120) as response:
+            data = json.load(response)
+    except urllib.error.HTTPError as error:
+        body = error.read().decode(errors='replace')
+        raise RuntimeError(
+            f"Atlas Cloud request failed ({error.code}): {body[:400]}"
+        ) from error
+
+    try:
+        return data['choices'][0]['message']['content']
+    except (KeyError, IndexError, TypeError) as error:
+        raise RuntimeError(f"Atlas Cloud returned an unexpected response: {data}") from error
+
+
 def analyze_image(
     image_paths: List[str],
     prompt: str,
-    model: str = "gemini-2.5-flash",
-    output_format: Optional[str] = None
+    model: str = GEMINI_DEFAULT_MODEL,
+    output_format: Optional[str] = None,
+    provider: str = "gemini"
 ) -> str:
     """
     Analyze one or more images with Gemini API.
@@ -83,6 +198,9 @@ def analyze_image(
     Returns:
         Model response text
     """
+    if provider == 'atlas':
+        return analyze_image_atlas(image_paths, prompt, model)
+
     try:
         from google import genai
         from google.genai import types
@@ -226,18 +344,16 @@ Examples:
     )
 
     parser.add_argument(
+        '--provider',
+        choices=['gemini', 'atlas'],
+        default='gemini',
+        help='Vision provider (default: gemini)'
+    )
+
+    parser.add_argument(
         '--model',
-        default='gemini-2.5-flash',
-        choices=[
-            'gemini-2.5-pro',
-            'gemini-2.5-flash',
-            'gemini-2.5-flash-lite',
-            'gemini-2.0-flash',
-            'gemini-2.0-flash-lite',
-            'gemini-1.5-pro',
-            'gemini-1.5-flash'
-        ],
-        help='Gemini model to use (default: gemini-2.5-flash)'
+        default=None,
+        help='Model ID (defaults to gemini-2.5-flash or google/gemini-3.5-flash)'
     )
 
     parser.add_argument(
@@ -262,8 +378,11 @@ Examples:
     result = analyze_image(
         image_paths=args.images,
         prompt=prompt,
-        model=args.model,
-        output_format=args.format
+        model=args.model or (
+            ATLAS_DEFAULT_MODEL if args.provider == 'atlas' else GEMINI_DEFAULT_MODEL
+        ),
+        output_format=args.format,
+        provider=args.provider
     )
 
     print(result)
