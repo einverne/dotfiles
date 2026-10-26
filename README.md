@@ -89,18 +89,10 @@ Terminal font:
 
 ## Claude Code Support
 
-This repository includes Claude Code skills and agents for enhanced AI assistance:
+This repository includes Claude Code agents and commands for enhanced AI assistance.
 
-### Skills (.claude/skills/)
-Specialized domain expertise that Claude can invoke:
-- **git-workflow**: Git operations and best practices
-- **shell-scripting**: Bash/Zsh scripting and automation
-- **dotfiles-manager**: Dotfiles organization and management
-- **debug-helper**: Debugging and troubleshooting
-- **performance-optimizer**: Code and script optimization
-- **test-expert**: Testing and TDD practices
-
-See [.claude/skills/README.md](.claude/skills/README.md) for detailed usage.
+### Skills
+Skills are maintained separately in [einverne/agent-skills](https://github.com/einverne/agent-skills) (git-workflow, shell-scripting, dotfiles-manager, debug-helper, performance-optimizer, test-expert, plus vendored third-party skills). Install with `npx skills i einverne/agent-skills`.
 
 ### Agents (claude/agents/)
 Autonomous task execution specialists:
