@@ -49,6 +49,7 @@ Run `make help` to list every documented target.
 | `make dotfiles` | Rebuild symlinks only (run after editing `config/install.conf.yml`) |
 | `make mac` | Install macOS apps and CLI tools via brew (includes `mise`) |
 | `make brew` | Batch-install from `~/.Brewfile` via `brew bundle` (includes `mise`) |
+| `make brew-optional` | Install optional apps from `Brewfile-optional` (calibre, charles, vlc, ...) |
 | `make mise` | Install `mise` standalone (normally covered by the brew flow) |
 | `make tmux` | Install non-brew tools such as the tmux plugin manager |
 | `make macos` | Run the macOS system-defaults scripts |

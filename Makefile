@@ -41,6 +41,9 @@ crontab:
 brew: ## Install brew & cask packages
 	@./install -c config/packages.conf.yml --plugin-dir dotbot-brew
 
+brew-optional: ## Install optional casks from Brewfile-optional
+	@brew bundle --verbose --file=Brewfile-optional
+
 tmux: ## Install non-brew tools eg. tmux package manager
 	@./install -c config/tmux.conf.yml
 

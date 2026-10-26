@@ -1,0 +1,22 @@
+# Optional apps, not installed by `make brew`. Install on demand: make brew-optional
+cask "calibre"
+cask "charles"
+cask "cyberduck"
+cask "dash"
+cask "eudic"
+cask "font-source-code-pro"
+cask "jd-gui"
+cask "licecap"
+cask "mpv"
+cask "plexamp"
+cask "via"
+cask "vlc"
+
+# Quick look
+cask "qlcolorcode"
+cask "qlstephen"
+cask "qlmarkdown"
+cask "quicklook-json"
+cask "suspicious-package"
+cask "quicklookase"
+cask "qlvideo"

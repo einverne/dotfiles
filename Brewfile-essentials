@@ -1,4 +1,3 @@
-tap "homebrew/cask"
 tap "github/gh"
 tap "koekeishiya/formulae"
 tap "narze/taps"
