@@ -34,26 +34,35 @@
         update_shell() {
           local shell_path;
           shell_path="$(command -v zsh)"
-        
-          fancy_echo "Changing your shell to zsh ..."
-          if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
-            fancy_echo "Adding '$shell_path' to /etc/shells"
+          # skip when zsh is missing or already the login shell, so reruns don't prompt for sudo
+          [ -n "$shell_path" ] || { echo "zsh not found, skipping"; return 0; }
+          [ "$(basename "$SHELL")" = zsh ] && return 0
+
+          echo "Changing your shell to zsh ..."
+          if ! grep -qx "$shell_path" /etc/shells; then
+            echo "Adding '$shell_path' to /etc/shells"
             sudo sh -c "echo $shell_path >> /etc/shells"
           fi
           sudo chsh -s "$shell_path" "$USER"
         }
-        
+
         update_shell
 
 - create:
     - ~/.config/
-    - ~/.claude/
+    - ~/.claude/agents
+    - ~/.claude/commands
 
+# Link entries into ~/.claude rather than replacing the directory itself:
+# ~/.claude also holds settings, sessions and local-only agents/commands,
+# and the default force: true would delete all of it.
 - link:
     ~/.config/espanso:
       if: '[ `uname` = Linux ]'
       path: espanso
-    ~/.claude/:
-      path: claude
-      relink: true
-      force: true
+    ~/.claude/agents/:
+      glob: true
+      path: claude/agents/*.md
+    ~/.claude/commands/:
+      glob: true
+      path: claude/commands/*
