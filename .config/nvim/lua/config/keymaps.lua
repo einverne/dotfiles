@@ -41,8 +41,8 @@ map("i", "<A-k>", "<Esc><cmd>m .-2<cr>==gi", { desc = "上移一行" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "下移选区" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "上移选区" })
 
--- 空格切换搜索高亮
-map("n", "<Space>", "<cmd>set hlsearch! hlsearch?<cr>", { desc = "切换搜索高亮" })
+-- 切换搜索高亮
+map("n", "<leader>h", "<cmd>set hlsearch! hlsearch?<cr>", { desc = "切换搜索高亮" })
 
 -- 以 root 权限保存
 map("n", "<leader>W", "<cmd>w !sudo tee % > /dev/null<cr>", { desc = "sudo 保存" })
