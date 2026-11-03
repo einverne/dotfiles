@@ -267,11 +267,11 @@ for _, v in pairs(hspoon_list) do
     hs.loadSpoon(v)
 end
 
-local muxyBundleID = "com.muxy.app"
+local rexBundleID = "com.superlogical.rex"
 
-local function muxyResize()
+local function rexResize()
     hs.timer.doAfter(0.3, function()
-        local app = hs.application.get(muxyBundleID)
+        local app = hs.application.get(rexBundleID)
         local win = app and app:mainWindow()
         if win then
             win:moveToUnit(hs.geometry(0, 0, 1, 0.8))
@@ -281,11 +281,11 @@ end
 
 hs.hotkey.bind({}, "F12", function()
     local frontApp = hs.application.frontmostApplication()
-    if frontApp and frontApp:bundleID() == muxyBundleID then
+    if frontApp and frontApp:bundleID() == rexBundleID then
         frontApp:hide()
     else
-        hs.execute("open -a '/Applications/Muxy.app'")
-        muxyResize()
+        hs.execute("open -a '/Applications/Rex Beta.app'")
+        rexResize()
     end
 end)
 
