@@ -20,6 +20,29 @@ return {
       -- snacks knows kitty, ghostty and wezterm; Rex identifies itself through TERM_PROGRAM.
       -- Unicode placeholders aren't verified in Rex, so images use direct placements.
       local envs = require("snacks.image.terminal").envs()
+
+      -- In rexmod's editor, Neovim runs headless behind the Rex panes and rexmod draws every
+      -- window itself. Images go out with nvim_ui_send, which rexmod writes to the panes'
+      -- terminals, and they're placed with Unicode placeholders: cells in the grid that move
+      -- with the text, into whichever pane shows them. snacks can't ask a headless Neovim's
+      -- terminal for its cell size, so rexmod sets g:rexmod_cell.
+      if vim.env.REXMOD_MULTIGRID == "1" then
+        table.insert(envs, 1, { name = "rex", env = { REXMOD_MULTIGRID = "1" }, supported = true, placeholders = true })
+        local terminal = require("snacks.image.terminal")
+        local size = terminal.size
+        terminal.size = function()
+          local s = size()
+          local cell = vim.g.rexmod_cell
+          if type(cell) == "table" and (cell[1] or 0) > 0 and (cell[2] or 0) > 0 then
+            s.cell_width, s.cell_height = cell[1], cell[2]
+            s.width, s.height = s.columns * cell[1], s.rows * cell[2]
+            s.scale = cell[1] / 8
+          end
+          return s
+        end
+        return
+      end
+
       table.insert(envs, 1, { name = "rex", env = { TERM_PROGRAM = "rex" }, supported = true, placeholders = false })
 
       -- Neovim 0.12 runs the TUI and the editor as two processes, and snacks sends images with
@@ -79,6 +102,61 @@ return {
         desc = "Open File in System App",
       },
     },
+  },
+
+  -- Tabs without the separators between them or the bar left of the current one.
+  {
+    "akinsho/bufferline.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.options = opts.options or {}
+      opts.options.separator_style = { "", "" }
+      opts.options.indicator = { style = "none" }
+    end,
+  },
+
+  -- In rexmod's editor every window is its own Rex pane, showing its own statusline. lualine
+  -- writes its line into whichever window has focus, and Neovim draws a statusline under any
+  -- float given one: a picker's input showed it. Floats other than our panes don't get it,
+  -- and the global statusline (laststatus=3) stays off.
+  {
+    "nvim-lualine/lualine.nvim",
+    optional = true,
+    opts = function()
+      if vim.env.REXMOD_MULTIGRID ~= "1" then
+        return
+      end
+      local nvim_opts = require("lualine.utils.nvim_opts")
+      local set = nvim_opts.set
+      nvim_opts.set = function(name, val, o)
+        -- a global statusline is drawn where no pane shows it
+        if name == "laststatus" and val == 3 then
+          val = 2
+        end
+        local win = o and o.window
+        if name == "statusline" and win and vim.api.nvim_win_is_valid(win) then
+          local c = vim.api.nvim_win_get_config(win)
+          if c.relative ~= "" and not c.external then
+            return
+          end
+        end
+        return set(name, val, o)
+      end
+    end,
+  },
+
+  -- On the command line the arrows move through the completion menu while it's open, and
+  -- through history (Up/Down) or the line (Left/Right) otherwise. LazyVim leaves only Tab.
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    opts = function(_, opts)
+      opts.cmdline = opts.cmdline or {}
+      opts.cmdline.keymap = vim.tbl_extend("force", opts.cmdline.keymap or {}, {
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+      })
+    end,
   },
 
   -- Markdown renders in the buffer: headings, lists, tables, code blocks.
