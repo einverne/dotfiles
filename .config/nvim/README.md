@@ -252,6 +252,16 @@ require("luasnip.loaders.from_vscode").lazy_load({
 仓库配置对齐 `~/Sync/wiki/.obsidian/`，和 Obsidian App 共用同一套目录约定：
 新笔记进 `Zettelkasten/`、日记进 `notes/journals/`、模板在 `Template/`、附件在 `Attachments/`。
 
+`[[...` 实时补全只匹配缓存中的文件名、标题和别名，精确匹配优先，最多读取 30 篇候选笔记。
+继续输入可以缩小范围；正文全文检索用 `,os`。标题/块链接补全和补全中新建笔记仍由插件处理。
+这是 `config/obsidian_completion.lua` 对 obsidian.nvim 3.16 补全内部接口的适配：原生补全会全文搜索并读取所有命中笔记，
+在大仓库中阻塞输入，结果过多时还会触发 `too many results to unpack`。升级插件时运行以下回归检查：
+
+```sh
+# 在 dotfiles 根目录运行，使用本机已安装的 obsidian.nvim / plenary.nvim
+nvim --headless -u NONE -i NONE -l .config/nvim/tests/obsidian_completion.lua
+```
+
 | 按键 | 功能 |
 | --- | --- |
 | `,oo` / `,os` | 快速切换笔记 / 全文搜索 |

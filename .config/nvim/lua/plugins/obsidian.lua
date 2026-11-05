@@ -182,11 +182,13 @@ return {
         separator = "", -- 默认是 80 个 -，太吵，换成一个空行
       },
 
-      -- wiki 仓库笔记量大，开缓存让搜索和补全快一些
+      -- 双链补全从这里的缓存筛选候选（见 config/obsidian_completion.lua）。
+      -- 插件 3.16 原生补全尚未使用此缓存，大仓库会逐次全文搜索。
       cache = { enabled = true },
     },
     config = function(_, opts)
       require("obsidian").setup(opts)
+      require("config.obsidian_completion").setup()
 
       -- <C-n> 新建笔记，只在 markdown buffer 里生效（buffer-local），
       -- 不占用 <C-n> 在其它文件类型里的原生行为（普通模式下等价 j，插入模式下是补全）。
